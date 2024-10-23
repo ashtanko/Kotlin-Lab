@@ -26,9 +26,13 @@ import kotlin.math.floor
  * @property left The left child of the node.
  * @property right The right child of the node.
  */
-data class TreeNode(var value: Int) {
+data class TreeNode(var value: Int) : Comparable<TreeNode> {
     var left: TreeNode? = null
     var right: TreeNode? = null
+
+    override fun compareTo(other: TreeNode): Int {
+        return value.compareTo(other.value)
+    }
 }
 
 /**
