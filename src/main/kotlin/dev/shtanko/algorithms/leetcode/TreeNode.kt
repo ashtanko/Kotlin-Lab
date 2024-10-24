@@ -168,3 +168,32 @@ fun TreeNode.prettyPrint(): String {
 fun TreeNode?.height(): Int {
     return if (this == null) -1 else 1 + this.left.height()
 }
+
+fun Array<Int?>.buildTree(): TreeNode? {
+    if (isEmpty()) return null
+
+    val root = TreeNode(this[0]!!)
+    val queue = ArrayDeque<TreeNode>()
+    queue.add(root)
+
+    var index = 1
+    while (queue.isNotEmpty() && index < size) {
+        val current = queue.removeFirst()
+
+        // Process left child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.left = TreeNode(this[index]!!)
+            queue.add(current.left!!)
+        }
+        index++
+
+        // Process right child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.right = TreeNode(this[index]!!)
+            queue.add(current.right!!)
+        }
+        index++
+    }
+
+    return root
+}

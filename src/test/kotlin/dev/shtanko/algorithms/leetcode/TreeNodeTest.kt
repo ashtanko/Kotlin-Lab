@@ -170,6 +170,105 @@ class TreeNodeTest {
         assertTreesEqualWithOffset(original, cloned, offset)
     }
 
+    @Test
+    fun `test empty array returns null`() {
+        val result = arrayOf<Int?>().buildTree()
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun `test array with one element returns single node`() {
+        val result = arrayOf<Int?>(1).buildTree()
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left).isNull()
+        assertThat(result?.right).isNull()
+    }
+
+    @Test
+    fun `test array with two elements creates correct tree`() {
+        val result = arrayOf<Int?>(1, 2).buildTree()
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(2)
+        assertThat(result?.right).isNull()
+    }
+
+    @Test
+    fun `test array with three elements creates correct tree`() {
+        val result = arrayOf<Int?>(1, 2, 3).buildTree()
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(2)
+        assertThat(result?.right?.value).isEqualTo(3)
+    }
+
+    @Test
+    fun `test array with nulls creates correct tree`() {
+        val result = arrayOf<Int?>(1, 2, 3, 4, 5, 6, 7).buildTree()
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(2)
+        assertThat(result?.right?.value).isEqualTo(3)
+        assertThat(result?.left?.left?.value).isEqualTo(4)
+        assertThat(result?.left?.right?.value).isEqualTo(5)
+        assertThat(result?.right?.left?.value).isEqualTo(6)
+        assertThat(result?.right?.right?.value).isEqualTo(7)
+        print(result?.prettyPrint())
+    }
+
+    @Test
+    fun `test array with missing children`() {
+        val result = arrayOf<Int?>(1, 2, 3, 4, null, 6, null).buildTree()
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(2)
+        assertThat(result?.right?.value).isEqualTo(3)
+        assertThat(result?.left?.left?.value).isEqualTo(4)
+        assertThat(result?.left?.right).isNull()
+        assertThat(result?.right?.left?.value).isEqualTo(6)
+        assertThat(result?.right?.right).isNull()
+    }
+
+    @Test
+    fun `test specific tree construction`() {
+        val specificTreeArray = arrayOf<Int?>(1, 2, 3, 4, 5, 6, null, null, null, 7, 8)
+
+        val result = specificTreeArray.buildTree()
+
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(2)
+        assertThat(result?.right?.value).isEqualTo(3)
+
+        // Check left subtree of 2
+        assertThat(result?.left?.left?.value).isEqualTo(4)
+        assertThat(result?.left?.right?.value).isEqualTo(5)
+
+        // Check right subtree of 1
+        assertThat(result?.right?.value).isEqualTo(3)
+        assertThat(result?.right?.left?.value).isEqualTo(6)
+
+        // Check children of 5
+        assertThat(result?.left?.right?.left?.value).isEqualTo(7)
+        assertThat(result?.left?.right?.right?.value).isEqualTo(8)
+        print(result?.prettyPrint())
+    }
+
+    @Test
+    fun `test specific tree construction with deeper branches`() {
+        val specificTreeArray = arrayOf<Int?>(1, 3, 2, null, 6, 4, 5, null, null, null, null, 8, 7)
+
+        val result = specificTreeArray.buildTree()
+
+        assertThat(result).isNotNull
+        assertThat(result?.value).isEqualTo(1)
+        assertThat(result?.left?.value).isEqualTo(3)
+        assertThat(result?.right?.value).isEqualTo(2)
+
+        print(result?.prettyPrint())
+    }
+
     private fun assertTreesEqual(expected: TreeNode?, actual: TreeNode?) {
         if (expected == null && actual == null) return
         Assertions.assertEquals(expected?.value, actual?.value)
