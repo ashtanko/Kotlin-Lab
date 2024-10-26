@@ -169,10 +169,15 @@ fun TreeNode?.height(): Int {
     return if (this == null) -1 else 1 + this.left.height()
 }
 
+/**
+ * Builds a binary tree from an array of integer values.
+ *
+ * @return The root node of the binary tree.
+ */
 fun Array<Int?>.buildTree(): TreeNode? {
     if (isEmpty()) return null
 
-    val root = TreeNode(this[0]!!)
+    val root = TreeNode(this.first()!!)
     val queue = ArrayDeque<TreeNode>()
     queue.add(root)
 
