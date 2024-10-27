@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.level.Hard
 
 /**
  * 1220. Count Vowels Permutation
  * @see <a href="https://leetcode.com/problems/count-vowels-permutation/">Source</a>
  */
+@Hard("https://leetcode.com/problems/count-vowels-permutation")
 fun interface CountVowelsPermutationStrategy {
     operator fun invoke(n: Int): Int
 }

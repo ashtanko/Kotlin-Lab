@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 import java.util.Queue
 
@@ -23,6 +24,7 @@ import java.util.Queue
  * 103. Binary Tree Zigzag Level Order Traversal
  * @see <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/">Source</a>
  */
+@Medium("https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal")
 fun interface ZigzagLevelOrder {
     operator fun invoke(root: TreeNode?): List<List<Int>>
 }

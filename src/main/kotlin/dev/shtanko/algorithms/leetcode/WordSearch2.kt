@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.annotations.level.Hard
 
 /**
  * 212. Word Search II
  * @see <a href="https://leetcode.com/problems/word-search-ii/">Source</a>
  */
+@Hard("https://leetcode.com/problems/word-search-ii")
 fun interface WordSearch2 {
     operator fun invoke(board: Array<CharArray>, words: Array<String>): List<String>
 }
@@ -31,43 +33,51 @@ fun interface WordSearch2 {
  */
 class WordSearch2Trie : WordSearch2 {
     override fun invoke(board: Array<CharArray>, words: Array<String>): List<String> {
-        val res: MutableList<String> = ArrayList()
+        val result: MutableList<String> = ArrayList()
         val root: TrieNode = buildTrie(words)
-        for (i in board.indices) {
-            for (j in 0 until board[0].size) {
-                dfs(board, i, j, root, res)
+        for (row in board.indices) {
+            for (col in board[0].indices) {
+                search(board, row, col, root, result)
             }
         }
-        return res
+        return result
     }
 
-    fun dfs(board: Array<CharArray>, i: Int, j: Int, p: TrieNode, res: MutableList<String>) {
-        var p0 = p
-        val c = board[i][j]
-        if (c == '#' || p0.next[c.code - 'a'.code] == null) return
-        p0 = p0.next[c.code - 'a'.code]!!
-        if (p0.word != null) {
-            res.add(p0.word!!)
-            p0.word = null
+    private fun search(board: Array<CharArray>, row: Int, col: Int, node: TrieNode, result: MutableList<String>) {
+        var currentNode = node
+        val char = board[row][col]
+        if (char == '#' || currentNode.next[char.code - 'a'.code] == null) return
+        currentNode = currentNode.next[char.code - 'a'.code]!!
+        if (currentNode.word != null) {
+            result.add(currentNode.word!!)
+            currentNode.word = null
         }
-        board[i][j] = '#'
-        if (i > 0) dfs(board, i - 1, j, p0, res)
-        if (j > 0) dfs(board, i, j - 1, p0, res)
-        if (i < board.size - 1) dfs(board, i + 1, j, p0, res)
-        if (j < board[0].size - 1) dfs(board, i, j + 1, p0, res)
-        board[i][j] = c
+        board[row][col] = '#'
+        if (row > 0) {
+            search(board, row - 1, col, currentNode, result)
+        }
+        if (col > 0) {
+            search(board, row, col - 1, currentNode, result)
+        }
+        if (row < board.size - 1) {
+            search(board, row + 1, col, currentNode, result)
+        }
+        if (col < board[0].size - 1) {
+            search(board, row, col + 1, currentNode, result)
+        }
+        board[row][col] = char
     }
 
     private fun buildTrie(words: Array<String>): TrieNode {
         val root = TrieNode()
-        for (w in words) {
-            var p: TrieNode? = root
-            for (c in w.toCharArray()) {
-                val i = c.code - 'a'.code
-                if (p?.next?.get(i) == null) p?.next?.set(i, TrieNode())
-                p = p?.next?.get(i)
+        for (word in words) {
+            var currentNode: TrieNode? = root
+            for (char in word.toCharArray()) {
+                val index = char.code - 'a'.code
+                if (currentNode?.next?.get(index) == null) currentNode?.next?.set(index, TrieNode())
+                currentNode = currentNode?.next?.get(index)
             }
-            p?.word = w
+            currentNode?.word = word
         }
         return root
     }

@@ -89,5 +89,5 @@ abstract class SearchSuggestionsSystemTest<out T : SearchSuggestionsSystem>(priv
     }
 }
 
-class SSSTrieTest : SearchSuggestionsSystemTest<SSSTrie>(SSSTrie())
-class SSSBinarySearchTest : SearchSuggestionsSystemTest<SSSBinarySearch>(SSSBinarySearch())
+class SSSTrieTest : SearchSuggestionsSystemTest<SearchSuggestionsSystem>(SearchSuggestionsTrie())
+class SSSBinarySearchTest : SearchSuggestionsSystemTest<SearchSuggestionsSystem>(SearchSuggestionsBinarySearch())

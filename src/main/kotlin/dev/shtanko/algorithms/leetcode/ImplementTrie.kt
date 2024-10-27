@@ -63,7 +63,7 @@ class TrieArray : Trie {
         return node
     }
 
-    data class TrieNode(var isEnd: Boolean = false) {
+    private data class TrieNode(var isEnd: Boolean = false) {
 
         private val links: Array<TrieNode?> = Array(ALPHABET_LETTERS_COUNT) { null }
 
@@ -140,5 +140,5 @@ class TrieHashMap : Trie {
         return true
     }
 
-    data class TrieNode(val charToNode: MutableMap<Char, TrieNode> = HashMap(), var isEnd: Boolean = false)
+    private data class TrieNode(val charToNode: MutableMap<Char, TrieNode> = HashMap(), var isEnd: Boolean = false)
 }

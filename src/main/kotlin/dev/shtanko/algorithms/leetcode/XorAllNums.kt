@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2425. Bitwise XOR of All Pairings
  * @see <a href="https://leetcode.com/problems/bitwise-xor-of-all-pairings/">Source</a>
  */
+@Medium("https://leetcode.com/problems/bitwise-xor-of-all-pairings")
 fun interface XorAllNums {
     operator fun invoke(nums1: IntArray, nums2: IntArray): Int
 }
@@ -28,8 +31,12 @@ class XorAllNumsConcise : XorAllNums {
     override operator fun invoke(nums1: IntArray, nums2: IntArray): Int {
         var x = 0
         var y = 0
-        for (a in nums1) x = x xor a
-        for (b in nums2) y = y xor b
+        for (a in nums1) {
+            x = x xor a
+        }
+        for (b in nums2) {
+            y = y xor b
+        }
         return nums1.size % 2 * y xor nums2.size % 2 * x
     }
 }

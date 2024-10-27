@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Hard
 import kotlin.math.max
 
 /**
  * 1617. Count Subtrees With Max Distance Between Cities
  * @see <a href="https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities/">Source</a>
  */
+@Hard("https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities")
 fun interface CountSubgraphsForEachDiameter {
     operator fun invoke(num: Int, edges: Array<IntArray>): IntArray
 }

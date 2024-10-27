@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2348. Number of Zero-Filled Subarrays
- * https://leetcode.com/problems/number-of-zero-filled-subarrays/
+ * @see <a href="https://leetcode.com/problems/number-of-zero-filled-subarrays/">Source</a>
  */
+@Medium("https://leetcode.com/problems/number-of-zero-filled-subarrays")
 fun interface ZeroFilledSubarray {
     operator fun invoke(nums: IntArray): Long
 }

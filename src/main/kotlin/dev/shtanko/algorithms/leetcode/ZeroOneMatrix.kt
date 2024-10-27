@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.min
@@ -24,57 +25,58 @@ import kotlin.math.min
  * 542. 01 Matrix
  * @see <a href="https://leetcode.com/problems/01-matrix/">Source</a>
  */
+@Medium("https://leetcode.com/problems/01-matrix")
 fun interface ZeroOneMatrix {
-    operator fun invoke(mat: Array<IntArray>): Array<IntArray>
+    operator fun invoke(matrix: Array<IntArray>): Array<IntArray>
 }
 
 /**
  * Approach 2: Using BFS
  */
 class ZeroOneMatrixBFS : ZeroOneMatrix {
-    private val dir = intArrayOf(0, 1, 0, -1, 0)
+    private val directions = intArrayOf(0, 1, 0, -1, 0)
 
-    override fun invoke(mat: Array<IntArray>): Array<IntArray> {
-        val q: Queue<IntArray> = LinkedList()
+    override fun invoke(matrix: Array<IntArray>): Array<IntArray> {
+        val queue: Queue<IntArray> = LinkedList()
 
-        initializeQueue(mat, q)
+        initializeQueue(matrix, queue)
 
-        while (q.isNotEmpty()) {
-            processQueue(mat, q)
+        while (queue.isNotEmpty()) {
+            processQueue(matrix, queue)
         }
 
-        return mat
+        return matrix
     }
 
-    private fun initializeQueue(mat: Array<IntArray>, q: Queue<IntArray>) {
-        for (r in mat.indices) {
-            for (c in mat[0].indices) {
-                if (mat[r][c] == 0) {
-                    q.offer(intArrayOf(r, c))
+    private fun initializeQueue(matrix: Array<IntArray>, queue: Queue<IntArray>) {
+        for (row in matrix.indices) {
+            for (col in matrix[0].indices) {
+                if (matrix[row][col] == 0) {
+                    queue.offer(intArrayOf(row, col))
                 } else {
-                    mat[r][c] = -1 // Marked as not processed yet!
+                    matrix[row][col] = -1 // Marked as not processed yet!
                 }
             }
         }
     }
 
-    private fun processQueue(mat: Array<IntArray>, q: Queue<IntArray>) {
-        val curr: IntArray = q.poll()
-        val r = curr[0]
-        val c = curr[1]
+    private fun processQueue(matrix: Array<IntArray>, queue: Queue<IntArray>) {
+        val current = queue.poll()
+        val row = current[0]
+        val col = current[1]
 
         for (i in 0..3) {
-            val nr: Int = r + dir[i]
-            val nc: Int = c + dir[i + 1]
+            val newRow = row + directions[i]
+            val newCol = col + directions[i + 1]
 
-            val local = nr < 0 || nr == mat.size || nc < 0 || nc == mat[0].size
+            val outOfBounds = newRow < 0 || newRow == matrix.size || newCol < 0 || newCol == matrix[0].size
 
-            if (local || mat[nr][nc] != -1) {
+            if (outOfBounds || matrix[newRow][newCol] != -1) {
                 continue
             }
 
-            mat[nr][nc] = mat[r][c] + 1
-            q.offer(intArrayOf(nr, nc))
+            matrix[newRow][newCol] = matrix[row][col] + 1
+            queue.offer(intArrayOf(newRow, newCol))
         }
     }
 }
@@ -84,42 +86,42 @@ class ZeroOneMatrixBFS : ZeroOneMatrix {
  */
 class ZeroOneMatrixDP : ZeroOneMatrix {
 
-    override fun invoke(mat: Array<IntArray>): Array<IntArray> {
-        val m: Int = mat.size
-        val n: Int = mat.firstOrNull()?.size ?: 0
+    override fun invoke(matrix: Array<IntArray>): Array<IntArray> {
+        val rows: Int = matrix.size
+        val cols: Int = matrix.firstOrNull()?.size ?: 0
 
-        fillTopLeft(mat, m, n)
-        fillBottomRight(mat, m, n)
+        fillTopLeft(matrix, rows, cols)
+        fillBottomRight(matrix, rows, cols)
 
-        return mat
+        return matrix
     }
 
-    private fun fillTopLeft(mat: Array<IntArray>, m: Int, n: Int) {
-        val inf = m + n
+    private fun fillTopLeft(matrix: Array<IntArray>, rows: Int, cols: Int) {
+        val inf = rows + cols
 
-        for (r in 0 until m) {
-            for (c in 0 until n) {
-                if (mat[r][c] == 0) continue
+        for (row in 0 until rows) {
+            for (col in 0 until cols) {
+                if (matrix[row][col] == 0) continue
 
-                val top = if (r - 1 >= 0) mat[r - 1][c] else inf
-                val left = if (c - 1 >= 0) mat[r][c - 1] else inf
+                val top = if (row - 1 >= 0) matrix[row - 1][col] else inf
+                val left = if (col - 1 >= 0) matrix[row][col - 1] else inf
 
-                mat[r][c] = min(top, left) + 1
+                matrix[row][col] = min(top, left) + 1
             }
         }
     }
 
-    private fun fillBottomRight(mat: Array<IntArray>, m: Int, n: Int) {
-        val inf = m + n
+    private fun fillBottomRight(matrix: Array<IntArray>, rows: Int, cols: Int) {
+        val inf = rows + cols
 
-        for (r in m - 1 downTo 0) {
-            for (c in n - 1 downTo 0) {
-                if (mat[r][c] == 0) continue
+        for (row in rows - 1 downTo 0) {
+            for (col in cols - 1 downTo 0) {
+                if (matrix[row][col] == 0) continue
 
-                val bottom = if (r + 1 < m) mat[r + 1][c] else inf
-                val right = if (c + 1 < n) mat[r][c + 1] else inf
+                val bottom = if (row + 1 < rows) matrix[row + 1][col] else inf
+                val right = if (col + 1 < cols) matrix[row][col + 1] else inf
 
-                mat[r][c] = min(mat[r][c], min(bottom, right) + 1)
+                matrix[row][col] = min(matrix[row][col], min(bottom, right) + 1)
             }
         }
     }

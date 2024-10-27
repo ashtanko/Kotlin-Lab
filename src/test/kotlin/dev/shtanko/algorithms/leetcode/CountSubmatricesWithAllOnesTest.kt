@@ -75,7 +75,7 @@ abstract class CountSubmatricesWithAllOnesTest<out T : CountSubmatricesWithAllOn
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `num submat test`(mat: Array<IntArray>, expected: Int) {
-        val actual = strategy.numSubmat(mat)
+        val actual = strategy.invoke(mat)
         assertThat(actual).isEqualTo(expected)
     }
 }

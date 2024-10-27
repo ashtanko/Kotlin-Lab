@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Hard
+
 /**
  * 2488. Count Subarrays With Median K
  * @see <a href="https://leetcode.com/problems/count-subarrays-with-median-k/">Source</a>
  */
+@Hard("https://leetcode.com/problems/count-subarrays-with-median-k")
 fun interface CountSubarrays {
     operator fun invoke(nums: IntArray, k: Int): Int
 }

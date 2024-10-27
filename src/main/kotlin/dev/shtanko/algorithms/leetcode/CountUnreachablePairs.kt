@@ -16,13 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2316. Count Unreachable Pairs of Nodes in an Undirected Graph
  * @see <a href="https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph">
  *     Source</a>
  */
+@Medium("https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph")
 fun interface CountUnreachablePairs {
-    fun invoke(num: Int, edges: Array<IntArray>): Long
+    operator fun invoke(num: Int, edges: Array<IntArray>): Long
 }
 
 class CountUnreachablePairsDFS : CountUnreachablePairs {

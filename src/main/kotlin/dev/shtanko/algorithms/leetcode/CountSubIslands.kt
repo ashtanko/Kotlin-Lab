@@ -18,11 +18,13 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.BFS
 import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 1905. Count Sub Islands
  * @see <a href="https://leetcode.com/problems/count-sub-islands/">Source</a>
  */
+@Medium("https://leetcode.com/problems/count-sub-islands")
 fun interface CountSubIslands {
     operator fun invoke(grid1: Array<IntArray>, grid2: Array<IntArray>): Int
 }

@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 1442. Count Triplets That Can Form Two Arrays of Equal XOR
  * @see <a href="https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/">Source</a>
  */
+@Medium("https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor")
 fun interface CountTriplets {
     operator fun invoke(arr: IntArray): Int
 }

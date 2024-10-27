@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Deque
 import java.util.LinkedList
 import java.util.Stack
@@ -24,6 +25,7 @@ import java.util.Stack
  * 739. Daily Temperatures
  * @see <a href="https://leetcode.com/problems/daily-temperatures">Source</a>
  */
+@Medium("https://leetcode.com/problems/daily-temperatures")
 fun interface DailyTemperatures {
     operator fun invoke(temperatures: IntArray): IntArray
 }

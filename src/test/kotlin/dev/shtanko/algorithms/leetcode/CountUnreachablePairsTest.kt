@@ -53,7 +53,7 @@ abstract class CountUnreachablePairsTest<out T : CountUnreachablePairs>(private 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `count pairs test`(num: Int, edges: Array<IntArray>, expected: Long) {
-        val actual = strategy.invoke(num, edges)
+        val actual = strategy(num, edges)
         assertThat(actual).isEqualTo(expected)
     }
 }

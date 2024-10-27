@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 791. Custom Sort String
  * @see <a href="https://leetcode.com/problems/custom-sort-string">Source</a>
  */
+@Medium("https://leetcode.com/problems/custom-sort-string")
 fun interface CustomSortString {
     operator fun invoke(order: String, str: String): String
 }
@@ -30,17 +33,17 @@ fun interface CustomSortString {
 class CustomSortStringComparator : CustomSortString {
     override fun invoke(order: String, str: String): String {
         val result = StringBuilder()
-        val mp = HashMap<Char, Int>()
+        val map = HashMap<Char, Int>()
         for (char in str) {
-            mp[char] = mp.getOrDefault(char, 0) + 1
+            map[char] = map.getOrDefault(char, 0) + 1
         }
         for (char in order) {
-            if (mp.containsKey(char)) {
-                result.append(char.toString().repeat(mp[char] ?: 0))
-                mp.remove(char)
+            if (map.containsKey(char)) {
+                result.append(char.toString().repeat(map[char] ?: 0))
+                map.remove(char)
             }
         }
-        for ((char, count) in mp) {
+        for ((char, count) in map) {
             result.append(char.toString().repeat(count))
         }
         return result.toString()

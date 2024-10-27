@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 1310. XOR Queries of a Subarray
  * @see <a href="https://leetcode.com/problems/xor-queries-of-a-subarray/">Source</a>
  */
+@Medium("https://leetcode.com/problems/xor-queries-of-a-subarray")
 fun interface XORQueriesOfSubarray {
     operator fun invoke(arr: IntArray, queries: Array<IntArray>): IntArray
 }
