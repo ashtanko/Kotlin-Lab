@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Copyright 2024 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,44 +17,40 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-class ShortestSubArrayTest {
-
-    @ParameterizedTest
-    @ArgumentsSource(InputArgumentsProvider::class)
-    fun `shortest sub array test`(arr: IntArray, k: Int, expected: Int) {
-        val actual = findShortestSubarray(arr, k)
-        assertEquals(expected, actual)
-    }
-
+abstract class DefuseTheBombTest<out T : DefuseTheBomb>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
-                intArrayOf(1),
-                1,
-                1,
-            ),
-            Arguments.of(
-                intArrayOf(1, 2),
-                4,
-                -1,
-            ),
-            Arguments.of(
-                intArrayOf(2, -1, 2),
+                intArrayOf(5, 7, 1, 4),
                 3,
-                3,
+                intArrayOf(12, 10, 16, 13),
             ),
             Arguments.of(
-                intArrayOf(),
+                intArrayOf(1, 2, 3, 4),
                 0,
-                -1,
+                intArrayOf(0, 0, 0, 0),
+            ),
+            Arguments.of(
+                intArrayOf(2, 4, 9, 3),
+                -2,
+                intArrayOf(12, 5, 6, 13),
             ),
         )
     }
+
+    @ParameterizedTest
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun decryptTest(code: IntArray, k: Int, expected: IntArray) {
+        val actual = strategy(code, k)
+        assertThat(actual).isEqualTo(expected)
+    }
 }
+
+class DefuseTheBombSlidingWindowTest : DefuseTheBombTest<DefuseTheBombSlidingWindow>(DefuseTheBombSlidingWindow)
