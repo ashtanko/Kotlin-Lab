@@ -29,6 +29,8 @@ mockk = "1.13.12"           # https://mockk.io
 kover = "0.7.6"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.18.1"            # https://jsoup.org/
+protobuf = "0.9.2"
+protoc = "3.19.1"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
@@ -56,6 +58,7 @@ jmh-annprocess = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.
 jmh-benchmarks = { module = "org.openjdk.jmh:jmh-core-benchmarks", version.ref = "jmh" }
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protoc" }
 #detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 # test libs
@@ -85,3 +88,4 @@ dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.r
 pitest = { id = "info.solidsoft.pitest", version.ref = "pitest" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 diktat = { id = "com.saveourtool.diktat", version.ref = "diktat" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }

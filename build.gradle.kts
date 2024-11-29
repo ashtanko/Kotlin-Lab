@@ -49,6 +49,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.kover)
     alias(libs.plugins.diktat)
+    alias(libs.plugins.protobuf)
 }
 
 jacoco {
@@ -296,6 +297,22 @@ tasks {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = libs.protobuf.protoc.get().toString()
+    }
+
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                val kotlin by registering {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     libs.apply {
         kotlin.apply {
@@ -317,6 +334,11 @@ dependencies {
 
         ktLintConfig(ktlint)
         implementation(jsoup)
+        implementation("com.google.protobuf:protobuf-java:3.19.1")
+        implementation("com.google.protobuf:protobuf-kotlin-lite:3.19.6")
+        implementation("io.grpc:grpc-stub:1.15.1")
+        implementation("io.grpc:grpc-protobuf:1.15.1")
+
 
         testImplementation(mockk)
         testImplementation(junit)
