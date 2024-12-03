@@ -37,7 +37,7 @@ internal class Node(var data: Int) {
                 if (head == null) {
                     head = nextNode
                 } else {
-                    current!!.next = nextNode
+                    current?.next = nextNode
                 }
 
                 current = nextNode
