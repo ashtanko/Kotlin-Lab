@@ -376,27 +376,27 @@ abstract class GenerateDetektReportTask : DefaultTask() {
     fun generateReport() {
         val report = parseDetektFile("${sourceDirectory.path}/detekt.md")
         val metricsList = listOf(
-            "${PROPERTIES_KEY.first}" to report.metrics.numberOfProperties,
-            "${FUNCTIONS_KEY.first}" to report.metrics.numberOfFunctions,
-            "${CLASSES_KEY.first}" to report.metrics.numberOfClasses,
-            "${PACKAGES_KEY.first}" to report.metrics.numberOfPackages,
-            "${KT_FILES_KEY.first}" to report.metrics.numberOfKtFiles,
+            PROPERTIES_KEY.first to report.metrics.numberOfProperties,
+            FUNCTIONS_KEY.first to report.metrics.numberOfFunctions,
+            CLASSES_KEY.first to report.metrics.numberOfClasses,
+            PACKAGES_KEY.first to report.metrics.numberOfPackages,
+            KT_FILES_KEY.first to report.metrics.numberOfKtFiles,
         )
 
         val metricsListColumns = metricsList.map { it.first }
         val metricsListRows = listOf(metricsList.map { "${it.second}" })
 
         val complexityList = listOf(
-            "${LOC_KEY.second}" to report.complexityReport.linesOfCode,
-            "${SLOC_KEY.second}" to report.complexityReport.sourceLinesOfCode,
-            "${LLOC_KEY.second}" to report.complexityReport.logicalLinesOfCode,
-            "${CLOC_KEY.second}" to report.complexityReport.commentLinesOfCode,
-            "${MCC_KEY.second}" to report.complexityReport.cyclomaticComplexity,
-            "${CC_KEY.second}" to report.complexityReport.cognitiveComplexity,
-            "${CS_KEY.second}" to report.complexityReport.codeSmells,
-            "${CSR_KEY.second}" to report.complexityReport.commentSourceRatio,
-            "${MCC_PER_LLOC_KEY.second}" to report.complexityReport.mccPer1000Lloc,
-            "${CS_KEY.second}" to report.complexityReport.codeSmellsPer1000Lloc,
+            LOC_KEY.second to report.complexityReport.linesOfCode,
+            SLOC_KEY.second to report.complexityReport.sourceLinesOfCode,
+            LLOC_KEY.second to report.complexityReport.logicalLinesOfCode,
+            CLOC_KEY.second to report.complexityReport.commentLinesOfCode,
+            MCC_KEY.second to report.complexityReport.cyclomaticComplexity,
+            CC_KEY.second to report.complexityReport.cognitiveComplexity,
+            CS_KEY.second to report.complexityReport.codeSmells,
+            CSR_KEY.second to report.complexityReport.commentSourceRatio,
+            MCC_PER_LLOC_KEY.second to report.complexityReport.mccPer1000Lloc,
+            CS_KEY.second to report.complexityReport.codeSmellsPer1000Lloc,
         )
 
         val complexityListColumns = complexityList.map { it.first }
@@ -456,10 +456,9 @@ abstract class GenerateDetektReportTask : DefaultTask() {
         }.joinToString("|", prefix = "|", postfix = "|")
 
         // Generate the separator row
-        val separator = columnWidths.map {
+        val separator = columnWidths.joinToString("|", prefix = "|", postfix = "|") {
             "-".repeat(it).padEnd(it)
         }
-            .joinToString("|", prefix = "|", postfix = "|")
 
         // Generate the data rows
         val dataRows = rows.joinToString(newline) { row ->
