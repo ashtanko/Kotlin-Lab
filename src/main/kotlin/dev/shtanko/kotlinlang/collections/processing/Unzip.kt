@@ -24,3 +24,32 @@ fun main() {
     println(numbers) // [1, 2, 3, 4]
     println(letters) // [a, b, c, d]
 }
+
+// region implementation
+private fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int =
+    if (this is Collection<*>) this.size else default
+
+private infix fun <T, R> Iterable<T>.zip(other: Iterable<R>): List<Pair<T, R>> {
+    return zip(other) { t1, t2 -> t1 to t2 }
+}
+
+private inline fun <T, R, V> Iterable<T>.zip(other: Iterable<R>, transform: (a: T, b: R) -> V): List<V> {
+    val first = iterator()
+    val second = other.iterator()
+    val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
+    while (first.hasNext() && second.hasNext()) {
+        list.add(transform(first.next(), second.next()))
+    }
+    return list
+}
+
+private fun <T, R> Iterable<Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
+    val expectedSize = collectionSizeOrDefault(10)
+    val listT = ArrayList<T>(expectedSize)
+    val listR = ArrayList<R>(expectedSize)
+    for (pair in this) {
+        listT.add(pair.first)
+        listR.add(pair.second)
+    }
+    return listT to listR
+}

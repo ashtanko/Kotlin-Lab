@@ -48,8 +48,8 @@ fun main() {
 /**
  * Type checks with logical or operator
  */
-interface Status {
-    fun signal() {}
+fun interface Status {
+    fun signal()
 }
 
 interface Ok : Status
@@ -73,7 +73,7 @@ fun signalCheck(signalStatus: Any) {
 /**
  * Inline functions
  */
-interface Processor {
+fun interface Processor {
     fun process()
 }
 
