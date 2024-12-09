@@ -27,6 +27,9 @@ import kotlin.random.Random
  * The insert and delete time complexity is O(log n) on average.
  * The space complexity is O(n).
  *
+ * Use Case: An alternative to balanced trees, supports fast search, insert, and delete operations.
+ * Features: Probabilistic balancing; used in in-memory databases like Redis.
+ *
  * @param K the type of keys
  * @param V the type of values
  * @property maxLevel the maximum level of the skip list
