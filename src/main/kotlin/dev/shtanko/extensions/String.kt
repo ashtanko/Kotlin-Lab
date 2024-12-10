@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 import kotlin.math.min
 

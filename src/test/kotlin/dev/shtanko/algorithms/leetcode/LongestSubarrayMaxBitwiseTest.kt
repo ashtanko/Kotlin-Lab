@@ -42,7 +42,7 @@ abstract class LongestSubarrayMaxBitwiseTest<out T : LongestSubarrayMaxBitwise>(
         )
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "input array: {0} should return int: {1}")
     @ArgumentsSource(InputArgumentsProvider::class)
     fun longestSubarrayTest(nums: IntArray, expected: Int) {
         val actual = strategy(nums)

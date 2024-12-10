@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Copyright 2024 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ext
-
-import java.math.BigInteger
+package dev.shtanko.extensions
 
 /**
- * Calculates the sum of all elements in the iterable collection.
- *
- * @return The sum of all elements in the iterable collection.
+ * This function divides a by greatest divisible power of b
  */
-fun Iterable<BigInteger>.sum(): BigInteger {
-    var sum: BigInteger = BigInteger.ZERO
-    for (element in this) {
-        sum += element
+fun Pair<Int, Int>.maxDivide(): Int {
+    val (a, b) = this
+    var a0 = a
+    while (a0 % b == 0) a0 /= b
+    return a0
+}
+
+fun Pair<Int, Int>.keepDividingWhenDivisible(): Int {
+    val (dividend, divisor) = this
+    var d = dividend
+    while (d % divisor == 0) {
+        d /= divisor
     }
-    return sum
+    return d
 }

@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 /**
- * This function divides a by greatest divisible power of b
+ * Returns a list containing elements at specified [startIndex] and [endIndex] from the original array.
+ *
+ * @param startIndex The start index of the range to copy.
+ * @param endIndex The end index of the range to copy.
+ * @return A list containing elements at specified [startIndex] and [endIndex] from the original array.
  */
-fun Pair<Int, Int>.maxDivide(): Int {
-    val (a, b) = this
-    var a0 = a
-    while (a0 % b == 0) a0 /= b
-    return a0
-}
-
-fun Pair<Int, Int>.keepDividingWhenDivisible(): Int {
-    val (dividend, divisor) = this
-    var d = dividend
-    while (d % divisor == 0) {
-        d /= divisor
+fun IntArray.subList(startIndex: Int, endIndex: Int): List<Int> {
+    return if (isNotEmpty() && startIndex < endIndex) {
+        this.slice(startIndex until endIndex)
+    } else {
+        emptyList()
     }
-    return d
 }

@@ -14,35 +14,43 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-class IntExtTest {
-    private class UglyNumberInputArgumentsProvider : ArgumentsProvider {
+internal sealed class LongestTripleSubstringTest<out T : LongestTripleSubstring>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(1, true),
-            Arguments.of(2, true),
+            Arguments.of(
+                "aaaa",
+                2,
+            ),
+            Arguments.of(
+                "abcdef",
+                -1,
+            ),
+            Arguments.of(
+                "abcaba",
+                1,
+            ),
         )
     }
 
-    @ParameterizedTest
-    @ArgumentsSource(UglyNumberInputArgumentsProvider::class)
-    fun `is ugly number test`(num: Int, expected: Boolean) {
-        val actual = num.isUgly()
-        Assertions.assertThat(actual).isEqualTo(expected)
+    @ParameterizedTest(name = "input string: {0} should return int: {1}")
+    @ArgumentsSource(InputArgumentsProvider::class)
+    @DisplayName("Test Longest Triple Substring")
+    internal fun maximumLengthTest(str: String, expected: Int) {
+        val actual = strategy(str)
+        assertThat(actual).isEqualTo(expected)
     }
 
-    @ParameterizedTest
-    @ArgumentsSource(UglyNumberInputArgumentsProvider::class)
-    fun `is ugly2 number test`(num: Int, expected: Boolean) {
-        val actual = num.isUgly2()
-        Assertions.assertThat(actual).isEqualTo(expected)
-    }
+    internal data object OptimizedHashingTest :
+        LongestTripleSubstringTest<LongestTripleSubstring>(LongestTripleSubstring.OptimizedHashing)
 }

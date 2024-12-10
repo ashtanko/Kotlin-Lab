@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 
 /**
  * 1523. Count Odd Numbers in an Interval Range

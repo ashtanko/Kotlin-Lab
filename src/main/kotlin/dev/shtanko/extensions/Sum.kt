@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Copyright 2022 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
-import kotlin.random.Random
+import java.math.BigInteger
 
-fun ClosedRange<Char>.randomString(length: Int) =
-    (1..length)
-        .map { (Random.nextInt(endInclusive.code - start.code) + start.code).toChar() }
-        .joinToString("")
-
-fun Char.isVowel(): Boolean {
-    return lowercaseChar() in setOf('a', 'e', 'i', 'o', 'u')
+/**
+ * Calculates the sum of all elements in the iterable collection.
+ *
+ * @return The sum of all elements in the iterable collection.
+ */
+fun Iterable<BigInteger>.sum(): BigInteger {
+    var sum: BigInteger = BigInteger.ZERO
+    for (element in this) {
+        sum += element
+    }
+    return sum
 }

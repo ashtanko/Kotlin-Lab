@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Copyright 2024 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package dev.shtanko.ext
+package dev.shtanko.extensions
 
 import java.math.BigInteger
 import java.util.stream.Stream
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -102,6 +102,6 @@ class BigIntegerExtTest {
     @ArgumentsSource(InputArgumentsProvider::class)
     fun sum(nums: List<BigInteger>, expected: BigInteger) {
         val actual = nums.sum()
-        assertThat(actual).isEqualTo(expected)
+        Assertions.assertThat(actual).isEqualTo(expected)
     }
 }

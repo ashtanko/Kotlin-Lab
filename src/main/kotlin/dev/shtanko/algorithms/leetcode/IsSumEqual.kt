@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.getNumberOfLetter
+import dev.shtanko.extensions.getNumberOfLetter
 
 /**
  * 1880. Check if Word Equals Summation of Two Words

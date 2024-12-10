@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Copyright 2022 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.leetcode
+package dev.shtanko.extensions
 
-import dev.shtanko.extensions.second
+import dev.shtanko.algorithms.TOLERANCE
+import dev.shtanko.algorithms.math.sqrt
+import kotlin.math.abs
 
 /**
- * Corporate Flight Bookings
+ * Checks if the given number is a perfect square.
+ *
+ * @return true if the number is a perfect square, false otherwise.
  */
-fun corpFlightBookings(bookings: Array<IntArray>, n: Int): IntArray {
-    val res = IntArray(n)
-    for (b in bookings) {
-        res[b.first() - 1] += b[2]
-        if (b.second() < n) res[b[1]] -= b[2]
-    }
-    for (i in 1 until n) res[i] += res[i - 1]
-    return res
+fun Number.isSquare(): Boolean {
+    val number = this.toDouble()
+    val sqrtNumber = sqrt(number)
+    val integerPart = sqrtNumber.toInt()
+    return abs(sqrtNumber - integerPart) < TOLERANCE
 }

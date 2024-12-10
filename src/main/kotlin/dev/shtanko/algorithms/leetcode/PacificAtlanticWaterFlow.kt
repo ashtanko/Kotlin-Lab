@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.lessThanZero
+import dev.shtanko.extensions.lessThanZero
 import java.util.LinkedList
 import java.util.Queue
 

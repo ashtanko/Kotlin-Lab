@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 fun <T> Array<T>.swap(i: Int, j: Int) {
     val tmp = this[i]

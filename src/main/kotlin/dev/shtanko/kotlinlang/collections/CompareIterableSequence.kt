@@ -16,7 +16,7 @@
 
 package dev.shtanko.kotlinlang.collections
 
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 
 /**
  * Retrieves the first element from a list after applying a series of transformations.

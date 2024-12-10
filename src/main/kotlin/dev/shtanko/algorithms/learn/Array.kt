@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.learn
 
-import dev.shtanko.algorithms.extensions.second
+import dev.shtanko.extensions.second
 
 fun secondStraightForward(arr: IntArray): Int {
     if (arr.size < 2) return -1

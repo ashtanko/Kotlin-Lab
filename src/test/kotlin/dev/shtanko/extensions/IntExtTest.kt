@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Copyright 2024 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +14,35 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 import java.util.stream.Stream
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class IntArrayTest {
-
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class IntExtTest {
+    private class UglyNumberInputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(intArrayOf(), 0, 0, intArrayOf()),
-            Arguments.of(intArrayOf(1), 0, 0, intArrayOf(1)),
-            Arguments.of(intArrayOf(1, 3), 0, 2, intArrayOf(3, 1)),
-            Arguments.of(intArrayOf(4, 8, 15, 16, 23, 42), 0, 6, intArrayOf(42, 23, 16, 15, 8, 4)),
-            Arguments.of(intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9), 5, 9, intArrayOf(1, 2, 3, 4, 5, 9, 8, 7, 6)),
+            Arguments.of(1, true),
+            Arguments.of(2, true),
         )
     }
 
     @ParameterizedTest
-    @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `reverse int array test`(arr: IntArray, start: Int, end: Int, expected: IntArray) {
-        arr.reverse(start, end)
-        assertThat(arr, equalTo(expected))
+    @ArgumentsSource(UglyNumberInputArgumentsProvider::class)
+    fun `is ugly number test`(num: Int, expected: Boolean) {
+        val actual = num.isUgly()
+        Assertions.assertThat(actual).isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(UglyNumberInputArgumentsProvider::class)
+    fun `is ugly2 number test`(num: Int, expected: Boolean) {
+        val actual = num.isUgly2()
+        Assertions.assertThat(actual).isEqualTo(expected)
     }
 }

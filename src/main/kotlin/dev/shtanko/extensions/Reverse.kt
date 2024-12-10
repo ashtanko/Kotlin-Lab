@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 /**
  * Reverse the subsections of the min array.

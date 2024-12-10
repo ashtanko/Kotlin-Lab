@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.flip
+import dev.shtanko.extensions.flip
 
 /**
  * Pancake sorting is the colloquial term for the mathematical problem of sorting a disordered stack of pancakes in

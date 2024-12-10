@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * Gnome sort (dubbed stupid sort) is a sorting algorithm originally proposed by an Iranian computer scientist

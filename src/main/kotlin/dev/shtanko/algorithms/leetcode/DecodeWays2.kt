@@ -17,7 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
-import dev.shtanko.algorithms.extensions.lessThanZero
+import dev.shtanko.extensions.lessThanZero
 
 // TODO Rename constants
 private const val NINE = 9

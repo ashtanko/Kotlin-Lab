@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isEven
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.isEven
+import dev.shtanko.extensions.swap
 import java.util.Arrays
 
 /**

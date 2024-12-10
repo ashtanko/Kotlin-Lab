@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.generateRandomArray
 import dev.shtanko.algorithms.utils.measureTime
+import dev.shtanko.extensions.generateRandomArray
 import java.util.Locale
 import java.util.stream.Stream
 import kotlin.system.measureTimeMillis

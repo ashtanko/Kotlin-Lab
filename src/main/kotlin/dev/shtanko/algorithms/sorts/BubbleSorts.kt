@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * Bubble sort is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares

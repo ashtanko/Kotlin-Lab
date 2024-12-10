@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isSquare
 import dev.shtanko.algorithms.math.sqrt
+import dev.shtanko.extensions.isSquare
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.min

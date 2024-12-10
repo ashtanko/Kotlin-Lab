@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Copyright 2020 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
-import dev.shtanko.algorithms.TOLERANCE
-import dev.shtanko.algorithms.math.sqrt
-import kotlin.math.abs
+import kotlin.random.Random
 
-/**
- * Checks if the given number is a perfect square.
- *
- * @return true if the number is a perfect square, false otherwise.
- */
-fun Number.isSquare(): Boolean {
-    val number = this.toDouble()
-    val sqrtNumber = sqrt(number)
-    val integerPart = sqrtNumber.toInt()
-    return abs(sqrtNumber - integerPart) < TOLERANCE
+fun ClosedRange<Char>.randomString(length: Int) =
+    (1..length)
+        .map { (Random.nextInt(endInclusive.code - start.code) + start.code).toChar() }
+        .joinToString("")
+
+fun Char.isVowel(): Boolean {
+    return lowercaseChar() in setOf('a', 'e', 'i', 'o', 'u')
 }

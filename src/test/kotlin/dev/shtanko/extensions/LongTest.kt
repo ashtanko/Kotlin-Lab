@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.shtanko.algorithms.extensions
+package dev.shtanko.extensions
 
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat

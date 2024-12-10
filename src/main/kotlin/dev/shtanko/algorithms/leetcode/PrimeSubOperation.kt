@@ -17,7 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.level.Medium
-import dev.shtanko.algorithms.extensions.isPrime
+import dev.shtanko.extensions.isPrime
 
 /**
  * 2601. Prime Subtraction Operation

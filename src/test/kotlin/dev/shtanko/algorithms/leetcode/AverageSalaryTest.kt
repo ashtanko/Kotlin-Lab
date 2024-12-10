@@ -28,12 +28,30 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 abstract class AverageSalaryTest<out T : AverageSalary>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(intArrayOf(4000, 3000, 1000, 2000), 2500.00000),
-            Arguments.of(intArrayOf(1000, 2000, 3000), 2000.00000),
-            Arguments.of(intArrayOf(6000, 5000, 4000, 3000, 2000, 1000), 3500.00000),
-            Arguments.of(intArrayOf(8000, 9000, 2000, 3000, 6000, 1000), 4750.00000),
-            Arguments.of(intArrayOf(500, 2000, 3000), 2000.0),
-            Arguments.of(intArrayOf(10, 25, 15, 40, 55, 23), 25.75),
+            Arguments.of(
+                intArrayOf(4000, 3000, 1000, 2000),
+                2500.00000,
+            ),
+            Arguments.of(
+                intArrayOf(1000, 2000, 3000),
+                2000.00000,
+            ),
+            Arguments.of(
+                intArrayOf(6000, 5000, 4000, 3000, 2000, 1000),
+                3500.00000,
+            ),
+            Arguments.of(
+                intArrayOf(8000, 9000, 2000, 3000, 6000, 1000),
+                4750.00000,
+            ),
+            Arguments.of(
+                intArrayOf(500, 2000, 3000),
+                2000.0,
+            ),
+            Arguments.of(
+                intArrayOf(10, 25, 15, 40, 55, 23),
+                25.75,
+            ),
             Arguments.of(
                 intArrayOf(
                     344,

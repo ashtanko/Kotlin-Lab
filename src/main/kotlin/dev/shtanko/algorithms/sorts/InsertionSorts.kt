@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list.
