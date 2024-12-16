@@ -81,6 +81,6 @@ package dev.shtanko.algorithms.annotations
  * its usage.
  * @constructor Creates a new RecursiveOptimized annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RecursiveOptimized(val info: String = "")

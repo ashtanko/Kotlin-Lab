@@ -91,6 +91,6 @@ package dev.shtanko.algorithms.annotations
  * usage.
  * @constructor Creates a new Greedy annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Greedy(val info: String = "")

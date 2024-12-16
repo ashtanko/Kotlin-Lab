@@ -109,6 +109,6 @@ package dev.shtanko.algorithms.annotations
  * @property info An optional string that provides additional information about the backtracking algorithm.
  * @constructor Creates a new Backtracking annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Backtracking(val info: String = "")

@@ -114,6 +114,6 @@ package dev.shtanko.algorithms.annotations
  *
  * Dijkstra's algorithm is widely used in routing and as a subroutine in other graph algorithms.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Dijkstra(val info: String = "")

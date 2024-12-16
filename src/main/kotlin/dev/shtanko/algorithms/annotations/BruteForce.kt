@@ -84,6 +84,6 @@ package dev.shtanko.algorithms.annotations
  * or usage.
  * @constructor Creates a new BruteForce annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class BruteForce(val info: String = "")

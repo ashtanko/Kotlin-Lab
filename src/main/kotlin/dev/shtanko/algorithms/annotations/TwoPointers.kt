@@ -78,6 +78,6 @@ package dev.shtanko.algorithms.annotations
  * implementation or its usage.
  * @constructor Creates a new TwoPointers annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class TwoPointers(val info: String = "")

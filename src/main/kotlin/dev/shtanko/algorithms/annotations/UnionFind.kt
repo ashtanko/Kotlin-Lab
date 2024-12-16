@@ -94,6 +94,6 @@ package dev.shtanko.algorithms.annotations
  * implementation or its usage.
  * @constructor Creates a new UnionFind annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class UnionFind(val info: String = "")

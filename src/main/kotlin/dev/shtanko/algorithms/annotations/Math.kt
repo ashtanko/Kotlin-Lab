@@ -75,6 +75,6 @@ package dev.shtanko.algorithms.annotations
  * implemented by the annotated code.
  * @constructor Creates a new Math annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Math(val info: String = "")

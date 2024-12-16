@@ -55,6 +55,6 @@ package dev.shtanko.algorithms.annotations
  * or usage.
  * @constructor Creates a new KruskalsAlgorithm annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class KruskalsAlgorithm(val info: String = "")

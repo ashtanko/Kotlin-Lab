@@ -72,6 +72,6 @@ package dev.shtanko.algorithms.annotations
  * @property info An optional string that provides additional information about the OnePass algorithm or its usage.
  * @constructor Creates a new OnePass annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class OnePass(val info: String = "")

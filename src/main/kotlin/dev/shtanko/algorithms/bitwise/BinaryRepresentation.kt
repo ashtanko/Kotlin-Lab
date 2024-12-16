@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.bitwise
 
+import dev.shtanko.algorithms.annotations.Bitwise
+
 /**
  * Let us take unsigned integer (32 bit), which consist of 0-31 bits.
  * To print binary representation of unsigned integer, start from 31st bit, check whether 31st bit is ON or OFF,
@@ -24,6 +26,7 @@ package dev.shtanko.algorithms.bitwise
  * Time Complexity: O(1)
  * Auxiliary Space: O(1)
  */
+@Bitwise
 fun Long.bin(): String {
     val sb = StringBuilder()
     sb.append("0")

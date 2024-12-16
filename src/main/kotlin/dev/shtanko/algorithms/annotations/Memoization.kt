@@ -74,6 +74,6 @@ package dev.shtanko.algorithms.annotations
  * implementation or its usage.
  * @constructor Creates a new Memoization annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Memoization(val info: String = "")

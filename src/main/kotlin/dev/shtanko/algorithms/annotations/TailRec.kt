@@ -60,6 +60,6 @@ package dev.shtanko.algorithms.annotations
  * or its usage.
  * @constructor Creates a new TailRec annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class TailRec(val info: String = "")

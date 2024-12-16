@@ -55,6 +55,6 @@ package dev.shtanko.algorithms.annotations
  * implementation or usage.
  * @constructor Creates a new DivideAndConquer annotation.
  */
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DivideAndConquer(val info: String = "")
