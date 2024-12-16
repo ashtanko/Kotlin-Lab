@@ -95,6 +95,6 @@ class BitwiseIntTest {
         assertEquals(-6, 5.invertBits()) // 5 (0101) → -6 (1010)
         assertEquals(-1, 0.invertBits()) // 0 (0000) → -1 (1111)
         assertEquals(-8, 7.invertBits()) // 7 (0111) → -8 (1000)
-        assertEquals(2, (-1).invertBits()) // -1 (1111) → 2 (0000)
+        assertEquals(0, (-1).invertBits()) // -1 (1111) → 0 (0000)
     }
 }

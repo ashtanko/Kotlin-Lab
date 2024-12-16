@@ -16,9 +16,21 @@
 
 package dev.shtanko.algorithms.learn.bit
 
-object Or {
+import dev.shtanko.algorithms.annotations.Bitwise
 
-    // if either of the bits is 1, it gives 1. If not, it gives 0
+/**
+ * The bitwise OR operation (|) takes two bits as operands and returns 1 if either of the bits is 1.
+ */
+@Bitwise
+object Or {
+    /**
+     * The bitwise OR operation (|) takes two bits as operands and returns 1 if either of the bits is 1.
+     * It returns 0 if both bits are 0.
+     *
+     * @param x The first integer.
+     * @param y The second integer.
+     * @return The result of the bitwise OR operation.
+     */
     fun simpleOr(x: Int, y: Int): Int {
         return x or y
     }
