@@ -25,18 +25,18 @@
 ```text
 14098 number of properties
 9628 number of functions
-8548 number of classes
+8550 number of classes
 185 number of packages
-3271 number of kt files
+3273 number of kt files
 ```
 
 
 ### Complexity Report
 ```text
-242601 lines of code (loc)
-149762 source lines of code (sloc)
-109576 logical lines of code (lloc)
-66750 comment lines of code (cloc)
+242723 lines of code (loc)
+149770 source lines of code (sloc)
+109582 logical lines of code (lloc)
+66858 comment lines of code (cloc)
 23605 cyclomatic complexity (mcc)
 19777 cognitive complexity
 0 number of total code smells
