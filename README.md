@@ -33,13 +33,13 @@
 
 ### Complexity Report
 ```text
-240945 lines of code (loc)
+242601 lines of code (loc)
 149762 source lines of code (sloc)
 109576 logical lines of code (lloc)
-65094 comment lines of code (cloc)
+66750 comment lines of code (cloc)
 23605 cyclomatic complexity (mcc)
 19777 cognitive complexity
 0 number of total code smells
-43 comment source ratio
+44 comment source ratio
 215 mcc per 1,000 lloc
 ```
