@@ -7,7 +7,7 @@ asynchronous tasks such as I/O operations, network requests, or any long-running
 ## Key Characteristics of Coroutines
 
 1. **Lightweight**:
-   - Coroutines are more lightweight than traditional threads. They don't require a dedicated OS thread, making them 
+   - Coroutines are more lightweight than traditional threads. They don't require a dedicated OS thread, making them
      cheaper to create and maintain.
 
 2. **Suspending and Resuming**:
