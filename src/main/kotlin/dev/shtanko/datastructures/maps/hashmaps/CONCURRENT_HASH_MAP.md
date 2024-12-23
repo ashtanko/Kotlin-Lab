@@ -1,9 +1,8 @@
-Concurrent hash maps are a specialized form of hash maps designed to handle concurrent access by multiple 
-threads efficiently. They provide thread-safe operations without requiring explicit synchronization, which can lead to 
-performance bottlenecks. In computer science, concurrent hash maps are essential for building scalable and 
-high-performance applications that require safe and efficient access to shared data structures.
+# Concurrent hash maps
 
-### Key Concepts
+Concurrent hash maps are a specialized form of hash maps designed to handle concurrent access by multiple threads efficiently. They provide thread-safe operations without requiring explicit synchronization, which can lead to performance bottlenecks. In computer science, concurrent hash maps are essential for building scalable and high-performance applications that require safe and efficient access to shared data structures.
+
+## Key Concepts
 
 1. **Thread Safety**: Concurrent hash maps ensure that multiple threads can safely read, write, and update the map 
 concurrently without causing data corruption or inconsistencies.
@@ -15,7 +14,7 @@ This means that different parts of the map can be locked independently, allowing
 3. **Lock-Free Algorithms**: Some implementations use lock-free or non-blocking algorithms to manage concurrent access. 
 These algorithms rely on atomic operations and are designed to avoid traditional locking mechanisms.
 
-### Common Implementations
+## Common Implementations
 
 1. **Segmented Locking**: One common approach is to divide the hash map into segments, each with its own lock. 
 Operations only lock the segment relevant to the key being accessed. This allows multiple threads to operate on 
@@ -33,7 +32,7 @@ different segments simultaneously without contention.
 3. **Lock-Free Hash Tables**: Some implementations, like certain versions of the `ConcurrentSkipListMap`, 
         use lock-free techniques that rely on atomic operations to ensure thread safety without locking.
 
-### Operations
+## Operations
 
 1. **Insertion**: The key is hashed to find the appropriate segment or bin. Fine-grained locking or CAS operations 
 ensure that the insertion is thread-safe. If the segment or bin is being modified, only that part is locked.
