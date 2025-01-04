@@ -19,6 +19,10 @@ package dev.shtanko.benchmark.jobs
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.LockSupport
 
+/**
+ * A job that simulates a storage operation.
+ * The job takes a random amount of time to complete.
+ */
 @Suppress("MagicNumber")
 class StorageJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

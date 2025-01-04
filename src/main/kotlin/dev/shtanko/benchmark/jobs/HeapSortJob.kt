@@ -16,6 +16,16 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Heap sort algorithm
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Heapsort">Heapsort</a>
+ *
+ * @return The sorted array.
+ *
+ * Runtime complexity: O(n log n)
+ * Space complexity: O(1)
+ */
 @Suppress("MagicNumber")
 class HeapSortJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

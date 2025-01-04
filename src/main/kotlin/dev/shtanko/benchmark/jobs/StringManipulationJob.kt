@@ -16,6 +16,12 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * A job that manipulates a string.
+ * The job appends the string "Test" to a StringBuilder 100,000 times.
+ * The result is not used to avoid dead code elimination.
+ * This job is used to measure the overhead of the benchmarking framework.
+ */
 @Suppress("MagicNumber")
 class StringManipulationJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

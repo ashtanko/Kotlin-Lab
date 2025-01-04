@@ -16,6 +16,18 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Benchmark job.
+ *
+ * This interface is used to define a benchmark job.
+ * A benchmark job is a function that performs a specific task.
+ */
 fun interface BenchmarkJob {
+
+    /**
+     * Perform the benchmark job.
+     *
+     * @param args The arguments to pass to the job.
+     */
     suspend operator fun invoke(vararg args: Any?)
 }

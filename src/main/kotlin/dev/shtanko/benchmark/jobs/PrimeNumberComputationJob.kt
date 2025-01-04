@@ -18,6 +18,11 @@ package dev.shtanko.benchmark.jobs
 
 import kotlin.math.sqrt
 
+/**
+ * A job that computes prime numbers up to a given limit using the Sieve of Eratosthenes algorithm.
+ * The limit is set to 10,000,000.
+ * The algorithm is implemented using a boolean array to store the sieve.
+ */
 @Suppress("MagicNumber")
 class PrimeNumberComputationJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

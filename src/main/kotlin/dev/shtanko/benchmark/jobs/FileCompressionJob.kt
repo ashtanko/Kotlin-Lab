@@ -21,6 +21,11 @@ import java.io.File
 import java.util.zip.Deflater
 import java.util.zip.Inflater
 
+/**
+ * File compression benchmark job.
+ *
+ * This job compresses a large text file using the Deflater class and then decompresses it using the Inflater class.
+ */
 @Suppress("MagicNumber")
 class FileCompressionJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

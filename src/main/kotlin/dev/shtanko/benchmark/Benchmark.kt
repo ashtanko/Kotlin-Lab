@@ -18,6 +18,7 @@
 
 package dev.shtanko.benchmark
 
+import dev.shtanko.benchmark.jobs.ArithmeticJob
 import dev.shtanko.benchmark.jobs.BenchmarkJob
 import dev.shtanko.benchmark.jobs.ConcurrentJob
 import dev.shtanko.benchmark.jobs.DatabaseQuerySimulationJob
@@ -26,11 +27,13 @@ import dev.shtanko.benchmark.jobs.FileIOManipulationsJob
 import dev.shtanko.benchmark.jobs.HeapSortJob
 import dev.shtanko.benchmark.jobs.HeavyCPUJob
 import dev.shtanko.benchmark.jobs.JSONJob
+import dev.shtanko.benchmark.jobs.ListManipulationsJob
 import dev.shtanko.benchmark.jobs.ListOperationsJob
 import dev.shtanko.benchmark.jobs.MatrixMultiplicationJob
 import dev.shtanko.benchmark.jobs.PrimeNumberComputationJob
 import dev.shtanko.benchmark.jobs.SimpleJob
 import dev.shtanko.benchmark.jobs.SortingLargeArrayJob
+import dev.shtanko.benchmark.jobs.StorageJob
 import dev.shtanko.benchmark.jobs.StringManipulationJob
 import kotlinx.coroutines.runBlocking
 
@@ -156,7 +159,10 @@ suspend fun main() {
         "Matrix Multiplication" to MatrixMultiplicationJob(),
         "JSON Serialization/Deserialization" to JSONJob(),
         "Heap Sort" to HeapSortJob(),
+        "List Manipulation" to ListManipulationsJob(),
         "File Compression" to FileCompressionJob(),
+        "Storage Job" to StorageJob(),
+        "Arithmetic Job" to ArithmeticJob(),
     )
 
     val results = benchmark.runBenchmarks(

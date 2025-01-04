@@ -16,6 +16,13 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Benchmark job that performs list operations.
+ * The job creates a list of 100,000 elements, removes the first element, and checks if the list contains an element.
+ * The job is used to compare the performance of different implementations of the list data structure.
+ * The job is executed multiple times to get an average execution time.
+ * The job is executed in a coroutine.
+ */
 @Suppress("MagicNumber")
 class ListOperationsJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

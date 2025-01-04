@@ -16,6 +16,14 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Matrix multiplication job.
+ * This job multiplies two matrices.
+ * The matrices are randomly generated.
+ * The size of the matrices is 1000x1000.
+ * The matrices are multiplied using the naive algorithm.
+ * The result is stored in a new matrix.
+ */
 @Suppress("MagicNumber")
 class MatrixMultiplicationJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

@@ -16,6 +16,14 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * A job that sorts a large array of random integers.
+ * The array has 100,000 elements.
+ * The array is sorted using the built-in sorting algorithm.
+ * The result is not used to avoid dead code elimination.
+ * This job is used to measure the overhead of the benchmarking framework.
+ * The job is executed in a coroutine.
+ */
 @Suppress("MagicNumber")
 class SortingLargeArrayJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

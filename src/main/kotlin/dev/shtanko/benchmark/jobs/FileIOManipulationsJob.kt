@@ -18,6 +18,11 @@ package dev.shtanko.benchmark.jobs
 
 import java.io.File
 
+/**
+ * This job benchmarks file I/O manipulations.
+ * It writes a text to a file, reads it, and then deletes the file.
+ * The benchmark measures the time it takes to perform these operations.
+ */
 class FileIOManipulationsJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {
         val file = File("benchmark_test.txt")

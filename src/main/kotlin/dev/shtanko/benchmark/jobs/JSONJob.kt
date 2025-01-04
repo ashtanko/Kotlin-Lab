@@ -21,6 +21,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
+/**
+ * JSONJob is a benchmark job that reads a JSON file from the resources and decodes it into a data class.
+ * This job is useful for benchmarking the performance of JSON deserialization tasks.
+ * The JSON file contains a list of repositories.
+ * The data class is generated using kotlinx.serialization.
+ * @see kotlinx.serialization
+ */
 class JSONJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {
         val res = "benchmark/orgs.json".readJsonFromResource()

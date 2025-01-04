@@ -16,6 +16,13 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * A simple job that calculates the square of each number from 0 to 1_000_000.
+ * The result is not used to avoid dead code elimination.
+ * This job is used to measure the overhead of the benchmarking framework.
+ * The job is executed 1,000,000 times.
+ * The job is executed in a coroutine.
+ */
 @Suppress("MagicNumber")
 class SimpleJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) = repeat(1_000_000) { it * it }

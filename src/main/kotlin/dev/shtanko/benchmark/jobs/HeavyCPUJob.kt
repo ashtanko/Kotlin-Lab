@@ -16,6 +16,10 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * A job that performs a heavy CPU operation.
+ * This job is useful for benchmarking the performance of CPU-bound tasks.
+ */
 @Suppress("MagicNumber")
 class HeavyCPUJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

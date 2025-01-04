@@ -19,6 +19,12 @@ package dev.shtanko.benchmark.jobs
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Concurrent job.
+ * This job launches 100 coroutines, each of which performs 10,000 iterations.
+ * The job is expected to complete in a reasonable amount of time.
+ * The job is used to test the performance of the benchmarking framework.
+ */
 @Suppress("MagicNumber")
 class ConcurrentJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) = coroutineScope {

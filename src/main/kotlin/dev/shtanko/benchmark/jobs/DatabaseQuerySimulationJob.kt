@@ -16,6 +16,14 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Database query simulation job.
+ *
+ * This job simulates a database query by filtering a list of data.
+ * The data is a list of integers from 2 to 200,000.
+ * The job filters the data by selecting only the elements that are divisible by 3.
+ * The job is used to test the performance of the benchmarking framework.
+ */
 @Suppress("MagicNumber")
 class DatabaseQuerySimulationJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {

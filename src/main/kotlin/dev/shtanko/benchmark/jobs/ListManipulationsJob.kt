@@ -16,6 +16,17 @@
 
 package dev.shtanko.benchmark.jobs
 
+/**
+ * Benchmark job that performs a series of list manipulations.
+ * The list is created with a seed value, then mapped to a float, then mapped to a float + 0.3,
+ * then associated by a string representation of the float, then mapped to the square of the float,
+ * then filtered to only include values greater than 5.
+ * The list is then discarded.
+ * The seed value is currently hardcoded to 100.
+ * The list is created with a seed value, then mapped to a float, then mapped to a float + 0.3,
+ * then associated by a string representation of the float, then mapped to the square of the float,
+ * then filtered to only include values greater than 5.
+ */
 @Suppress("MagicNumber")
 class ListManipulationsJob : BenchmarkJob {
     override suspend fun invoke(vararg args: Any?) {
