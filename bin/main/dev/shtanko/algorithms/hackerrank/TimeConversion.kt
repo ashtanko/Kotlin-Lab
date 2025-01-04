@@ -44,8 +44,6 @@ sealed interface TimeConversion {
                 !isAM -> "${(hours.toInt() + 12)}:$minutes:$seconds"
                 else -> "$hours:$minutes:$seconds"
             }
-
-            // Remove the AM/PM suffix
             return militaryTime
         }
     }

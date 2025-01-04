@@ -27,15 +27,20 @@ fun interface RemoveDuplicates {
 class RemoveDuplicatesSolution : RemoveDuplicates {
     override fun invoke(nums: IntArray): Int {
         val n = nums.size
+        // If the array has less than 2 elements, return its length
         if (n < 2) return n
         var count = 0
+        // Iterate through the array starting from the second element
         for (i in 1 until n) {
+            // If the current element is the same as the previous one, increment the count
             if (nums[i] == nums[i - 1]) {
                 count++
             } else {
+                // Move the current element to the correct position
                 nums[i - count] = nums[i]
             }
         }
+        // Return the length of the array without duplicates
         return n - count
     }
 }
