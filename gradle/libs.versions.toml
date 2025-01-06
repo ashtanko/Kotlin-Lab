@@ -1,14 +1,14 @@
 [versions]
-coroutines = " 1.9.0-RC"    # https://github.com/Kotlin/kotlinx.coroutines
-junit = "5.11.0-M2"         # https://junit.org/junit5/
-kotlin = "2.0.0"            # https://kotlinlang.org/docs/releases.html
-detekt = "1.23.6"           # https://github.com/detekt/detekt
-dokka = "1.9.20"            # https://github.com/Kotlin/dokka
-spotless = "7.0.0.BETA1"    # https://github.com/diffplug/spotless
+coroutines = "1.10.1"       # https://github.com/Kotlin/kotlinx.coroutines
+junit = "5.11.4"            # https://junit.org/junit5 | https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter
+kotlin = "2.1.0"            # https://github.com/JetBrains/kotlin
+detekt = "1.23.7"           # https://github.com/detekt/detekt
+dokka = "2.0.0"             # https://github.com/Kotlin/dokka
+spotless = "7.0.0"          # https://github.com/diffplug/spotless
 dependency = "1.33.0"       # https://github.com/autonomousapps/dependency-analysis-gradle-plugin
 pitest = "1.15.0"           # https://plugins.gradle.org/plugin/info.solidsoft.pitest
-ktlint = "0.49.0"           # https://github.com/pinterest/ktlint
-kapt = "2.0.0"              # https://kotlinlang.org/docs/kapt.html
+ktlint = "12.1.2"           # https://github.com/JLLeitschuh/ktlint-gradle
+kapt = "2.1.0"              # https://kotlinlang.org/docs/kapt.html
 slf4j = "1.7.36"            # https://www.slf4j.org TODO remove
 rxjava = "3.1.8"            # https://github.com/ReactiveX/RxJava TODO remove
 rxkotlin = "3.0.1"          # https://github.com/ReactiveX/RxKotlin TODO remove
@@ -20,13 +20,13 @@ dagger = "2.51.1"           # https://dagger.dev TODO remove
 jmh = "1.37"                # https://github.com/openjdk/jmh
 kotlintest = "3.4.2"        # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 kotest = "5.9.1"            # https://kotest.io
-assertj = "3.26.3"          # https://mvnrepository.com/artifact/org.assertj/assertj-core
-mockito = "5.12.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
-mockito_kotlin = "2.2.0"    # https://github.com/mockito/mockito-kotlin
+assertj = "3.27.2"          # https://mvnrepository.com/artifact/org.assertj/assertj-core | https://assertj.github.io/doc
+mockito = "5.15.2"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
+mockito_kotlin = "5.4.0"    # https://github.com/mockito/mockito-kotlin
 logback = "1.2.11"          # https://logback.qos.ch
 hamcrest = "2.2"            # https://hamcrest.org/JavaHamcrest/distributables
 mockk = "1.13.12"           # https://mockk.io
-kover = "0.7.6"             # https://github.com/Kotlin/kotlinx-kover
+kover = "0.9.0"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.18.1"            # https://jsoup.org/
 
@@ -65,7 +65,7 @@ kotlintest-core = { module = "io.kotlintest:kotlintest-core", version.ref = "kot
 kotlintest-junit5 = { module = "io.kotlintest:kotlintest-runner-junit5", version.ref = "kotlintest" }
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-kotlin = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version.ref = "mockito_kotlin" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito_kotlin" }
 logback = { module = "ch.qos.logback:logback-core", version.ref = "logback" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }

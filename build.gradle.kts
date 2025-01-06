@@ -21,8 +21,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 val projectJvmTarget = 17
 val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
 val ktLintConfig: Configuration by configurations.creating
-val isK2Enabled = true
-val k2CompilerArg = if (isK2Enabled) listOf("-Xuse-k2") else emptyList()
 val outputDir = "${project.layout.buildDirectory}/reports/ktlint/"
 val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
 val kotlinVersion = KOTLIN_2_0
@@ -135,10 +133,12 @@ subprojects {
     apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 }
 
-koverReport {
-    verify {
-        rule {
-            minBound(80)
+kover {
+    reports {
+        verify {
+            rule {
+                minBound(80)
+            }
         }
     }
 }
@@ -242,7 +242,6 @@ tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "$projectJvmTarget"
-            freeCompilerArgs = freeCompilerArgs + k2CompilerArg
         }
     }
 
