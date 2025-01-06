@@ -338,6 +338,7 @@ dependencies {
         testImplementation(kotest.assertions)
         testImplementation(kotest.property)
         testImplementation(okhttp.mockwebserver)
+        testImplementation("app.cash.turbine:turbine:1.2.0")
     }
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
