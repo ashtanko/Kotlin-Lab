@@ -2,7 +2,10 @@
 
 # Run detekt + ktlint
 check:
-	./gradlew detekt ktlintCheck --profile --daemon
+	./gradlew detekt --profile --daemon
+
+ktlint:
+	./gradlew ktlintCheck
 
 # Run spotless, more info: https://github.com/diffplug/spotless
 spotless:

@@ -16,7 +16,9 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 val projectJvmTarget = 17
 val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
@@ -47,19 +49,12 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.kover)
     alias(libs.plugins.diktat)
+    alias(libs.plugins.ktlint)
 }
 
 jacoco {
     toolVersion = "0.8.11"
 }
-
-//sonarqube {
-//    properties {
-//        setProperty("sonar.projectKey", "ashtanko_kotlab")
-//        setProperty("sonar.organization", "ashtanko")
-//        setProperty("sonar.host.url", "https://sonarcloud.io")
-//    }
-//}
 
 repositories {
     mavenCentral()
@@ -71,26 +66,6 @@ repositories {
 application {
     mainClass.set("link.kotlin.scripts.Application")
     mainClass.set("dev.shtanko.report.ReportParserKt")
-}
-
-val ktlintCheck by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Check Kotlin code style."
-    classpath = ktLintConfig
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("src/**/*.kt")
-}
-
-val ktlintFormat by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Fix Kotlin code style deviations."
-    classpath = ktLintConfig
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("-F", "src/**/*.kt")
 }
 
 plugins.withId("info.solidsoft.pitest") {
@@ -121,7 +96,7 @@ spotless {
             ),
         )
         trimTrailingWhitespace()
-        indentWithSpaces()
+        // indentWithSpaces()
         endWithNewline()
         val delimiter = "^(package|object|import|interface|internal|@file|//startfile)"
         val licenseHeaderFile = rootProject.file("spotless/copyright.kt")
@@ -239,9 +214,10 @@ tasks {
         }
     }
 
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "$projectJvmTarget"
+    withType<KotlinJvmCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
         }
     }
 
@@ -287,12 +263,6 @@ tasks {
         useJUnitPlatform()
         finalizedBy(withType(JacocoReport::class.java))
     }
-
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "$projectJvmTarget"
-        }
-    }
 }
 
 dependencies {
@@ -314,7 +284,6 @@ dependencies {
         implementation(okhttp)
         implementation("org.openjdk.jol:jol-core:0.17")
 
-        ktLintConfig(ktlint)
         implementation(jsoup)
 
         testImplementation(mockk)
@@ -383,8 +352,8 @@ abstract class GenerateDetektReportTask : DefaultTask() {
             KT_FILES_KEY.first to report.metrics.numberOfKtFiles,
         )
 
-        val metricsListColumns = metricsList.map { it.first }
-        val metricsListRows = listOf(metricsList.map { "${it.second}" })
+        // val metricsListColumns = metricsList.map { it.first }
+        // val metricsListRows = listOf(metricsList.map { "${it.second}" })
 
         val complexityList = listOf(
             LOC_KEY.second to report.complexityReport.linesOfCode,
@@ -399,8 +368,8 @@ abstract class GenerateDetektReportTask : DefaultTask() {
             CS_KEY.second to report.complexityReport.codeSmellsPer1000Lloc,
         )
 
-        val complexityListColumns = complexityList.map { it.first }
-        val complexityListRows = listOf(complexityList.map { "${it.second}" })
+        // val complexityListColumns = complexityList.map { it.first }
+        // val complexityListRows = listOf(complexityList.map { "${it.second}" })
         writeReport(metricsList.map { "${it.second} ${it.first}" }.toSet(), "Metrics", false, metricsReportFile)
         writeReport(
             complexityList.map { "${it.second} ${it.first}" }.toSet(),
