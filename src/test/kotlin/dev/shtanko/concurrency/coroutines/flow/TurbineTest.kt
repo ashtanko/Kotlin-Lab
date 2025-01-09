@@ -26,11 +26,9 @@ import org.junit.jupiter.api.Test
 class TurbineTest {
 
     @Test
-    fun `turbine single flow test example`() = runTest {
-        flowOf("one").test {
-            assertEquals("one", awaitItem())
-            awaitComplete()
-        }
+    fun `turbine single flow test example`() = runFlowTest(flowOf("one")) {
+        assertEquals("one", awaitItem())
+        awaitComplete()
     }
 
     @Test

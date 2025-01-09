@@ -29,6 +29,8 @@ mockk = "1.13.12"           # https://mockk.io
 kover = "0.9.0"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.18.1"            # https://jsoup.org/
+turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
+truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
@@ -55,6 +57,8 @@ jmh-annprocess = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.
 jmh-benchmarks = { module = "org.openjdk.jmh:jmh-core-benchmarks", version.ref = "jmh" }
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
 #detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 # test libs
