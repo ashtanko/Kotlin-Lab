@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Copyright 2025 Oleksii Shtanko
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package dev.shtanko.api.contributors
+package dev.shtanko.github.data.model
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-fun main() = runBlocking {
-    ContributorsImpl().loadContributors()
-}
+@Serializable
+data class GitHubLicenseModel(
+    val key: String? = null,
+    val name: String? = null,
+    @SerialName("spdx_id") val spdxId: String? = null,
+    val url: String? = null,
+    @SerialName("node_id") val nodeId: String? = null,
+)

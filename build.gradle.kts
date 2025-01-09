@@ -282,8 +282,10 @@ dependencies {
         implementation(retrofit)
         implementation(retrofit.mock)
         implementation(okhttp)
+        implementation(sandwich.retrofit)
+        implementation(okhttp.logging)
         implementation("org.openjdk.jol:jol-core:0.17")
-
+        implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
         implementation(jsoup)
 
         testImplementation(mockk)
