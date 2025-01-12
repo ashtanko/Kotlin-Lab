@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("MagicNumber", "SwallowedException", "TooGenericExceptionThrown")
+@file:Suppress("MagicNumber", "SwallowedException", "TooGenericExceptionThrown", "TooGenericExceptionCaught")
 
 package dev.shtanko.concurrency.coroutines.examples
 

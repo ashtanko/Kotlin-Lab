@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "TooGenericExceptionCaught")
 package dev.shtanko.concurrency.coroutines.examples
 
 import kotlin.random.Random
