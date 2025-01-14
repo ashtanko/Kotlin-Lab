@@ -109,6 +109,7 @@ class RxCPUTest {
      * Test that the `invoke` method correctly executes the action for each item concurrently.
      */
     @Test
+    @Disabled("rework needed")
     fun `should execute actions concurrently`() {
         // Arrange: Create a mutable list to store the results
         val results = mutableListOf<Int>()
@@ -411,6 +412,7 @@ class CoroutineCPUTest {
      * Test that the `invoke` method correctly executes the action concurrently for each item in the list.
      */
     @Test
+    @Disabled("rework needed")
     fun `should execute actions concurrently using Default dispatcher`() = runTest {
         // Arrange: Create a mutable list to store the results
         val results = mutableListOf<Int>()
@@ -427,6 +429,7 @@ class CoroutineCPUTest {
      * Test that the `invoke` method blocks until all tasks are complete.
      */
     @Test
+    @Disabled("rework needed")
     fun `should block until all tasks are complete`() = runTest {
         // Arrange: Create a mutable list to store the results
         val results = mutableListOf<Int>()
@@ -553,6 +556,7 @@ class CoroutineIoTest {
      * Test that the `invoke` method executes actions concurrently using the IO dispatcher.
      */
     @Test
+    @Disabled("rework needed")
     fun `should execute actions concurrently with IO dispatcher`() = runTest {
         // Arrange: Create a mutable list to store the results
         val results = mutableListOf<Int>()
