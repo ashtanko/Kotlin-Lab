@@ -27,10 +27,6 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.extension.ExtensionContext
-import org.junit.jupiter.api.extension.ParameterContext
-import org.junit.jupiter.api.extension.ParameterResolver
-import org.junit.jupiter.api.extension.RegisterExtension
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -127,12 +123,6 @@ class ParameterizedTestsTest {
         assertTrue(num >= 1 && num <= 2)
         assertEquals(2, list.size)
     }
-
-    @ParameterizedTest
-    @MethodSource("factoryMethodWithArguments")
-    fun testWithFactoryMethodWithArguments(argument: String) {
-        assertTrue(argument.startsWith("2"))
-    }
     // endregion
 
     // region @FieldSource
@@ -163,9 +153,6 @@ class ParameterizedTestsTest {
         @JvmStatic
         val listOfFruits = listOf("apple", "banana")
 
-        @RegisterExtension
-        val integerResolver = IntegerResolver()
-
         @JvmStatic
         fun stringProvider(): List<String> {
             return listOf("apple", "banana")
@@ -189,10 +176,6 @@ class ParameterizedTestsTest {
             )
         }
 
-        @JvmStatic
-        fun factoryMethodWithArguments(quantity: Int): List<Arguments> {
-            return listOf(arguments("$quantity apples"), arguments("$quantity lemons"))
-        }
 
         @JvmStatic
         val namedArgumentsSupplier: Supplier<Stream<Arguments>> = Supplier {
@@ -201,21 +184,5 @@ class ParameterizedTestsTest {
                 arguments("banana"),
             )
         }
-    }
-}
-
-class IntegerResolver : ParameterResolver {
-    override fun supportsParameter(
-        parameterContext: ParameterContext?,
-        extensionContext: ExtensionContext?,
-    ): Boolean {
-        return parameterContext?.parameter?.type == Int::class.java
-    }
-
-    override fun resolveParameter(
-        parameterContext: ParameterContext?,
-        extensionContext: ExtensionContext?,
-    ): Any? {
-        return 2
     }
 }

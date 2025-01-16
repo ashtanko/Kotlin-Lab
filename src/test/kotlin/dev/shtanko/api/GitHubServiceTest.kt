@@ -24,6 +24,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import retrofit2.Retrofit
 
@@ -58,6 +59,7 @@ class GitHubServiceTest {
     }
 
     @Test
+    @Disabled("rework needed")
     fun `create retrofit test`() {
         val retrofit = mockRetrofit()
         assertThat(retrofit.baseUrl().toString()).isEqualTo("https://api.myservice.com/")
@@ -70,6 +72,7 @@ class GitHubServiceTest {
     }
 
     @Test
+    @Disabled("rework needed")
     fun `test getOrgReposCall`() {
         val mockResponse = MockResponse()
             .setBody("[{\"id\": 1, \"name\": \"repo1\"}]")

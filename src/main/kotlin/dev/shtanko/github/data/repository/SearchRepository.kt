@@ -17,6 +17,7 @@
 package dev.shtanko.github.data.repository
 
 import com.skydoves.sandwich.ApiResponse
+import dev.shtanko.github.data.cache.NetworkResponseCache
 import dev.shtanko.github.data.model.Order
 import dev.shtanko.github.data.model.SearchResponseModel
 import dev.shtanko.github.data.model.Sort
@@ -38,6 +39,7 @@ interface SearchRepository {
 
 class SearchRepositoryImpl(
     private val searchService: SearchService,
+    private val cache: NetworkResponseCache<SearchResponseModel>,
     private val dispatcher: CoroutineDispatcher,
 ) : SearchRepository {
     override fun search(

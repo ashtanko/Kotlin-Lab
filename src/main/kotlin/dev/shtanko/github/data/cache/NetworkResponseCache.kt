@@ -56,11 +56,11 @@ class InMemoryNetworkResponseCache<T>(val expiration: Duration = 5.minutes) : Ne
     }
 
     override fun invalidate(key: String) {
-        TODO("Not yet implemented")
+        map.remove(key)
     }
 
     override fun clear() {
-        TODO("Not yet implemented")
+        map.clear()
     }
 
     override fun size(): Int {

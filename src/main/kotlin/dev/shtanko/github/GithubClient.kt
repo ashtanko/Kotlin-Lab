@@ -16,9 +16,13 @@
 
 package dev.shtanko.github
 
+import com.skydoves.sandwich.ApiResponse
+import dev.shtanko.github.data.cache.InMemoryNetworkResponseCache
+import dev.shtanko.github.data.model.SearchResponseModel
 import dev.shtanko.github.data.network.di.provideSearchService
 import dev.shtanko.github.data.repository.SearchRepository
 import dev.shtanko.github.data.repository.SearchRepositoryImpl
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
@@ -26,14 +30,20 @@ object GithubClient {
     @JvmStatic
     fun main(args: Array<String>) = runBlocking {
         val searchService = provideSearchService().value
-        val searchRepository: SearchRepository = SearchRepositoryImpl(searchService, dispatcher = Dispatchers.IO)
+        val cache = InMemoryNetworkResponseCache<SearchResponseModel>(expiration = 10.seconds)
+        val searchRepository: SearchRepository = SearchRepositoryImpl(searchService, cache, dispatcher = Dispatchers.IO)
         searchRepository.search(
             "android", order = null,
             perPage = null,
             sort = null,
             limit = null,
         ).collect {
-            println(it)
+            if (it is ApiResponse.Success<SearchResponseModel>) {
+                val items = it.data.items
+                items?.forEach { item ->
+                    println(item.name)
+                }
+            }
         }
     }
 }

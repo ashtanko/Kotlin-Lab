@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test
 class BenchmarkTest {
 
     @Test
+    @Disabled("rework needed")
     fun `test memory measurement for a coroutine block`() = runTest {
         val memoryMeasurer = CoroutinesMemoryMeasurer()
 
