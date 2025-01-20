@@ -17,15 +17,19 @@
 package dev.shtanko.turbine
 
 import app.cash.turbine.test
+import app.cash.turbine.turbineScope
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -35,7 +39,7 @@ class AdvancedUsageTest {
     @Test
     fun `advanced usage test`() = runTest {
         val timeFlow = flow {
-            kotlinx.coroutines.delay(100)
+            delay(100)
             emit("Hello")
         }
 
@@ -205,6 +209,66 @@ class AdvancedUsageTest {
         stateFlow.test {
             assertEquals(2, awaitItem())
             expectNoEvents()
+        }
+    }
+
+    @Test
+    fun `channelFlow test`() = runTest {
+        channelFlow {
+            withContext(IO) {
+                Thread.sleep(100)
+                send("item")
+            }
+        }.test {
+            assertEquals("item", awaitItem())
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun `channelFlow 2 test`() = runTest {
+        channelFlow {
+            withContext(IO) {
+                repeat(10) {
+                    Thread.sleep(200)
+                    send("item $it")
+                }
+            }
+        }.test {
+            assertEquals("item 0", awaitItem())
+            assertEquals("item 1", awaitItem())
+            assertEquals("item 2", awaitItem())
+        }
+    }
+
+    @Test
+    fun `flows can also be explicitly canceled at any point test`() = runTest {
+        channelFlow {
+            withContext(IO) {
+                repeat(10) {
+                    Thread.sleep(200)
+                    send("item $it")
+                }
+            }
+        }.test {
+            Thread.sleep(700)
+            cancel()
+
+            assertEquals("item 0", awaitItem())
+            assertEquals("item 1", awaitItem())
+            assertEquals("item 2", awaitItem())
+        }
+    }
+
+    @Test
+    fun `names test`() = runTest {
+        turbineScope {
+            val turbine1 = flowOf(1).testIn(backgroundScope, name = "turbine 1")
+            val turbine2 = flowOf(2).testIn(backgroundScope, name = "turbine 2")
+            turbine1.awaitItem()
+            turbine2.awaitItem()
+            turbine1.awaitComplete() // comment
+            turbine2.awaitComplete() // comment
         }
     }
 }
