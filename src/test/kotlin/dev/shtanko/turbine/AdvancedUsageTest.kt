@@ -271,4 +271,64 @@ class AdvancedUsageTest {
             turbine2.awaitComplete() // comment
         }
     }
+
+    @Test
+    fun `multiple flows test`() = runTest {
+        turbineScope {
+            val turbine1 = flowOf(1).testIn(backgroundScope)
+            val turbine2 = flowOf(2).testIn(backgroundScope)
+            assertEquals(1, turbine1.awaitItem())
+            assertEquals(2, turbine2.awaitItem())
+            turbine1.awaitComplete()
+            turbine2.awaitComplete()
+        }
+    }
+
+    @Test
+    fun `testIn test`() = runTest {
+        turbineScope {
+            val turbine = flowOf("one", "two").testIn(backgroundScope)
+            assertEquals("one", turbine.awaitItem())
+            assertEquals("two", turbine.awaitItem())
+            turbine.awaitComplete()
+        }
+    }
+
+    @Test
+    fun `cancelAndIgnoreRemainingEvents test`() = runTest {
+        flowOf("one", "two").test {
+            assertEquals("one", awaitItem())
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `most recent emitted item and ignore the previous ones test`() = runTest {
+        flowOf("one", "two", "three")
+            .map {
+                delay(100)
+                it
+            }
+            .test {
+                // 0 - 100ms -> no emission yet
+                // 100ms - 200ms -> "one" is emitted
+                // 200ms - 300ms -> "two" is emitted
+                // 300ms - 400ms -> "three" is emitted
+                delay(250)
+                assertEquals("two", expectMostRecentItem())
+                cancelAndIgnoreRemainingEvents()
+            }
+    }
+
+    @Test
+    fun `flow termination test`() = runTest {
+        flow { emit(throw RuntimeException("broken!")) }.test {
+            assertEquals("broken!", awaitError().message)
+        }
+    }
+
+    @Test
+    fun `flow termination 2 test`() = runTest {
+        // flow<Nothing> { throw RuntimeException("broken!") }.test { } // todo uncomment
+    }
 }
