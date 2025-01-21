@@ -16,15 +16,13 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 val projectJvmTarget = 17
 val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
-val ktLintConfig: Configuration by configurations.creating
-val outputDir = "${project.layout.buildDirectory}/reports/ktlint/"
-val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
 val kotlinVersion = KOTLIN_2_0
 
 fun isLinux(): Boolean {
@@ -262,6 +260,16 @@ tasks {
         testLogging.showStandardStreams = true
         useJUnitPlatform()
         finalizedBy(withType(JacocoReport::class.java))
+    }
+}
+
+kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+        freeCompilerArgs.add("-Xwhen-guards")
+        apiVersion.set(KOTLIN_2_0)
+        languageVersion.set(KOTLIN_2_0)
     }
 }
 
