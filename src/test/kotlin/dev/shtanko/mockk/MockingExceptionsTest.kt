@@ -16,7 +16,9 @@
 
 package dev.shtanko.mockk
 
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class MockingExceptionsTest {
@@ -25,7 +27,15 @@ class MockingExceptionsTest {
 
     @Test
     fun `mocking exceptions example test`() {
+        every { repository.deleteUser(1) } returns false
 
+        try {
+            deleteUser(1, repository)
+        } catch (e: IllegalArgumentException) {
+            println(e.message) // Output: Delete failed
+        }
+
+        verify { repository.deleteUser(1) }
     }
 
     private fun deleteUser(id: Int, repository: UserRepository) {

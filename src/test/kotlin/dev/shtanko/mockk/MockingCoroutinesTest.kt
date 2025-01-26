@@ -16,7 +16,10 @@
 
 package dev.shtanko.mockk
 
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 
 class MockingCoroutinesTest {
@@ -24,8 +27,13 @@ class MockingCoroutinesTest {
     private val repository = mockk<UserRepository>()
 
     @Test
-    fun `mocking coroutines example test`() {
+    fun `mocking coroutines example test`() = runTest {
+        coEvery { repository.fetchUser() } returns User(1, "Mocked User")
 
+        val user = repository.fetchUser()
+        println(user) // Output: User(id=1, name=Mocked User)
+
+        coVerify { repository.fetchUser() }
     }
 
 
