@@ -1,3 +1,0 @@
-* Composition
-* Aggregation
-* Delegation
