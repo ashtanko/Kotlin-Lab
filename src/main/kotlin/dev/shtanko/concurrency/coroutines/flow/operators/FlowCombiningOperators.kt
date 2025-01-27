@@ -37,8 +37,8 @@ object FlowCombiningOperators {
         @JvmStatic
         fun main(args: Array<String>) = runBlocking {
             val flow1 = flowOf(1, 2, 3, 4, 5, 6).onEach { delay(10L) }
-            val flow2 = flowOf("a", "b", "c", "d", "e").onEach { delay(10L) }
-            flow1.combine(flow2) { i, s -> i.toString() + s }
+            val flow2 = flowOf("a", "b", "c", "d", "e").onEach { delay(20L) }
+            combine(flow1, flow2) { i, s -> i.toString() + s }
                 .collect {
                     println(it)
                 }
