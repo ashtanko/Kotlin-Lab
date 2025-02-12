@@ -1,7 +1,7 @@
 [versions]
 coroutines = "1.10.1"       # https://github.com/Kotlin/kotlinx.coroutines
 junit = "5.11.4"            # https://junit.org/junit5 | https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter
-kotlin = "2.1.0"            # https://github.com/JetBrains/kotlin
+kotlin = "2.1.10"           # https://github.com/JetBrains/kotlin
 detekt = "1.23.7"           # https://github.com/detekt/detekt
 dokka = "2.0.0"             # https://github.com/Kotlin/dokka
 spotless = "7.0.0"          # https://github.com/diffplug/spotless
@@ -26,12 +26,12 @@ mockito_kotlin = "5.4.0"    # https://github.com/mockito/mockito-kotlin
 logback = "1.2.11"          # https://logback.qos.ch
 hamcrest = "2.2"            # https://hamcrest.org/JavaHamcrest/distributables
 mockk = "1.13.12"           # https://mockk.io
-kover = "0.9.0"             # https://github.com/Kotlin/kotlinx-kover
+kover = "0.9.1"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.18.1"            # https://jsoup.org/
 turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
-sandwich = "2.0.10"         # https://github.com/skydoves/sandwich
+sandwich = "2.1.0"          # https://github.com/skydoves/sandwich
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
