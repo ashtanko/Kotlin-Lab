@@ -34,7 +34,7 @@ fun isLinux(): Boolean {
 plugins {
     application
     jacoco
-    id("com.github.nbaztec.coveralls-jacoco") version "1.2.16"
+    id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     // id ("org.sonarqube") version "4.4.1.3373"
     idea
