@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.countZeroesOnes
+import dev.shtanko.extensions.countZeroesOnes
 import kotlin.math.max
 
 /**

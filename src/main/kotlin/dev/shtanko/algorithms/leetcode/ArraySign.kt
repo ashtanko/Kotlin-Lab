@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Easy
 
 /**
  * 1822. Sign of the Product of an Array
  * @see <a href="https://leetcode.com/problems/sign-of-the-product-of-an-array/">Source</a>
  */
+@Easy("https://leetcode.com/problems/sign-of-the-product-of-an-array")
 fun interface ArraySign {
     operator fun invoke(nums: IntArray): Int
 }

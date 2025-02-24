@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Stack
 import kotlin.math.abs
 
@@ -24,6 +25,7 @@ import kotlin.math.abs
  * 735. Asteroid Collision
  * @see <a href="https://leetcode.com/problems/asteroid-collision/">Source</a>
  */
+@Medium("https://leetcode.com/problems/asteroid-collision")
 fun interface AsteroidCollision {
     operator fun invoke(asteroids: IntArray): IntArray
 }
@@ -35,18 +37,18 @@ fun interface AsteroidCollision {
 class AsteroidCollisionStack : AsteroidCollision {
 
     override operator fun invoke(asteroids: IntArray): IntArray {
-        val st: Stack<Int> = Stack<Int>()
+        val stack: Stack<Int> = Stack<Int>()
 
         for (asteroid in asteroids) {
             var flag = true
-            while (st.isNotEmpty() && st.peek() > 0 && asteroid < 0) {
+            while (stack.isNotEmpty() && stack.peek() > 0 && asteroid < 0) {
                 // If the top asteroid in the stack is smaller, then it will explode.
                 // Hence, pop it from the stack, also continue with the next asteroid in the stack.
-                if (abs(st.peek()) < abs(asteroid)) {
-                    st.pop()
+                if (abs(stack.peek()) < abs(asteroid)) {
+                    stack.pop()
                     continue
-                } else if (abs(st.peek()) == abs(asteroid)) {
-                    st.pop()
+                } else if (abs(stack.peek()) == abs(asteroid)) {
+                    stack.pop()
                 }
 
                 // If we reach here, the current asteroid will be destroyed
@@ -55,15 +57,15 @@ class AsteroidCollisionStack : AsteroidCollision {
                 break
             }
             if (flag) {
-                st.push(asteroid)
+                stack.push(asteroid)
             }
         }
 
         // Add the asteroids from the stack to the vector in the reverse order.
-        val remainingAsteroids = IntArray(st.size)
+        val remainingAsteroids = IntArray(stack.size)
         for (i in remainingAsteroids.indices.reversed()) {
-            remainingAsteroids[i] = st.peek()
-            st.pop()
+            remainingAsteroids[i] = stack.peek()
+            stack.pop()
         }
 
         return remainingAsteroids

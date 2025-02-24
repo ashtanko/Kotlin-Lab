@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2265. Count Nodes Equal to Average of Subtree
  * @see <a href="https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree")
 fun interface AverageOfSubtree {
     operator fun invoke(root: TreeNode?): Int
 }
 
 sealed interface AverageOfSubtreeStrategy {
-
     /**
      * Approach: Depth First Search (DFS)
      */
@@ -35,7 +37,9 @@ sealed interface AverageOfSubtreeStrategy {
 
         override fun invoke(root: TreeNode?): Int {
             result = 0
-            visitNode(root!!)
+            root?.let {
+                visitNode(root)
+            }
             return result
         }
 

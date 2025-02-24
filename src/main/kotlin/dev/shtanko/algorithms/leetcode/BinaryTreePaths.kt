@@ -19,6 +19,7 @@ package dev.shtanko.algorithms.leetcode
 import dev.shtanko.algorithms.annotations.BFS
 import dev.shtanko.algorithms.annotations.Iterative
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.LinkedList
 import java.util.Queue
 import java.util.Stack
@@ -26,6 +27,11 @@ import java.util.Stack
 private const val FORMAT = "%s%s%s"
 private const val ARROW = "->"
 
+/**
+ * 257. Binary Tree Paths
+ * @see <a href="https://leetcode.com/problems/binary-tree-paths/">Source</a>
+ */
+@Easy("https://leetcode.com/problems/binary-tree-paths")
 fun interface BinaryTreePaths {
     operator fun invoke(root: TreeNode?): List<String>
 }

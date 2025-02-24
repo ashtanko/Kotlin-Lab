@@ -25,6 +25,8 @@ fun interface RestoreArrayFromAdjacentPairs {
 }
 
 sealed interface RestoreArrayFromAdjacentPairsStrategy {
+
+    @dev.shtanko.algorithms.annotations.DFS
     data object DFS : RestoreArrayFromAdjacentPairs, RestoreArrayFromAdjacentPairsStrategy {
         override fun invoke(adjacentPairs: Array<IntArray>): IntArray {
             val graph = mutableMapOf<Int, MutableList<Int>>()
@@ -63,6 +65,7 @@ sealed interface RestoreArrayFromAdjacentPairsStrategy {
         }
     }
 
+    @dev.shtanko.algorithms.annotations.Iterative
     data object Iterative : RestoreArrayFromAdjacentPairs, RestoreArrayFromAdjacentPairsStrategy {
         override fun invoke(adjacentPairs: Array<IntArray>) = IntArray(adjacentPairs.size + 1).apply {
             val map = HashMap<Int, Pair<Int, Int?>>()

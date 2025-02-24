@@ -45,7 +45,7 @@ abstract class LongestSubsequenceTest<out T : LongestSubsequence>(private val st
         )
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "input array: {0}, difference: {1} should return int: {2}")
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `longest subsequence test`(arr: IntArray, difference: Int, expected: Int) {
         val actual = strategy.invoke(arr, difference)

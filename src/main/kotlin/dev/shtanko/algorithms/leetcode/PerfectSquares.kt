@@ -16,8 +16,11 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isSquare
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Math
 import dev.shtanko.algorithms.math.sqrt
+import dev.shtanko.extensions.isSquare
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.min
@@ -33,6 +36,7 @@ fun interface PerfectSquares {
 /**
  * Dynamic Programming
  */
+@DP
 class PerfectSquaresDP : PerfectSquares {
     override fun invoke(num: Int): Int {
         val list: MutableList<Int> = ArrayList()
@@ -64,6 +68,7 @@ class PerfectSquaresDP : PerfectSquares {
 /**
  * Static Dynamic Programming
  */
+@DP
 class PerfectSquaresStaticDP : PerfectSquares {
     override fun invoke(num: Int): Int {
         val result: MutableList<Int> = ArrayList()
@@ -87,6 +92,7 @@ class PerfectSquaresStaticDP : PerfectSquares {
 /**
  * Mathematical Solution
  */
+@Math
 class PerfectSquaresMath : PerfectSquares {
     override fun invoke(num: Int): Int {
         var remainingNumber = num
@@ -117,6 +123,7 @@ class PerfectSquaresMath : PerfectSquares {
 /**
  * Breadth-First Search
  */
+@BFS
 class PerfectSquaresBFS : PerfectSquares {
     override fun invoke(num: Int): Int {
         val queue: Queue<Int> = LinkedList()

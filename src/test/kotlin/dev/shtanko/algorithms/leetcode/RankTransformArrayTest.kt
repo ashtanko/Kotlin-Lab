@@ -24,12 +24,12 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-class RankTransformArrayTest {
+abstract class RankTransformArrayTest<out T : RankTransformOfArray>(private val strategy: T) {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `array rank transform test`(arr: IntArray, expected: IntArray) {
-        val actual = arr.arrayRankTransform()
+        val actual = strategy(arr)
         assertArrayEquals(expected, actual)
     }
 
@@ -54,3 +54,7 @@ class RankTransformArrayTest {
         )
     }
 }
+
+class RankTransformOfArraySortingTest : RankTransformArrayTest<RankTransformOfArray>(RankTransformOfArraySort())
+class RankTransformOfArraySetTest : RankTransformArrayTest<RankTransformOfArray>(RankTransformOfArraySet())
+class RankTransformOfArrayTreeMapTest : RankTransformArrayTest<RankTransformOfArray>(RankTransformOfArrayTree())

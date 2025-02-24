@@ -16,7 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.lessThanZero
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.extensions.lessThanZero
 import java.util.LinkedList
 import java.util.Queue
 
@@ -26,6 +28,7 @@ fun interface PacificAtlanticWaterFlow {
     operator fun invoke(matrix: Array<IntArray>): List<List<Int>>
 }
 
+@DFS
 class PacificAtlanticDFS : PacificAtlanticWaterFlow {
     override operator fun invoke(matrix: Array<IntArray>): List<List<Int>> {
         val res: MutableList<MutableList<Int>> = LinkedList()
@@ -60,6 +63,7 @@ class PacificAtlanticDFS : PacificAtlanticWaterFlow {
     }
 }
 
+@BFS
 class PacificAtlanticBFS : PacificAtlanticWaterFlow {
 
     override operator fun invoke(matrix: Array<IntArray>): List<List<Int>> {

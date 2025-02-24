@@ -16,19 +16,40 @@
 
 package dev.shtanko.algorithms.bitwise
 
-import dev.shtanko.algorithms.HALF
-import dev.shtanko.algorithms.THREE_HALVES
+import dev.shtanko.algorithms.annotations.Bitwise
 
 // responsible for the fast approximation
-private const val MAGIC_NUMBER = 0x5f3759df
+// The "magic number" used for the fast approximation (derived empirically).
+// This constant helps adjust the bits in such a way that a good approximation of the inverse square root is
+// produced.
+private const val FAST_APPROXIMATION = 0x5f3759df
 
+@Bitwise
+@Suppress("MagicNumber")
 fun fastInverseSquareRoot(number: Float): Float {
-    var i: Long
-    val x2 = number.times(HALF)
-    var y = number
-    i = java.lang.Float.floatToIntBits(y).toLong()
-    i = MAGIC_NUMBER - i.shr(1)
-    y = java.lang.Float.intBitsToFloat(i.toInt())
-    y *= THREE_HALVES - x2.times(y).times(y)
-    return y
+    var bitRepresentation: Long
+    // halfNumber holds half the value of the original number for use in the approximation formula.
+    val halfNumber = number * 0.5f
+
+    // initialApproximation starts as the original number and will be adjusted through the approximation.
+    var initialApproximation = number
+
+    // Convert the float number to an integer representation by getting its bits.
+    // We use the Java method `floatToIntBits()` to get the raw bits of the float.
+    bitRepresentation = java.lang.Float.floatToIntBits(initialApproximation).toLong()
+
+    // Apply the magic number and perform a bitwise right shift to get the approximation.
+    // This step adjusts the bits to give a starting point for the inverse square root calculation.
+    bitRepresentation = FAST_APPROXIMATION - bitRepresentation.shr(1)
+
+    // Convert the bits back to a float.
+    // This is where the magic happens, turning the bitwise manipulation into a floating-point approximation.
+    initialApproximation = java.lang.Float.intBitsToFloat(bitRepresentation.toInt())
+
+    // Refine the approximation using the formula: y = y * (1.5 - (halfNumber * y * y))
+    // This step further improves the approximation using a few iterations of multiplication.
+    initialApproximation *= 1.5f - halfNumber * initialApproximation * initialApproximation
+
+    // Return the final approximation of the inverse square root.
+    return initialApproximation
 }

@@ -18,38 +18,40 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.BruteForce
 import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Easy
 
 /**
  * 1491. Average Salary Excluding the Minimum and Maximum Salary
  * @see <a href="https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary">
  *     Source</a>
  */
+@Easy(link = "https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary")
 fun interface AverageSalary {
-    fun average(salary: IntArray): Double
+    fun average(salaries: IntArray): Double
 }
 
 @BruteForce
 class AverageSalaryBruteForce : AverageSalary {
-    override fun average(salary: IntArray): Double {
+    override fun average(salaries: IntArray): Double {
         var sum = 0.0
         var min = Int.MAX_VALUE
         var max = 0
-        for (s in salary) {
-            sum += s
-            if (s < min) {
-                min = s
+        for (salary in salaries) {
+            sum += salary
+            if (salary < min) {
+                min = salary
             }
-            if (s > max) {
-                max = s
+            if (salary > max) {
+                max = salary
             }
         }
-        return sum.minus(max).minus(min) / salary.size.minus(2)
+        return sum.minus(max).minus(min) / salaries.size.minus(2)
     }
 }
 
 @StraightForward
 class AverageSalarySimple : AverageSalary {
-    override fun average(salary: IntArray): Double {
-        return salary.sorted().toTypedArray().copyOfRange(1, salary.size - 1).average()
+    override fun average(salaries: IntArray): Double {
+        return salaries.sorted().toTypedArray().copyOfRange(1, salaries.size - 1).average()
     }
 }

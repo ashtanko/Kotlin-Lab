@@ -160,6 +160,42 @@ class ReportParserTest {
 
         assertEquals(expectedContent, actualContent)
     }
+
+    @Test
+    fun testGenerateMarkdownTable_withData() {
+        val columns = listOf("Name", "Age", "City")
+        val rows = listOf(
+            listOf("Alice", "30", "New York"),
+            listOf("Bob", "25", "Los Angeles"),
+            listOf("Charlie", "35", "Chicago"),
+        )
+        val expectedHeader = "|Name   |Age|City       |"
+        val expectedSeparator = "|-------|---|-----------|"
+        val expectedRows = "|Alice  |30 |New York   |\n" +
+            "|Bob    |25 |Los Angeles|\n" +
+            "|Charlie|35 |Chicago    |"
+
+        val (header, separator, dataRows) = generateMarkdownTable(columns, rows)
+
+        println("$header\n$separator\n$dataRows")
+
+        assertEquals(expectedHeader, header)
+        assertEquals(expectedSeparator, separator)
+        assertEquals(expectedRows, dataRows)
+    }
+
+    @Test
+    fun generateMarkdownTableWithNewlineCharacter() {
+        val columns = listOf("Header1", "Header2")
+        val rows = listOf(
+            listOf("Row1Col1", "Row1Col2"),
+            listOf("Row2Col1", "Row2Col2"),
+        )
+        val (header, separator, dataRows) = generateMarkdownTable(columns, rows, newline = "\r\n")
+        assertEquals("|Header1 |Header2 |", header)
+        assertEquals("|--------|--------|", separator)
+        assertEquals("|Row1Col1|Row1Col2|\r\n|Row2Col1|Row2Col2|", dataRows)
+    }
 }
 
 fun captureStandardOutput(block: () -> Unit): String {

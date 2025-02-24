@@ -41,29 +41,29 @@ class SplitLinkedListInPartsCopy : SplitLinkedListInParts {
      * @return An array of linked lists representing the parts.
      */
     override fun invoke(head: NullableListNode?, k: Int): Array<NullableListNode?> {
-        var cur: NullableListNode? = head
-        var n = 0
-        while (cur != null) {
-            cur = cur.next
-            n++
+        var currentNode: NullableListNode? = head
+        var totalNodes = 0
+        while (currentNode != null) {
+            currentNode = currentNode.next
+            totalNodes++
         }
 
-        val width = n / k
-        val rem = n % k
+        val partSize = totalNodes / k
+        val remainder = totalNodes % k
 
-        val ans = arrayOfNulls<NullableListNode>(k)
-        cur = head
+        val result = arrayOfNulls<NullableListNode>(k)
+        currentNode = head
         for (i in 0 until k) {
-            val h = NullableListNode(0)
-            var write: NullableListNode? = h
-            for (j in 0 until width + if (i < rem) 1 else 0) {
-                write?.next = cur?.value?.let { NullableListNode(it) }
-                write = write?.next
-                if (cur != null) cur = cur.next
+            val dummyHead = NullableListNode(0)
+            var writer: NullableListNode? = dummyHead
+            for (j in 0 until partSize + if (i < remainder) 1 else 0) {
+                writer?.next = currentNode?.value?.let { NullableListNode(it) }
+                writer = writer?.next
+                if (currentNode != null) currentNode = currentNode.next
             }
-            ans[i] = h.next
+            result[i] = dummyHead.next
         }
-        return ans
+        return result
     }
 }
 
@@ -78,30 +78,30 @@ class SplitLinkedListInPartsInput : SplitLinkedListInParts {
      * @return An array of linked lists representing the parts.
      */
     override fun invoke(head: NullableListNode?, k: Int): Array<NullableListNode?> {
-        var cur: NullableListNode? = head
-        var n = 0
-        while (cur != null) {
-            cur = cur.next
-            n++
+        var currentNode: NullableListNode? = head
+        var totalNodes = 0
+        while (currentNode != null) {
+            currentNode = currentNode.next
+            totalNodes++
         }
 
-        val width = n / k
-        val rem = n % k
+        val partSize = totalNodes / k
+        val remainder = totalNodes % k
 
-        val ans = arrayOfNulls<NullableListNode>(k)
-        cur = head
+        val result = arrayOfNulls<NullableListNode>(k)
+        currentNode = head
         for (i in 0 until k) {
-            val h = cur
-            for (j in 0 until width + (if (i < rem) 1 else 0) - 1) {
-                if (cur != null) cur = cur.next
+            val partHead = currentNode
+            for (j in 0 until partSize + (if (i < remainder) 1 else 0) - 1) {
+                if (currentNode != null) currentNode = currentNode.next
             }
-            if (cur != null) {
-                val prev: NullableListNode = cur
-                cur = cur.next
-                prev.next = null
+            if (currentNode != null) {
+                val previousNode: NullableListNode = currentNode
+                currentNode = currentNode.next
+                previousNode.next = null
             }
-            ans[i] = h
+            result[i] = partHead
         }
-        return ans
+        return result
     }
 }

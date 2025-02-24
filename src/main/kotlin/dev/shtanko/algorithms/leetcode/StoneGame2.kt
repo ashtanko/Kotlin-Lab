@@ -91,3 +91,40 @@ class StoneGame2WithMemoization : StoneGame2 {
         private const val LIMIT = 1000000
     }
 }
+
+/**
+ * Approach 2: Dynamic Programming (Tabulation)
+ */
+class StoneGame2DP : StoneGame2 {
+    override fun invoke(piles: IntArray): Int {
+        if (piles.isEmpty()) {
+            return 0
+        }
+        val length = piles.size
+        val dp = Array(length + 1) { IntArray(length + 1) }
+
+        // Store suffix sum for all possible suffixes
+        val suffixSum = IntArray(length + 1)
+        for (i in length - 1 downTo 0) {
+            suffixSum[i] = suffixSum[i + 1] + piles[i]
+        }
+
+        // Initialize the dp array.
+        for (i in 0..length) {
+            dp[i][length] = suffixSum[i]
+        }
+
+        // Start from the last index to store the future state first.
+        for (index in length - 1 downTo 0) {
+            for (maxTillNow in length - 1 downTo 1) {
+                for (x in 1..(2 * maxTillNow).coerceAtMost(length - index)) {
+                    dp[index][maxTillNow] = maxOf(
+                        dp[index][maxTillNow],
+                        suffixSum[index] - dp[index + x][maxTillNow.coerceAtLeast(x)],
+                    )
+                }
+            }
+        }
+        return dp[0][1]
+    }
+}

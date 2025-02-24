@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 8. String to Integer (atoi)
@@ -24,6 +25,7 @@ import dev.shtanko.algorithms.DECIMAL
  * @receiver String The string to convert to an integer.
  * @return Int The converted integer.
  */
+@Medium(link = "https://leetcode.com/problems/string-to-integer-atoi")
 fun String.atoi(): Int {
     val str = this.trim()
     var index = 0

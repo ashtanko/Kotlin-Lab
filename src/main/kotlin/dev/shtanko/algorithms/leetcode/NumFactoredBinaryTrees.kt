@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 823. Binary Trees With Factors
@@ -26,6 +27,7 @@ fun interface NumFactoredBinaryTrees {
     operator fun invoke(arr: IntArray): Int
 }
 
+@DFS
 class NumFactoredBinaryTreesDFS : NumFactoredBinaryTrees {
     override fun invoke(arr: IntArray): Int {
         val set = arr.toSet()

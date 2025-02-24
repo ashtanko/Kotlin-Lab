@@ -17,12 +17,14 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Greedy
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.TreeMap
 
 /**
  * 954. Array of Doubled Pairs
  * @see <a href="https://leetcode.com/problems/array-of-doubled-pairs/">Source</a>
  */
+@Medium("https://leetcode.com/problems/array-of-doubled-pairs")
 fun interface ArrayOfDoubledPairs {
     operator fun invoke(arr: IntArray): Boolean
 }

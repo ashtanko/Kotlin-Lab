@@ -16,6 +16,9 @@
 
 package dev.shtanko.utils
 
+/**
+ * Bad class for testing purposes
+ */
 class BadClass {
     override fun equals(other: Any?): Boolean = error("equals")
     override fun hashCode(): Int = error("hashCode")

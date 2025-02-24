@@ -26,9 +26,13 @@ import kotlin.math.floor
  * @property left The left child of the node.
  * @property right The right child of the node.
  */
-data class TreeNode(var value: Int) {
+data class TreeNode(var value: Int) : Comparable<TreeNode> {
     var left: TreeNode? = null
     var right: TreeNode? = null
+
+    override fun compareTo(other: TreeNode): Int {
+        return value.compareTo(other.value)
+    }
 }
 
 /**
@@ -163,4 +167,38 @@ fun TreeNode.prettyPrint(): String {
  */
 fun TreeNode?.height(): Int {
     return if (this == null) -1 else 1 + this.left.height()
+}
+
+/**
+ * Builds a binary tree from an array of integer values.
+ *
+ * @return The root node of the binary tree.
+ */
+fun Array<Int?>.buildTree(): TreeNode? {
+    if (isEmpty()) return null
+
+    val root = TreeNode(this.first()!!)
+    val queue = ArrayDeque<TreeNode>()
+    queue.add(root)
+
+    var index = 1
+    while (queue.isNotEmpty() && index < size) {
+        val current = queue.removeFirst()
+
+        // Process left child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.left = TreeNode(this[index]!!)
+            queue.add(current.left!!)
+        }
+        index++
+
+        // Process right child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.right = TreeNode(this[index]!!)
+            queue.add(current.right!!)
+        }
+        index++
+    }
+
+    return root
 }

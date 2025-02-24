@@ -16,10 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Recursive
+
 fun interface UnivaluedBinaryTree {
     operator fun invoke(root: TreeNode?): Boolean
 }
 
+@DFS
 class UnivaluedBinaryTreeDFS : UnivaluedBinaryTree {
 
     private var values: MutableList<Int> = mutableListOf()
@@ -41,6 +45,7 @@ class UnivaluedBinaryTreeDFS : UnivaluedBinaryTree {
     }
 }
 
+@Recursive
 class UnivaluedBinaryTreeRecursive : UnivaluedBinaryTree {
     override operator fun invoke(root: TreeNode?): Boolean {
         val isLeftCorrect = root?.left == null || root.value == root.left?.value && invoke(root.left)

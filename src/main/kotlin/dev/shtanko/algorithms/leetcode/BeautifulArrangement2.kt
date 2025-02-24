@@ -17,7 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Medium
 
+/**
+ * 667. Beautiful Arrangement II
+ * @see <a href="https://leetcode.com/problems/beautiful-arrangement-ii/">Source</a>
+ */
+@Medium("https://leetcode.com/problems/beautiful-arrangement-ii")
 fun interface BeautifulArrangement2 {
     operator fun invoke(num: Int, k: Int): IntArray
 }

@@ -19,11 +19,13 @@ package dev.shtanko.algorithms.leetcode
 import dev.shtanko.algorithms.annotations.OnePass
 import dev.shtanko.algorithms.annotations.PrefixSum
 import dev.shtanko.algorithms.annotations.SlidingWindow
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 930. Binary Subarrays With Sum
  * @see <a href="https://leetcode.com/problems/binary-subarrays-with-sum">Source</a>
  */
+@Medium("https://leetcode.com/problems/binary-subarrays-with-sum")
 fun interface BinarySubArraysWithSum {
     operator fun invoke(nums: IntArray, goal: Int): Int
 }

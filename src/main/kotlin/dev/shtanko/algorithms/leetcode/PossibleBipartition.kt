@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 886. Possible Bipartition
  * @see <a href="https://leetcode.com/problems/possible-bipartition">Source</a>
@@ -24,6 +26,7 @@ fun interface PossibleBipartition {
     operator fun invoke(n: Int, dislikes: Array<IntArray>): Boolean
 }
 
+@DFS
 class PossibleBipartitionDFS : PossibleBipartition {
     override operator fun invoke(n: Int, dislikes: Array<IntArray>): Boolean {
         val graph: Array<MutableList<Int>> = Array(n + 1) { mutableListOf() }

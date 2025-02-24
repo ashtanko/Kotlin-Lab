@@ -19,12 +19,14 @@ package dev.shtanko.algorithms.leetcode
 import dev.shtanko.algorithms.DECIMAL
 import dev.shtanko.algorithms.annotations.OnePass
 import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.LinkedList
 
 /**
  * 989. Add to Array-Form of Integer
  * @see <a href="https://leetcode.com/problems/add-to-array-form-of-integer/">Source</a>
  */
+@Easy(link = "https://leetcode.com/problems/add-to-array-form-of-integer")
 fun interface AddToArrayForm {
     operator fun invoke(num: IntArray, k: Int): List<Int>
 }

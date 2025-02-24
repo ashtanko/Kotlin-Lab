@@ -152,6 +152,7 @@ class AlienDictionaryDFS : AlienDictionary {
      * @param i The index of the current node being visited.
      * @return `true` if the DFS traversal is successful, `false` if a cycle is detected.
      */
+    @DFS
     private fun dfs(adj: Array<BooleanArray>, visited: IntArray, sb: StringBuilder, i: Int): Boolean {
         visited[i] = 1 // 1 = visiting
         for (j in 0 until ALPHABET_LETTERS_COUNT) {

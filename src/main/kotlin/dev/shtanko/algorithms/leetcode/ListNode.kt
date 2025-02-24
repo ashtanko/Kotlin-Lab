@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 
 /**
  * Represents a node in a singly-linked list.
@@ -25,7 +25,7 @@ import dev.shtanko.algorithms.extensions.isEven
 data class ListNode(
     var value: Int = 0,
     var next: ListNode? = null,
-) {
+) : Comparable<ListNode> {
     /**
      * Returns a string representation of the list node and its successors.
      */
@@ -49,6 +49,10 @@ data class ListNode(
      */
     fun prettyPrint() {
         println(prettyPrinted())
+    }
+
+    override fun compareTo(other: ListNode): Int {
+        return value.compareTo(other.value)
     }
 
     companion object {

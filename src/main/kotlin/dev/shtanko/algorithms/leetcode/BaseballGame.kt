@@ -16,10 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.Stack
 
+/**
+ * 682. Baseball Game
+ * @see <a href="https://leetcode.com/problems/baseball-game">Source</a>
+ */
+@Easy("https://leetcode.com/problems/baseball-game")
 class BaseballGame {
-
     operator fun invoke(ops: Array<String>): Int {
         val stack = Stack<Int>()
         for (op in ops) {
@@ -38,7 +43,9 @@ class BaseballGame {
             }
         }
         var ans = 0
-        for (score in stack) ans += score
+        for (score in stack) {
+            ans += score
+        }
         return ans
     }
 }

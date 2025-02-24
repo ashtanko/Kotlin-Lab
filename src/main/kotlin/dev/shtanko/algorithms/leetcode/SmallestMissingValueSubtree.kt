@@ -16,14 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.level.Hard
+
 /**
  * 2003. Smallest Missing Genetic Value in Each Subtree
  * @see <a href="https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/">Source</a>
  */
+@Hard
 fun interface SmallestMissingValueSubtree {
     operator fun invoke(parents: IntArray, nums: IntArray): IntArray
 }
 
+@DFS
 class SmallestMissingValueSubtreeStrict : SmallestMissingValueSubtree {
     var m: HashMap<Int, List<Int>> = HashMap()
     lateinit var arr: IntArray

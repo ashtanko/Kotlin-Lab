@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Deque
 import java.util.LinkedList
 
@@ -24,6 +25,7 @@ import java.util.LinkedList
  * 948. Bag of Tokens
  * @see <a href="https://leetcode.com/problems/bag-of-tokens">Source</a>
  */
+@Medium("https://leetcode.com/problems/bag-of-tokens")
 fun interface BagOfTokens {
     operator fun invoke(tokens: IntArray, power: Int): Int
 }

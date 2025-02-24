@@ -19,6 +19,7 @@ package dev.shtanko.algorithms.leetcode
 import dev.shtanko.algorithms.DECIMAL
 import dev.shtanko.algorithms.annotations.Math
 import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Easy
 
 private const val MAX = 9
 
@@ -26,6 +27,7 @@ private const val MAX = 9
  * 258. Add Digits
  * @see <a href="https://leetcode.com/problems/add-digits/">Source</a>
  */
+@Easy(link = "https://leetcode.com/problems/add-digits")
 fun interface AddDigits {
     operator fun invoke(num: Int): Int
 }

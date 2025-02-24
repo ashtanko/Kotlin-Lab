@@ -18,12 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Backtracking
 import dev.shtanko.algorithms.annotations.Bitwise
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.pow
 
 /**
  * 2597. The Number of Beautiful Subsets
  * @see <a href="https://leetcode.com/problems/the-number-of-beautiful-subsets/">Source</a>
  */
+@Medium("https://leetcode.com/problems/the-number-of-beautiful-subsets")
 fun interface BeautifulSubsets {
     operator fun invoke(nums: IntArray, k: Int): Int
 }

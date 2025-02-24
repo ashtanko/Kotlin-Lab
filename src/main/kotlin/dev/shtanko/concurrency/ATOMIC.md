@@ -1,9 +1,11 @@
+# Atomic
+
 In the Java Virtual Machine (JVM), the term "atomic" refers to operations that are performed as a single, indivisible 
 step. This means that the operation is completed without any interference or observation from other threads. 
 Atomicity is a crucial concept in concurrent programming, ensuring that certain actions happen entirely or not at all, 
 preventing race conditions and data corruption.
 
-### Atomic Operations
+## Atomic Operations
 
 1. **Primitive Types**:
    - **Read and write operations** on primitive types like `int`, `short`, `byte`, `char`, `float`, and `boolean` are

@@ -16,11 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
-fun interface CountTheRepetitionsStrategy {
+import dev.shtanko.algorithms.annotations.level.Hard
+
+/**
+ * 466. Count The Repetitions
+ * @see <a href="https://leetcode.com/problems/count-the-repetitions/">Source</a>
+ */
+@Hard("https://leetcode.com/problems/count-the-repetitions")
+fun interface CountTheRepetitions {
     operator fun invoke(s1: String, n1: Int, s2: String, n2: Int): Int
 }
 
-class CountTheRepetitionsBruteForce : CountTheRepetitionsStrategy {
+class CountTheRepetitionsBruteForce : CountTheRepetitions {
     override operator fun invoke(s1: String, n1: Int, s2: String, n2: Int): Int {
         if (n2 == 0) return 0
         var index = 0
@@ -40,7 +47,7 @@ class CountTheRepetitionsBruteForce : CountTheRepetitionsStrategy {
     }
 }
 
-class CountTheRepetitionsBetterBruteForce : CountTheRepetitionsStrategy {
+class CountTheRepetitionsBetterBruteForce : CountTheRepetitions {
 
     override operator fun invoke(s1: String, n1: Int, s2: String, n2: Int): Int {
         val reps = IntArray(ARRAY_SIZE)

@@ -16,6 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BruteForce
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 62. Unique Paths
  * @see <a href="https://leetcode.com/problems/unique-paths">Source</a>
@@ -27,6 +30,7 @@ fun interface UniquePaths {
 /**
  * Approach 1: Brute-Force
  */
+@BruteForce
 class UniquePathsBruteForce : UniquePaths {
     override fun invoke(m: Int, n: Int): Int {
         return perform(m, n, 0, 0)
@@ -55,6 +59,7 @@ class UniquePathsBruteForce : UniquePaths {
 /**
  * Approach 2: Dynamic Programming - Memoization
  */
+@DFS
 class UniquePathsDpMemo : UniquePaths {
     /**
      * Calculate the number of unique paths from the top-left corner (0,0) to the

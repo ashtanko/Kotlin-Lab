@@ -17,12 +17,15 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Greedy
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 import java.util.Queue
 
 /**
- * Split Array into Consecutive Subsequences.
+ * 659. Split Array into Consecutive Subsequences
+ * @see <a href="https://leetcode.com/problems/split-array-into-consecutive-subsequences/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/split-array-into-consecutive-subsequences")
 fun interface ArrIntoConsecutiveSubsequences {
     operator fun invoke(nums: IntArray): Boolean
 }

@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.DP
 import java.util.LinkedList
 import java.util.Queue
 
@@ -27,6 +29,7 @@ fun interface ShortestBridge {
     operator fun invoke(grid: Array<IntArray>): Int
 }
 
+@DP
 class ShortestBridgeDP : ShortestBridge {
     override operator fun invoke(grid: Array<IntArray>): Int {
         val queue: Queue<IntArray> = LinkedList()
@@ -83,6 +86,7 @@ class ShortestBridgeDP : ShortestBridge {
     }
 }
 
+@DFS
 class ShortestBridgeDFS : ShortestBridge {
     override operator fun invoke(grid: Array<IntArray>): Int {
         return shortestBridge(grid)

@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.TreeMap
 
 /**
  * 2502. Design Memory Allocator
  * @see <a href="https://leetcode.com/problems/design-memory-allocator">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/design-memory-allocator")
 interface Malloc {
     fun allocate(size: Int, mID: Int): Int
 

@@ -43,30 +43,31 @@ class StrangePrinterBottomUp : StrangePrinter {
      */
     override operator fun invoke(str: String): Int {
         if (str.isEmpty()) return 0
-        val n: Int = str.length
-        val dp = Array(n) { IntArray(n) }
-        for (length in 1..n) {
-            for (left in 0..n - length) {
-                val right = left + length - 1
-                var j = -1
-                dp[left][right] = n
-                for (i in left until right) {
-                    if (str[i] != str[right] && j == -1) {
-                        j = i
+        val length: Int = str.length
+        val dp = Array(length) { IntArray(length) }
+        for (subLength in 1..length) {
+            for (start in 0..length - subLength) {
+                val end = start + subLength - 1
+                var splitIndex = -1
+                dp[start][end] = length
+                for (i in start until end) {
+                    if (str[i] != str[end] && splitIndex == -1) {
+                        splitIndex = i
                     }
-                    if (j != -1) {
-                        dp[left][right] =
-                            min(dp[left][right].toDouble(), (1 + dp[j][i] + dp[i + 1][right]).toDouble())
-                                .toInt()
+                    if (splitIndex != -1) {
+                        dp[start][end] = min(
+                            dp[start][end].toDouble(),
+                            (1 + dp[splitIndex][i] + dp[i + 1][end]).toDouble(),
+                        ).toInt()
                     }
                 }
-                if (j == -1) {
-                    dp[left][right] = 0
+                if (splitIndex == -1) {
+                    dp[start][end] = 0
                 }
             }
         }
 
-        return dp[0][n - 1] + 1
+        return dp[0][length - 1] + 1
     }
 }
 
@@ -74,7 +75,7 @@ class StrangePrinterBottomUp : StrangePrinter {
  * Approach 2: Top-Down Dynamic Programming (Memoization)
  */
 class StrangePrinterTopDown : StrangePrinter {
-    private lateinit var dp: Array<IntArray>
+    private lateinit var memo: Array<IntArray>
 
     /**
      * This function calculates the minimum number of turns the printer will need in order to print the string.
@@ -84,15 +85,15 @@ class StrangePrinterTopDown : StrangePrinter {
      */
     override operator fun invoke(str: String): Int {
         if (str.isEmpty()) return 0
-        val n: Int = str.length
-        dp = Array(n) { IntArray(n) }
-        for (left in 0 until n) {
-            for (right in 0 until n) {
-                dp[left][right] = -1
+        val length: Int = str.length
+        memo = Array(length) { IntArray(length) }
+        for (left in 0 until length) {
+            for (right in 0 until length) {
+                memo[left][right] = -1
             }
         }
 
-        return solve(str, n, 0, n - 1) + 1
+        return calculateMinTurns(str, length, 0, length - 1) + 1
     }
 
     /**
@@ -104,25 +105,33 @@ class StrangePrinterTopDown : StrangePrinter {
      * @param right The ending index of the substring.
      * @return The minimum number of turns the printer will need to print the substring.
      */
-    private fun solve(s: String, n: Int, left: Int, right: Int): Int {
-        if (dp[left][right] != -1) {
-            return dp[left][right]
+    private fun calculateMinTurns(s: String, length: Int, start: Int, end: Int): Int {
+        if (memo[start][end] != -1) {
+            return memo[start][end]
         }
-        dp[left][right] = n
-        var j = -1
-        for (i in left until right) {
-            if (s[i] != s[right] && j == -1) {
-                j = i
+        memo[start][end] = length
+        var splitIndex = -1
+        for (i in start until end) {
+            if (s[i] != s[end] && splitIndex == -1) {
+                splitIndex = i
             }
-            if (j != -1) {
-                dp[left][right] =
-                    min(dp[left][right].toDouble(), (1 + solve(s, n, j, i) + solve(s, n, i + 1, right)).toDouble())
-                        .toInt()
+            if (splitIndex != -1) {
+                memo[start][end] = min(
+                    memo[start][end].toDouble(),
+                    1.plus(calculateMinTurns(s, length, splitIndex, i)).plus(
+                        calculateMinTurns(
+                            s,
+                            length,
+                            i + 1,
+                            end,
+                        ),
+                    ).toDouble(),
+                ).toInt()
             }
         }
-        if (j == -1) {
-            dp[left][right] = 0
+        if (splitIndex == -1) {
+            memo[start][end] = 0
         }
-        return dp[left][right]
+        return memo[start][end]
     }
 }

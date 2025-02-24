@@ -1,12 +1,14 @@
 # Processes in JVM
 
 ## 1. Class Loading
+
 The JVM loads compiled Java bytecode files (`.class` files) into memory:
 
 - **Loading**: Reads the `.class` file and creates a `java.lang.Class` object.
 - **Linking**: Verifies bytecode, prepares memory for static fields, resolves symbolic references.
   
 ## 2. Memory Management
+
 JVM manages memory in different areas:
 
 - **Heap**: Runtime object allocation (instances, arrays).
@@ -14,6 +16,7 @@ JVM manages memory in different areas:
 - **Method Area**: Stores class structures, method bytecode, constants, static fields.
 
 ## 3. Execution Engine
+
 Executes bytecode instructions:
 
 - **Interpreter**: Interprets bytecode sequentially.
@@ -21,6 +24,7 @@ Executes bytecode instructions:
 - **Garbage Collector**: Manages memory by reclaiming unused objects.
 
 ## 4. Runtime Data Areas
+
 Stores data during program execution:
 
 - **Heap**: Object allocation.
@@ -28,15 +32,18 @@ Stores data during program execution:
 - **Method Area**: Shared class metadata.
 
 ## 5. Security
+
 Enforces security:
 
 - **Bytecode Verifier**: Checks bytecode validity against Java rules.
 - **Security Manager**: Enforces access control policies.
 
 ## 6. Exception Handling
+
 Manages runtime exceptions and errors for program stability.
 
 ## 7. Native Interface
+
 Allows Java to interact with native libraries (e.g., C/C++).
 
 Understanding these processes helps optimize Java applications and ensures platform-independent execution through JVM abstraction.

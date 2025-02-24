@@ -41,20 +41,20 @@ internal class AnimalShelter {
     }
 
     fun dequeueDogs(): Dog {
-        val dog = dogs.first.inner
+        val dog = dogs.first().inner
         dogs.removeFirst()
         return dog
     }
 
     fun dequeueCat(): Cat {
-        val cat = cats.first.inner
+        val cat = cats.first().inner
         cats.removeFirst()
         return cat
     }
 
     fun dequeueAny(): Animal {
-        val oldestDog = dogs.first
-        val oldestCat = cats.first
+        val oldestDog = dogs.first()
+        val oldestCat = cats.first()
 
         return if (oldestDog.time < oldestCat.time) {
             dequeueDogs()

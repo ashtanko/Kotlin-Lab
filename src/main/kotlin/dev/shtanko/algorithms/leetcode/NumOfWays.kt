@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 1569. Number of Ways to Reorder Array to Get Same BST
@@ -74,6 +75,7 @@ class NumOfWaysTriangle : NumOfWays {
     }
 }
 
+@DFS
 class NumOfWaysImpl : NumOfWays {
     private lateinit var arr: Array<LongArray>
 

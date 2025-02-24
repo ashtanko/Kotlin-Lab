@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.BinarySearch
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.Arrays
 import kotlin.math.abs
 
@@ -24,6 +25,7 @@ import kotlin.math.abs
  * 2389. Longest Subsequence With Limited Sum
  * @see <a href="https://leetcode.com/problems/longest-subsequence-with-limited-sum/">Source</a>
  */
+@Easy(link = "https://leetcode.com/problems/longest-subsequence-with-limited-sum")
 fun interface AnswerQueries {
     operator fun invoke(nums: IntArray, queries: IntArray): IntArray
 }

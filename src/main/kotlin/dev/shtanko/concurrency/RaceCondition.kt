@@ -28,8 +28,14 @@ object RaceConditionExample {
     private var counter = 0
 
     private fun increment() {
-        repeat(10000) {
+        repeat(100000) {
             counter++
+        }
+    }
+
+    private fun decrement() {
+        repeat(100000) {
+            counter--
         }
     }
 
@@ -37,8 +43,8 @@ object RaceConditionExample {
         listOf(
             thread { increment() },
             thread { increment() },
-            thread { increment() },
-            thread { increment() },
+            thread { decrement() },
+            thread { decrement() },
         ).forEach {
             it.join()
         }
@@ -56,20 +62,28 @@ object RaceConditionFix {
     private var counter = 0
     private val lock = Any()
 
-    fun increment() {
-        repeat(10000) {
+    private fun increment() {
+        repeat(100000) {
             synchronized(lock) {
                 counter++
             }
         }
     }
 
-    fun run() {
+    private fun decrement() {
+        repeat(100000) {
+            synchronized(lock) {
+                counter--
+            }
+        }
+    }
+
+    private fun run() {
         listOf(
             thread { increment() },
             thread { increment() },
-            thread { increment() },
-            thread { increment() },
+            thread { decrement() },
+            thread { decrement() },
         ).forEach {
             it.join()
         }

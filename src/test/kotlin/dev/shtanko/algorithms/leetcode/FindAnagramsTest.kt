@@ -60,7 +60,7 @@ abstract class FindAnagramsTest<out T : FindAnagrams>(private val strategy: T) {
             Arguments.of(
                 "",
                 "",
-                listOf(0),
+                emptyList<Int>(),
             ),
         )
     }
@@ -74,3 +74,4 @@ abstract class FindAnagramsTest<out T : FindAnagrams>(private val strategy: T) {
 }
 
 class FindAnagramsHashTableTest : FindAnagramsTest<FindAnagrams>(FindAnagramsHashTable())
+class FindAnagramsShortTest : FindAnagramsTest<FindAnagrams>(FindAnagramsShort())

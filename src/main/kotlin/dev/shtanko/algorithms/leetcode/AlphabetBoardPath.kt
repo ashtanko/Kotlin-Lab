@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Collections
 import kotlin.math.max
 
@@ -24,6 +25,7 @@ import kotlin.math.max
  * 1138. Alphabet Board Path
  * @see <a href="https://leetcode.com/problems/alphabet-board-path/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/alphabet-board-path")
 fun interface AlphabetBoardPath {
     operator fun invoke(target: String): String
 }

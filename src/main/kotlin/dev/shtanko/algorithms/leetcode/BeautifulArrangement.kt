@@ -18,12 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Backtracking
 import dev.shtanko.algorithms.annotations.BruteForce
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.algorithms.annotations.level.Medium
+import dev.shtanko.extensions.swap
 
 /**
- * https://leetcode.com/problems/beautiful-arrangement/
  * 526. Beautiful Arrangement
+ * @see <a href="https://leetcode.com/problems/beautiful-arrangement/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/beautiful-arrangement")
 fun interface BeautifulArrangement {
     operator fun invoke(num: Int): Int
 }

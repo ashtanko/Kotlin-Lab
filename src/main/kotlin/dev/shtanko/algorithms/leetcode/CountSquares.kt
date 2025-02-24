@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.min
 
 /**
  * Count Square Submatrices with All Ones.
  * @see <a href="https://leetcode.com/problems/count-square-submatrices-with-all-ones/">Source</a>
  */
+@Medium("https://leetcode.com/problems/count-square-submatrices-with-all-ones")
 object CountSquares {
     operator fun invoke(matrix: Array<IntArray>): Int {
         var res = 0

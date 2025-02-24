@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 import java.util.Queue
 
@@ -23,15 +24,16 @@ import java.util.Queue
  * 207. Course Schedule
  * @see <a href="https://leetcode.com/problems/course-schedule/">Source</a>
  */
+@Medium("https://leetcode.com/problems/course-schedule")
 fun interface CourseSchedule {
-    fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean
+    operator fun invoke(numCourses: Int, prerequisites: Array<IntArray>): Boolean
 }
 
 /**
  * Approach 1: Topological Sort Using Kahn's Algorithm
  */
 class CourseScheduleKahn : CourseSchedule {
-    override fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
+    override fun invoke(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
         val indegree = IntArray(numCourses)
         val adj: MutableList<MutableList<Int>> = ArrayList(numCourses)
 
@@ -74,7 +76,7 @@ class CourseScheduleKahn : CourseSchedule {
  */
 class CourseScheduleDFS : CourseSchedule {
 
-    override fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
+    override fun invoke(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
         val adj: MutableList<MutableList<Int>> = ArrayList(numCourses)
         for (i in 0 until numCourses) {
             adj.add(ArrayList())

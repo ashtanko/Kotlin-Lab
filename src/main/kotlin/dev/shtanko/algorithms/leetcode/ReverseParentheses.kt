@@ -16,6 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BruteForce
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Sort
 import dev.shtanko.datastructures.Stack
 import java.util.Deque
 import java.util.LinkedList
@@ -29,6 +32,7 @@ fun interface ReverseParentheses {
     operator fun invoke(str: String): String
 }
 
+@BruteForce
 class ReverseParenthesesBF : ReverseParentheses {
     override operator fun invoke(str: String): String {
         val stack: Stack<Char> = Stack()
@@ -49,6 +53,7 @@ class ReverseParenthesesBF : ReverseParentheses {
     }
 }
 
+@Sort
 class ReverseParenthesesSort : ReverseParentheses {
     override operator fun invoke(str: String): String {
         val deque: Deque<StringBuilder> = LinkedList()
@@ -74,6 +79,7 @@ class ReverseParenthesesSort : ReverseParentheses {
     }
 }
 
+@DFS
 class ReverseParenthesesStringBuilder : ReverseParentheses {
     override fun invoke(str: String): String {
         val n = str.length

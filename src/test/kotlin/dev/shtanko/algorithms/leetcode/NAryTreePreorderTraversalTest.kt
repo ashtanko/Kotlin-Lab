@@ -25,35 +25,53 @@ abstract class NAryTreePreorderTraversalTest<out T : NAryTreePreorderTraversalSt
 
     @Test
     fun `NAry tree preorder traversal test`() {
-        val root = NAryNode(1)
-        val third = NAryNode(3)
-        third.children = listOf(NAryNode(5), NAryNode(6))
-        root.children = listOf(third, NAryNode(2), NAryNode(4))
+        val root = NAryNode(1).apply {
+            children = listOf(
+                NAryNode(3).apply {
+                    children = listOf(NAryNode(5), NAryNode(6))
+                },
+                NAryNode(2),
+                NAryNode(4),
+            )
+        }
         val actual = strategy.preorder(root)
         assertEquals(listOf(1, 3, 5, 6, 2, 4), actual)
     }
 
     @Test
     fun `NAry tree preorder traversal 2 test`() {
-        val root = NAryNode(1)
-        val third = NAryNode(3)
-        val seventh = NAryNode(7)
-        val eleventh = NAryNode(11)
-        seventh.children = listOf(eleventh)
-        eleventh.children = listOf(NAryNode(14))
-        third.children = listOf(NAryNode(6), seventh)
-
-        val fourth = NAryNode(4)
-        val eight = NAryNode(8)
-        fourth.children = listOf(eight)
-        eight.children = listOf(NAryNode(12))
-
-        val fifth = NAryNode(5)
-        val ninth = NAryNode(9)
-        ninth.children = listOf(NAryNode(13))
-        fifth.children = listOf(ninth, NAryNode(10))
-
-        root.children = listOf(NAryNode(2), third, fourth, fifth)
+        val root = NAryNode(1).apply {
+            children = listOf(
+                NAryNode(2),
+                NAryNode(3).apply {
+                    children = listOf(
+                        NAryNode(6),
+                        NAryNode(7).apply {
+                            children = listOf(
+                                NAryNode(11).apply {
+                                    children = listOf(NAryNode(14))
+                                },
+                            )
+                        },
+                    )
+                },
+                NAryNode(4).apply {
+                    children = listOf(
+                        NAryNode(8).apply {
+                            children = listOf(NAryNode(12))
+                        },
+                    )
+                },
+                NAryNode(5).apply {
+                    children = listOf(
+                        NAryNode(9).apply {
+                            children = listOf(NAryNode(13))
+                        },
+                        NAryNode(10),
+                    )
+                },
+            )
+        }
         val actual = strategy.preorder(root)
         assertEquals(listOf(1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10), actual)
     }

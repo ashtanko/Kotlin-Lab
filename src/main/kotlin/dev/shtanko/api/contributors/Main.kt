@@ -16,7 +16,8 @@
 
 package dev.shtanko.api.contributors
 
-fun main() {
-    val contributors: Contributors = ContributorsImpl()
-    contributors.init()
+import kotlinx.coroutines.runBlocking
+
+fun main() = runBlocking {
+    ContributorsImpl().loadContributors()
 }

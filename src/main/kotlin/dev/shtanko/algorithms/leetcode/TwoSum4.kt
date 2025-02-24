@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
@@ -51,6 +53,7 @@ class TwoSum4HashSet : TwoSum4 {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@BFS
 class TwoSum4BFS : TwoSum4 {
     override fun invoke(root: TreeNode, k: Int): Boolean {
         val set: MutableSet<Int?> = HashSet()
@@ -76,6 +79,7 @@ class TwoSum4BFS : TwoSum4 {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@BFS
 class TwoSum4BST : TwoSum4 {
     override fun invoke(root: TreeNode, k: Int): Boolean {
         val list: MutableList<Int> = ArrayList()
@@ -98,6 +102,7 @@ class TwoSum4BST : TwoSum4 {
     }
 }
 
+@DFS
 class TwoSum4DFS : TwoSum4 {
     override fun invoke(root: TreeNode, k: Int): Boolean {
         return dfs(root, root, k)

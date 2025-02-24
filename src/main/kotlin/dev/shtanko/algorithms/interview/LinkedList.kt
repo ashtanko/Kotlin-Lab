@@ -22,11 +22,20 @@ import java.util.Stack
 internal class Node(var data: Int) {
     var next: Node? = null
 
+    /**
+     * Drop the next node in the linked list.
+     */
     fun dropNext() {
         this.next = this.next?.next
     }
 
     companion object {
+        /**
+         * Create a linked list from an array of integers.
+         *
+         * @param arr The array of integers.
+         * @return The head of the linked list.
+         */
         fun fromArray(arr: IntArray): Node {
             var head: Node? = null
             var current: Node? = null
@@ -37,7 +46,7 @@ internal class Node(var data: Int) {
                 if (head == null) {
                     head = nextNode
                 } else {
-                    current!!.next = nextNode
+                    current?.next = nextNode
                 }
 
                 current = nextNode

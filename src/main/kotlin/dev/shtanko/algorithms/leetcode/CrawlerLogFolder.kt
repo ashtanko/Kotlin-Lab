@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.Stack
 
 /**
  * 1598. Crawler Log Folder
  * @see <a href="https://leetcode.com/problems/crawler-log-folder">Source</a>
  */
+@Easy("https://leetcode.com/problems/crawler-log-folder")
 fun interface CrawlerLogFolder {
     operator fun invoke(logs: Array<String>): Int
 }

@@ -18,6 +18,7 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
 import dev.shtanko.algorithms.annotations.Sort
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.max
 import kotlin.math.min
 
@@ -25,18 +26,19 @@ import kotlin.math.min
  * 1630. Arithmetic Subarrays
  * @see <a href="https://leetcode.com/problems/arithmetic-subarrays">Source</a>
  */
+@Medium("https://leetcode.com/problems/arithmetic-subarrays")
 fun interface ArithmeticSubarrays {
-    operator fun invoke(nums: IntArray, l: IntArray, r: IntArray): List<Boolean>
+    operator fun invoke(nums: IntArray, leftIndices: IntArray, rightIndices: IntArray): List<Boolean>
 }
 
 @Sort
 class ArithmeticSubarraysSort : ArithmeticSubarrays {
-    override fun invoke(nums: IntArray, l: IntArray, r: IntArray): List<Boolean> {
+    override fun invoke(nums: IntArray, leftIndices: IntArray, rightIndices: IntArray): List<Boolean> {
         val ans: MutableList<Boolean> = ArrayList()
-        for (i in l.indices) {
-            val arr = IntArray(r[i] - l[i] + 1)
+        for (i in leftIndices.indices) {
+            val arr = IntArray(rightIndices[i] - leftIndices[i] + 1)
             for (j in arr.indices) {
-                arr[j] = nums[l[i] + j]
+                arr[j] = nums[leftIndices[i] + j]
             }
             ans.add(check(arr))
         }
@@ -58,12 +60,12 @@ class ArithmeticSubarraysSort : ArithmeticSubarrays {
 
 @Iterative
 class ArithmeticSubarraysSet : ArithmeticSubarrays {
-    override fun invoke(nums: IntArray, l: IntArray, r: IntArray): List<Boolean> {
+    override fun invoke(nums: IntArray, leftIndices: IntArray, rightIndices: IntArray): List<Boolean> {
         val ans: MutableList<Boolean> = ArrayList()
-        for (i in l.indices) {
-            val arr = IntArray(r[i] - l[i] + 1)
+        for (i in leftIndices.indices) {
+            val arr = IntArray(rightIndices[i] - leftIndices[i] + 1)
             for (j in arr.indices) {
-                arr[j] = nums[l[i] + j]
+                arr[j] = nums[leftIndices[i] + j]
             }
             ans.add(check(arr))
         }

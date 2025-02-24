@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 1829. Maximum XOR for Each Query
  * @see <a href="https://leetcode.com/problems/maximum-xor-for-each-query/">Source</a>
  */
+@Medium("https://leetcode.com/problems/maximum-xor-for-each-query")
 fun interface MaximumXor {
     operator fun invoke(nums: IntArray, maximumBit: Int): IntArray
 }

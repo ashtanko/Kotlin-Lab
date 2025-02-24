@@ -21,11 +21,11 @@ package dev.shtanko.algorithms.leetcode
  * @see <a href="https://leetcode.com/problems/count-submatrices-with-all-ones/">Source</a>
  */
 fun interface CountSubmatricesWithAllOnes {
-    fun numSubmat(mat: Array<IntArray>): Int
+    operator fun invoke(mat: Array<IntArray>): Int
 }
 
 class CountSubmatricesWithAllOnesStack : CountSubmatricesWithAllOnes {
-    override fun numSubmat(mat: Array<IntArray>): Int {
+    override fun invoke(mat: Array<IntArray>): Int {
         val m: Int = mat.size
         val n: Int = mat[0].size
 

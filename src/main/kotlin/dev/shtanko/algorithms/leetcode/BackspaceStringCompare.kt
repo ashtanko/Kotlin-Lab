@@ -25,20 +25,20 @@ import java.util.Stack
  * @see <a href="https://leetcode.com/problems/backspace-string-compare">Source</a>
  */
 fun interface BackspaceStringCompare {
-    operator fun invoke(s: String, t: String): Boolean
+    operator fun invoke(source: String, target: String): Boolean
 }
 
 @Iterative
 class BackspaceStringCompareStack : BackspaceStringCompare {
-    override fun invoke(s: String, t: String): Boolean {
-        return build(s) == build(t)
+    override fun invoke(source: String, target: String): Boolean {
+        return build(source) == build(target)
     }
 
-    private fun build(s: String): String {
+    private fun build(str: String): String {
         val ans: Stack<Char> = Stack()
-        for (c in s.toCharArray()) {
-            if (c != '#') {
-                ans.push(c)
+        for (character in str.toCharArray()) {
+            if (character != '#') {
+                ans.push(character)
             } else if (!ans.empty()) {
                 ans.pop()
             }
@@ -49,41 +49,41 @@ class BackspaceStringCompareStack : BackspaceStringCompare {
 
 @TwoPointers
 class BackspaceStringCompareTwoPointer : BackspaceStringCompare {
-    override fun invoke(s: String, t: String): Boolean {
-        var i: Int = s.length - 1
-        var j: Int = t.length - 1
-        var skipS = 0
-        var skipT = 0
+    override fun invoke(source: String, target: String): Boolean {
+        var sourceIndex: Int = source.length - 1
+        var targetIndex: Int = target.length - 1
+        var sourceSkip = 0
+        var targetSkip = 0
 
-        while (i >= 0 || j >= 0) { // While there may be chars in build(S) or build (T)
-            while (i >= 0) { // Find position of next possible char in build(S)
-                if (s[i] == '#') {
-                    skipS++
-                    i--
-                } else if (skipS > 0) {
-                    skipS--
-                    i--
+        while (sourceIndex >= 0 || targetIndex >= 0) { // While there may be chars in build(source) or build(target)
+            while (sourceIndex >= 0) { // Find position of next possible char in build(source)
+                if (source[sourceIndex] == '#') {
+                    sourceSkip++
+                    sourceIndex--
+                } else if (sourceSkip > 0) {
+                    sourceSkip--
+                    sourceIndex--
                 } else {
                     break
                 }
             }
-            while (j >= 0) { // Find position of next possible char in build(T)
-                if (t[j] == '#') {
-                    skipT++
-                    j--
-                } else if (skipT > 0) {
-                    skipT--
-                    j--
+            while (targetIndex >= 0) { // Find position of next possible char in build(target)
+                if (target[targetIndex] == '#') {
+                    targetSkip++
+                    targetIndex--
+                } else if (targetSkip > 0) {
+                    targetSkip--
+                    targetIndex--
                 } else {
                     break
                 }
             }
             // If two actual characters are different
-            if (i >= 0 && j >= 0 && s[i] != t[j]) return false
+            if (sourceIndex >= 0 && targetIndex >= 0 && source[sourceIndex] != target[targetIndex]) return false
             // If expecting to compare char vs nothing
-            if (i >= 0 != j >= 0) return false
-            i--
-            j--
+            if (sourceIndex >= 0 != targetIndex >= 0) return false
+            sourceIndex--
+            targetIndex--
         }
         return true
     }

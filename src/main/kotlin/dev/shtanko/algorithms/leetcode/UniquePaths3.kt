@@ -16,6 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Backtracking
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 980. Unique Paths III
  * @see <a href="https://leetcode.com/problems/unique-paths-iii/">Source</a>
@@ -24,6 +27,8 @@ fun interface UniquePaths3 {
     operator fun invoke(grid: Array<IntArray>): Int
 }
 
+@DFS
+@Backtracking
 class UniquePaths3Backtracking : UniquePaths3 {
     private var result = 0
     private var emptyCells: Int = 1

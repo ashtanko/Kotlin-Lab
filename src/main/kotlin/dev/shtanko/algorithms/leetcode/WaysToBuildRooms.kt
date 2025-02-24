@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 1916. Count Ways to Build Rooms in an Ant Colony
@@ -26,6 +27,7 @@ fun interface WaysToBuildRooms {
     operator fun invoke(prevRoom: IntArray): Int
 }
 
+@DFS
 class WaysToBuildRoomsDFS : WaysToBuildRooms {
     override operator fun invoke(prevRoom: IntArray): Int {
         val n: Int = prevRoom.size

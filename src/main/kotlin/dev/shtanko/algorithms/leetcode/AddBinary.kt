@@ -17,12 +17,15 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Bitwise
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.math.BigInteger
 
 /**
  * Given two binary strings a and b, return their sum as a binary string.
+ * @see <a href="https://leetcode.com/problems/add-binary">Source</a>
  */
-fun interface AddBinaryStrategy {
+@Easy(link = "https://leetcode.com/problems/add-binary")
+fun interface AddBinary {
     operator fun invoke(a: String, b: String): String
 }
 
@@ -31,7 +34,7 @@ fun interface AddBinaryStrategy {
  * Space complexity: O(max(N,M)) to keep the answer.
  */
 @Bitwise
-class AddBinaryBitByBitComputation : AddBinaryStrategy {
+class AddBinaryBitByBitComputation : AddBinary {
     /**
      * Adds two binary strings and returns their sum as a binary string.
      *
@@ -61,33 +64,33 @@ class AddBinaryBitByBitComputation : AddBinaryStrategy {
  * Space complexity: O(max(N,M)) to keep the answer.
  */
 @Bitwise
-class AddBinaryBitManipulation : AddBinaryStrategy {
+class AddBinaryBitManipulation : AddBinary {
     /**
      * Performs binary addition of two strings and returns the sum as a binary string.
      *
-     * @param a The first binary string.
-     * @param b The second binary string.
+     * @param firstBinary The first binary string.
+     * @param secondBinary The second binary string.
      * @return The sum of the two binary strings as a binary string.
      */
-    override operator fun invoke(a: String, b: String): String {
-        if (a.isEmpty() || b.isEmpty()) return ""
-        val firstOperand = BigInteger(a, 2)
-        val secondOperand = BigInteger(b, 2)
-        val zeroBigInteger = BigInteger("0", 2)
+    override operator fun invoke(firstBinary: String, secondBinary: String): String {
+        if (firstBinary.isEmpty() || secondBinary.isEmpty()) return ""
+        val firstOperand = BigInteger(firstBinary, 2)
+        val secondOperand = BigInteger(secondBinary, 2)
+        val zero = BigInteger("0", 2)
 
-        return binaryAddition(firstOperand, secondOperand, zeroBigInteger).toString(2)
+        return addBinary(firstOperand, secondOperand, zero).toString(2)
     }
 
-    private fun binaryAddition(
+    private fun addBinary(
         firstOperand: BigInteger,
         secondOperand: BigInteger,
-        zeroBigInteger: BigInteger,
+        zero: BigInteger,
     ): BigInteger {
         var tempResult: BigInteger
         var carryResult: BigInteger
         var x = firstOperand
         var y = secondOperand
-        while (y.compareTo(zeroBigInteger) != 0) {
+        while (y.compareTo(zero) != 0) {
             tempResult = x.xor(y)
             carryResult = x.and(y).shiftLeft(1)
             x = tempResult

@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 1382. Balance a Binary Search Tree
  * @see <a href="https://leetcode.com/problems/balance-a-binary-search-tree/">Source</a>
  */
+@Medium("https://leetcode.com/problems/balance-a-binary-search-tree")
 fun interface BalanceBST {
     operator fun invoke(root: TreeNode?): TreeNode?
 }
@@ -56,7 +58,6 @@ class BalanceBSTInorder : BalanceBST {
 }
 
 class BalanceBSTreeDSW : BalanceBST {
-
     override operator fun invoke(root: TreeNode?): TreeNode? {
         val pseudoRoot = TreeNode(0)
         pseudoRoot.right = root

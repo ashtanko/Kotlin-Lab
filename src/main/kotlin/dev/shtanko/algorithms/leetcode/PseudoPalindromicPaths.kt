@@ -16,6 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Recursive
+
 /**
  * 1457. Pseudo-Palindromic Paths in a Binary Tree
  * @see <a href="https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree">Source</a>
@@ -24,6 +27,7 @@ fun interface PseudoPalindromicPaths {
     operator fun invoke(root: TreeNode?): Int
 }
 
+@DFS
 class PseudoPalindromicPathsDFS : PseudoPalindromicPaths {
     override fun invoke(root: TreeNode?): Int {
         var count = 0
@@ -56,6 +60,7 @@ class PseudoPalindromicPathsDFS : PseudoPalindromicPaths {
     }
 }
 
+@Recursive
 class PseudoPalindromicPathsRecursive : PseudoPalindromicPaths {
     private var count = 0
 

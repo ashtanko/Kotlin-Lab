@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 1444. Number of Ways of Cutting a Pizza
@@ -26,6 +27,7 @@ fun interface NumberOfWaysOfCuttingPizza {
     fun ways(pizza: Array<String>, k: Int): Int
 }
 
+@DFS
 class NumberOfWaysOfCuttingPizzaPrefixSum : NumberOfWaysOfCuttingPizza {
     override fun ways(pizza: Array<String>, k: Int): Int {
         val m: Int = pizza.size

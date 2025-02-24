@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.LinkedList
 import java.util.Queue
 import java.util.Stack
@@ -24,6 +25,7 @@ import java.util.Stack
  * 1700. Number of Students Unable to Eat Lunch
  * @see <a href="https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/">Source</a>
  */
+@Easy("https://leetcode.com/problems/number-of-students-unable-to-eat-lunch")
 fun interface CountStudents {
     operator fun invoke(students: IntArray, sandwiches: IntArray): Int
 }

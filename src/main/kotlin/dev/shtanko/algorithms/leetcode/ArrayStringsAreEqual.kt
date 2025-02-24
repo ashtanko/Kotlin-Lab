@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.TwoPointers
+import dev.shtanko.algorithms.annotations.level.Easy
 
 /**
  * 1662. Check If Two String Arrays are Equivalent
  * @see <a href="https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent">Source</a>
  */
+@Easy(link = "https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent")
 fun interface ArrayStringsAreEqual {
     operator fun invoke(word1: Array<String>, word2: Array<String>): Boolean
 }

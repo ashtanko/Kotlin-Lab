@@ -16,7 +16,7 @@
 
 package dev.shtanko.datastructures
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * A priority queue implementation using a binary heap.

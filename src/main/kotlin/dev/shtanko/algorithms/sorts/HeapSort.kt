@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * Heap sort is a comparison based sorting technique based on Binary Heap data structure. It is similar to selection

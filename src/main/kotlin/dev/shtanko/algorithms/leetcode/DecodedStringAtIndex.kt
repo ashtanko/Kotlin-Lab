@@ -16,37 +16,44 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 880. Decoded String at Index
  * @see <a href="https://leetcode.com/problems/decoded-string-at-index">Source</a>
  */
+@Medium("https://leetcode.com/problems/decoded-string-at-index")
 fun interface DecodedStringAtIndex {
     operator fun invoke(str: String, k: Int): String
 }
 
 class DecodedStringAtIndexSolution : DecodedStringAtIndex {
     override fun invoke(str: String, k: Int): String {
-        var n = 0
-        var k0 = k
+        var currentLength = 0
+        var targetIndex = k
 
-        var i = 0
-        while (n < k0) {
-            n = if (Character.isDigit(str[i])) n * (str[i] - '0') else n + 1
-            i++
-        }
-        i--
-        while (i > 0) {
-            if (Character.isDigit(str[i])) {
-                n /= str[i] - '0'
-                k0 %= n
+        var position = 0
+        while (currentLength < targetIndex) {
+            currentLength = if (Character.isDigit(str[position])) {
+                currentLength * (str[position] - '0')
             } else {
-                if (k0 % n == 0) {
+                currentLength + 1
+            }
+            position++
+        }
+        position--
+        while (position > 0) {
+            if (Character.isDigit(str[position])) {
+                currentLength /= str[position] - '0'
+                targetIndex %= currentLength
+            } else {
+                if (targetIndex % currentLength == 0) {
                     break
                 }
-                n--
+                currentLength--
             }
-            i--
+            position--
         }
-        return str[i].toString()
+        return str[position].toString()
     }
 }

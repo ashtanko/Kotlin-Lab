@@ -16,6 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
+/**
+ * 816. Ambiguous Coordinates
+ * @see <a href="https://leetcode.com/problems/ambiguous-coordinates/">Source</a>
+ */
+@Medium(link = "https://leetcode.com/problems/ambiguous-coordinates")
 class AmbiguousCoordinates {
     operator fun invoke(str: String): List<String> {
         val ans: MutableList<String> = ArrayList()

@@ -34,3 +34,20 @@ fun main() {
     // Barbara won 3000
     // Cyprian won 1000
 }
+
+private infix fun <T, R> Iterable<T>.zip(other: Iterable<R>): List<Pair<T, R>> {
+    return zip(other) { t1, t2 -> t1 to t2 }
+}
+
+private fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int =
+    if (this is Collection<*>) this.size else default
+
+private inline fun <T, R, V> Iterable<T>.zip(other: Iterable<R>, transform: (a: T, b: R) -> V): List<V> {
+    val first = iterator()
+    val second = other.iterator()
+    val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
+    while (first.hasNext() && second.hasNext()) {
+        list.add(transform(first.next(), second.next()))
+    }
+    return list
+}

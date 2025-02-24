@@ -17,14 +17,16 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Stack
 
 /**
  * 445. Add Two Numbers II
  * @see <a href="https://leetcode.com/problems/add-two-numbers-ii/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/add-two-numbers-ii")
 fun interface AddTwoNumbers2 {
-    operator fun invoke(l1: ListNode?, l2: ListNode?): ListNode?
+    operator fun invoke(list1: ListNode?, list2: ListNode?): ListNode?
 }
 
 /**
@@ -34,39 +36,39 @@ class AddTwoNumbers2Stack : AddTwoNumbers2 {
     /**
      * Adds two numbers represented as linked lists in reverse order.
      *
-     * @param l1 The first linked list representing a number.
-     * @param l2 The second linked list representing a number.
+     * @param list1 The first linked list representing a number.
+     * @param list2 The second linked list representing a number.
      * @return The linked list representing the sum of l1 and l2.
      */
-    override fun invoke(l1: ListNode?, l2: ListNode?): ListNode? {
-        val s1: Stack<Int> = Stack<Int>()
-        val s2: Stack<Int> = Stack<Int>()
-        var ll1 = l1
-        var ll2 = l2
-        while (ll1 != null) {
-            s1.push(ll1.value)
-            ll1 = ll1.next
+    override fun invoke(list1: ListNode?, list2: ListNode?): ListNode? {
+        val stack1: Stack<Int> = Stack<Int>()
+        val stack2: Stack<Int> = Stack<Int>()
+        var node1 = list1
+        var node2 = list2
+        while (node1 != null) {
+            stack1.push(node1.value)
+            node1 = node1.next
         }
-        while (ll2 != null) {
-            s2.push(ll2.value)
-            ll2 = ll2.next
+        while (node2 != null) {
+            stack2.push(node2.value)
+            node2 = node2.next
         }
 
         var totalSum = 0
-        var carry = 0
-        var ans = ListNode()
-        while (!s1.empty() || !s2.empty()) {
-            if (!s1.empty()) totalSum += s1.pop()
-            if (!s2.empty()) totalSum += s2.pop()
-            ans.value = totalSum % DECIMAL
-            carry = totalSum / DECIMAL
-            val head = ListNode(carry)
-            head.next = ans
-            ans = head
-            totalSum = carry
+        var carryOver = 0
+        var resultNode = ListNode()
+        while (!stack1.empty() || !stack2.empty()) {
+            if (!stack1.empty()) totalSum += stack1.pop()
+            if (!stack2.empty()) totalSum += stack2.pop()
+            resultNode.value = totalSum % DECIMAL
+            carryOver = totalSum / DECIMAL
+            val headNode = ListNode(carryOver)
+            headNode.next = resultNode
+            resultNode = headNode
+            totalSum = carryOver
         }
 
-        return if (carry == 0) ans.next else ans
+        return if (carryOver == 0) resultNode.next else resultNode
     }
 }
 
@@ -77,30 +79,30 @@ class AddTwoNumbers2Reverse : AddTwoNumbers2 {
     /**
      * Adds two numbers represented by linked lists in reverse order.
      *
-     * @param l1 The first linked list representing a number in reverse order.
-     * @param l2 The second linked list representing a number in reverse order.
+     * @param list1 The first linked list representing a number in reverse order.
+     * @param list2 The second linked list representing a number in reverse order.
      * @return The sum of the two numbers as a linked list in reverse order.
      */
-    override fun invoke(l1: ListNode?, l2: ListNode?): ListNode? {
-        var r1: ListNode? = l1?.reverseList()
-        var r2: ListNode? = l2?.reverseList()
+    override fun invoke(list1: ListNode?, list2: ListNode?): ListNode? {
+        var reversedList1: ListNode? = list1?.reverseList()
+        var reversedList2: ListNode? = list2?.reverseList()
 
         var totalSum = 0
-        var carry = 0
-        var ans = ListNode()
-        while (r1 != null || r2 != null) {
-            if (r1 != null) totalSum += r1.value
-            if (r2 != null) totalSum += r2.value
-            ans.value = totalSum % DECIMAL
-            carry = totalSum / DECIMAL
-            val head = ListNode(carry)
-            head.next = ans
-            ans = head
-            totalSum = carry
-            r1 = r1?.next
-            r2 = r2?.next
+        var carryOver = 0
+        var resultNode = ListNode()
+        while (reversedList1 != null || reversedList2 != null) {
+            if (reversedList1 != null) totalSum += reversedList1.value
+            if (reversedList2 != null) totalSum += reversedList2.value
+            resultNode.value = totalSum % DECIMAL
+            carryOver = totalSum / DECIMAL
+            val headNode = ListNode(carryOver)
+            headNode.next = resultNode
+            resultNode = headNode
+            totalSum = carryOver
+            reversedList1 = reversedList1?.next
+            reversedList2 = reversedList2?.next
         }
 
-        return if (carry == 0) ans.next else ans
+        return if (carryOver == 0) resultNode.next else resultNode
     }
 }

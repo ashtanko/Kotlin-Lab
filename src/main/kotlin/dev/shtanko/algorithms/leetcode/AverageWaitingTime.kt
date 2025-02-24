@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.max
 
 /**
  * 1701. Average Waiting Time
  * @see <a href="https://leetcode.com/problems/average-waiting-time">Source</a>
  */
+@Medium("https://leetcode.com/problems/average-waiting-time")
 fun interface AverageWaitingTime {
     operator fun invoke(customers: Array<IntArray>): Double
 }

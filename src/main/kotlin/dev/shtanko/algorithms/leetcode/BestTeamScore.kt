@@ -17,12 +17,14 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.max
 
 /**
  * 1626. Best Team With No Conflicts
  * @see <a href="https://leetcode.com/problems/best-team-with-no-conflicts/">Source</a>
  */
+@Medium("https://leetcode.com/problems/best-team-with-no-conflicts")
 fun interface BestTeamScore {
     operator fun invoke(scores: IntArray, ages: IntArray): Int
 }

@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.gfg
 
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 import kotlin.math.floor
 import kotlin.math.sqrt
 

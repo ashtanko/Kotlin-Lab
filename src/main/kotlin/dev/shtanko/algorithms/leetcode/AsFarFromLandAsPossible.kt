@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.max
 import kotlin.math.min
 
@@ -24,6 +25,7 @@ import kotlin.math.min
  * 1162. As Far from Land as Possible
  * @see <a href="https://leetcode.com/problems/as-far-from-land-as-possible/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/as-far-from-land-as-possible")
 fun interface AsFarFromLandAsPossible {
     fun maxDistance(grid: Array<IntArray>): Int
 }

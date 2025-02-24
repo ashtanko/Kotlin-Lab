@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-abstract class MaximumWidthRampTest<out T : MaximumWidthRampStrategy>(private val strategy: T) {
+abstract class MaximumWidthRampTest<out T : MaximumWidthRamp>(private val strategy: T) {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
@@ -55,3 +55,9 @@ class MaximumWidthRampSortTest : MaximumWidthRampTest<MaximumWidthRampSort>(Maxi
 
 class MaximumWidthRampBinarySearchTest :
     MaximumWidthRampTest<MaximumWidthRampBinarySearch>(MaximumWidthRampBinarySearch())
+
+class MaximumWidthRampTwoPointersTest :
+    MaximumWidthRampTest<MaximumWidthRampTwoPointers>(MaximumWidthRampTwoPointers())
+
+class MaximumWidthRampMonotonicStackTest :
+    MaximumWidthRampTest<MaximumWidthRampMonotonicStack>(MaximumWidthRampMonotonicStack())

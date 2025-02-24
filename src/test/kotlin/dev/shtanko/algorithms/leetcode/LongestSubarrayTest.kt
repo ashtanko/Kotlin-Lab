@@ -46,7 +46,7 @@ abstract class LongestSubarrayTest<out T : LongestSubarray>(private val strategy
         )
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "input array: {0} should return int: {1}")
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `longest subarray test`(nums: IntArray, expected: Int) {
         val actual = strategy.invoke(nums)

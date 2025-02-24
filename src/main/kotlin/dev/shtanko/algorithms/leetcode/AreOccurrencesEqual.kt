@@ -18,11 +18,13 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Easy
 
 /**
  * 1941. Check if All Characters Have Equal Number of Occurrences
- * link https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
+ * @see <a href="https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/">Source</a>
  */
+@Easy("https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences")
 fun interface AreOccurrencesEqual {
     operator fun invoke(str: String): Boolean
 }

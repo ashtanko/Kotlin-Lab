@@ -29,6 +29,12 @@ package dev.shtanko.datastructures.maps.hashmaps
 class SimpleHashMap<Key, Value>(private val size: Int) {
     private val buckets: Array<MutableList<Pair<Key, Value>>> = Array(size) { mutableListOf<Pair<Key, Value>>() }
 
+    /**
+     * Inserts a key-value pair into the hash map. If the key already exists, the value is updated.
+     *
+     * @param key The key to insert.
+     * @param value The value to insert.
+     */
     fun insert(key: Key, value: Value) {
         val index = hashFunction(key)
         val bucket = buckets[index]
@@ -42,6 +48,12 @@ class SimpleHashMap<Key, Value>(private val size: Int) {
         bucket.add(key to value)
     }
 
+    /**
+     * Looks up a key in the hash map and returns the associated value, if it exists.
+     *
+     * @param key The key to look up.
+     * @return The value associated with the key, or null if the key is not found.
+     */
     fun lookup(key: Key): Value? {
         val index = hashFunction(key)
         val bucket = buckets[index]
@@ -54,6 +66,11 @@ class SimpleHashMap<Key, Value>(private val size: Int) {
         return null
     }
 
+    /**
+     * Deletes a key from the hash map, if it exists.
+     *
+     * @param key The key to delete.
+     */
     fun delete(key: Key) {
         val index = hashFunction(key)
         val bucket = buckets[index]
@@ -68,7 +85,12 @@ class SimpleHashMap<Key, Value>(private val size: Int) {
         }
     }
 
-    private fun hashFunction(key: Key): Int {
-        return key.hashCode() % size
-    }
+    /**
+     * A simple hash function that returns the index of the bucket for a given key.
+     * This implementation uses the modulo operator to calculate the hash.
+     * Note: This hash function is not ideal and may result in collisions.
+     *
+     * @param key The key to hash.
+     */
+    private fun hashFunction(key: Key) = key.hashCode() % size
 }

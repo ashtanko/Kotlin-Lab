@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2196. Create Binary Tree From Descriptions
  * @see <a href="https://leetcode.com/problems/create-binary-tree-from-descriptions">Source</a>
  */
+@Medium("https://leetcode.com/problems/create-binary-tree-from-descriptions")
 fun interface CreateBinaryTree {
     operator fun invoke(descriptions: Array<IntArray>): TreeNode?
 }

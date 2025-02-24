@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.second
+import dev.shtanko.extensions.second
 import java.util.LinkedList
 
 fun reconstructQueue(people: Array<IntArray>): Array<IntArray> {

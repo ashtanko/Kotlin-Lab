@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
@@ -30,6 +32,7 @@ fun interface NumberOfProvinces {
 /**
  * Approach 1: Depth First Search
  */
+@DFS
 class NumberOfProvincesDFS : NumberOfProvinces {
     override fun findCircleNum(isConnected: Array<IntArray>): Int {
         val n: Int = isConnected.size
@@ -59,6 +62,7 @@ class NumberOfProvincesDFS : NumberOfProvinces {
 /**
  * Approach 2: Breadth First Search
  */
+@BFS
 class NumberOfProvincesBFS : NumberOfProvinces {
     override fun findCircleNum(isConnected: Array<IntArray>): Int {
         val n: Int = isConnected.size
@@ -95,6 +99,7 @@ class NumberOfProvincesBFS : NumberOfProvinces {
 /**
  * Approach 3: Union-find
  */
+@dev.shtanko.algorithms.annotations.UnionFind
 class NumberOfProvincesUnionFind : NumberOfProvinces {
     override fun findCircleNum(isConnected: Array<IntArray>): Int {
         val n: Int = isConnected.size

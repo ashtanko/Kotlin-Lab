@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.exercises
 
-import dev.shtanko.algorithms.extensions.isBinary
+import dev.shtanko.extensions.isBinary
 import java.util.TreeMap
 
 class BinaryToDecimal {

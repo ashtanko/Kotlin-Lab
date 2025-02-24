@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Hard
 import kotlin.math.max
 import kotlin.math.min
 
@@ -23,6 +24,7 @@ import kotlin.math.min
  * 2444. Count Subarrays With Fixed Bounds
  * @see <a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/">Source</a>
  */
+@Hard("https://leetcode.com/problems/count-subarrays-with-fixed-bounds")
 fun interface CountSubarraysWithFixedBounds {
     fun countSubarrays(nums: IntArray, minK: Int, maxK: Int): Long
 }

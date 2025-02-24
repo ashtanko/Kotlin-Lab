@@ -1,8 +1,8 @@
-## Kotlin Coroutines Channels
+# Kotlin Coroutines Channels
 
 Kotlin coroutines channels provide a way for coroutines to communicate with each other in a structured manner, facilitating the exchange of data in a concurrent and non-blocking way. Here’s an explanation of Kotlin coroutines channels:
 
-### Overview
+## Overview
 
 Channels in Kotlin coroutines act as pipelines that connect sending and receiving coroutines, allowing them to exchange values asynchronously. They are similar to queues or pipes in traditional concurrency models but are designed specifically to work seamlessly with coroutines.
 

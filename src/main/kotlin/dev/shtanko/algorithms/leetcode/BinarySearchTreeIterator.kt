@@ -17,8 +17,14 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Stack
 
+/**
+ * 173. Binary Search Tree Iterator
+ * @see <a href="https://leetcode.com/problems/binary-search-tree-iterator/">Source</a>
+ */
+@Medium("https://leetcode.com/problems/binary-search-tree-iterator")
 interface BSTIterator {
     fun next(): Int
 

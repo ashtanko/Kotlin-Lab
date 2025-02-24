@@ -1,11 +1,12 @@
-## Coroutine Builders in Kotlin
+# Coroutine Builders in Kotlin
 
-### 1. `launch`
+## 1. `launch`
 
 The `launch` coroutine builder is used to start a new coroutine that runs concurrently with the current coroutine scope. 
 It returns a `Job` object that represents the coroutine and can be used to control its lifecycle.
 
-Example:
+### Example
+
 ```kotlin
 import kotlinx.coroutines.*
 
@@ -19,12 +20,12 @@ fun main() = runBlocking {
 }
 ```
 
-### 2. `async`
+## 2. `async`
 
-The async coroutine builder is used to start a coroutine that computes a result asynchronously. It returns a Deferred 
+The async coroutine builder is used to start a coroutine that computes a result asynchronously. It returns a Deferred
 object representing a future result. This builder is useful when you need to perform a computation concurrently and retrieve its result later.
 
-### Example:
+### Example
 
 ```kotlin
 import kotlinx.coroutines.*
@@ -39,12 +40,12 @@ fun main() = runBlocking {
 }
 ```
 
-### 3. `runBlocking`
+## 3. `runBlocking`
 
 The `runBlocking` coroutine builder is used to start a new coroutine and block the current thread until its completion. 
 It is primarily used in main functions and tests to launch a coroutine and wait for its completion before proceeding.
 
-### Example:
+### Example
 
 ```kotlin
 import kotlinx.coroutines.*
@@ -58,12 +59,12 @@ fun main() = runBlocking {
 }
 ```
 
-### 4. coroutineScope
+## 4. coroutineScope
 
 The `coroutineScope` coroutine builder is used to create a new coroutine scope within a suspending function. 
 It suspends the coroutine until all launched child coroutines complete. It is used to structure concurrent operations within suspending functions.
 
-### Example:
+### Example
 
 ```kotlin
 import kotlinx.coroutines.*

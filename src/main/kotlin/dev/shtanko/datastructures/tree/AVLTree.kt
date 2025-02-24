@@ -110,7 +110,7 @@ class AVLTree {
 
         //  Update heights
         x.height = max(height(x.left), height(x.right)) + 1
-        y?.height = max(height(y?.left), height(y?.right)) + 1
+        y?.height = max(height(y.left), height(y.right)) + 1
 
         // Return new root
         return y
@@ -128,7 +128,7 @@ class AVLTree {
 
         // Update heights
         y.height = max(height(y.left), height(y.right)) + 1
-        x?.height = max(height(x?.left), height(x?.right)) + 1
+        x?.height = max(height(x.left), height(x.right)) + 1
 
         // Return new root
         return x

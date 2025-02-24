@@ -24,9 +24,9 @@ There are several ways to create and use Coroutine Scopes in Kotlin, including u
 `runBlocking`, `coroutineScope`, and `GlobalScope`.
 
 1. **runBlocking**:
+
    - `runBlocking` creates a new coroutine scope and blocks the current thread until all coroutines within the scope 
      complete. It is typically used in main functions and tests.
-   
    ```kotlin
    fun main() = runBlocking {
        launch {
@@ -35,7 +35,8 @@ There are several ways to create and use Coroutine Scopes in Kotlin, including u
        }
        println("Main function completed")
    }
-  ```
+   ```
+
 ### coroutineScope
 
 `coroutineScope` creates a new coroutine scope and suspends the current coroutine until all coroutines within the scope complete. 

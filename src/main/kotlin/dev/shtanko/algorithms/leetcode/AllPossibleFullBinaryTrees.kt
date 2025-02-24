@@ -18,11 +18,13 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 894. All Possible Full Binary Trees
  * @see <a href="https://leetcode.com/problems/all-possible-full-binary-trees/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/all-possible-full-binary-trees")
 fun interface AllPossibleFullBinaryTrees {
     operator fun invoke(n: Int): List<TreeNode?>
 }

@@ -87,3 +87,4 @@ abstract class StoneGame2Test<out T : StoneGame2>(private val strategy: T) {
 }
 
 class StoneGame2MemoizationTest : StoneGame2Test<StoneGame2>(StoneGame2WithMemoization())
+class StoneGame2DPTest : StoneGame2Test<StoneGame2>(StoneGame2DP())

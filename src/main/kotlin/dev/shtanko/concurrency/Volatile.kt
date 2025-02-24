@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package dev.shtanko.concurrency
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.runBlocking

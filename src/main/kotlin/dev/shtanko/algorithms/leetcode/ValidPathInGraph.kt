@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
@@ -131,6 +132,7 @@ class ValidPathUnionByRank : ValidPathInGraph {
 /**
  * 3. DFS - Depth First Search
  */
+@DFS
 class ValidPathDFS : ValidPathInGraph {
 
     private var seen = false

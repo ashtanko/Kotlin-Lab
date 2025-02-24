@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2962. Count Subarrays Where Max Element Appears at Least K Times
- * @see <a href="https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-time">Source</a>
+ * @see <a href="https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times">Source</a>
  */
+@Medium("https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times")
 fun interface CountSubarraysMaxElement {
     operator fun invoke(nums: IntArray, k: Int): Long
 }

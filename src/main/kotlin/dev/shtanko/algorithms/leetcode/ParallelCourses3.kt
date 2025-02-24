@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Sort
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.max
@@ -28,6 +30,7 @@ fun interface ParallelCourses3 {
     operator fun invoke(n: Int, relations: Array<IntArray>, time: IntArray): Int
 }
 
+@Sort
 class ParallelCourses3Sort : ParallelCourses3 {
     override fun invoke(n: Int, relations: Array<IntArray>, time: IntArray): Int {
         val graph: MutableMap<Int, MutableList<Int>> = HashMap()
@@ -73,6 +76,7 @@ class ParallelCourses3Sort : ParallelCourses3 {
     }
 }
 
+@DFS
 class ParallelCourses3DFS : ParallelCourses3 {
 
     private val graph: MutableMap<Int, MutableList<Int>> = HashMap()

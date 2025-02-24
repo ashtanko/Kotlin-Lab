@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Deque
 import java.util.LinkedList
 import java.util.Stack
@@ -24,17 +25,18 @@ import java.util.Stack
  * 394. Decode String
  * @see <a href="https://leetcode.com/problems/decode-string/">Source</a>
  */
+@Medium("https://leetcode.com/problems/decode-string")
 fun interface DecodeString {
-    operator fun invoke(s: String): String
+    operator fun invoke(input: String): String
 }
 
 class DecodeStringStack : DecodeString {
-    override operator fun invoke(s: String): String {
+    override operator fun invoke(input: String): String {
         val numStack: Stack<Int> = Stack()
         val strBuild: Stack<StringBuilder> = Stack()
         var str = StringBuilder()
         var num = 0
-        for (c in s.toCharArray()) {
+        for (c in input.toCharArray()) {
             when (c) {
                 in '0'..'9' -> {
                     num = num * 10 + c.code - '0'.code
@@ -66,39 +68,39 @@ class DecodeStringStack : DecodeString {
 }
 
 class DecodeStringRecursive : DecodeString {
-    override operator fun invoke(s: String): String {
-        val queue: Deque<Char> = LinkedList()
-        for (c in s.toCharArray()) {
-            queue.offer(c)
+    override operator fun invoke(input: String): String {
+        val charQueue: Deque<Char> = LinkedList()
+        for (char in input.toCharArray()) {
+            charQueue.offer(char)
         }
-        return helper(queue)
+        return decodeHelper(charQueue)
     }
 
-    fun helper(queue: Deque<Char>): String {
-        val sb = java.lang.StringBuilder()
-        var num = 0
-        while (queue.isNotEmpty()) {
-            val c: Char = queue.poll()
+    private fun decodeHelper(charQueue: Deque<Char>): String {
+        val decodedString = StringBuilder()
+        var repeatCount = 0
+        while (charQueue.isNotEmpty()) {
+            val currentChar: Char = charQueue.poll()
             when {
-                Character.isDigit(c) -> {
-                    num = num * 10 + c.code - '0'.code
+                Character.isDigit(currentChar) -> {
+                    repeatCount = repeatCount * 10 + currentChar.code - '0'.code
                 }
 
-                c == '[' -> {
-                    val sub = helper(queue)
-                    for (i in 0 until num) sb.append(sub)
-                    num = 0
+                currentChar == '[' -> {
+                    val subString = decodeHelper(charQueue)
+                    for (i in 0 until repeatCount) decodedString.append(subString)
+                    repeatCount = 0
                 }
 
-                c == ']' -> {
+                currentChar == ']' -> {
                     break
                 }
 
                 else -> {
-                    sb.append(c)
+                    decodedString.append(currentChar)
                 }
             }
         }
-        return sb.toString()
+        return decodedString.toString()
     }
 }

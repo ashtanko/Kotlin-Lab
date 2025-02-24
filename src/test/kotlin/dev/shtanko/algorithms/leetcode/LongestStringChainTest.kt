@@ -38,7 +38,7 @@ abstract class LongestStringChainTest<out T : LongestStringChain>(private val st
         )
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "words: {0} should return int: {1}")
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `longest string chain test`(words: Array<String>, expected: Int) {
         val actual = strategy.invoke(words)

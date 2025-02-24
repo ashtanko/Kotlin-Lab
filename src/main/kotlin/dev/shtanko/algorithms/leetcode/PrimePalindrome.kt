@@ -17,7 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
-import dev.shtanko.algorithms.extensions.isPrime
+import dev.shtanko.extensions.isPrime
 import kotlin.math.pow
 
 /**

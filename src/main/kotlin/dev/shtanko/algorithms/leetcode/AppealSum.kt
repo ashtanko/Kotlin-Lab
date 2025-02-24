@@ -18,11 +18,13 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Hard
 
 /**
  * 2262. Total Appeal of A String
  * @see <a href="https://leetcode.com/problems/total-appeal-of-a-string/">Source</a>
  */
+@Hard(link = "https://leetcode.com/problems/total-appeal-of-a-string")
 fun interface AppealSum {
     /**
      * This function calculates the total appeal of a string.
@@ -41,7 +43,6 @@ fun interface AppealSum {
  */
 @DP
 class AppealSumDP : AppealSum {
-
     override operator fun invoke(str: String): Long {
         var res: Long = 0
         var cur: Long = 0

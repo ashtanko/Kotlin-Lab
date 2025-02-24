@@ -16,8 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import kotlin.math.abs
 
+/**
+ * 110. Balanced Binary Tree
+ * @see <a href="https://leetcode.com/problems/balanced-binary-tree">Source</a>
+ */
+@Easy("https://leetcode.com/problems/balanced-binary-tree")
 fun isBalanced(root: TreeNode?): Boolean {
     return balancedHelper(root) >= 0
 }

@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
@@ -27,6 +29,7 @@ fun interface SmallestStrStartingFromLeaf {
     operator fun invoke(root: TreeNode?): String
 }
 
+@DFS
 class SmallestStrStartingFromLeafDFS : SmallestStrStartingFromLeaf {
 
     private var smallest = ""
@@ -60,6 +63,7 @@ class SmallestStrStartingFromLeafDFS : SmallestStrStartingFromLeaf {
     }
 }
 
+@BFS
 class SmallestStrStartingFromLeafBFS : SmallestStrStartingFromLeaf {
     override fun invoke(root: TreeNode?): String {
         var smallestString = ""

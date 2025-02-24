@@ -1,10 +1,10 @@
-### Continuations
+# Continuations
 
 A continuation is a core concept in programming that represents the state of a computation at a certain point in time. 
 It allows the computation to be paused and later resumed from that exact point. This concept is particularly useful for 
 implementing asynchronous programming and coroutines.
 
-#### Key Characteristics of Continuations
+## Key Characteristics of Continuations
 
 1. **Execution State**:
    - A continuation captures the entire execution state of a program, including the call stack, local variables, and the
@@ -18,7 +18,7 @@ implementing asynchronous programming and coroutines.
    - Continuations enable non-blocking asynchronous code. Instead of blocking a thread while waiting for an operation to
      complete, the thread can execute other tasks, and the suspended continuation can resume once the operation is complete.
 
-#### Continuations in Kotlin Coroutines
+### Continuations in Kotlin Coroutines
 
 In Kotlin, continuations are used internally to implement coroutines. When you call a suspending function, it doesn't
 block the thread. Instead, it creates a continuation that represents the remaining work to be done after the suspension point.

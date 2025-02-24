@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
 import kotlin.math.max
 
 /**
@@ -26,6 +27,7 @@ fun interface WordBreak2 {
     operator fun invoke(str: String, wordDict: List<String>): List<String>
 }
 
+@DFS
 class WordBreak2DPDFS : WordBreak2 {
     override operator fun invoke(str: String, wordDict: List<String>): List<String> {
         val wordStartIndices: Array<MutableList<Int>?> = arrayOfNulls(str.length + 1)
@@ -130,6 +132,7 @@ class WordBreak2Backtracking : WordBreak2 {
     }
 }
 
+@DFS
 class WordBreak2DFS : WordBreak2 {
     override operator fun invoke(str: String, wordDict: List<String>): List<String> {
         return depthFirstSearch(str, wordDict, HashMap())

@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.HALF_OF_BYTE
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 93. Restore IP Addresses
@@ -26,6 +27,7 @@ fun interface RestoreIPAddresses {
     operator fun invoke(s: String): List<String>
 }
 
+@DFS
 class RestoreIPAddressesDFS : RestoreIPAddresses {
     override operator fun invoke(s: String): List<String> {
         val solutions: MutableList<String> = ArrayList()

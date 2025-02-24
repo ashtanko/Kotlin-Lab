@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.DFS
 import java.lang.Character.isDigit
 
 /**
@@ -28,6 +29,7 @@ fun interface PossiblyEquals {
     operator fun invoke(s1: String, s2: String): Boolean
 }
 
+@DFS
 class PossiblyEqualsDFS : PossiblyEquals {
     override operator fun invoke(s1: String, s2: String): Boolean {
         val l1: Int = s1.length

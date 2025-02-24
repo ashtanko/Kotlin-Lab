@@ -16,11 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
+
 /**
  * Given an integer n and an integer start.
  * Define an array nums where nums[i] = start + 2*i (0-indexed) and n == nums.length.
  * Return the bitwise XOR of all elements of nums.
+ * @see <a href="https://leetcode.com/problems/xor-operation-in-an-array/">Source</a>
  */
+@Easy("https://leetcode.com/problems/xor-operation-in-an-array")
 fun Int.xorOperation(start: Int): Int {
     var xor = 0
     for (i in 0 until this) {

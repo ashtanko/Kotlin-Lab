@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 113. Path Sum II
  * @see <a href="https://leetcode.com/problems/path-sum-ii/">Source</a>
@@ -27,6 +29,7 @@ fun interface PathSum2 {
 /**
  * Approach: Depth First Traversal | Recursion
  */
+@DFS
 class PathSum2DFS : PathSum2 {
     override operator fun invoke(root: TreeNode?, targetSum: Int): List<List<Int>> {
         val pathsList: MutableList<List<Int>> = ArrayList()

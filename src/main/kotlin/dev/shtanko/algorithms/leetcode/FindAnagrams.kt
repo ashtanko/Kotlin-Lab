@@ -29,13 +29,13 @@ fun interface FindAnagrams {
 class FindAnagramsHashTable : FindAnagrams {
     override operator fun invoke(s: String, p: String): List<Int> {
         val list: MutableList<Int> = ArrayList()
-        if (p.length > s.length) return list // Base Condition
+        if (p.length > s.length || p.isEmpty() && s.isEmpty()) return list // Base Condition
         val n: Int = s.length // Array1 of s
         val m: Int = p.length // Array2 of p
         val count = freq(p) // initialize only 1 time
         val currentCount = freq(s.substring(0, m)) // freq function, update every-time according to sliding window
         // areSame function
-        if (areSame(count, currentCount)) {
+        if (count.contentEquals(currentCount)) {
             list.add(0)
         }
 
@@ -44,22 +44,12 @@ class FindAnagramsHashTable : FindAnagrams {
             // going from 3 to 9 in above example
             currentCount[s[i - m] - 'a']-- // blue pointer, decrement frequency
             currentCount[s[i] - 'a']++ // red pointer, increment frequency
-            if (areSame(count, currentCount)) { // now check, both array are same
+            if (count.contentEquals(currentCount)) { // now check, both array are same
                 list.add(i - m + 1) // if we find similar add their index in our list
             }
             i++
         }
         return list
-    }
-
-    private fun areSame(x: IntArray, y: IntArray): Boolean {
-        for (i in 0 until ALPHABET_LETTERS_COUNT) {
-            // compare all the frequency & doesn't find any di-similar frequency return true otherwise false
-            if (x[i] != y[i]) {
-                return false
-            }
-        }
-        return true
     }
 
     private fun freq(s: String): IntArray {
@@ -68,5 +58,21 @@ class FindAnagramsHashTable : FindAnagrams {
             count[element.code - 'a'.code]++ // update acc. to it's frequency
         }
         return count // and return count
+    }
+}
+
+class FindAnagramsShort : FindAnagrams {
+    override fun invoke(s: String, p: String): List<Int> {
+        val result = mutableListOf<Int>()
+        if (s.length < p.length) return result
+        val pc = IntArray('z' - 'a' + 1)
+        for (i in p) pc[i - 'a']++
+        for (i in s.indices) {
+            pc[s[i] - 'a']--
+            if (i >= p.length) pc[s[i - p.length] - 'a']++
+            if (pc.all { it == 0 }) result.add(i - p.length + 1)
+        }
+
+        return result
     }
 }

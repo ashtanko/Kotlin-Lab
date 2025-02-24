@@ -16,7 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.extensions.swap
 import java.util.LinkedList
 import java.util.Queue
 
@@ -68,6 +70,7 @@ private fun numSimilarGroupsCount(
 /**
  * Approach 1: Depth First Search
  */
+@BFS
 class SimilarStringGroupsBFS : SimilarStringGroups {
 
     override fun invoke(strings: Array<String>): Int {
@@ -97,6 +100,7 @@ class SimilarStringGroupsBFS : SimilarStringGroups {
 /**
  * Approach 2: Breadth First Search
  */
+@DFS
 class SimilarStringGroupsDFS : SimilarStringGroups {
     override fun invoke(strings: Array<String>): Int {
         return numSimilarGroupsCount(strings, ::dfs)

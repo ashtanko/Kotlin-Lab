@@ -26,23 +26,23 @@ fun interface CountConsistentStrings {
 
 class CountConsistentStringsMap : CountConsistentStrings {
     override operator fun invoke(allowed: String, words: Array<String>): Int {
-        var ans = 0
-        val map = HashSet<Char>()
-        for (ch in allowed.toCharArray()) {
-            map.add(ch)
+        var consistentStringCount = 0
+        val allowedChars = HashSet<Char>()
+        for (char in allowed.toCharArray()) {
+            allowedChars.add(char)
         }
-        var c: Int
-        for (s in words) {
-            c = 0
-            for (ch in s.toCharArray()) {
-                if (!map.contains(ch)) {
-                    c++
+        var inconsistentCharCount: Int
+        for (word in words) {
+            inconsistentCharCount = 0
+            for (char in word.toCharArray()) {
+                if (!allowedChars.contains(char)) {
+                    inconsistentCharCount++
                 }
             }
-            if (c == 0) {
-                ans++
+            if (inconsistentCharCount == 0) {
+                consistentStringCount++
             }
         }
-        return ans
+        return consistentStringCount
     }
 }

@@ -108,7 +108,7 @@ abstract class DiffWaysToComputeTest<out T : DiffWaysToCompute>(private val stra
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `diff ways to compute test`(expression: String, expected: List<Int>) {
-        val actual = strategy.compute(expression)
+        val actual = strategy.invoke(expression)
         assertThat(actual).containsExactlyInAnyOrder(*expected.toTypedArray())
     }
 }

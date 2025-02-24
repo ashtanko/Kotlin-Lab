@@ -18,6 +18,7 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Backtracking
 import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Medium
 import dev.shtanko.algorithms.complexity.RuntimeComplexity
 import dev.shtanko.algorithms.complexity.SpaceComplexity
 import java.util.LinkedList
@@ -26,6 +27,7 @@ import java.util.LinkedList
  * All Paths From Source to Target.
  * @see <a href="https://leetcode.com/problems/all-paths-from-source-to-target/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/all-paths-from-source-to-target")
 fun interface AllPathsSourceTarget {
     operator fun invoke(graph: Array<IntArray>): List<List<Int>>
 }

@@ -1,8 +1,8 @@
-## Coroutine Context in Kotlin
+# Coroutine Context in Kotlin
 
 In Kotlin coroutines, the coroutine context defines the behavior and characteristics of a coroutine, such as its dispatcher and other contextual elements. It plays a crucial role in determining how coroutines are executed and managed. Here’s a breakdown of key components of coroutine context:
 
-### 1. **Dispatcher**
+### 1. Dispatcher
 
 The dispatcher determines which thread or threads the coroutine will use for its execution. Kotlin provides several dispatchers:
    - **`Dispatchers.Default`**: Suitable for CPU-bound tasks that don't require UI interaction.

@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.max
@@ -31,6 +33,7 @@ fun interface NumOfMinutes {
 /**
  * Approach 1: Depth-First Search (DFS)
  */
+@DFS
 class NumOfMinutesDFS : NumOfMinutes {
 
     private var maxTime = Int.MIN_VALUE
@@ -68,6 +71,7 @@ class NumOfMinutesDFS : NumOfMinutes {
 /**
  * Approach 2: Breadth-First Search (BFS)
  */
+@BFS
 class NumOfMinutesBFS : NumOfMinutes {
     private var maxTime = Int.MIN_VALUE
 

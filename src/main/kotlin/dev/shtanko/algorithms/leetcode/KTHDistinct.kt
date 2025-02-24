@@ -26,13 +26,13 @@ fun interface KTHDistinct {
 
 class KTHDistinctImpl : KTHDistinct {
     override operator fun invoke(arr: Array<String>, k: Int): String {
-        val map: MutableMap<String, Boolean> = HashMap()
-        var k0 = k
-        for (s in arr) {
-            map[s] = !map.containsKey(s)
+        val distinctMap: MutableMap<String, Boolean> = HashMap()
+        var remainingK = k
+        for (str in arr) {
+            distinctMap[str] = !distinctMap.containsKey(str)
         }
-        for (s in arr) {
-            if (map[s]!! && k0-- == 1) return s
+        for (str in arr) {
+            if (distinctMap.getOrDefault(str, false) && remainingK-- == 1) return str
         }
         return ""
     }

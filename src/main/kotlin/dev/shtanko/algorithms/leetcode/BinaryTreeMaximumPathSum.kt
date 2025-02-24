@@ -17,10 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Hard
 
 /**
- * Object that contains methods to calculate the maximum path sum in a binary tree.
+ * 124. Binary Tree Maximum Path Sum
+ * @see <a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">Source</a>
  */
+@Hard("https://leetcode.com/problems/binary-tree-maximum-path-sum")
 @Recursive
 object BinaryTreeMaximumPathSum {
 

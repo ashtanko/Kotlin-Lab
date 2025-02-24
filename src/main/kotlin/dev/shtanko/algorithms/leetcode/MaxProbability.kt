@@ -25,21 +25,17 @@ import java.util.Queue
  * @see <a href="https://leetcode.com/problems/path-with-maximum-probability/">Source</a>
  */
 fun interface MaxProbability {
-    operator fun invoke(n: Int, edges: Array<IntArray>, succProb: DoubleArray, start: Int, end: Int): Double
+    operator fun invoke(n: Int, edges: Array<IntArray>, probabilities: DoubleArray, start: Int, end: Int): Double
 }
 
-fun Array<IntArray>.buildGraph(succProb: DoubleArray): MutableMap<Int, MutableList<Pair<Int, Double>>> {
+fun Array<IntArray>.toGraph(probabilities: DoubleArray): MutableMap<Int, MutableList<Pair<Int, Double>>> {
     val graph: MutableMap<Int, MutableList<Pair<Int, Double>>> = HashMap()
     for (i in this.indices) {
-        val u = this[i][0]
-        val v = this[i][1]
-        val pathProb = succProb[i]
-        graph.computeIfAbsent(
-            u,
-        ) { ArrayList() }.add(Pair(v, pathProb))
-        graph.computeIfAbsent(
-            v,
-        ) { ArrayList() }.add(Pair(u, pathProb))
+        val node1 = this[i][0]
+        val node2 = this[i][1]
+        val probability = probabilities[i]
+        graph.computeIfAbsent(node1) { ArrayList() }.add(Pair(node2, probability))
+        graph.computeIfAbsent(node2) { ArrayList() }.add(Pair(node1, probability))
     }
     return graph
 }
@@ -48,31 +44,37 @@ fun Array<IntArray>.buildGraph(succProb: DoubleArray): MutableMap<Int, MutableLi
  * Approach 1: Bellman-Ford Algorithm
  */
 class MaxProbabilityBellmanFord : MaxProbability {
-    override operator fun invoke(n: Int, edges: Array<IntArray>, succProb: DoubleArray, start: Int, end: Int): Double {
-        val maxProb = DoubleArray(n)
-        maxProb[start] = 1.0
+    override operator fun invoke(
+        n: Int,
+        edges: Array<IntArray>,
+        probabilities: DoubleArray,
+        start: Int,
+        end: Int,
+    ): Double {
+        val maxProbabilities = DoubleArray(n)
+        maxProbabilities[start] = 1.0
 
         for (i in 0 until n - 1) {
-            var hasUpdate = false
+            var updated = false
             for (j in edges.indices) {
-                val u = edges[j][0]
-                val v = edges[j][1]
-                val pathProb = succProb[j]
-                if (maxProb[u] * pathProb > maxProb[v]) {
-                    maxProb[v] = maxProb[u] * pathProb
-                    hasUpdate = true
+                val node1 = edges[j][0]
+                val node2 = edges[j][1]
+                val probability = probabilities[j]
+                if (maxProbabilities[node1] * probability > maxProbabilities[node2]) {
+                    maxProbabilities[node2] = maxProbabilities[node1] * probability
+                    updated = true
                 }
-                if (maxProb[v] * pathProb > maxProb[u]) {
-                    maxProb[u] = maxProb[v] * pathProb
-                    hasUpdate = true
+                if (maxProbabilities[node2] * probability > maxProbabilities[node1]) {
+                    maxProbabilities[node1] = maxProbabilities[node2] * probability
+                    updated = true
                 }
             }
-            if (!hasUpdate) {
+            if (!updated) {
                 break
             }
         }
 
-        return maxProb[end]
+        return maxProbabilities[end]
     }
 }
 
@@ -80,8 +82,14 @@ class MaxProbabilityBellmanFord : MaxProbability {
  * Approach 2: Shortest Path Faster Algorithm
  */
 class MaxProbabilityShortestPath : MaxProbability {
-    override operator fun invoke(n: Int, edges: Array<IntArray>, succProb: DoubleArray, start: Int, end: Int): Double {
-        val graph = edges.buildGraph(succProb)
+    override operator fun invoke(
+        n: Int,
+        edges: Array<IntArray>,
+        probabilities: DoubleArray,
+        start: Int,
+        end: Int,
+    ): Double {
+        val graph = edges.toGraph(probabilities)
         val maxProb = DoubleArray(n)
         maxProb[start] = 1.0
 
@@ -110,8 +118,14 @@ class MaxProbabilityShortestPath : MaxProbability {
  * Approach 3: Dijkstra's Algorithm
  */
 class MaxProbabilityDijkstra : MaxProbability {
-    override operator fun invoke(n: Int, edges: Array<IntArray>, succProb: DoubleArray, start: Int, end: Int): Double {
-        val graph = edges.buildGraph(succProb)
+    override operator fun invoke(
+        n: Int,
+        edges: Array<IntArray>,
+        probabilities: DoubleArray,
+        start: Int,
+        end: Int,
+    ): Double {
+        val graph = edges.toGraph(probabilities)
 
         val maxProb = DoubleArray(n)
         maxProb[start] = 1.0

@@ -16,10 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1483. Kth Ancestor of a Tree Node
  * @see <a href="https://leetcode.com/problems/kth-ancestor-of-a-tree-node/">Source</a>
  */
+@DFS
 class TreeAncestor(n: Int, parent: IntArray) {
     private var tree: Array<MutableList<Int>> = Array(n) { ArrayList() }
     private var level: MutableList<MutableList<Int>> = ArrayList() // nodes in a level

@@ -29,7 +29,7 @@ class ShortestSubArrayTest {
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `shortest sub array test`(arr: IntArray, k: Int, expected: Int) {
-        val actual = shortestSubarray(arr, k)
+        val actual = findShortestSubarray(arr, k)
         assertEquals(expected, actual)
     }
 

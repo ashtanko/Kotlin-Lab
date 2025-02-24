@@ -18,12 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.BFS
 import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 
 /**
  * 2385. Amount of Time for Binary Tree to Be Infected
  * @see <a href="https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected")
 fun interface AmountOfTime {
     operator fun invoke(root: TreeNode?, start: Int): Int
 }

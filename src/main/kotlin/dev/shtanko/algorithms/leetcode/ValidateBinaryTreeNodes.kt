@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
@@ -27,6 +28,7 @@ fun interface ValidateBinaryTreeNodes {
     operator fun invoke(n: Int, leftChild: IntArray, rightChild: IntArray): Boolean
 }
 
+@DFS
 class ValidateBinaryTreeNodesDFS : ValidateBinaryTreeNodes {
     override fun invoke(n: Int, leftChild: IntArray, rightChild: IntArray): Boolean {
         val inDegree = IntArray(n) { 0 }

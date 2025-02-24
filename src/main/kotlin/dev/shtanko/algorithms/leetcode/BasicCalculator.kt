@@ -17,9 +17,15 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.level.Hard
 import java.util.Stack
 import kotlin.math.pow
 
+/**
+ * 224. Basic Calculator
+ * @see <a href="https://leetcode.com/problems/basic-calculator">Source</a>
+ */
+@Hard("https://leetcode.com/problems/basic-calculator")
 fun interface CalculationStrategy {
     operator fun invoke(str: String): Int
 }

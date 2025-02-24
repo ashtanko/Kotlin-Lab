@@ -27,7 +27,6 @@ data class Quadruple<out A, out B, out C, out D>(
     val third: C,
     val fourth: D,
 ) : Serializable {
-
     /**
      * Returns string representation of the [Quadruple] including its [first], [second] and [third] and [fourth] values.
      */
@@ -57,7 +56,6 @@ data class Quintuple<out A, out B, out C, out D, out E>(
     val fourth: D,
     val fifth: E,
 ) : Serializable {
-
     /**
      * Returns string representation of the [Quadruple] including its [first], [second] and [third] and [fourth]
      * and [fifth] values.

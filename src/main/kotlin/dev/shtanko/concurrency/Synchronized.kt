@@ -17,6 +17,7 @@
 package dev.shtanko.concurrency
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.runBlocking
@@ -30,6 +31,7 @@ class SynchronizedIncrementor {
     }
 }
 
+@OptIn(DelicateCoroutinesApi::class)
 @Suppress("MagicNumber")
 fun main() = runBlocking {
     val incrementor = SynchronizedIncrementor()

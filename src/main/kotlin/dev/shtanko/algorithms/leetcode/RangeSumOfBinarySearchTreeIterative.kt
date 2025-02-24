@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Iterative
 import java.util.Stack
 
 /**
@@ -26,6 +28,7 @@ fun interface RangeSumOfBinarySearchTree {
     operator fun invoke(root: TreeNode?, left: Int, right: Int): Int
 }
 
+@Iterative
 class RangeSumOfBinarySearchTreeIterative : RangeSumOfBinarySearchTree {
     override operator fun invoke(root: TreeNode?, left: Int, right: Int): Int {
         var ans = 0
@@ -43,6 +46,7 @@ class RangeSumOfBinarySearchTreeIterative : RangeSumOfBinarySearchTree {
     }
 }
 
+@DFS
 class RangeSumOfBinarySearchTreeRecursive : RangeSumOfBinarySearchTree {
     override operator fun invoke(root: TreeNode?, left: Int, right: Int): Int {
         return rangeSumBSTRecursive(root, left, right)

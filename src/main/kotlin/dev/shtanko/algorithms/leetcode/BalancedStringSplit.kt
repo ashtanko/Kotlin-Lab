@@ -16,19 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
+
 /**
- * Balanced strings are those who have equal quantity of 'L' and 'R' characters.
- * Given a balanced string s split it in the maximum amount of balanced strings.
- * Return the maximum amount of splitted balanced strings.
+ * 1221. Split a String in Balanced Strings
+ * @see <a href="https://leetcode.com/problems/split-a-string-in-balanced-strings">Source</a>
  */
+@Easy("https://leetcode.com/problems/split-a-string-in-balanced-strings")
 fun String.balancedStringSplit(): Int {
-    var c = 0
-    var count = 0
-    for (character in this) {
-        count += if (character == 'L') 1 else -1
-        if (count == 0) {
-            c++
+    var balancedCount = 0
+    var balance = 0
+    for (char in this) {
+        balance += if (char == 'L') 1 else -1
+        if (balance == 0) {
+            balancedCount++
         }
     }
-    return c
+    return balancedCount
 }

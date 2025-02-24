@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import dev.shtanko.algorithms.utils.Dp
 
 /**
@@ -71,6 +73,7 @@ class WordBreakDP : WordBreak {
  * References:
  *  https://leetcode.com/problems/word-break/discuss/43819/DFS-with-Path-Memorizing-Java-Solution
  */
+@DFS
 class WordBreakDFS : WordBreak {
     override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         if (s.isEmpty()) return false
@@ -112,6 +115,7 @@ class WordBreakDFS : WordBreak {
  * Time Complexity:     O(L ^ 2) + O(N * L) / O(N) ~ O(L ^ 2)
  * Space Complexity:    O(N)
  */
+@BFS
 class WordBreakBFS : WordBreak {
     override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         if (s.isEmpty()) return false

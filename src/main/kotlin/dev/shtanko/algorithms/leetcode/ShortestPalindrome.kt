@@ -16,96 +16,86 @@
 
 package dev.shtanko.algorithms.leetcode
 
+/**
+ * 214. Shortest Palindrome
+ * @see <a href="https://leetcode.com/problems/shortest-palindrome/">Shortest Palindrome</a>
+ */
 fun interface ShortestPalindromeStrategy {
-    operator fun invoke(s: String): String
+    operator fun invoke(str: String): String
 }
 
 class ShortestPalindromeBruteForce : ShortestPalindromeStrategy {
-    override operator fun invoke(s: String): String {
-        val n = s.length
-        var len = 0
-        for (k in n - 1 downTo 0) {
-            var i = 0
-            var j = k
-            while (i < j) {
-                if (s[i] != s[j]) break
-                i++
-                j--
+    override operator fun invoke(str: String): String {
+        val length = str.length
+        var palindromeLength = 0
+        for (k in length - 1 downTo 0) {
+            var left = 0
+            var right = k
+            while (left < right) {
+                if (str[left] != str[right]) break
+                left++
+                right--
             }
-            if (i >= j) {
-                len = k
+            if (left >= right) {
+                palindromeLength = k
                 break
             }
         }
-        val sb = java.lang.StringBuilder()
-        for (i in n - 1 downTo len + 1) {
-            sb.append(s[i])
+        val stringBuilder = StringBuilder()
+        for (i in length - 1 downTo palindromeLength + 1) {
+            stringBuilder.append(str[i])
         }
-        sb.append(s)
-        return sb.toString()
+        stringBuilder.append(str)
+        return stringBuilder.toString()
     }
 }
 
 class ShortestPalindromeTwoPointers : ShortestPalindromeStrategy {
-    override operator fun invoke(s: String): String {
-        var str = s
-        var i = 0
-        var j = str.length - 1
-        while (i < j) {
-            val ith = str[i]
-            val jth = str[j]
-            if (ith == jth) {
-                i++
-                j--
+    override operator fun invoke(str: String): String {
+        var input = str
+        var left = 0
+        var right = input.length - 1
+        while (left < right) {
+            val leftChar = input[left]
+            val rightChar = input[right]
+            if (leftChar == rightChar) {
+                left++
+                right--
             } else {
-                str = str.substring(0, i) + jth + str.substring(i)
-                i++
+                input = input.substring(0, left) + rightChar + input.substring(left)
+                left++
             }
         }
-        return str
+        return input
     }
 }
 
 class ShortestPalindromeMP : ShortestPalindromeStrategy {
-    override operator fun invoke(s: String): String {
-        val temp = s + "#" + StringBuilder(s).reverse().toString()
-        val table = getTable(temp)
-        return StringBuilder(s.substring(table[table.size - 1])).reverse().toString() + s
+    override operator fun invoke(input: String): String {
+        val combinedString = input + "#" + StringBuilder(input).reverse().toString()
+        val prefixTable = buildPrefixTable(combinedString)
+        return StringBuilder(input.substring(prefixTable[prefixTable.size - 1])).reverse().toString() + input
     }
 
-    private fun getTable(s: String): IntArray {
-        // get lookup table
-        val table = IntArray(s.length)
+    private fun buildPrefixTable(pattern: String): IntArray {
+        val prefixTable = IntArray(pattern.length)
+        var prefixIndex = 0
 
-        // pointer that points to matched char in prefix part
-        var index = 0
-        // skip index 0, we will not match a string with itself
-        for (i in 1 until s.length) {
-            if (s[index] == s[i]) {
-                // we can extend match in prefix and postfix
-                table[i] = table[i - 1] + 1
-                index++
+        for (i in 1 until pattern.length) {
+            if (pattern[prefixIndex] == pattern[i]) {
+                prefixTable[i] = prefixTable[i - 1] + 1
+                prefixIndex++
             } else {
-                // match failed, we try to match a shorter substring
-
-                // by assigning index to table[i-1], we will shorten the match string length, and jump to the
-                // prefix part that we used to match postfix ended at i - 1
-                index = table[i - 1]
-                while (index > 0 && s[index] != s[i]) {
-                    // we will try to shorten the match string length until we revert to the beginning of
-                    // match (index 1)
-                    index = table[index - 1]
+                prefixIndex = prefixTable[i - 1]
+                while (prefixIndex > 0 && pattern[prefixIndex] != pattern[i]) {
+                    prefixIndex = prefixTable[prefixIndex - 1]
                 }
-
-                // when we are here may either found a match char or we reach the boundary and still no luck
-                // so we need check char match
-                if (s[index] == s[i]) {
-                    // if match, then extend one char
-                    index++
+                if (pattern[prefixIndex] == pattern[i]) {
+                    prefixIndex++
                 }
-                table[i] = index
+                prefixTable[i] = prefixIndex
             }
         }
-        return table
+        return prefixTable
     }
 }

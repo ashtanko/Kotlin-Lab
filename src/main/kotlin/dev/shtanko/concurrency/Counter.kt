@@ -18,14 +18,36 @@ package dev.shtanko.concurrency
 
 import java.util.concurrent.atomic.AtomicInteger
 
+/**
+ * A simple counter that can be incremented and read.
+ * This class is thread-safe.
+ */
 class Counter {
     private var value: AtomicInteger = AtomicInteger(0)
 
-    fun inc() = value.getAndIncrement()
+    /**
+     * Increment the counter by one.
+     * This operation is atomic.
+     *
+     * @return the new value of the counter
+     */
+    fun inc(): Int = value.getAndIncrement()
 
+    /**
+     * Add one to the counter and return the new value.
+     * This operation is atomic.
+     *
+     * @return the new value of the counter
+     */
     fun addAndGet(): Int {
         return value.incrementAndGet()
     }
 
-    fun get() = value.get()
+    /**
+     * Get the current value of the counter.
+     * This operation is atomic.
+     *
+     * @return the current value of the counter
+     */
+    fun get(): Int = value.get()
 }

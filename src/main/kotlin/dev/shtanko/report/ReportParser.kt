@@ -39,10 +39,24 @@ fun main(args: Array<String>) {
     val md = generateMarkdownTable(metrics)
     println(md)
     metricsToFile(metrics, outputFilePath)
+    mdToFile(md, fetchDirPath())
     printExtractedMetrics(metrics)
 
     metrics[METRICS_KEY]?.forEach { handleMetric(separateNumbersFromText(it.formatMetricValue())) }
     metrics[COMPLEXITY_REPORT_KEY]?.forEach { handleMetric(separateNumbersFromText(it.formatMetricValue())) }
+}
+
+fun mdToFile(md: String, outputFilePath: String) {
+    val file = File(outputFilePath)
+    val targetFile = if (file.isDirectory) {
+        File("${file.absolutePath}/output2.md")
+    } else {
+        file
+    }
+
+    if (!targetFile.exists()) targetFile.createNewFile()
+    targetFile.writeText("")
+    targetFile.appendText(md)
 }
 
 fun metricsToFile(metrics: Map<String, List<String>>, outputFilePath: String) {
@@ -83,6 +97,11 @@ fun generateMarkdownTable(metrics: Map<String, List<String>>): String {
     }
 
     return table.toString()
+}
+
+fun fetchDirPath(): String {
+    val currentDir = System.getProperty("user.dir")
+    return "$currentDir/build/reports/detekt"
 }
 
 /**
@@ -191,6 +210,48 @@ fun separateNumbersFromText(input: String): Pair<String, String> {
     val text = matches.filter { it.groupValues[2].isNotEmpty() }.joinToString("") { it.groupValues[2] }
 
     return Pair(numbers, text)
+}
+
+fun generateMarkdownTable(
+    columns: List<String>,
+    rows: List<List<String>>,
+    newline: String = "\n",
+): Triple<String, String, String> {
+    if (columns.isEmpty()) return Triple("", "", "")
+
+    // Calculate the maximum width for each column
+    val columnWidths = columns.map { it.length }.toMutableList()
+    rows.forEach { row ->
+        row.forEachIndexed { index, cell ->
+            if (index < columnWidths.size) {
+                columnWidths[index] = maxOf(columnWidths[index], cell.length)
+            }
+        }
+    }
+
+    // Helper function to pad cells to match the column width
+    fun padCell(cell: String, width: Int): String = cell.padEnd(width)
+
+    // Generate the header row
+    val header = columns.mapIndexed { index, col ->
+        padCell(col, columnWidths[index])
+    }.joinToString("|", prefix = "|", postfix = "|")
+
+    // Generate the separator row
+    val separator = columnWidths.map {
+        "-".repeat(it).padEnd(it)
+    }
+        .joinToString("|", prefix = "|", postfix = "|")
+
+    // Generate the data rows
+    val dataRows = rows.joinToString(newline) { row ->
+        row.mapIndexed { index, cell ->
+            padCell(cell, columnWidths[index])
+        }.joinToString("|", prefix = "|", postfix = "|")
+    }
+
+    // Combine header, separator, and rows into the final Markdown table
+    return Triple(header, separator, dataRows)
 }
 
 data class Metric(

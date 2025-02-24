@@ -16,9 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
-// Beautiful Array @see <a href="https://leetcode.com/problems/beautiful-array/">Source</a>
-class BeautifulArray {
+import dev.shtanko.algorithms.annotations.level.Medium
 
+/**
+ * 932. Beautiful Array
+ * @see <a href="https://leetcode.com/problems/beautiful-array">Source</a>
+ */
+@Medium("https://leetcode.com/problems/beautiful-array")
+class BeautifulArray {
     private val memo: MutableMap<Int, IntArray> by lazy {
         HashMap()
     }

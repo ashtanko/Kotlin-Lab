@@ -18,42 +18,44 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.MOD
 import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Hard
 import kotlin.math.max
 
 /**
  * 2478. Number of Beautiful Partitions
  * @see <a href="https://leetcode.com/problems/number-of-beautiful-partitions">Source</a>
  */
+@Hard("https://leetcode.com/problems/number-of-beautiful-partitions")
 fun interface BeautifulPartitions {
-    operator fun invoke(str: String, k: Int, minLength: Int): Int
+    operator fun invoke(input: String, partitions: Int, minLength: Int): Int
 }
 
 @DP
 class BeautifulPartitionsDP : BeautifulPartitions {
-    override operator fun invoke(str: String, k: Int, minLength: Int): Int {
-        val cs: CharArray = str.toCharArray()
-        val n = cs.size
+    override operator fun invoke(input: String, partitions: Int, minLength: Int): Int {
+        val charArray: CharArray = input.toCharArray()
+        val length = charArray.size
         // make sure the input is valid
-        if (!prime(cs[0]) || prime(cs[n - 1])) return 0
-        val dp = Array(k) { IntArray(n) }
-        // base case. If k = 1, the only thing required is to check if a character is prime
-        var i: Int = n - minLength
+        if (!isPrime(charArray[0]) || isPrime(charArray[length - 1])) return 0
+        val dp = Array(partitions) { IntArray(length) }
+        // base case. If partitions = 1, the only thing required is to check if a character is prime
+        var i: Int = length - minLength
         while (0 <= i) {
-            dp[0][i] = if (prime(cs[i])) 1 else 0
+            dp[0][i] = if (isPrime(charArray[i])) 1 else 0
             --i
         }
-        for (i1 in 1 until k) {
-            // re-use dp[k - 1][] and compute the `prefix sum` backwards
+        for (partitionIndex in 1 until partitions) {
+            // re-use dp[partitions - 1][] and compute the `prefix sum` backwards
             // sum is the number of valid end points
             run {
-                var j: Int = n - i1 * minLength
+                var j: Int = length - partitionIndex * minLength
                 var sum = 0
                 while (0 <= j) {
-                    // if dp[][] is 0, store the sum. othewise, it could be a possible valid end point.
-                    if (0 == dp[i1 - 1][j]) {
-                        dp[i1 - 1][j] = sum
-                    } else if (0 != j && 0 == dp[i1 - 1][j - 1]) {
-                        sum = (sum + dp[i1 - 1][j]) % MOD
+                    // if dp[][] is 0, store the sum. otherwise, it could be a possible valid end point.
+                    if (0 == dp[partitionIndex - 1][j]) {
+                        dp[partitionIndex - 1][j] = sum
+                    } else if (0 != j && 0 == dp[partitionIndex - 1][j - 1]) {
+                        sum = (sum + dp[partitionIndex - 1][j]) % MOD
                     }
                     --j
                 }
@@ -61,22 +63,22 @@ class BeautifulPartitionsDP : BeautifulPartitions {
             // use 2 pointers [j, p] to find a valid substring
             var j = 0
             var p: Int = minLength - 1
-            while (j + minLength * i1 < n) {
-                if (!prime(cs[j])) {
+            while (j + minLength * partitionIndex < length) {
+                if (!isPrime(charArray[j])) {
                     ++j
                     continue
                 }
                 p = max(p, j + minLength - 1)
-                while (prime(cs[p])) p++ // boundary check is skipped as the last character is not prime
-                if (0 == dp[i1 - 1][p]) break // early break because there's no valid end points
-                dp[i1][j] = dp[i1 - 1][p]
+                while (isPrime(charArray[p])) p++ // boundary check is skipped as the last character is not prime
+                if (0 == dp[partitionIndex - 1][p]) break // early break because there's no valid end points
+                dp[partitionIndex][j] = dp[partitionIndex - 1][p]
                 ++j
             }
         }
-        return dp[k - 1][0]
+        return dp[partitions - 1][0]
     }
 
-    private fun prime(c: Char): Boolean {
-        return '2' == c || '3' == c || '5' == c || '7' == c
+    private fun isPrime(c: Char): Boolean {
+        return c == '2' || c == '3' || c == '5' || c == '7'
     }
 }

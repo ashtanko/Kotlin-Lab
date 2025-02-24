@@ -64,7 +64,7 @@ abstract class LongestZigZagPathTest<out T : LongestZigZagPath>(private val stra
         )
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "root: {0} should return int: {1}")
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `longest zig zag test`(root: TreeNode?, expected: Int) {
         val actual = strategy.longestZigZag(root)

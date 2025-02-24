@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.TwoPointers
+import dev.shtanko.algorithms.annotations.level.Easy
 
 /**
  * 455. Assign Cookies
  * @see <a href="https://leetcode.com/problems/assign-cookies">Source</a>
  */
+@Easy("https://leetcode.com/problems/assign-cookies")
 fun interface AssignCookies {
     operator fun invoke(greedFactor: IntArray, size: IntArray): Int
 }

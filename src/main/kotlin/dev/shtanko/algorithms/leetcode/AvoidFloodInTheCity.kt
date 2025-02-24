@@ -17,8 +17,14 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.TreeSet
 
+/**
+ * 1488. Avoid Flood in The City
+ * @see <a href="https://leetcode.com/problems/avoid-flood-in-the-city/">Source</a>
+ */
+@Medium("https://leetcode.com/problems/avoid-flood-in-the-city")
 fun interface AvoidFlood {
     operator fun invoke(rains: IntArray): IntArray
 }
@@ -54,7 +60,6 @@ class AvoidFloodTree : AvoidFlood {
 
 @StraightForward
 class AvoidFloodSimple : AvoidFlood {
-
     private val empty = IntArray(0)
 
     override operator fun invoke(rains: IntArray): IntArray {

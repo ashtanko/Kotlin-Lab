@@ -21,6 +21,7 @@ import dev.shtanko.algorithms.annotations.BruteForceOptimized
 import dev.shtanko.algorithms.annotations.DP
 import dev.shtanko.algorithms.annotations.Math
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
 import dev.shtanko.algorithms.complexity.RuntimeComplexity
 import dev.shtanko.algorithms.complexity.SpaceComplexity
 
@@ -28,6 +29,7 @@ import dev.shtanko.algorithms.complexity.SpaceComplexity
  * Arithmetic Slices
  * @see <a href="https://leetcode.com/problems/arithmetic-slices/">Source</a>
  */
+@Medium("https://leetcode.com/problems/arithmetic-slices")
 fun interface ArithmeticSlices {
     operator fun invoke(arr: IntArray): Int
 }
@@ -43,15 +45,15 @@ fun interface ArithmeticSlices {
 class ArSlicesBruteForce : ArithmeticSlices {
     override fun invoke(arr: IntArray): Int {
         var count = 0
-        for (s in 0 until arr.size - 2) {
-            val d: Int = arr[s + 1] - arr[s]
-            for (e in s + 2 until arr.size) {
-                var i: Int = s + 1
-                while (i <= e) {
-                    if (arr[i] - arr[i - 1] != d) break
-                    i++
+        for (start in 0 until arr.size - 2) {
+            val difference: Int = arr[start + 1] - arr[start]
+            for (end in start + 2 until arr.size) {
+                var index: Int = start + 1
+                while (index <= end) {
+                    if (arr[index] - arr[index - 1] != difference) break
+                    index++
                 }
-                if (i > e) count++
+                if (index > end) count++
             }
         }
         return count
@@ -69,10 +71,10 @@ class ArSlicesBruteForce : ArithmeticSlices {
 class ArSlicesBetterBruteForce : ArithmeticSlices {
     override fun invoke(arr: IntArray): Int {
         var count = 0
-        for (s in 0 until arr.size - 2) {
-            val d: Int = arr[s + 1] - arr[s]
-            for (e in s + 2 until arr.size) {
-                if (arr[e] - arr[e - 1] == d) count++ else break
+        for (start in 0 until arr.size - 2) {
+            val difference: Int = arr[start + 1] - arr[start]
+            for (end in start + 2 until arr.size) {
+                if (arr[end] - arr[end - 1] == difference) count++ else break
             }
         }
         return count
@@ -86,24 +88,22 @@ class ArSlicesBetterBruteForce : ArithmeticSlices {
  */
 @Recursive
 class ArSlicesRecursion : ArithmeticSlices {
-
-    private var sum = 0
-
-    override fun invoke(arr: IntArray): Int {
-        slices(arr, arr.size - 1)
-        return sum
+    private var totalSum = 0
+    override fun invoke(array: IntArray): Int {
+        calculateSlices(array, array.size - 1)
+        return totalSum
     }
 
-    private fun slices(arr: IntArray, i: Int): Int {
-        if (i < 2) return 0
-        var ap = 0
-        if (arr[i] - arr[i - 1] == arr[i - 1] - arr[i - 2]) {
-            ap = 1 + slices(arr, i - 1)
-            sum += ap
+    private fun calculateSlices(array: IntArray, index: Int): Int {
+        if (index < 2) return 0
+        var arithmeticProgression = 0
+        if (array[index] - array[index - 1] == array[index - 1] - array[index - 2]) {
+            arithmeticProgression = 1 + calculateSlices(array, index - 1)
+            totalSum += arithmeticProgression
         } else {
-            slices(arr, i - 1)
+            calculateSlices(array, index - 1)
         }
-        return ap
+        return arithmeticProgression
     }
 }
 

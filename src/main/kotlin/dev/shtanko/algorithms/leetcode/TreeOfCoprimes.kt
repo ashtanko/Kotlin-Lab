@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1766. Tree of Coprimes
  * @see <a href="https://leetcode.com/problems/tree-of-coprimes/">Source</a>
@@ -24,6 +26,7 @@ fun interface TreeOfCoprimes {
     operator fun invoke(nums: IntArray, edges: Array<IntArray>): IntArray
 }
 
+@DFS
 class TreeOfCoprimesDFS : TreeOfCoprimes {
 
     lateinit var ans: IntArray

@@ -18,42 +18,45 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
 import dev.shtanko.algorithms.annotations.Math
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 2. Add Two Numbers
  * @see <a href="https://leetcode.com/problems/add-two-numbers">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/add-two-numbers")
 fun interface AddTwoNumbers {
-    operator fun invoke(l1: ListNode?, l2: ListNode?): ListNode?
+    operator fun invoke(list1: ListNode?, list2: ListNode?): ListNode?
 }
 
 @Math
 class AddTwoNumbersMath : AddTwoNumbers {
-    override fun invoke(l1: ListNode?, l2: ListNode?): ListNode? {
-        val dummy = ListNode(0) // creating a dummy list
-        var curr: ListNode? = dummy // initialising a pointer
-        var carry = 0 // initialising our carry with 0 initial
-        // while loop will run, until l1 OR l2 not reaches null OR if they both reaches null.
-        // But our carry has some value in it. We will add that as well into our list
-        var l10 = l1
-        var l20 = l2
-        while (l10 != null || l20 != null || carry == 1) {
-            var sum = 0 // initialising our sum
-            if (l10 != null) { // adding l1 to our sum & moving l1
-                sum += l10.value
-                l10 = l10.next
+    override fun invoke(list1: ListNode?, list2: ListNode?): ListNode? {
+        val dummyNode = ListNode(0) // creating a dummy list
+        var currentNode: ListNode? = dummyNode // initializing a pointer
+        var carryOver = 0 // initializing our carry with 0 initially
+        // while loop will run until list1 OR list2 reaches null OR if they both reach null.
+        // But if our carry has some value in it, we will add that as well into our list
+        var node1 = list1
+        var node2 = list2
+        while (node1 != null || node2 != null || carryOver == 1) {
+            var sum = 0 // initializing our sum
+            if (node1 != null) { // adding list1 to our sum & moving list1
+                sum += node1.value
+                node1 = node1.next
             }
-            if (l20 != null) { // adding l2 to our sum & moving l2
-                sum += l20.value
-                l20 = l20.next
+            if (node2 != null) { // adding list2 to our sum & moving list2
+                sum += node2.value
+                node2 = node2.next
             }
-            sum += carry // if we have carry then add it into our sum
-            carry = sum / DECIMAL // if we get carry, then divide it by 10 to get the carry
-            val node = ListNode(sum % DECIMAL) // the value we'll get by modulating it,
-            // will become as new node so. add it to our list
-            curr?.next = node // curr will point to that new node if we get
-            curr = curr?.next // update the current every time
+            sum += carryOver // if we have carry, then add it into our sum
+            carryOver = sum / DECIMAL // if we get carry, then divide it by 10 to get the carry
+            val newNode = ListNode(sum % DECIMAL) // the value we'll get by modulating it,
+            // will become a new node, so add it to our list
+            currentNode?.next = newNode // currentNode will point to that new node if we get
+            currentNode = currentNode?.next // update the current node every time
         }
-        return dummy.next // return dummy.next bcz, we don't want the value we have considered in it initially
+        // return dummyNode.next because we don't want the value we have considered in it initially
+        return dummyNode.next
     }
 }

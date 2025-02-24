@@ -17,11 +17,13 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.TwoPointers
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 2486. Append Characters to String to Make Subsequence
  * @see <a href="https://leetcode.com/problems/append-characters-to-string-to-make-subsequence">Source</a>
  */
+@Medium("https://leetcode.com/problems/append-characters-to-string-to-make-subsequence")
 fun interface AppendCharacters {
     operator fun invoke(source: String, target: String): Int
 }

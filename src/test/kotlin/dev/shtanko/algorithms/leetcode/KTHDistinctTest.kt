@@ -42,6 +42,21 @@ abstract class KTHDistinctTest<out T : KTHDistinct>(private val strategy: T) {
                 3,
                 "",
             ),
+            Arguments.of(
+                arrayOf<String>(),
+                0,
+                "",
+            ),
+            Arguments.of(
+                arrayOf<String>("a"),
+                0,
+                "",
+            ),
+            Arguments.of(
+                arrayOf<String>("a"),
+                1,
+                "a",
+            ),
         )
     }
 

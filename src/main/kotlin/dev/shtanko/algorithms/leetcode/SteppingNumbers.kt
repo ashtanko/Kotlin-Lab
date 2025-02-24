@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.DFS
 
 /**
  * 1215. Stepping Numbers
@@ -26,6 +27,7 @@ fun interface SteppingNumbers {
     operator fun invoke(low: Int, high: Int): List<Int>
 }
 
+@DFS
 class SteppingNumbersBFS : SteppingNumbers {
     override fun invoke(low: Int, high: Int): List<Int> {
         val list: MutableList<Int> = ArrayList()

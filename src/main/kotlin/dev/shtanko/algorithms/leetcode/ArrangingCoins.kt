@@ -18,8 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.BinarySearch
 import dev.shtanko.algorithms.annotations.Math
+import dev.shtanko.algorithms.annotations.level.Easy
 import kotlin.math.sqrt
 
+/**
+ * 441. Arranging Coins
+ * @see <a href="https://leetcode.com/problems/arranging-coins/">Source</a>
+ */
+@Easy("https://leetcode.com/problems/arranging-coins")
 fun interface ArrangingCoins {
     operator fun invoke(coins: Int): Int
 }
@@ -48,12 +54,12 @@ class ArrangingCoinsBS : ArrangingCoins {
 
 @Math
 class ArrangingCoinsMath : ArrangingCoins {
-
     override fun invoke(coins: Int): Int {
         val result = sqrt(COEFFICIENT1 * coins + COEFFICIENT2) - COEFFICIENT3
         return result.toInt()
     }
 
+    // todo refactor
     companion object {
         private const val COEFFICIENT1 = 2
         private const val COEFFICIENT2 = 0.25

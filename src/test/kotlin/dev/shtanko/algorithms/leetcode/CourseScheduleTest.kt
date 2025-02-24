@@ -64,7 +64,7 @@ abstract class CourseScheduleTest<out T : CourseSchedule>(private val strategy: 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `cracking the safe test`(numCourses: Int, prerequisites: Array<IntArray>, expected: Boolean) {
-        val actual = strategy.canFinish(numCourses, prerequisites)
+        val actual = strategy.invoke(numCourses, prerequisites)
         Assertions.assertEquals(expected, actual)
     }
 }

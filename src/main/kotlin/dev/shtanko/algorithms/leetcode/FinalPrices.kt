@@ -16,19 +16,27 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.Stack
 
 /**
- * Time O(N)
- * Space O(N)
+ * 1475. Final Prices With a Special Discount in a Shop
+ * @see <a href="https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/">Source</a>
  */
-fun IntArray.finalPrices(): IntArray {
-    val stack = Stack<Int>()
-    for (i in indices) {
-        while (stack.isNotEmpty() && this[stack.peek()] >= this[i]) {
-            this[stack.pop()] -= this[i]
+@Easy
+sealed interface FinalPrices {
+    operator fun invoke(prices: IntArray): IntArray
+
+    data object StackStrategy : FinalPrices {
+        override fun invoke(prices: IntArray): IntArray {
+            val stack = Stack<Int>()
+            for (i in prices.indices) {
+                while (stack.isNotEmpty() && prices[stack.peek()] >= prices[i]) {
+                    prices[stack.pop()] -= prices[i]
+                }
+                stack.push(i)
+            }
+            return prices
         }
-        stack.push(i)
     }
-    return this
 }

@@ -19,6 +19,19 @@ package dev.shtanko.concurrency
 import java.lang.reflect.Field
 import sun.misc.Unsafe
 
+/**
+ * A custom implementation of an AtomicInteger using the Unsafe class.
+ * This class provides atomic operations on an integer value.
+ * The incrementAndGet method increments the value atomically and returns the new value.
+ * The get method returns the current value.
+ *
+ * @param initialValue the initial value of the integer.
+ * @see sun.misc.Unsafe
+ * @see sun.misc.Unsafe.compareAndSwapInt
+ * @see sun.misc.Unsafe.objectFieldOffset
+ * @see sun.misc.Unsafe.getIntVolatile
+ * @see sun.misc.Unsafe.putIntVolatile
+ */
 class MyAtomicInteger(initialValue: Int) {
     // Volatile Field: Uses a @Volatile field to ensure visibility across threads.
     @Volatile

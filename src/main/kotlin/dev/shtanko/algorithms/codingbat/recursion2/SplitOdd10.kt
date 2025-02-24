@@ -17,7 +17,7 @@
 package dev.shtanko.algorithms.codingbat.recursion2
 
 import dev.shtanko.algorithms.DECIMAL
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 
 /**
  * Recursion-2 > splitOdd10

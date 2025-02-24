@@ -17,12 +17,14 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.*
 
 /**
  * 623. Add One Row to Tree
  * @see <a href="https://leetcode.com/problems/add-one-row-to-tree/">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/add-one-row-to-tree")
 fun interface AddOneRowToTree {
     operator fun invoke(root: TreeNode?, value: Int, depth: Int): TreeNode?
 }

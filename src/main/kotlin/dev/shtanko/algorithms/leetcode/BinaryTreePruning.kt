@@ -18,11 +18,13 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Recursive
 import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Medium
 
 /**
  * 814. Binary Tree Pruning
  * @see <a href="https://leetcode.com/problems/binary-tree-pruning/">Source</a>
  */
+@Medium("https://leetcode.com/problems/binary-tree-pruning")
 fun interface BinaryTreePruning {
     operator fun invoke(root: TreeNode?): TreeNode?
 }

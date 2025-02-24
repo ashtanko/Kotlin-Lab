@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isPalindrome
+import dev.shtanko.extensions.isPalindrome
 
 enum class SPNumType(val value: Int) {
     EVEN(1),

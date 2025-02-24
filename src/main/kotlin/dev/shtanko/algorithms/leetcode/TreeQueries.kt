@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.DP
 import kotlin.math.max
 
 /**
@@ -26,6 +28,8 @@ fun interface TreeQueries {
     operator fun invoke(root: TreeNode, queries: IntArray): IntArray
 }
 
+@DP
+@DFS
 class TreeQueriesDP : TreeQueries {
     private val cache: HashMap<Int, Int> = HashMap()
     private val answer: IntArray = IntArray(SIZE)

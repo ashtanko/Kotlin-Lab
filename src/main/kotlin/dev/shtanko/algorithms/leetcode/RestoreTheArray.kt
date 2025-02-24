@@ -18,6 +18,9 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.DECIMAL
 import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.BottomUpDP
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.TopDownDP
 import kotlin.math.min
 
 /**
@@ -31,6 +34,7 @@ fun interface RestoreTheArray {
 /**
  * Approach 1: Dynamic Programming (Top Down)
  */
+@TopDownDP
 class RestoreTheArrayTopDown : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val m: Int = s.length
@@ -67,6 +71,7 @@ class RestoreTheArrayTopDown : RestoreTheArray {
 /**
  * Approach 2: Dynamic Programming (Bottom Up)
  */
+@BottomUpDP
 class RestoreTheArrayBottomUp : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val m: Int = s.length
@@ -94,6 +99,7 @@ class RestoreTheArrayBottomUp : RestoreTheArray {
     }
 }
 
+@DFS
 class RestoreTheArrayMemoization : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val dp = arrayOfNulls<Int>(s.length) // dp[i] is number of ways to print valid arrays from string s start at i

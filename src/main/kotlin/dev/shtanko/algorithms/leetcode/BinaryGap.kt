@@ -18,6 +18,7 @@ package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.Iterative
 import dev.shtanko.algorithms.annotations.OnePass
+import dev.shtanko.algorithms.annotations.level.Easy
 
 private const val MAX_SIZE = 32
 
@@ -25,6 +26,7 @@ private const val MAX_SIZE = 32
  * 868. Binary Gap
  * @see <a href="https://leetcode.com/problems/binary-gap/">Source</a>
  */
+@Easy("https://leetcode.com/problems/binary-gap")
 fun interface BinaryGap {
     operator fun invoke(num: Int): Int
 }

@@ -18,6 +18,7 @@ package dev.shtanko.concurrency
 
 import java.util.concurrent.Semaphore
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.runBlocking
@@ -39,6 +40,7 @@ class SemaphoreIncrementor {
     }
 }
 
+@OptIn(DelicateCoroutinesApi::class)
 @Suppress("MagicNumber")
 fun main() = runBlocking {
     val incrementor = SemaphoreIncrementor()

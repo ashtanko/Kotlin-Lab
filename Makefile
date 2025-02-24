@@ -2,7 +2,10 @@
 
 # Run detekt + ktlint
 check:
-	./gradlew detekt ktlintCheck --profile --daemon
+	./gradlew detekt --profile --daemon
+
+ktlint:
+	./gradlew ktlintCheck
 
 # Run spotless, more info: https://github.com/diffplug/spotless
 spotless:
@@ -10,7 +13,7 @@ spotless:
 
 # Update the README.md file in accordance with the detekt report
 md:
-	truncate -s0 README.md && cat config/main.md >> README.md && cat build/reports/detekt/detekt.md >> README.md
+	truncate -s0 README.md && cat config/main.md >> README.md && cat build/reports/detekt/metrics.md >> README.md && cat build/reports/detekt/complexity.md >> README.md
 
 # Copy jacoco report
 jacoco:
@@ -18,7 +21,7 @@ jacoco:
 
 # Run code style check + update the README.md file in accordance with the detekt report
 default:
-	make spotless && make check && make md
+	make spotless && make check && make repo && make md
 
 # Build the project
 run:
@@ -33,7 +36,7 @@ lines:
 	find . -name '*.kt' | xargs wc -l
 
 cloc:
-	cloc --include-lang=kotlin src
+	cloc --include-lang=kotlin src/main
 
 kover:
 	./gradlew koverHtmlReport
@@ -45,7 +48,7 @@ jar:
 	./gradlew shadowJar && mv ./build/libs/*.jar config/
 
 repo:
-	java -jar config/detekt_report_parser.jar ./build/reports/detekt/detekt.html ./config/detekt.md
+	./gradlew detektReportToMdTask
 
 
 .DEFAULT_GOAL := default

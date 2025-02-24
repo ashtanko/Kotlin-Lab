@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package dev.shtanko.concurrency
 
 import kotlin.random.Random
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel

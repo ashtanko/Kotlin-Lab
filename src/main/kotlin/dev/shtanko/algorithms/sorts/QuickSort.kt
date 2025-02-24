@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
 /**
  * Developed by Tony Hoare in 1959, with his work published in 1961, Quicksort is an efficient sort algorithm using

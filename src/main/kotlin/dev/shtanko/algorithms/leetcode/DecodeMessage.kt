@@ -17,44 +17,47 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.stream.Collectors
 
 /**
  * 2325. Decode the Message
- * https://leetcode.com/problems/decode-the-message/
+ * @see <a href="https://leetcode.com/problems/decode-the-message">Source</a>
  */
+@Easy("https://leetcode.com/problems/decode-the-message")
 fun interface DecodeMessage {
     operator fun invoke(key: String, message: String): String
 }
 
 class DecodeMessageBruteForce : DecodeMessage {
     override operator fun invoke(key: String, message: String): String {
-        val m: MutableMap<Char, Char> = HashMap()
-        m[' '] = ' '
-        var to = 'a'
-        for (from in key.toCharArray()) {
-            if (!m.containsKey(from)) {
-                m[from] = to++
+        val charMapping: MutableMap<Char, Char> = HashMap()
+        charMapping[' '] = ' '
+        var currentChar = 'a'
+        for (keyChar in key.toCharArray()) {
+            if (!charMapping.containsKey(keyChar)) {
+                charMapping[keyChar] = currentChar++
             }
         }
-        return message.chars().mapToObj { c -> m[c.toChar()].toString() + "" }.collect(Collectors.joining(""))
+        return message.chars().mapToObj { char -> charMapping[char.toChar()].toString() }
+            .collect(Collectors.joining(""))
     }
 }
 
 class DecodeMessageSB : DecodeMessage {
     override operator fun invoke(key: String, message: String): String {
-        val table = CharArray(ALPHABET_LETTERS_COUNT)
-        var index = 0
-        for (c in key.toCharArray()) {
-            if (index < ALPHABET_LETTERS_COUNT && c != ' ' && table[c.code - 'a'.code].code == 0) {
-                table[c.code - 'a'.code] = (index + 'a'.code).toChar()
-                index++
+        val charTable = CharArray(ALPHABET_LETTERS_COUNT)
+        var currentIndex = 0
+        for (char in key.toCharArray()) {
+            if (currentIndex < ALPHABET_LETTERS_COUNT && char != ' ' && charTable[char.code - 'a'.code].code == 0) {
+                charTable[char.code - 'a'.code] = (currentIndex + 'a'.code).toChar()
+                currentIndex++
             }
         }
-        val sb = StringBuilder()
-        for (c in message.toCharArray()) {
-            sb.append(if (c == ' ') ' ' else table[c.code - 'a'.code])
+        val decodedMessage = StringBuilder()
+        for (char in message.toCharArray()) {
+            decodedMessage.append(if (char == ' ') ' ' else charTable[char.code - 'a'.code])
         }
-        return sb.toString()
+        return decodedMessage.toString()
     }
 }

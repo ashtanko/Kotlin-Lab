@@ -23,7 +23,7 @@ import kotlin.math.min
  * @see <a href="https://leetcode.com/problems/extra-characters-in-a-string">Source</a>
  */
 fun interface ExtraCharactersInString {
-    operator fun invoke(s: String, dictionary: Array<String>): Int
+    operator fun invoke(str: String, dictionary: Array<String>): Int
 }
 
 /**
@@ -33,11 +33,11 @@ class ExtraCharactersInStringTopDown : ExtraCharactersInString {
     private lateinit var memo: Array<Int>
     private lateinit var dictionarySet: HashSet<String>
 
-    override fun invoke(s: String, dictionary: Array<String>): Int {
-        val n = s.length
+    override fun invoke(str: String, dictionary: Array<String>): Int {
+        val n = str.length
         memo = Array(n) { 0 }
         dictionarySet = HashSet(dictionary.toList())
-        return dp(0, n, s)
+        return dp(0, n, str)
     }
 
     private fun dp(start: Int, n: Int, s: String): Int {
@@ -61,15 +61,15 @@ class ExtraCharactersInStringTopDown : ExtraCharactersInString {
  * Approach 2: Bottom Up Dynamic Programming with Substring Method
  */
 class ExtraCharactersInStringBottomUp : ExtraCharactersInString {
-    override fun invoke(s: String, dictionary: Array<String>): Int {
-        val n = s.length
+    override fun invoke(str: String, dictionary: Array<String>): Int {
+        val n = str.length
         val dictionarySet = HashSet(dictionary.toList())
         val dp = IntArray(n + 1)
 
         for (start in n - 1 downTo 0) {
             dp[start] = dp[start + 1] + 1
             for (end in start until n) {
-                val curr = s.substring(start, end + 1)
+                val curr = str.substring(start, end + 1)
                 if (dictionarySet.contains(curr)) {
                     dp[start] = dp[start].coerceAtMost(dp[end + 1])
                 }
@@ -87,11 +87,11 @@ class ExtraCharactersInStringTopDownTrie : ExtraCharactersInString {
     private var root: TrieNode? = null
     private lateinit var memo: Array<Int>
 
-    override fun invoke(s: String, dictionary: Array<String>): Int {
-        val n: Int = s.length
+    override fun invoke(str: String, dictionary: Array<String>): Int {
+        val n: Int = str.length
         root = dictionary.buildTrie()
         memo = Array(n + 1) { 0 }
-        return dp(0, n, s)
+        return dp(0, n, str)
     }
 
     private fun dp(start: Int, n: Int, s: String): Int {
@@ -120,8 +120,8 @@ class ExtraCharactersInStringTopDownTrie : ExtraCharactersInString {
  * Approach 4: Bottom Up Dynamic Programming with Trie
  */
 class ExtraCharactersInStringBottomUpTrie : ExtraCharactersInString {
-    override fun invoke(s: String, dictionary: Array<String>): Int {
-        val n: Int = s.length
+    override fun invoke(str: String, dictionary: Array<String>): Int {
+        val n: Int = str.length
         val root: TrieNode = dictionary.buildTrie()
         val dp = IntArray(n + 1)
 
@@ -129,10 +129,10 @@ class ExtraCharactersInStringBottomUpTrie : ExtraCharactersInString {
             dp[start] = dp[start + 1] + 1
             var node: TrieNode? = root
             for (end in start until n) {
-                if (node?.children?.containsKey(s[end]) == false) {
+                if (node?.children?.containsKey(str[end]) == false) {
                     break
                 }
-                node = node?.children?.get(s[end])
+                node = node?.children?.get(str[end])
                 if (node?.isWord == true) {
                     dp[start] = min(dp[start].toDouble(), dp[end + 1].toDouble()).toInt()
                 }

@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1125. Smallest Sufficient Team
  * @see <a href="https://leetcode.com/problems/smallest-sufficient-team/">Source</a>
@@ -24,6 +26,7 @@ fun interface SmallestSufficientTeam {
     operator fun invoke(reqSkills: Array<String>, people: List<List<String>>): IntArray
 }
 
+@DFS
 class SmallestSufficientTeamDFS : SmallestSufficientTeam {
     private var sol: MutableList<Int> = ArrayList()
 
@@ -46,7 +49,7 @@ class SmallestSufficientTeamDFS : SmallestSufficientTeam {
         return ans
     }
 
-    fun search(cur: Int, pe: IntArray, onesol: MutableList<Int>, n: Int) {
+    private fun search(cur: Int, pe: IntArray, onesol: MutableList<Int>, n: Int) {
         // when all bits are 1, all skills are covered
         if (cur == (1 shl n) - 1) {
             if (sol.isEmpty() || onesol.size < sol.size) {

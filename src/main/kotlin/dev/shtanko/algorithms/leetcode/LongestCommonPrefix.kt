@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.commonPrefix
+import dev.shtanko.extensions.commonPrefix
 
 /**
  * Longest Common Prefix.
