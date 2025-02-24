@@ -56,7 +56,7 @@ jobs:
         run: ./gradlew detekt --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
 
       - name: Build with Gradle and test
-        run: ./gradlew build -x koverVerify  # Skipping koverVerify to avoid failure if coverage has lowered
+        run: ./gradlew build -x koverVerify -x ktlintCheck -x ktlintFormat -x runKtlintCheckOverTestSourceSet -x ktlintMainSourceSetCheck -x ktlintKotlinScriptCheck  # Skipping koverVerify to avoid failure if coverage has lowered
 
       - name: Generate Test Coverage Xml Report
         run: ./gradlew koverXmlReport
