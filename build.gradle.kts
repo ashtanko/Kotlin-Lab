@@ -82,28 +82,37 @@ pitest {
     mutationThreshold.set(40)
 }
 
-spotless {
-    kotlin {
-        target(
-            fileTree(
-                mapOf(
-                    "dir" to ".",
-                    "include" to listOf("**/*.kt"),
-                    "exclude" to listOf("**/build/**", "**/spotless/*.kt"),
-                ),
-            ),
-        )
-        trimTrailingWhitespace()
-        // indentWithSpaces()
-        endWithNewline()
-        val delimiter = "^(package|object|import|interface|internal|@file|//startfile)"
-        val licenseHeaderFile = rootProject.file("spotless/copyright.kt")
-        licenseHeaderFile(licenseHeaderFile, delimiter)
-    }
-}
-
 subprojects {
     apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("${layout.buildDirectory}/**/*.kt")
+            ktlint().editorConfigOverride(
+                mapOf(
+                    "indent_size" to "2",
+                    "continuation_indent_size" to "2",
+                ),
+            )
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+        format("kts") {
+            target("**/*.kts")
+            targetExclude("${layout.buildDirectory}/**/*.kts")
+            licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+        format("xml") {
+            target("**/*.xml")
+            targetExclude("${layout.buildDirectory}/**/*.xml")
+            licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(^(?![\\/ ]\\*).*$)")
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+    }
 }
 
 kover {

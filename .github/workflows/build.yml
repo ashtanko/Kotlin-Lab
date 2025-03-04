@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better analysis relevancy
 
@@ -62,7 +62,7 @@ jobs:
         run: ./gradlew koverXmlReport
 
       - name: Coveralls Parallel
-        uses: coverallsapp/github-action@v2.2.3
+        uses: coverallsapp/github-action@v2.3.6
         with:
           parallel: true
           flag-name: run-${{ join(matrix.*, '-') }}
