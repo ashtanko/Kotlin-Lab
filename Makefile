@@ -9,7 +9,7 @@ ktlint:
 
 # Run spotless, more info: https://github.com/diffplug/spotless
 spotless:
-	./gradlew spotlessApply spotlessCheck spotlessKotlin
+	./gradlew spotlessApply spotlessCheck
 
 # Update the README.md file in accordance with the detekt report
 md:
