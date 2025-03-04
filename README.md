@@ -37,7 +37,7 @@
 157796 source lines of code (sloc)
 115146 logical lines of code (lloc)
 72253 comment lines of code (cloc)
-24537 cyclomatic complexity (mcc)
+24538 cyclomatic complexity (mcc)
 20171 cognitive complexity
 0 number of total code smells
 45 comment source ratio
