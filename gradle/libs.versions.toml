@@ -32,6 +32,8 @@ jsoup = "1.18.3"            # https://jsoup.org/
 turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 sandwich = "2.1.0"          # https://github.com/skydoves/sandwich
+protobuf = "0.9.2"
+protoc = "3.19.1"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
@@ -60,6 +62,7 @@ jmh-benchmarks = { module = "org.openjdk.jmh:jmh-core-benchmarks", version.ref =
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 sandwich-retrofit = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protoc" }
 #detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 # testing libs
@@ -92,3 +95,4 @@ pitest = { id = "info.solidsoft.pitest", version.ref = "pitest" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 diktat = { id = "com.saveourtool.diktat", version.ref = "diktat" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }
