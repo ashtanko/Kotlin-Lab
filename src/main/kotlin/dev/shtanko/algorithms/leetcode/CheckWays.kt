@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1719. Number Of Ways To Reconstruct A Tree
- * @link https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/
+ * @see <a href="https://leetcode.com/problems/number-of-ways-to-reconstruct-a-tree/">Source</a>
  */
-interface CheckWays {
-    fun perform(pairs: Array<IntArray>): Int
+fun interface CheckWays {
+    operator fun invoke(pairs: Array<IntArray>): Int
 }
 
+@DFS
 class CheckWaysDFS : CheckWays {
 
     var result = 1
 
-    override fun perform(pairs: Array<IntArray>): Int {
+    override operator fun invoke(pairs: Array<IntArray>): Int {
         result = 1
         val graph: HashMap<Int, HashSet<Int>> = HashMap()
 

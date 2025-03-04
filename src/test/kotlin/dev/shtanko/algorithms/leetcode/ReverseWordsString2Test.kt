@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,9 +25,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class ReverseWordsString2Test {
+class ReverseWordsString2Test {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 charArrayOf('t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e'),
@@ -36,7 +36,7 @@ internal class ReverseWordsString2Test {
         )
     }
 
-    internal class InputToReverseArgumentsProvider : ArgumentsProvider {
+    class InputToReverseArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 charArrayOf(),
@@ -53,7 +53,7 @@ internal class ReverseWordsString2Test {
         )
     }
 
-    internal class InputToReverseWordArgumentsProvider : ArgumentsProvider {
+    class InputToReverseWordArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 charArrayOf(),
@@ -68,21 +68,21 @@ internal class ReverseWordsString2Test {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `internal test`(s: CharArray, expected: CharArray) {
-        ReverseWordsInString2().perform(s)
+    fun `test`(s: CharArray, expected: CharArray) {
+        ReverseWordsInString2().invoke(s)
         assertArrayEquals(expected, s)
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputToReverseArgumentsProvider::class)
-    internal fun `reverse whole string test`(s: CharArray, left: Int, right: Int, expected: CharArray) {
+    fun `reverse whole string test`(s: CharArray, left: Int, right: Int, expected: CharArray) {
         s.reverse(left, right)
         assertArrayEquals(expected, s)
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputToReverseWordArgumentsProvider::class)
-    internal fun `reverse each word test`(s: CharArray, expected: CharArray) {
+    fun `reverse each word test`(s: CharArray, expected: CharArray) {
         ReverseWordsInString2().reverseEachWord(s)
         assertArrayEquals(expected, s)
     }

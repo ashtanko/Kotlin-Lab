@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,87 +16,147 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.BinarySearch
+import dev.shtanko.algorithms.annotations.PrefixSum
 import kotlin.math.max
 
 /**
  * 1508. Range Sum of Sorted Subarray Sums
- * @link https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/
+ * @see <a href="https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/">Source</a>
  */
-interface RangeSum {
-    fun perform(nums: IntArray, n: Int, left: Int, right: Int): Int
+fun interface RangeSum {
+    operator fun invoke(nums: IntArray, n: Int, left: Int, right: Int): Int
 }
 
+@PrefixSum
 class RangeSumPrefixSum : RangeSum {
-    override fun perform(nums: IntArray, n: Int, left: Int, right: Int): Int {
-        var res: Long = 0
-        var sum: Long = 0
-        val sums: MutableList<Long> = ArrayList()
-        val pSum: MutableList<Long> = ArrayList() // sums - all sums of subarrays, pSum - prefix sums;
-        var l = left
+    override operator fun invoke(nums: IntArray, n: Int, left: Int, right: Int): Int {
+        // Initialize the result variable to store the final sum
+        var result: Long = 0
 
-        pSum.add(0L)
+        // Initialize the currentSum variable to store the sum of the current subarray
+        var currentSum: Long = 0
+
+        // List to store the sums of all subarrays
+        val subarraySums: MutableList<Long> = ArrayList()
+
+        // List to store the prefix sums
+        val prefixSums: MutableList<Long> = ArrayList()
+
+        // Initialize leftIndex with the value of left
+        var leftIndex = left
+
+        // Add an initial value of 0 to prefixSums to handle subarrays starting from index 0
+        prefixSums.add(0L)
+
+        // Calculate prefix sums and subarray sums
         for (i in 0 until n) {
-            sum += nums[i]
-            pSum.add(sum)
-            for (j in 0 until pSum.size - 1) sums.add(sum - pSum[j])
+            // Update the current sum with the current element
+            currentSum += nums[i]
+
+            // Add the current sum to the prefix sums list
+            prefixSums.add(currentSum)
+
+            // Calculate all subarray sums ending at the current index
+            for (j in 0 until prefixSums.size - 1) {
+                subarraySums.add(currentSum - prefixSums[j])
+            }
         }
-        sums.sort()
-        while (l <= right) res = (res + sums[l++ - 1]) % MOD
-        return res.toInt()
+
+        // Sort the list of subarray sums
+        subarraySums.sort()
+
+        // Sum the elements from the left-th to the right-th smallest subarray sums
+        while (leftIndex <= right) {
+            result = (result + subarraySums[leftIndex++ - 1]) % MOD
+        }
+
+        // Return the result as an integer
+        return result.toInt()
     }
 }
 
+@BinarySearch
 class RangeSumBinarySearch : RangeSum {
-    override fun perform(nums: IntArray, n: Int, left: Int, right: Int): Int {
-        val maxLeft = findMax(nums, left)
-        val maxRight = findMax(nums, right)
-        val rangeSumLeft = rangeSum(nums, maxLeft)
-        val rangeSumRight = rangeSum(nums, maxRight)
-        var ans = Math.floorMod(rangeSumRight[0] + (right - rangeSumRight[1]) * (maxRight + 1), MOD)
-        ans = Math.floorMod(ans - (rangeSumLeft[0] + (left - rangeSumLeft[1] - 1) * (maxLeft + 1)), MOD)
-        return ans
+    override operator fun invoke(nums: IntArray, n: Int, left: Int, right: Int): Int {
+        // Find the maximum value for the left boundary
+        val maxLeft = findMaxValue(nums, left)
+
+        // Find the maximum value for the right boundary
+        val maxRight = findMaxValue(nums, right)
+
+        // Calculate the range sum for the left boundary
+        val rangeSumLeft = calculateRangeSum(nums, maxLeft)
+
+        // Calculate the range sum for the right boundary
+        val rangeSumRight = calculateRangeSum(nums, maxRight)
+
+        // Calculate the result using the range sums and boundaries
+        var result = Math.floorMod(rangeSumRight[0] + (right - rangeSumRight[1]) * (maxRight + 1), MOD)
+        result = Math.floorMod(result - (rangeSumLeft[0] + (left - rangeSumLeft[1] - 1) * (maxLeft + 1)), MOD)
+
+        // Return the final result
+        return result
     }
 
-    private fun findMax(nums: IntArray, cnt: Int): Int {
-        var lo = 0
-        var hi = 0
-        for (v in nums) hi += v
-        while (lo < hi) {
-            val mid = lo + (hi - lo + 1) / 2
-            val sum = rangeSum(nums, mid)
-            if (sum[1] >= cnt) {
-                hi = mid - 1
+    private fun findMaxValue(nums: IntArray, count: Int): Int {
+        // Initialize low and high pointers
+        var low = 0
+        var high = 0
+
+        // Calculate the sum of all elements in nums
+        for (value in nums) high += value
+
+        // Perform binary search to find the maximum value
+        while (low < high) {
+            val mid = low + (high - low + 1) / 2
+            val sum = calculateRangeSum(nums, mid)
+            if (sum[1] >= count) {
+                high = mid - 1
             } else {
-                lo = mid
+                low = mid
             }
         }
-        return lo
+
+        // Return the maximum value found
+        return low
     }
 
-    // sum of various rangesums, including only those rangesum that are below max
-    private fun rangeSum(nums: IntArray, max: Int): IntArray {
-        var rangeSum = 0
-        var rangeCnt = 0
-        var lo = 0
-        var hi = 0
-        val n = nums.size
-        var sum = 0
-        var sumsum = 0
-        while (lo < n) {
-            while (hi < n && sum + nums[hi] <= max) {
-                sum += nums[hi]
-                sumsum = (sumsum + sum) % MOD
-                ++hi
+    private fun calculateRangeSum(nums: IntArray, maxValue: Int): IntArray {
+        // Initialize variables to store the total range sum and count
+        var totalRangeSum = 0
+        var totalRangeCount = 0
+
+        // Initialize low and high pointers
+        var low = 0
+        var high = 0
+
+        // Get the size of the nums array
+        val size = nums.size
+
+        // Initialize variables to store the current sum and cumulative sum
+        var currentSum = 0
+        var cumulativeSum = 0
+
+        // Iterate through the nums array to calculate range sums
+        while (low < size) {
+            while (high < size && currentSum + nums[high] <= maxValue) {
+                currentSum += nums[high]
+                cumulativeSum = (cumulativeSum + currentSum) % MOD
+                ++high
             }
-            rangeSum = (rangeSum + sumsum) % MOD
-            if (hi > lo) {
-                sum -= nums[lo]
-                sumsum = (sumsum - (hi - lo) * nums[lo] + MOD) % MOD
-                rangeCnt += hi - lo
+            totalRangeSum = (totalRangeSum + cumulativeSum) % MOD
+            if (high > low) {
+                currentSum -= nums[low]
+                cumulativeSum = (cumulativeSum - (high - low) * nums[low] + MOD) % MOD
+                totalRangeCount += high - low
             }
-            ++lo
-            hi = max(hi, lo)
+            ++low
+            high = max(high, low)
         }
-        return intArrayOf(rangeSum, rangeCnt)
+
+        // Return the total range sum and count as an array
+        return intArrayOf(totalRangeSum, totalRangeCount)
     }
 }

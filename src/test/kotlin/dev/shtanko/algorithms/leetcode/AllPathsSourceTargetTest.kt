@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AllPathsSourceTargetTest<out T : AllPathsSourceTarget>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class AllPathsSourceTargetTest<out T : AllPathsSourceTarget>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -109,19 +109,32 @@ internal abstract class AllPathsSourceTargetTest<out T : AllPathsSourceTarget>(p
                     listOf(0, 1, 4),
                 ),
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2, 3),
+                    intArrayOf(2),
+                    intArrayOf(3),
+                    intArrayOf(),
+                ),
+                listOf(
+                    listOf(0, 1, 2, 3),
+                    listOf(0, 2, 3),
+                    listOf(0, 3),
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `all paths source target test`(graph: Array<IntArray>, expected: List<List<Int>>) {
-        val actual = strategy.perform(graph)
+    fun `all paths source target test`(graph: Array<IntArray>, expected: List<List<Int>>) {
+        val actual = strategy.invoke(graph)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class AllPathsSourceBacktrackingTest :
+class AllPathsSourceBacktrackingTest :
     AllPathsSourceTargetTest<AllPathsSourceBacktracking>(AllPathsSourceBacktracking())
 
-internal class AllPathsSourceDPTest :
+class AllPathsSourceDPTest :
     AllPathsSourceTargetTest<AllPathsSourceDP>(AllPathsSourceDP())

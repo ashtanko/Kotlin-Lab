@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,20 +41,20 @@ internal class AnimalShelter {
     }
 
     fun dequeueDogs(): Dog {
-        val dog = dogs.first.inner
+        val dog = dogs.first().inner
         dogs.removeFirst()
         return dog
     }
 
     fun dequeueCat(): Cat {
-        val cat = cats.first.inner
+        val cat = cats.first().inner
         cats.removeFirst()
         return cat
     }
 
     fun dequeueAny(): Animal {
-        val oldestDog = dogs.first
-        val oldestCat = cats.first
+        val oldestDog = dogs.first()
+        val oldestCat = cats.first()
 
         return if (oldestDog.time < oldestCat.time) {
             dequeueDogs()

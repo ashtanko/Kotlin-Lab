@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,9 +25,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class TreeNodeExtensionsTest {
+class TreeNodeExtensionsTest {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -37,11 +37,23 @@ internal class TreeNodeExtensionsTest {
                 intArrayOf(1, 2, 3, 4, 5, 6, 7),
                 listOf(1, 2, 3, 4, 5, 6, 7),
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+                listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+                listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+            ),
         )
     }
 
     @Test
-    internal fun `insert level order test`() {
+    fun `insert level order test`() {
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7)
         val tree: TreeNode? = null
         val root = insertLevelOrder(tree, arr, 0)
@@ -63,7 +75,7 @@ internal class TreeNodeExtensionsTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `array to tree test`(arr: IntArray, expected: List<Int>) {
+    fun `array to tree test`(arr: IntArray, expected: List<Int>) {
         val tree = arr.toTree()
         val actual = tree.levelOrder().flatten()
         assertEquals(expected, actual)

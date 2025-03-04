@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.LinkedList
 
-interface JumpGame5Strategy {
-    fun perform(arr: IntArray): Int
+fun interface JumpGame5Strategy {
+    operator fun invoke(arr: IntArray): Int
 
     fun checkNeighbors(visited: MutableSet<Int>, node: Int, n: Int, nex: MutableList<Int>) {
         if (node + 1 < n && !visited.contains(node + 1)) {
@@ -37,7 +37,7 @@ interface JumpGame5Strategy {
 }
 
 class JP5BreadthFirstSearch : JumpGame5Strategy {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val n: Int = arr.size
         if (n <= 1) {
             return 0
@@ -101,7 +101,7 @@ class JP5BidirectionalBFS : JumpGame5Strategy {
         visited.add(0)
     }
 
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val n: Int = arr.size
         if (n <= 1) {
             return 0
@@ -160,7 +160,7 @@ class JP5BidirectionalBFS : JumpGame5Strategy {
         }
     }
 
-    private fun isOtherContains(other: MutableList<Int>, node: Int): Boolean {
+    private fun isOtherContains(other: List<Int>, node: Int): Boolean {
         return other.contains(node + 1) || other.contains(node - 1)
     }
 }
@@ -176,7 +176,7 @@ class JP5BidirectionalBFS2 : JumpGame5Strategy {
         head.add(0)
     }
 
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val totalNums = arr.size
         if (totalNums <= 1) return 0
 

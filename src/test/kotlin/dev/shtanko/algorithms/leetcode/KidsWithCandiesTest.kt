@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,34 +16,45 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class KidsWithCandiesTest<out T : KidsWithCandiesStrategy>(private val strategy: T) {
+abstract class KidsWithCandiesTest<out T : KidsWithCandiesStrategy>(private val strategy: T) {
 
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Pair<IntArray, Int>, BooleanArray>> {
-            return listOf(
-                intArrayOf(2, 3, 5, 1, 3) to 3 to booleanArrayOf(true, true, true, false, true),
-                intArrayOf(4, 2, 1, 1, 2) to 1 to booleanArrayOf(true, false, false, false, false),
-                intArrayOf(12, 1, 12) to 10 to booleanArrayOf(true, false, true),
-            )
-        }
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(2, 3, 5, 1, 3),
+                3,
+                booleanArrayOf(true, true, true, false, true),
+            ),
+            Arguments.of(
+                intArrayOf(4, 2, 1, 1, 2),
+                1,
+                booleanArrayOf(true, false, false, false, false),
+            ),
+            Arguments.of(
+                intArrayOf(12, 1, 12),
+                10,
+                booleanArrayOf(true, false, true),
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `kids with candies test`(testCase: Pair<Pair<IntArray, Int>, BooleanArray>) {
-        val (data, expected) = testCase
-        val (candies, extraCandies) = data
-        val actual = strategy.perform(candies, extraCandies)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `kids with candies test`(candies: IntArray, extraCandies: Int, expected: BooleanArray) {
+        val actual = strategy.invoke(candies, extraCandies)
         assertArrayEquals(expected, actual)
     }
 }
 
-internal class KidsWithCandiesStraightForwardTest :
+class KidsWithCandiesStraightForwardTest :
     KidsWithCandiesTest<KidsWithCandiesStraightForward>(KidsWithCandiesStraightForward())
 
-internal class KidsWithCandiesStreamTest : KidsWithCandiesTest<KidsWithCandiesStream>(KidsWithCandiesStream())
+class KidsWithCandiesStreamTest : KidsWithCandiesTest<KidsWithCandiesStream>(KidsWithCandiesStream())

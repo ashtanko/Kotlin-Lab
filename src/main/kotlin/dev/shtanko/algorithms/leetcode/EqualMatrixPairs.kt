@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2352. Equal Row and Column Pairs
- * @link https://leetcode.com/problems/equal-row-and-column-pairs/
+ * @see <a href="https://leetcode.com/problems/equal-row-and-column-pairs/">Source</a>
  */
-interface EqualMatrixPairs {
-    fun equalPairs(grid: Array<IntArray>): Int
+fun interface EqualMatrixPairs {
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 class EqualMatrixPairsTrie : EqualMatrixPairs {
-    override fun equalPairs(grid: Array<IntArray>): Int {
+    override fun invoke(grid: Array<IntArray>): Int {
         val root = TrieNode()
         val n: Int = grid.size
         var res = 0
@@ -40,7 +40,7 @@ class EqualMatrixPairsTrie : EqualMatrixPairs {
             var curNode = root
             for (row in grid) {
                 curNode = if (curNode.children.containsKey(row[i])) {
-                    curNode.children[row[i]]!!
+                    curNode.children.getOrDefault(row[i], TrieNode())
                 } else {
                     break
                 }

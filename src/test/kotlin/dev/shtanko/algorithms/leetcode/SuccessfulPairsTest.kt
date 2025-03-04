@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,13 +39,25 @@ abstract class SuccessfulPairsTest<out T : SuccessfulPairs>(private val strategy
                 16,
                 intArrayOf(2, 0, 2),
             ),
+            Arguments.of(
+                intArrayOf(1, 1, 1),
+                intArrayOf(1, 2, 3),
+                2,
+                intArrayOf(2, 2, 2),
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1),
+                intArrayOf(1, 2, 3),
+                3,
+                intArrayOf(1, 1, 1),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `successful pairs test`(spells: IntArray, potions: IntArray, success: Long, expected: IntArray) {
-        val actual = strategy.perform(spells, potions, success)
+        val actual = strategy.invoke(spells, potions, success)
         assertThat(actual).isEqualTo(expected)
     }
 }

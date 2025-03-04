@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface PairSumStrategy {
-    fun perform(arr: IntArray): Int
+import dev.shtanko.algorithms.annotations.Sort
+
+fun interface PairSum {
+    operator fun invoke(arr: IntArray): Int
 }
 
-class PairSumSort1 : PairSumStrategy {
-    override fun perform(arr: IntArray): Int {
+@Sort
+class PairSumSort1 : PairSum {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         val list = arr.toList()
         val chunks = list.chunked(2)
@@ -33,8 +36,9 @@ class PairSumSort1 : PairSumStrategy {
     }
 }
 
-class PairSumSort2 : PairSumStrategy {
-    override fun perform(arr: IntArray): Int {
+@Sort
+class PairSumSort2 : PairSum {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         var res = 0
         var i = 0
@@ -46,16 +50,17 @@ class PairSumSort2 : PairSumStrategy {
     }
 }
 
-class PairSumSort3 : PairSumStrategy {
-    override fun perform(arr: IntArray): Int {
+@Sort
+class PairSumSort3 : PairSum {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         return arr.toList().chunked(2) { it.minOrNull() ?: 0 }.sum()
     }
 }
 
-class PairSumOdd : PairSumStrategy {
+class PairSumOdd : PairSum {
 
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val exist = IntArray(MAX_ARR_SIZE)
         for (i in arr.indices) {
             exist[arr[i] + ARR_HELPER]++

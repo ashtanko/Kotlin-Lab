@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,94 +16,103 @@
 
 package dev.shtanko.algorithms.leetcode
 
-private const val LIMIT = 26
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.annotations.Bitwise
+import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.Sort
 
 /**
  * 1657. Determine if Two Strings Are Close
- * @link https://leetcode.com/problems/determine-if-two-strings-are-close/
+ * @see <a href="https://leetcode.com/problems/determine-if-two-strings-are-close/">Source</a>
  */
-interface CloseStrings {
-    fun perform(word1: String, word2: String): Boolean
+fun interface CloseStrings {
+    operator fun invoke(word1: String, word2: String): Boolean
 }
 
+@Iterative
 class CloseStringsMap : CloseStrings {
 
-    override fun perform(word1: String, word2: String): Boolean {
+    override operator fun invoke(word1: String, word2: String): Boolean {
         if (word1.length != word2.length) {
             return false
         }
-        val wf = IntArray(LIMIT)
-        val wf2 = IntArray(LIMIT)
+        val wf = IntArray(ALPHABET_LETTERS_COUNT)
+        val wf2 = IntArray(ALPHABET_LETTERS_COUNT)
         for (i in word1.indices) {
             wf[word1[i] - 'a'] += 1
             wf2[word2[i] - 'a'] += 1
         }
-        for (i in 0 until LIMIT) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
             if (wf[i] == 0 && wf2[i] != 0) return false
         }
-        val map: HashMap<Int, Int> = HashMap()
-        for (i in 0 until LIMIT) {
-            map[wf[i]] = map.getOrDefault(wf[i], 0) + 1
-            map[wf2[i]] = map.getOrDefault(wf2[i], 0) - 1
+        val map1: HashMap<Int, Int> = HashMap()
+        val map2: HashMap<Int, Int> = HashMap()
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
+            map1[wf[i]] = map1.getOrDefault(wf[i], 0) + 1
+            map2[wf2[i]] = map2.getOrDefault(wf2[i], 0) + 1
         }
-        for (key in map.keys) {
-            if (map[key] != 0) {
-                return false
-            }
-        }
-        return true
+        return map1 == map2
     }
 }
 
+@Bitwise
 class CloseStringsBitwise : CloseStrings {
 
-    companion object {
-        private const val LIMIT = 26
-    }
-
-    override fun perform(word1: String, word2: String): Boolean {
-        if (word1.length != word2.length) return false
-
-        val count1 = IntArray(LIMIT)
-        val count2 = IntArray(LIMIT)
-        for (ch in word1.toCharArray()) {
-            ++count1[ch.code - 'a'.code]
-        }
-        for (ch in word2.toCharArray()) {
-            ++count2[ch.code - 'a'.code]
+    override operator fun invoke(word1: String, word2: String): Boolean {
+        if (word1.length != word2.length) {
+            return false
         }
 
-        var signature = 0
-        for (i in 0 until LIMIT) {
-            if (count1[i] > 0 && count2[i] == 0 || count2[i] > 0 && count1[i] == 0) {
-                return false
-            }
-            signature = signature xor count1[i]
-            signature = signature xor count2[i]
+        val v1 = IntArray(ALPHABET_LETTERS_COUNT)
+        val v2 = IntArray(ALPHABET_LETTERS_COUNT)
+
+        var k1 = 0
+        var k2 = 0
+
+        for (b in word1.toByteArray()) {
+            val i = b - 'a'.code.toByte()
+            v1[i]++
+            k1 = k1 or (1 shl i)
         }
 
-        return signature == 0
+        for (b in word2.toByteArray()) {
+            val i = b - 'a'.code.toByte()
+            v2[i]++
+            k2 = k2 or (1 shl i)
+        }
+
+        // Ensure the same characters are used
+        if (k1 != k2) {
+            return false
+        }
+
+        // Test that occurrence counts match
+        v1.sort()
+        v2.sort()
+
+        return v1.contentEquals(v2)
     }
 }
 
+@Sort
 class CloseStringsSort : CloseStrings {
-    override fun perform(word1: String, word2: String): Boolean {
-        val freq1 = IntArray(LIMIT)
-        val freq2 = IntArray(LIMIT)
+    override operator fun invoke(word1: String, word2: String): Boolean {
+        val freq1 = IntArray(ALPHABET_LETTERS_COUNT)
+        val freq2 = IntArray(ALPHABET_LETTERS_COUNT)
         for (element in word1) {
             freq1[element - 'a']++
         }
         for (element in word2) {
             freq2[element - 'a']++
         }
-        for (i in 0 until LIMIT) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
             if (freq1[i] == 0 && freq2[i] != 0 || freq1[i] != 0 && freq2[i] == 0) {
                 return false
             }
         }
         freq1.sort()
         freq2.sort()
-        for (i in 0 until LIMIT) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
             if (freq1[i] != freq2[i]) {
                 return false
             }

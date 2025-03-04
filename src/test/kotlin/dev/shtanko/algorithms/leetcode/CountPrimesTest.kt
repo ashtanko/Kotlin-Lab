@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
 
-internal abstract class CountPrimesTest<out T : CountPrimesStrategy>(private val strategy: T) {
+abstract class CountPrimesTest<out T : CountPrimesStrategy>(private val strategy: T) {
 
     @TestFactory
-    internal fun `count primes test`() = listOf(
+    fun `count primes test`() = listOf(
         0 to 0,
         1 to 0,
         3 to 1,
@@ -36,12 +36,12 @@ internal abstract class CountPrimesTest<out T : CountPrimesStrategy>(private val
         1_000_000 to 78498,
     ).map { (input, expected) ->
         DynamicTest.dynamicTest("count primes of $input then get $expected") {
-            val actual = strategy.perform(input)
+            val actual = strategy.invoke(input)
             Assertions.assertThat(actual).isEqualTo(expected)
         }
     }
 }
 
-internal class CountPrimesBrutForceTest : CountPrimesTest<CountPrimesBrutForce>(CountPrimesBrutForce())
+class CountPrimesBrutForceTest : CountPrimesTest<CountPrimesBrutForce>(CountPrimesBrutForce())
 
-internal class CountPrimesTimeComplexityTest : CountPrimesTest<CountPrimesTimeComplexity>(CountPrimesTimeComplexity())
+class CountPrimesSpaceComplexityTest : CountPrimesTest<CountPrimesTimeComplexity>(CountPrimesTimeComplexity())

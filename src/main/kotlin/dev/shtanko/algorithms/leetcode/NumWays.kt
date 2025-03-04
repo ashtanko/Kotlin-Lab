@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,25 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.MOD
+
 /**
  * 1639. Number of Ways to Form a Target String Given a Dictionary
- * @link https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/
+ * @see <a href="https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary">
+ *     Source</a>
  */
-interface NumWays {
-    fun perform(words: Array<String>, target: String): Int
+fun interface NumWays {
+    operator fun invoke(words: Array<String>, target: String): Int
 }
 
 class NumWaysDP : NumWays {
 
-    override fun perform(words: Array<String>, target: String): Int {
+    override operator fun invoke(words: Array<String>, target: String): Int {
         val wLen: Int = words[0].length
         val tLen: Int = target.length
         val dp = Array(tLen) { LongArray(wLen) }
-        val freq = Array(wLen) { IntArray(ARR_SIZE) }
+        val freq = Array(wLen) { IntArray(ALPHABET_LETTERS_COUNT) }
         for (w in words) {
             for (i in w.indices) {
                 freq[i][w[i].code - 'a'.code]++
@@ -47,9 +51,5 @@ class NumWaysDP : NumWays {
             }
         }
         return dp[tLen - 1][wLen - 1].toInt()
-    }
-
-    companion object {
-        private const val ARR_SIZE = 26
     }
 }

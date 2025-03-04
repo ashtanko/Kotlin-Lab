@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,11 +16,12 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import kotlin.math.min
 
 /**
  * 2131. Longest Palindrome by Concatenating Two-Letter Words
- * @link https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/
+ * @see <a href="https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/">Source</a>
  */
 fun interface LongestPalindromeConcatenating {
     fun longestPalindrome(words: Array<String>): Int
@@ -71,29 +72,23 @@ class LongestPalindromeConcatenatingMap : LongestPalindromeConcatenating {
  */
 class LongestPalindromeConcatenatingArr : LongestPalindromeConcatenating {
 
-    companion object {
-        private const val ALPHABET_SIZE = 26
-    }
-
     override fun longestPalindrome(words: Array<String>): Int {
-        val count = Array(ALPHABET_SIZE) {
-            IntArray(
-                ALPHABET_SIZE,
-            )
+        val count = Array(ALPHABET_LETTERS_COUNT) {
+            IntArray(ALPHABET_LETTERS_COUNT)
         }
         for (word in words) {
             count[word[0].code - 'a'.code][word[1].code - 'a'.code]++
         }
         var answer = 0
         var central = false
-        for (i in 0 until ALPHABET_SIZE) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
             if (count[i][i] % 2 == 0) {
                 answer += count[i][i]
             } else {
                 answer += count[i][i] - 1
                 central = true
             }
-            for (j in i + 1 until ALPHABET_SIZE) {
+            for (j in i + 1 until ALPHABET_LETTERS_COUNT) {
                 answer += 2 * min(count[i][j], count[j][i])
             }
         }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.min
 
 /**
  * 2163. Minimum Difference in Sums After Removal of Elements
- * @link https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/
+ * @see <a href="https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/">Source</a>
  */
-interface MinimumDifference {
-    fun perform(nums: IntArray): Long
+fun interface MinimumDifference {
+    operator fun invoke(nums: IntArray): Long
 }
 
 class MinimumDifferencePriorityQueue : MinimumDifference {
-    override fun perform(nums: IntArray): Long {
+    override operator fun invoke(nums: IntArray): Long {
         var s1: Long = 0
         var s2: Long = 0
         val dp = LongArray(nums.size)

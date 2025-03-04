@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -48,6 +48,77 @@ abstract class CarPoolingTest<out T : CarPooling>(private val strategy: T) {
                     intArrayOf(),
                 ),
                 0,
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(2, 1, 5),
+                    intArrayOf(3, 5, 7),
+                ),
+                3,
+                true,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                11,
+                true,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                12,
+                true,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                10,
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                9,
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                8,
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                7,
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 2, 7),
+                    intArrayOf(3, 7, 9),
+                    intArrayOf(8, 3, 9),
+                ),
+                6,
                 false,
             ),
         )

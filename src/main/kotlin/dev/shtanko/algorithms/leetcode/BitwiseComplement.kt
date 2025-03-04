@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,17 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Bitwise
+import dev.shtanko.algorithms.annotations.BruteForce
 import kotlin.math.ln
 
 /**
  * 1009. Complement of Base 10 Integer
- * @link https://leetcode.com/problems/complement-of-base-10-integer/
+ * @see <a href="https://leetcode.com/problems/complement-of-base-10-integer/">Source</a>
  */
-interface BitwiseComplement {
-    fun perform(n: Int): Int
+@Bitwise
+fun interface BitwiseComplement {
+    operator fun invoke(n: Int): Int
 }
 
 /**
@@ -32,7 +35,7 @@ interface BitwiseComplement {
  * Space Complexity: O(1).
  */
 class BitwiseComplementFlipBit : BitwiseComplement {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         if (n == 0) return 1
         var todo = n
         var bit = 1
@@ -52,7 +55,7 @@ class BitwiseComplementFlipBit : BitwiseComplement {
  * Space Complexity: O(1).
  */
 class BitwiseComplementBitmask : BitwiseComplement {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         if (n == 0) return 1
         val l = ln(n.toDouble()).div(ln(2.0)).plus(1).toInt()
         val bitmask = 1.shl(l).minus(1)
@@ -66,7 +69,7 @@ class BitwiseComplementBitmask : BitwiseComplement {
  * Space Complexity: O(1).
  */
 class BitwiseComplementBuiltInFunc : BitwiseComplement {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         return if (n == 0) 1 else Integer.highestOneBit(n).shl(1).minus(n).minus(1)
     }
 }
@@ -77,7 +80,7 @@ class BitwiseComplementBuiltInFunc : BitwiseComplement {
  * Space Complexity: O(1).
  */
 class HighestOneBit : BitwiseComplement {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         if (n == 0) return 1
         var bitmask: Int = n
         bitmask = bitmask or bitmask.shr(BIT_COUNT_POW)
@@ -98,8 +101,9 @@ class HighestOneBit : BitwiseComplement {
     }
 }
 
+@BruteForce
 class BitwiseComplementBruteForce : BitwiseComplement {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         var x = 1
         while (n > x) x = x * 2 + 1
         return x - n

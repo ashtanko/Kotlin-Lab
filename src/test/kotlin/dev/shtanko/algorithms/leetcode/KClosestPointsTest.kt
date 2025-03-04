@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,37 +16,45 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class KClosestPointsTest<out T : KClosestPointsStrategy>(private val strategy: T) {
+abstract class KClosestPointsTest<out T : KClosestPointsStrategy>(private val strategy: T) {
 
-    companion object {
-
-        @JvmStatic
-        fun dataProvider(): List<Pair<Pair<Array<IntArray>, Int>, Array<IntArray>>> = listOf(
-            arrayOf(
-                intArrayOf(1, 3),
-                intArrayOf(-2, 2),
-            ) to 1 to arrayOf(intArrayOf(-2, 2)),
-            arrayOf(
-                intArrayOf(3, 3),
-                intArrayOf(5, -1),
-                intArrayOf(-2, 4),
-            ) to 2 to arrayOf(intArrayOf(3, 3), intArrayOf(-2, 4)),
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 3),
+                    intArrayOf(-2, 2),
+                ),
+                1,
+                arrayOf(intArrayOf(-2, 2)),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(3, 3),
+                    intArrayOf(5, -1),
+                    intArrayOf(-2, 4),
+                ),
+                2,
+                arrayOf(intArrayOf(3, 3), intArrayOf(-2, 4)),
+            ),
         )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `K closest points test`(testCase: Pair<Pair<Array<IntArray>, Int>, Array<IntArray>>) {
-        val (data, expected) = testCase
-        val (points, k) = data
-        val actual = strategy.perform(points, k)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `K closest points test`(points: Array<IntArray>, k: Int, expected: Array<IntArray>) {
+        val actual = strategy.invoke(points, k)
         assertArrayEquals(expected, actual)
     }
 }
 
-internal class KClosestPointsQueueTest : KClosestPointsTest<KClosestPointsQueue>(KClosestPointsQueue())
-internal class KClosestPointsSortTest : KClosestPointsTest<KClosestPointsSort>(KClosestPointsSort())
+class KClosestPointsQueueTest : KClosestPointsTest<KClosestPointsQueue>(KClosestPointsQueue())
+class KClosestPointsSortTest : KClosestPointsTest<KClosestPointsSort>(KClosestPointsSort())

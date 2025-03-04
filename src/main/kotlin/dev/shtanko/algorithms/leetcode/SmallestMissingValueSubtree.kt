@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,26 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.level.Hard
+
 /**
  * 2003. Smallest Missing Genetic Value in Each Subtree
- * @link https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/
+ * @see <a href="https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/">Source</a>
  */
-interface SmallestMissingValueSubtree {
-    fun perform(parents: IntArray, nums: IntArray): IntArray
+@Hard
+fun interface SmallestMissingValueSubtree {
+    operator fun invoke(parents: IntArray, nums: IntArray): IntArray
 }
 
+@DFS
 class SmallestMissingValueSubtreeStrict : SmallestMissingValueSubtree {
     var m: HashMap<Int, List<Int>> = HashMap()
     lateinit var arr: IntArray
     var miss = 1
     var set: HashSet<Int> = HashSet()
 
-    override fun perform(parents: IntArray, nums: IntArray): IntArray {
+    override operator fun invoke(parents: IntArray, nums: IntArray): IntArray {
         val n: Int = parents.size
         val res = IntArray(n)
         for (i in 0 until n) {

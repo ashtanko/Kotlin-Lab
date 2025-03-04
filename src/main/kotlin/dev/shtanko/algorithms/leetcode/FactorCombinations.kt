@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,14 @@ import kotlin.math.sqrt
 /**
  * 254. Factor Combinations
  */
-interface FactorCombinations {
-    fun getFactors(n: Int): List<List<Int>>
+fun interface FactorCombinations {
+    operator fun invoke(num: Int): List<List<Int>>
 }
 
 class FactorCombinationsImpl : FactorCombinations {
-    override fun getFactors(n: Int): List<List<Int>> {
+    override fun invoke(num: Int): List<List<Int>> {
         val result: MutableList<List<Int>> = ArrayList()
-        helper(result, ArrayList(), n, 2)
+        helper(result, ArrayList(), num, 2)
         return result
     }
 
@@ -51,11 +51,11 @@ class FactorCombinationsImpl : FactorCombinations {
 }
 
 class FactorCombinationsImpl2 : FactorCombinations {
-    override fun getFactors(n: Int): List<List<Int>> {
+    override fun invoke(num: Int): List<List<Int>> {
         val ret: MutableList<List<Int>> = LinkedList<List<Int>>()
-        if (n <= 3) return ret
+        if (num <= 3) return ret
         val path: MutableList<Int> = LinkedList<Int>()
-        getFactors(2, n, path, ret)
+        getFactors(2, num, path, ret)
         return ret
     }
 

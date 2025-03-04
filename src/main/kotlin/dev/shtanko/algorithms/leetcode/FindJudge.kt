@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,26 +18,26 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Find the Town Judge.
- * @link https://leetcode.com/problems/find-the-town-judge/
+ * @see <a href="https://leetcode.com/problems/find-the-town-judge/">Source</a>
  */
-interface FindJudge {
-    fun perform(n: Int, trust: Array<IntArray>): Int
+fun interface FindJudge {
+    operator fun invoke(num: Int, trust: Array<IntArray>): Int
 }
 
 class FindJudgeTwoArrays : FindJudge {
-    override fun perform(n: Int, trust: Array<IntArray>): Int {
-        if (trust.size < n - 1) {
+    override operator fun invoke(num: Int, trust: Array<IntArray>): Int {
+        if (trust.size < num - 1) {
             return -1
         }
-        val indegrees = IntArray(n + 1)
-        val outdegrees = IntArray(n + 1)
+        val inDegrees = IntArray(num + 1)
+        val outDegrees = IntArray(num + 1)
 
         for (relation in trust) {
-            outdegrees[relation[0]]++
-            indegrees[relation[1]]++
+            outDegrees[relation[0]]++
+            inDegrees[relation[1]]++
         }
-        for (i in 1..n) {
-            if (indegrees[i] == n - 1 && outdegrees[i] == 0) {
+        for (i in 1..num) {
+            if (inDegrees[i] == num - 1 && outDegrees[i] == 0) {
                 return i
             }
         }
@@ -46,18 +46,18 @@ class FindJudgeTwoArrays : FindJudge {
 }
 
 class FindJudgeOneArray : FindJudge {
-    override fun perform(n: Int, trust: Array<IntArray>): Int {
-        if (trust.size < n - 1) {
+    override operator fun invoke(num: Int, trust: Array<IntArray>): Int {
+        if (trust.size < num - 1) {
             return -1
         }
-        val trustScores = IntArray(n + 1)
+        val trustScores = IntArray(num + 1)
         for (relation in trust) {
             trustScores[relation[0]]--
             trustScores[relation[1]]++
         }
 
-        for (i in 1..n) {
-            if (trustScores[i] == n - 1) {
+        for (i in 1..num) {
+            if (trustScores[i] == num - 1) {
                 return i
             }
         }

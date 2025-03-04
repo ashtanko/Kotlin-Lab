@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,27 +16,53 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class SubtractProductAndSumTest {
-
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Int, Int>> {
-            return listOf(
-                234 to 15,
-                4421 to 21,
-            )
-        }
-    }
+class SubtractProductAndSumTest {
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `subtract product and sum test`(testCase: Pair<Int, Int>) {
-        val (n, expected) = testCase
-        val actual = n.subtractProductAndSum()
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `subtract product and sum test`(num: Int, expected: Int) {
+        val actual = num.calculateDifferenceBetweenProductAndSum()
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                0,
+                1,
+            ),
+            Arguments.of(
+                -1,
+                1,
+            ),
+            Arguments.of(
+                234,
+                15,
+            ),
+            Arguments.of(
+                4421,
+                21,
+            ),
+            Arguments.of(
+                2345,
+                106,
+            ),
+            Arguments.of(
+                100,
+                -1,
+            ),
+            Arguments.of(
+                1000,
+                -1,
+            ),
+        )
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,71 +19,83 @@ package dev.shtanko.patterns.behavioral.strategy
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
+data class Product(val id: Int, val name: String, val price: Int)
+
 object EcommerceApp {
 
-    private val priceOnProducts: Map<Int, Int> = HashMap<Int, Int>().apply {
-        put(1, 2200)
-        put(2, 1850)
-        put(3, 1100)
-        put(4, 890)
-    }
-    private val reader = BufferedReader(InputStreamReader(System.`in`))
+    private val products = listOf(
+        Product(1, "Mother board", 2200),
+        Product(2, "CPU", 1850),
+        Product(3, "HDD", 1100),
+        Product(4, "Memory", 890),
+    )
+
     private val order = Order()
     private lateinit var strategy: PayStrategy
 
     @JvmStatic
     fun main(args: Array<String>) {
+        val reader = BufferedReader(InputStreamReader(System.`in`))
+
         while (!order.isClosed) {
-            var cost: Int
-            var continueChoice: String
-            do {
-                print(
-                    "Please, select a product:" + "\n" +
-                        "1 - Mother board" + "\n" +
-                        "2 - CPU" + "\n" +
-                        "3 - HDD" + "\n" +
-                        "4 - Memory" + "\n",
-                )
-                val choice = reader.readLine().toInt()
-                cost = priceOnProducts[choice] ?: 0
-                print("Count: ")
-                val count = reader.readLine().toInt()
-                order.totalCost = cost * count
-                print("Do you wish to continue selecting products? Y/N: ")
-                continueChoice = reader.readLine()
-            } while (continueChoice.equals("Y", ignoreCase = true))
-            if (::strategy.isInitialized) {
-                println(
-                    "Please, select a payment method:" + "\n" +
-                        "1 - PalPay" + "\n" +
-                        "2 - Credit Card",
-                )
-                val paymentMethod = reader.readLine()
-
-                // Client creates different strategies based on input from user,
-                // application configuration, etc.
-                strategy = if (paymentMethod == "1") {
-                    PayByPayPal()
-                } else {
-                    PayByCreditCard()
-                }
-            }
-
-            // Order object delegates gathering payment data to strategy object,
-            // since only strategies know what data they need to process a
-            // payment.
-            order.processOrder(strategy)
-            print("Pay " + order.totalCost + " units or Continue shopping? P/C: ")
-            val proceed = reader.readLine()
-            if (proceed.equals("P", ignoreCase = true)) {
-                // Finally, strategy handles the payment.
-                if (strategy.pay(order.totalCost)) {
-                    println("Payment has been successful.")
-                } else {
-                    println("FAIL! Please, check your data.")
-                }
-                order.setClosed()
-            }
+            processOrder(reader)
         }
     }
+
+    fun processOrder(reader: BufferedReader) {
+        var continueShopping: Boolean
+        do {
+            val selectedProduct = selectProduct(reader)
+            val quantity = getProductQuantity(reader)
+            order.totalCost += selectedProduct.price * quantity
+
+            continueShopping = askContinueShopping(reader)
+        } while (continueShopping)
+
+        strategy = choosePaymentMethod(reader)
+
+        order.processOrder(strategy)
+    }
+
+    fun selectProduct(reader: BufferedReader): Product {
+        println("Please, select a product:")
+        products.forEach { println("${it.id} - ${it.name}") }
+
+        val choice = reader.readLine().toInt()
+        return products.firstOrDefault({ it.id == choice }, products.first())
+    }
+
+    fun getProductQuantity(reader: BufferedReader): Int {
+        print("Count: ")
+        return reader.readLine().toInt()
+    }
+
+    fun askContinueShopping(reader: BufferedReader): Boolean {
+        print("Do you wish to continue selecting products? Y/N: ")
+        val answer = reader.readLine()
+        return answer.equals("Y", ignoreCase = true)
+    }
+
+    fun choosePaymentMethod(reader: BufferedReader): PayStrategy {
+        println("Please, select a payment method:")
+        println("1 - PayPal")
+        println("2 - Credit Card")
+
+        val paymentMethod = reader.readLine()
+
+        return if (paymentMethod == "1") {
+            PayByPayPal()
+        } else {
+            PayByCreditCard()
+        }
+    }
+}
+
+inline fun <T> Iterable<T>.firstOrDefault(predicate: (T) -> Boolean, default: T): T {
+    for (element in this) {
+        if (predicate(element)) {
+            return element
+        }
+    }
+    return default
 }

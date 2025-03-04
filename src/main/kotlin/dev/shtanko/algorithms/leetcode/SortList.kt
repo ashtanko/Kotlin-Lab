@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface SortListStrategy {
-    fun perform(head: ListNode): ListNode?
+fun interface SortListStrategy {
+    operator fun invoke(head: ListNode): ListNode?
 }
 
 class TopDownMergeSort : SortListStrategy {
-    override fun perform(head: ListNode): ListNode? {
+    override operator fun invoke(head: ListNode): ListNode? {
         if (head.next == null) return head
         val mid = getMid(head) ?: ListNode(0)
-        val left = perform(head)
-        val right = perform(mid)
+        val left = invoke(head)
+        val right = invoke(mid)
         return merge(left, right)
     }
 
@@ -66,7 +66,7 @@ class BottomUpMergeSort : SortListStrategy {
     var tail: ListNode? = ListNode(0)
     var nextSubList: ListNode? = ListNode(0)
 
-    override fun perform(head: ListNode): ListNode? {
+    override operator fun invoke(head: ListNode): ListNode? {
         return sortList(head)
     }
 

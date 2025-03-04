@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 397. Integer Replacement
- * @link https://leetcode.com/problems/integer-replacement/
+ * @see <a href="https://leetcode.com/problems/integer-replacement/">Source</a>
  */
 fun interface IntegerReplacement {
-    fun invoke(n: Int): Int
+    operator fun invoke(n: Int): Int
 }
 
 class IntegerReplacementBitCount : IntegerReplacement {
-    override fun invoke(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         var n0 = n
         var c = 0
         while (n0 != 1) {
@@ -43,7 +43,7 @@ class IntegerReplacementBitCount : IntegerReplacement {
 }
 
 class IntegerReplacementBinary : IntegerReplacement {
-    override fun invoke(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         var c = 0
         var n0 = n
         while (n0 != 1) {

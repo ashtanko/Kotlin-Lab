@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,23 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Hard
 import kotlin.math.max
 
 /**
  * 1617. Count Subtrees With Max Distance Between Cities
- * @link https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities/
+ * @see <a href="https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities/">Source</a>
  */
-interface CountSubgraphsForEachDiameter {
-    fun perform(n: Int, edges: Array<IntArray>): IntArray
+@Hard("https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities")
+fun interface CountSubgraphsForEachDiameter {
+    operator fun invoke(num: Int, edges: Array<IntArray>): IntArray
 }
 
 class CountSubgraphsForEachDiameterDFS : CountSubgraphsForEachDiameter {
 
     private var max = 0
 
-    override fun perform(n: Int, edges: Array<IntArray>): IntArray {
+    override operator fun invoke(num: Int, edges: Array<IntArray>): IntArray {
         val graph: MutableMap<Int, MutableSet<Int>> = HashMap()
         for (edge in edges) {
             graph.computeIfAbsent(
@@ -40,10 +42,10 @@ class CountSubgraphsForEachDiameterDFS : CountSubgraphsForEachDiameter {
                 edge[1],
             ) { HashSet() }.add(edge[0])
         }
-        val ans = IntArray(n - 1)
-        for (bit in 0 until (1 shl n)) {
+        val ans = IntArray(num - 1)
+        for (bit in 0 until (1 shl num)) {
             val subtree: MutableSet<Int?> = HashSet()
-            for (i in 0 until n) if (bit and (1 shl i) != 0) subtree.add(i + 1)
+            for (i in 0 until num) if (bit and (1 shl i) != 0) subtree.add(i + 1)
             var edgeCount = 0
             max = 0
             for (edge in edges) {

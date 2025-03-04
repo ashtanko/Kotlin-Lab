@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
 import kotlin.math.min
 
 /**
  * 842. Split Array into Fibonacci Sequence
- * @link https://leetcode.com/problems/split-array-into-fibonacci-sequence/
+ * @see <a href="https://leetcode.com/problems/split-array-into-fibonacci-sequence/">Source</a>
  */
 fun interface SplitIntoFibonacci {
-    fun invoke(num: String): List<Int>
+    operator fun invoke(num: String): List<Int>
 }
 
 /**
  * Approach #1: Brute Force
  */
 class SplitIntoFibonacciBruteForce : SplitIntoFibonacci {
-    override fun invoke(num: String): List<Int> {
+    override operator fun invoke(num: String): List<Int> {
         val n: Int = num.length
         for (i in 0 until min(10, n)) {
             if (num[0] == '0' && i > 0) break
@@ -66,7 +67,7 @@ class SplitIntoFibonacciBruteForce : SplitIntoFibonacci {
 }
 
 class SplitIntoFibonacciBacktracking : SplitIntoFibonacci {
-    override fun invoke(num: String): List<Int> {
+    override operator fun invoke(num: String): List<Int> {
         val ans: MutableList<Int> = ArrayList()
         helper(num, ans, 0)
         return ans

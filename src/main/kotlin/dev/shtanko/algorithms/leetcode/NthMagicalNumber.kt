@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import dev.shtanko.algorithms.math.gcd
 import kotlin.math.ceil
 import kotlin.math.min
 
-interface NthMagicalNumberStrategy {
-    fun perform(n: Int, a: Int, b: Int): Int
+fun interface NthMagicalNumber {
+    operator fun invoke(n: Int, a: Int, b: Int): Int
 }
 
-class NthMagicalNumberMath : NthMagicalNumberStrategy {
+class NthMagicalNumberMath : NthMagicalNumber {
 
-    override fun perform(n: Int, a: Int, b: Int): Int {
+    override operator fun invoke(n: Int, a: Int, b: Int): Int {
         val lcm = a * b / gcd(a, b)
         val cntPerLcm = lcm / a + lcm / b - 1
         val cntLcm = n / cntPerLcm
@@ -38,15 +39,14 @@ class NthMagicalNumberMath : NthMagicalNumberStrategy {
     }
 }
 
-class NthMagicalNumberBS : NthMagicalNumberStrategy {
-    override fun perform(n: Int, a: Int, b: Int): Int {
+class NthMagicalNumberBS : NthMagicalNumber {
+    override operator fun invoke(n: Int, a: Int, b: Int): Int {
         val l: Int = a / gcd(a, b) * b
 
         var lo: Long = 0
         var hi: Long = n.toLong() * min(a, b)
         while (lo < hi) {
             val mi = lo + hi.minus(lo) / 2
-            // If there are not enough magic numbers below mi...
             if (mi / a + mi / b - mi / l < n) lo = mi + 1 else hi = mi
         }
 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Memoization
 import kotlin.math.max
 
 /**
  * 312. Burst Balloons
- * @link https://leetcode.com/problems/burst-balloons/
+ * @see <a href="https://leetcode.com/problems/burst-balloons/">Source</a>
  */
-interface BurstBalloons {
-    fun maxCoins(nums: IntArray): Int
+fun interface BurstBalloons {
+    operator fun invoke(nums: IntArray): Int
 }
 
+@Memoization
 class BurstBalloonsMemoization : BurstBalloons {
-    override fun maxCoins(nums: IntArray): Int {
+    override fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         val arr = IntArray(n + 2)
         arr[0] = 1.also { arr[n + 1] = it }
@@ -54,8 +57,9 @@ class BurstBalloonsMemoization : BurstBalloons {
     }
 }
 
+@DP
 class BurstBalloonsDP : BurstBalloons {
-    override fun maxCoins(nums: IntArray): Int {
+    override fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         val arr = IntArray(n + 2)
         arr[0] = 1.also { arr[n + 1] = it } // Giving padding of 1 to the corner elements

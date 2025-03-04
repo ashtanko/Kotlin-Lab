@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,32 +20,35 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
 
-internal abstract class CountSortedVowelStringsTest<out T : CountSortedVowelStrings>(private val strategy: T) {
+abstract class CountSortedVowelStringsTest<out T : CountSortedVowelStrings>(private val strategy: T) {
 
     @TestFactory
-    internal fun `count vowel strings`() = listOf(
+    fun `count vowel strings`() = listOf(
         1 to 5,
         2 to 15,
+        3 to 35,
+        4 to 70,
+        5 to 126,
         33 to 66045,
     ).map { (input, expected) ->
         DynamicTest.dynamicTest("count vowel strings of $input then get $expected") {
-            val actual = strategy.perform(input)
+            val actual = strategy.invoke(input)
             assertThat(actual).isEqualTo(expected)
         }
     }
 }
 
-internal class CountSortedVowelBruteForceTest :
+class CountSortedVowelBruteForceTest :
     CountSortedVowelStringsTest<CountSortedVowelBruteForce>(CountSortedVowelBruteForce())
 
-internal class CountSortedVowelRecursionTest :
+class CountSortedVowelRecursionTest :
     CountSortedVowelStringsTest<CountSortedVowelRecursion>(CountSortedVowelRecursion())
 
-internal class CountSortedVowelTopDynamicTest :
+class CountSortedVowelTopDynamicTest :
     CountSortedVowelStringsTest<CountSortedVowelTopDynamic>(CountSortedVowelTopDynamic())
 
-internal class CountSortedVowelBottomUpTest :
+class CountSortedVowelBottomUpTest :
     CountSortedVowelStringsTest<CountSortedVowelBottomUp>(CountSortedVowelBottomUp())
 
-internal class CountSortedVowelMathTest :
+class CountSortedVowelMathTest :
     CountSortedVowelStringsTest<CountSortedVowelMath>(CountSortedVowelMath())

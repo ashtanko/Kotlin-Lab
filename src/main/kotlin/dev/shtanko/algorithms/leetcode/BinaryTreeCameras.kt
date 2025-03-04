@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,22 +16,27 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Greedy
+import dev.shtanko.algorithms.annotations.level.Hard
 import kotlin.math.min
 
 /**
  * 968. Binary Tree Cameras
- * @link https://leetcode.com/problems/binary-tree-cameras/
+ * @see <a href="https://leetcode.com/problems/binary-tree-cameras/">Source</a>
  */
-interface BinaryTreeCamerasStrategy {
-
-    fun perform(root: TreeNode?): Int
+@Hard("https://leetcode.com/problems/binary-tree-cameras")
+fun interface BinaryTreeCameras {
+    operator fun invoke(root: TreeNode?): Int
 }
 
-class BinaryTreeCamerasDFS : BinaryTreeCamerasStrategy {
+@DFS
+class BinaryTreeCamerasDFS : BinaryTreeCameras {
 
     private var cameras = 0
 
-    override fun perform(root: TreeNode?): Int {
+    override operator fun invoke(root: TreeNode?): Int {
         if (root == null) return 0
         val top = root.dfs()
         val local = if (top == NOT_MONITORED) 1 else 0
@@ -59,26 +64,26 @@ class BinaryTreeCamerasDFS : BinaryTreeCamerasStrategy {
     }
 }
 
-class BinaryTreeCamerasDP : BinaryTreeCamerasStrategy {
-
-    override fun perform(root: TreeNode?): Int {
-        val ans = solve(root)
-        return min(ans[1], ans[2])
+@DP
+class BinaryTreeCamerasDP : BinaryTreeCameras {
+    override operator fun invoke(root: TreeNode?): Int {
+        val result = calculate(root)
+        return min(result[1], result[2])
     }
 
     // 0: Strict ST; All nodes below this are covered, but not this one
     // 1: Normal ST; All nodes below and incl this are covered - no camera
     // 2: Placed camera; All nodes below this are covered, plus camera here
-    private fun solve(node: TreeNode?): IntArray {
+    private fun calculate(node: TreeNode?): IntArray {
         if (node == null) return intArrayOf(0, 0, MAX_ARRAY_SIZE)
-        val l = solve(node.left)
-        val r = solve(node.right)
-        val mL12 = min(l[1], l[2])
-        val mR12 = min(r[1], r[2])
-        val d0 = l[1] + l[1]
-        val d1 = min(l[2] + mR12, r[2] + mL12)
-        val d2 = 1 + min(l[0], mL12) + min(r[0], mR12)
-        return intArrayOf(d0, d1, d2)
+        val left = calculate(node.left)
+        val right = calculate(node.right)
+        val minLeft12 = min(left[1], left[2])
+        val minRight12 = min(right[1], right[2])
+        val state0 = left[1] + left[1]
+        val state1 = min(left[2] + minRight12, right[2] + minLeft12)
+        val state2 = 1 + min(left[0], minLeft12) + min(right[0], minRight12)
+        return intArrayOf(state0, state1, state2)
     }
 
     companion object {
@@ -86,10 +91,10 @@ class BinaryTreeCamerasDP : BinaryTreeCamerasStrategy {
     }
 }
 
-class BinaryTreeCamerasGreedy : BinaryTreeCamerasStrategy {
-
+@Greedy
+class BinaryTreeCamerasGreedy : BinaryTreeCameras {
     private var res = 0
-    override fun perform(root: TreeNode?): Int {
+    override operator fun invoke(root: TreeNode?): Int {
         return (if (dfs(root) < 1) 1 else 0) + res
     }
 

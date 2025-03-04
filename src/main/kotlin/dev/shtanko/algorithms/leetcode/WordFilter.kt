@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Prefix and Suffix Search
- * @link https://leetcode.com/problems/prefix-and-suffix-search/
+ * @see <a href="https://leetcode.com/problems/prefix-and-suffix-search/">Source</a>
  */
-interface WordFilter {
-    fun perform(prefix: String, suffix: String): Int
+fun interface WordFilter {
+    operator fun invoke(prefix: String, suffix: String): Int
 }
 
 /**
@@ -29,59 +29,56 @@ interface WordFilter {
  */
 class WordFilterTrie(words: Array<String>) : WordFilter {
 
-    private var trie1: WFTrieNode = WFTrieNode()
-    private var trie2: WFTrieNode = WFTrieNode()
+    private val trie1: WFTrieNode = WFTrieNode()
+    private val trie2: WFTrieNode = WFTrieNode()
     private var wt = 0
 
     init {
-        for (word in words) {
+        words.forEach { word ->
             val ca = word.toCharArray()
-            var cur: WFTrieNode = trie1
-            cur.weight.add(wt)
-            for (letter in ca) {
-                if (cur.children[letter - 'a'] == null) {
-                    cur.children[letter - 'a'] = WFTrieNode()
-                }
-                cur = cur.children[letter - 'a']!!
-                cur.weight.add(wt)
-            }
-            cur = trie2
-            cur.weight.add(wt)
-            for (j in ca.indices.reversed()) {
-                val letter = ca[j]
-                if (cur.children[letter - 'a'] == null) {
-                    cur.children[letter - 'a'] = WFTrieNode()
-                }
-                cur = cur.children[letter - 'a']!!
-                cur.weight.add(wt)
-            }
+            insertWord(ca, trie1)
+            insertWord(ca.reversedArray(), trie2)
             wt++
         }
     }
 
-    override fun perform(prefix: String, suffix: String): Int {
-        var cur1: WFTrieNode = trie1
-        var cur2: WFTrieNode = trie2
+    private fun insertWord(charArray: CharArray, root: WFTrieNode) {
+        var cur = root
+        cur.weight.add(wt)
+
+        for (letter in charArray) {
+            val index = letter - 'a'
+            if (cur.children[index] == null) {
+                cur.children[index] = WFTrieNode()
+            }
+            cur = cur.children[index]!!
+            cur.weight.add(wt)
+        }
+    }
+
+    override operator fun invoke(prefix: String, suffix: String): Int {
+        val cur1 = getNodeWithPrefix(prefix, trie1)
+        val cur2 = getNodeWithPrefix(suffix.reversed(), trie2)
+
+        return cur1.weight.intersect(cur2.weight).maxOrNull() ?: -1
+    }
+
+    private fun getNodeWithPrefix(prefix: String, root: WFTrieNode): WFTrieNode {
+        var cur = root
         for (letter in prefix.toCharArray()) {
-            if (cur1.children[letter - 'a'] == null) return -1
-            cur1 = cur1.children[letter - 'a']!!
+            val index = letter - 'a'
+            cur = cur.children[index] ?: return WFTrieNode()
         }
-        val ca = suffix.toCharArray()
-        for (j in ca.indices.reversed()) {
-            val letter = ca[j]
-            if (cur2.children[letter - 'a'] == null) return -1
-            cur2 = cur2.children[letter - 'a']!!
-        }
-
-        var ans = -1
-        for (w1 in cur1.weight) if (w1 > ans && cur2.weight.contains(w1)) ans = w1
-
-        return ans
+        return cur
     }
 
     class WFTrieNode {
-        var children: Array<WFTrieNode?> = arrayOfNulls(26)
+        var children: Array<WFTrieNode?> = arrayOfNulls(ALPHABET_LETTERS_COUNT)
         var weight: MutableSet<Int> = HashSet()
+    }
+
+    companion object {
+        private const val ALPHABET_LETTERS_COUNT = 26
     }
 }
 
@@ -107,7 +104,7 @@ class WordFilterWrappedWords(words: Array<String>) : WordFilter {
         }
     }
 
-    override fun perform(prefix: String, suffix: String): Int {
+    override operator fun invoke(prefix: String, suffix: String): Int {
         var cur: TrieNode = trie
         for (letter in "$suffix{$prefix".toCharArray()) {
             if (cur.children[letter - 'a'] == null) return -1
@@ -116,7 +113,7 @@ class WordFilterWrappedWords(words: Array<String>) : WordFilter {
         return cur.weight
     }
 
-    internal class TrieNode {
+    class TrieNode {
         var children: Array<TrieNode?> = arrayOfNulls(27)
         var weight: Int = 0
     }

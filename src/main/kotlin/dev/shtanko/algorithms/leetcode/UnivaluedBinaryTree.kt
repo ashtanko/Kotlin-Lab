@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
-internal interface UnivaluedBinaryTreeStrategy {
-    fun perform(root: TreeNode?): Boolean
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.Recursive
+
+fun interface UnivaluedBinaryTree {
+    operator fun invoke(root: TreeNode?): Boolean
 }
 
-internal class UnivaluedBinaryTreeDFS : UnivaluedBinaryTreeStrategy {
+@DFS
+class UnivaluedBinaryTreeDFS : UnivaluedBinaryTree {
 
     private var values: MutableList<Int> = mutableListOf()
 
-    override fun perform(root: TreeNode?): Boolean {
+    override operator fun invoke(root: TreeNode?): Boolean {
         dfs(root)
         for (value in values) {
             if (value != values.first()) return false
@@ -41,10 +45,11 @@ internal class UnivaluedBinaryTreeDFS : UnivaluedBinaryTreeStrategy {
     }
 }
 
-internal class UnivaluedBinaryTreeRecursive : UnivaluedBinaryTreeStrategy {
-    override fun perform(root: TreeNode?): Boolean {
-        val isLeftCorrect = root?.left == null || root.value == root.left?.value && perform(root.left)
-        val isRightCorrect = root?.right == null || root.value == root.right?.value && perform(root.right)
+@Recursive
+class UnivaluedBinaryTreeRecursive : UnivaluedBinaryTree {
+    override operator fun invoke(root: TreeNode?): Boolean {
+        val isLeftCorrect = root?.left == null || root.value == root.left?.value && invoke(root.left)
+        val isRightCorrect = root?.right == null || root.value == root.right?.value && invoke(root.right)
         return isLeftCorrect && isRightCorrect
     }
 }

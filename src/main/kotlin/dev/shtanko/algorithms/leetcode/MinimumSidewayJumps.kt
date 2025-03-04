@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.min
 
 /**
  * 1824. Minimum Sideway Jumps
- * @link https://leetcode.com/problems/minimum-sideway-jumps/
+ * @see <a href="https://leetcode.com/problems/minimum-sideway-jumps/">Source</a>
  */
-interface MinimumSidewayJumps {
-    fun perform(obstacles: IntArray): Int
+fun interface MinimumSidewayJumps {
+    operator fun invoke(obstacles: IntArray): Int
 }
 
 class MinimumSidewayJumpsDP : MinimumSidewayJumps {
-    override fun perform(obstacles: IntArray): Int {
+    override operator fun invoke(obstacles: IntArray): Int {
         val dp = intArrayOf(1, 0, 1)
         for (a in obstacles) {
             if (a > 0) dp[a - 1] = LIMIT

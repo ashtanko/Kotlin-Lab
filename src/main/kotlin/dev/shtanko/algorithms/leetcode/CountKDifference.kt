@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.abs
 
 /**
  * 2006. Count Number of Pairs With Absolute Difference K
- * @link https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/
+ * @see <a href="https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/">Source</a>
  */
-interface CountKDifference {
-    fun perform(nums: IntArray, k: Int): Int
+fun interface CountKDifference {
+    operator fun invoke(nums: IntArray, k: Int): Int
 }
 
 class CountKDifferenceBruteForce : CountKDifference {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var count = 0
         for (i in nums.indices) {
             for (j in i + 1 until nums.size) {
@@ -43,7 +43,7 @@ class CountKDifferenceBruteForce : CountKDifference {
 }
 
 class CountKDifferenceMap : CountKDifference {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         val map: MutableMap<Int, Int> = HashMap()
         var res = 0
         for (i in nums.indices) {

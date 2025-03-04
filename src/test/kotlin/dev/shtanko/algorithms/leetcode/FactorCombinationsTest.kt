@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -81,13 +81,28 @@ abstract class FactorCombinationsTest<out T : FactorCombinations>(private val st
                     listOf(10, 10),
                 ),
             ),
+            Arguments.of(
+                32,
+                listOf(
+                    listOf(2, 16),
+                    listOf(4, 8),
+                    listOf(2, 2, 8),
+                    listOf(2, 4, 4),
+                    listOf(2, 2, 2, 4),
+                    listOf(2, 2, 2, 2, 2),
+                ),
+            ),
+            Arguments.of(
+                23848713,
+                emptyList<List<Int>>(),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `get factors test`(n: Int, expected: List<List<Int>>) {
-        val actual = strategy.getFactors(n)
+    fun `get factors test`(num: Int, expected: List<List<Int>>) {
+        val actual = strategy.invoke(num)
         assertThat(actual).containsAll(expected)
     }
 }

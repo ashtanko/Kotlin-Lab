@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@ package dev.shtanko.algorithms.leetcode
 /**
  *
  */
-interface SortedListToBST {
-    fun perform(head: ListNode?): TreeNode?
+fun interface SortedListToBST {
+    operator fun invoke(head: ListNode?): TreeNode?
 }
 
 /**
@@ -28,7 +28,7 @@ interface SortedListToBST {
  */
 class SortedListToBSTRecursion : SortedListToBST {
 
-    override fun perform(head: ListNode?): TreeNode? {
+    override operator fun invoke(head: ListNode?): TreeNode? {
         // If the head doesn't exist, then the linked list is empty
         if (head == null) {
             return null
@@ -52,19 +52,19 @@ class SortedListToBSTRecursion : SortedListToBST {
         // Recursively form balanced BSTs using the left and right halves of the original list.
 
         // Recursively form balanced BSTs using the left and right halves of the original list.
-        node.left = this.perform(head)
-        node.right = this.perform(mid.next)
+        node.left = this.invoke(head)
+        node.right = this.invoke(mid.next)
         return node
     }
 
     private fun findMiddleElement(head: ListNode): ListNode? {
-        // The pointer used to disconnect the left half from the mid node.
+        // The pointer used to disconnect the left half from the mid-node.
         var prevPtr: ListNode? = null
         var slowPtr: ListNode? = head
         var fastPtr: ListNode? = head
 
         // Iterate until fastPr doesn't reach the end of the linked list.
-        while (fastPtr != null && fastPtr.next != null) {
+        while (fastPtr?.next != null) {
             prevPtr = slowPtr
             slowPtr = slowPtr!!.next
             fastPtr = fastPtr.next!!.next
@@ -84,7 +84,7 @@ class SortedListToBSTRecursion : SortedListToBST {
 class SortedListToBSTArray : SortedListToBST {
     private val values: MutableList<Int> = ArrayList()
 
-    override fun perform(head: ListNode?): TreeNode {
+    override operator fun invoke(head: ListNode?): TreeNode {
         this.mapListToValues(head)
         // Convert the array to
         return convertListToBST(0, this.values.size - 1)!!
@@ -127,7 +127,7 @@ class SortedListToBSTInorder : SortedListToBST {
 
     private var head: ListNode? = null
 
-    override fun perform(head: ListNode?): TreeNode? {
+    override operator fun invoke(head: ListNode?): TreeNode? {
         // Get the size of the linked list first
         val size = findSize(head)
         this.head = head

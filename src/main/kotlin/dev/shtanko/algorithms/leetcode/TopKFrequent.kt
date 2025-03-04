@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import java.util.LinkedList
 import java.util.PriorityQueue
 import java.util.TreeMap
@@ -23,8 +24,8 @@ import java.util.TreeMap
 /**
  * 692. Top K Frequent Words
  */
-interface TopKFrequent {
-    fun perform(words: Array<String>, k: Int): List<String>
+fun interface TopKFrequent {
+    operator fun invoke(words: Array<String>, k: Int): List<String>
 }
 
 private class Comparator1 : Comparator<Map.Entry<String, Int>> {
@@ -56,7 +57,7 @@ class Comparator2 : Comparator<Map.Entry<String, Int>> {
 }
 
 class TopKFrequentSorting : TopKFrequent {
-    override fun perform(words: Array<String>, k: Int): List<String> {
+    override operator fun invoke(words: Array<String>, k: Int): List<String> {
         val map: MutableMap<String, Int> = HashMap()
         for (word in words) {
             map[word] = map.getOrDefault(word, 0) + 1
@@ -76,7 +77,7 @@ class TopKFrequentSorting : TopKFrequent {
 }
 
 class TopKFrequentMinHeap : TopKFrequent {
-    override fun perform(words: Array<String>, k: Int): List<String> {
+    override operator fun invoke(words: Array<String>, k: Int): List<String> {
         val map: MutableMap<String, Int> = HashMap()
         for (word in words) {
             map[word] = map.getOrDefault(word, 0) + 1
@@ -103,7 +104,7 @@ class TopKFrequentMinHeap : TopKFrequent {
 }
 
 class TopKFrequentMap : TopKFrequent {
-    override fun perform(words: Array<String>, k: Int): List<String> {
+    override operator fun invoke(words: Array<String>, k: Int): List<String> {
         val result: MutableList<String> = LinkedList()
         val map: MutableMap<String, Int> = HashMap()
         for (i in words.indices) {
@@ -121,7 +122,7 @@ class TopKFrequentMap : TopKFrequent {
             }
         }
 
-        while (!pq.isEmpty()) result.add(0, pq.poll().key)
+        while (pq.isNotEmpty()) result.add(0, pq.poll().key)
 
         return result
     }
@@ -129,7 +130,7 @@ class TopKFrequentMap : TopKFrequent {
 
 class TopKFrequentTrie : TopKFrequent {
 
-    override fun perform(words: Array<String>, k: Int): List<String> {
+    override operator fun invoke(words: Array<String>, k: Int): List<String> {
         val map: MutableMap<String, Int> = HashMap()
         for (word in words) {
             map[word] = map.getOrDefault(word, 0) + 1
@@ -147,7 +148,8 @@ class TopKFrequentTrie : TopKFrequent {
         val ans: MutableList<String> = LinkedList()
 
         for (i in buckets.indices.reversed()) {
-            // for trie in each bucket, get all the words with same frequency in lexicographic order. Compare with k and get the result
+            // for trie in each bucket, get all the words with same frequency in lexicographic order.
+            // Compare with k and get the result
             if (buckets[i] != null) {
                 val l: MutableList<String> = LinkedList()
                 buckets[i]?.getWords(buckets[i]?.root, l)
@@ -165,12 +167,12 @@ class TopKFrequentTrie : TopKFrequent {
         return ans
     }
 
-    internal class TrieNode {
-        var children = arrayOfNulls<TrieNode>(ARR_SIZE)
+    class TrieNode {
+        var children = arrayOfNulls<TrieNode>(ALPHABET_LETTERS_COUNT)
         var word: String? = null
     }
 
-    internal class Trie {
+    class Trie {
         var root = TrieNode()
         fun addWord(word: String) {
             var cur: TrieNode? = root
@@ -190,21 +192,17 @@ class TopKFrequentTrie : TopKFrequent {
             if (node.word != null) {
                 ans.add(node.word ?: return)
             }
-            for (i in 0 until ARR_SIZE) {
+            for (i in 0 until ALPHABET_LETTERS_COUNT) {
                 if (node.children[i] != null) {
                     getWords(node.children[i], ans)
                 }
             }
         }
     }
-
-    companion object {
-        private const val ARR_SIZE = 26
-    }
 }
 
 class TopKFrequentBucketSort : TopKFrequent {
-    override fun perform(words: Array<String>, k: Int): List<String> {
+    override operator fun invoke(words: Array<String>, k: Int): List<String> {
         val map: MutableMap<String, Int> = HashMap()
         for (word in words) {
             map[word] = map.getOrDefault(word, 0) + 1
@@ -226,7 +224,7 @@ class TopKFrequentBucketSort : TopKFrequent {
                 val temp = buckets[i] ?: return emptyList()
                 if (temp.size < k0) {
                     k0 -= temp.size
-                    while (temp.size > 0) {
+                    while (temp.isNotEmpty()) {
                         ans.add(temp.pollFirstEntry().key)
                     }
                 } else {

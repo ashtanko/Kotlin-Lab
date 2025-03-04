@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import kotlin.math.abs
 
-interface SingleRowKeyboard {
-    fun perform(keyboard: String, word: String): Int
+fun interface SingleRowKeyboard {
+    operator fun invoke(keyboard: String, word: String): Int
 }
 
 class SingleRowKeyboardNaive : SingleRowKeyboard {
-    override fun perform(keyboard: String, word: String): Int {
-        val map = IntArray(LIMIT)
+    override operator fun invoke(keyboard: String, word: String): Int {
+        val map = IntArray(ALPHABET_LETTERS_COUNT)
         for (i in keyboard.indices) {
             map[keyboard[i] - 'a'] = i
         }
@@ -37,9 +38,5 @@ class SingleRowKeyboardNaive : SingleRowKeyboard {
         }
 
         return res
-    }
-
-    companion object {
-        private const val LIMIT = 26
     }
 }

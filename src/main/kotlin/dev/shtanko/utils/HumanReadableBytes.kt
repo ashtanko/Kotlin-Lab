@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,10 @@
 
 package dev.shtanko.utils
 
-import dev.shtanko.algorithms.leetcode.BYTE
+import dev.shtanko.algorithms.BYTE
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
+import java.util.Locale
 import kotlin.math.abs
 
 private const val WTF = 0xfffccccccccccccL
@@ -32,7 +33,7 @@ fun Long.toHumanReadableByteCountBin(): String {
     val bytes = this
     val absB = if (bytes == Long.MIN_VALUE) Long.MAX_VALUE else abs(bytes)
     if (absB < BYTE) {
-        return String.format("%d B", bytes)
+        return String.format(Locale.getDefault(), "%d B", bytes)
     }
     var value = absB
     val ci: CharacterIterator = StringCharacterIterator(SIZE_CHARACTERS)
@@ -43,5 +44,5 @@ fun Long.toHumanReadableByteCountBin(): String {
         i -= 10
     }
     value *= java.lang.Long.signum(bytes).toLong()
-    return String.format("%.1f %ciB", value / BYTE.toDouble(), ci.current())
+    return String.format(Locale.getDefault(), "%.1f %ciB", value / BYTE.toDouble(), ci.current())
 }

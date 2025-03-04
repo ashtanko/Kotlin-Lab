@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,15 @@ import kotlin.math.min
 
 /**
  * 2167. Minimum Time to Remove All Cars Containing Illegal Goods
- * @link https://leetcode.com/problems/minimum-time-to-remove-all-cars-containing-illegal-goods/
+ * @see <a href="https://leetcode.com/problems/minimum-time-to-remove-all-cars-containing-illegal-goods">
+ *     Source</a>
  */
-interface MinimumTime {
-    fun perform(s: String): Int
+fun interface MinimumTime {
+    operator fun invoke(s: String): Int
 }
 
 class MinimumTimeOnePass : MinimumTime {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         val n: Int = s.length
         var left = 0
         var res = n
@@ -40,7 +41,7 @@ class MinimumTimeOnePass : MinimumTime {
 }
 
 class MinimumTimePrefixSuffix : MinimumTime {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         if (s.isEmpty()) {
             return 0
         }

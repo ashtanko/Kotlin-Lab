@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,6 +21,7 @@ import dev.shtanko.patterns.behavioral.memento.StarType.RED_GIANT
 import dev.shtanko.patterns.behavioral.memento.StarType.SUN
 import dev.shtanko.patterns.behavioral.memento.StarType.SUPERNOVA
 import dev.shtanko.patterns.behavioral.memento.StarType.WHITE_DWARF
+import java.util.Locale
 
 class Star(private var type: StarType, private var ageYears: Int, private var massTons: Int) {
     /**
@@ -53,7 +54,7 @@ class Star(private var type: StarType, private var ageYears: Int, private var ma
     }
 
     override fun toString(): String =
-        String.format("%s age: %d years mass: %d tons", type.toString(), ageYears, massTons)
+        String.format(Locale.getDefault(), "%s age: %d years mass: %d tons", type.toString(), ageYears, massTons)
 
     private data class StarMementoInternal(val type: StarType, val ageYears: Int, val massTons: Int) : StarMemento
 }

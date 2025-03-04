@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,9 +26,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class HappyNumberTest {
+class HappyNumberTest {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(19, true),
             Arguments.of(16, false),
@@ -36,7 +36,7 @@ internal class HappyNumberTest {
         )
     }
 
-    internal class InputListArgumentsProvider : ArgumentsProvider {
+    class InputListArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(0, listOf<Int>()),
             Arguments.of(5, listOf(1)),
@@ -48,13 +48,13 @@ internal class HappyNumberTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `happy number test`(n: Int, expected: Boolean) {
-        val actual = n.isHappy()
+    fun `happy number test`(num: Int, expected: Boolean) {
+        val actual = num.isHappy()
         assertEquals(expected, actual)
     }
 
     @Test
-    internal fun `lost list test`() {
+    fun `lost list test`() {
         val happyList = mutableListOf<Int>()
         listOf(4, 8, 15, 16, 23, 42).each {
             if (it.isHappy()) {
@@ -66,7 +66,7 @@ internal class HappyNumberTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputListArgumentsProvider::class)
-    internal fun `happy number list test`(times: Int, expected: List<Int>) {
+    fun `happy number list test`(times: Int, expected: List<Int>) {
         val happyList = mutableListOf<Int>()
         repeat(times) {
             if (it.isHappy()) {

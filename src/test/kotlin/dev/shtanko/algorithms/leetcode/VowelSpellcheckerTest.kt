@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class VowelSpellcheckerTest<out T : VowelSpellchecker>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class VowelSpellcheckerTest<out T : VowelSpellchecker>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf<String>(),
@@ -37,15 +37,25 @@ internal abstract class VowelSpellcheckerTest<out T : VowelSpellchecker>(private
                 arrayOf("kite", "Kite", "KiTe", "Hare", "HARE", "Hear", "hear", "keti", "keet", "keto"),
                 arrayOf("kite", "KiTe", "KiTe", "Hare", "hare", "", "", "KiTe", "", "KiTe"),
             ),
+            Arguments.of(
+                arrayOf("yellow"),
+                arrayOf("YellOw"),
+                arrayOf("yellow"),
+            ),
+            Arguments.of(
+                arrayOf("yellow"),
+                arrayOf("YellOW"),
+                arrayOf("yellow"),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `spellchecker test`(wordlist: Array<String>, queries: Array<String>, expected: Array<String>) {
-        val actual = strategy.perform(wordlist, queries)
+    fun `spellchecker test`(wordlist: Array<String>, queries: Array<String>, expected: Array<String>) {
+        val actual = strategy.invoke(wordlist, queries)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class VowelSpellcheckerImplTest : VowelSpellcheckerTest<VowelSpellcheckerImpl>(VowelSpellcheckerImpl())
+class VowelSpellcheckerImplTest : VowelSpellcheckerTest<VowelSpellcheckerImpl>(VowelSpellcheckerImpl())

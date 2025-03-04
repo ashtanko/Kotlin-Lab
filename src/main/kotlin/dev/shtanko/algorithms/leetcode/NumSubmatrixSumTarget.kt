@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,98 +18,84 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1074. Number of Submatrices That Sum to Target
- * @link https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/
+ * @see <a href="https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/">Source</a>
  */
-interface NumSubmatrixSumTarget {
-    fun perform(matrix: Array<IntArray>, target: Int): Int
+fun interface NumSubmatrixSumTarget {
+    operator fun invoke(matrix: Array<IntArray>, target: Int): Int
 }
 
-/**
- * Approach 1: Number of Subarrays that Sum to Target: Horizontal 1D Prefix Sum
- * Time complexity: O(R^2 C)
- * Space complexity: O(RC)
- */
-class HorizontalPrefixSum : NumSubmatrixSumTarget {
-    override fun perform(matrix: Array<IntArray>, target: Int): Int {
-        val r: Int = matrix.size
-        val c: Int = matrix[0].size
+class NumSubmatrixSumTargetSolution : NumSubmatrixSumTarget {
+    override operator fun invoke(matrix: Array<IntArray>, target: Int): Int {
+        var res = 0
+        val m = matrix.size
+        val n = matrix[0].size
 
-        // compute 2D prefix sum
-        val ps = Array(r + 1) { IntArray(c + 1) }
-        for (i in 1 until r + 1) {
-            for (j in 1 until c + 1) {
-                ps[i][j] = ps[i - 1][j] + ps[i][j - 1] - ps[i - 1][j - 1] + matrix[i - 1][j - 1]
+        // Compute prefix sum for each row
+        for (i in 0 until m) {
+            for (j in 1 until n) {
+                matrix[i][j] += matrix[i][j - 1]
             }
         }
 
-        var count = 0
-        var currSum: Int
-        val h: MutableMap<Int, Int> = HashMap()
-        // reduce 2D problem to 1D one
-        // by fixing two rows r1 and r2 and
-        // computing 1D prefix sum for all matrices using [r1..r2] rows
-        for (r1 in 1 until r + 1) {
-            for (r2 in r1 until r + 1) {
-                h.clear()
-                h[0] = 1
-                for (col in 1 until c + 1) {
-                    // current 1D prefix sum
-                    currSum = ps[r2][col] - ps[r1 - 1][col]
-
-                    // add subarrays which sum up to (currSum - target)
-                    count += h.getOrDefault(currSum - target, 0)
-
-                    // save current prefix sum
-                    h[currSum] = h.getOrDefault(currSum, 0) + 1
+        // Iterate over all pairs of columns and count submatrices with sum equal to target
+        val counter = HashMap<Int, Int>()
+        for (i in 0 until n) {
+            for (j in i until n) {
+                counter.clear()
+                counter[0] = 1
+                var cur = 0
+                for (k in 0 until m) {
+                    cur += matrix[k][j] - if (i > 0) matrix[k][i - 1] else 0
+                    res += counter.getOrDefault(cur - target, 0)
+                    counter[cur] = counter.getOrDefault(cur, 0) + 1
                 }
             }
         }
-
-        return count
+        return res
     }
 }
 
-/**
- * Approach 2: Number of Subarrays that Sum to Target: Vertical 1D Prefix Sum
- * Time complexity: O(RC^2)
- * Space complexity: O(RC)
- */
-class VerticalPrefixSum : NumSubmatrixSumTarget {
-    override fun perform(matrix: Array<IntArray>, target: Int): Int {
-        val r: Int = matrix.size
-        val c: Int = matrix[0].size
+class NumSubmatrixSumTargetSolution2 : NumSubmatrixSumTarget {
+    override fun invoke(matrix: Array<IntArray>, target: Int): Int {
+        val prefixSumMatrix = calculatePrefixSum(matrix)
+        return countSubmatrixSums(prefixSumMatrix, target)
+    }
 
-        // compute 2D prefix sum
-        val ps = Array(r + 1) { IntArray(c + 1) }
-        for (i in 1 until r + 1) {
-            for (j in 1 until c + 1) {
-                ps[i][j] = ps[i - 1][j] + ps[i][j - 1] - ps[i - 1][j - 1] + matrix[i - 1][j - 1]
+    private fun calculatePrefixSum(matrix: Array<IntArray>): Array<IntArray> {
+        val m = matrix.size
+        val n = matrix[0].size
+        val prefixSumMatrix = Array(m) { IntArray(n) }
+
+        for (row in 0 until m) {
+            for (col in 0 until n) {
+                prefixSumMatrix[row][col] = matrix[row][col] + if (col > 0) prefixSumMatrix[row][col - 1] else 0
             }
         }
+        return prefixSumMatrix
+    }
 
+    private fun countSubmatrixSums(prefixSumMatrix: Array<IntArray>, target: Int): Int {
+        val m = prefixSumMatrix.size
+        val n = prefixSumMatrix[0].size
         var count = 0
-        var currSum: Int
-        val h: MutableMap<Int, Int> = HashMap()
-        // reduce 2D problem to 1D one
-        // by fixing two columns c1 and c2 and
-        // computing 1D prefix sum for all matrices using [c1..c2] columns
-        for (c1 in 1 until c + 1) {
-            for (c2 in c1 until c + 1) {
-                h.clear()
-                h[0] = 1
-                for (row in 1 until r + 1) {
-                    // current 1D prefix sum
-                    currSum = ps[row][c2] - ps[row][c1 - 1]
 
-                    // add subarrays which sum up to (currSum - target)
-                    count += h.getOrDefault(currSum - target, 0)
-
-                    // save current prefix sum
-                    h[currSum] = h.getOrDefault(currSum, 0) + 1
+        for (colStart in 0 until n) {
+            for (colEnd in colStart until n) {
+                for (rowStart in 0 until m) {
+                    var sum = 0
+                    for (rowEnd in rowStart until m) {
+                        sum += prefixSumMatrix[rowEnd][colEnd] - if (colStart > 0) {
+                            prefixSumMatrix[rowEnd][colStart - 1]
+                        } else {
+                            0
+                        }
+                        if (sum == target) {
+                            count++
+                        }
+                    }
                 }
             }
         }
-
         return count
     }
 }

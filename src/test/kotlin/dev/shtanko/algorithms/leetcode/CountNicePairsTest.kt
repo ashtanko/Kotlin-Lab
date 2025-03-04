@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -39,13 +39,37 @@ abstract class CountNicePairsTest<out T : CountNicePairs>(private val strategy: 
                 intArrayOf(),
                 0,
             ),
+            Arguments.of(
+                intArrayOf(1),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1),
+                1,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1),
+                3,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1),
+                6,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1),
+                10,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1, 1),
+                15,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `count nice pairs test`(nums: IntArray, expected: Int) {
-        val actual = strategy.perform(nums)
+        val actual = strategy.invoke(nums)
         assertThat(actual).isEqualTo(expected)
     }
 }

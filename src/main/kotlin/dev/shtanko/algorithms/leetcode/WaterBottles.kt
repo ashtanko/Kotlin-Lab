@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,14 +17,11 @@
 package dev.shtanko.algorithms.leetcode
 
 /**
- * Water Bottles.
- * Given numBottles full water bottles, you can exchange numExchange empty water bottles for one full water bottle.
- * The operation of drinking a full water bottle turns it into an empty bottle.
- * Return the maximum number of water bottles you can drink.
- * @link https://leetcode.com/problems/water-bottles/
+ * 1518. Water Bottles
+ * @see <a href="https://leetcode.com/problems/water-bottles/">Source</a>
  */
 class WaterBottles {
-    fun perform(numBottles: Int, numExchange: Int): Int {
+    operator fun invoke(numBottles: Int, numExchange: Int): Int {
         if (numExchange == 0) return numBottles
         var nBottles = numBottles
         var ans = nBottles

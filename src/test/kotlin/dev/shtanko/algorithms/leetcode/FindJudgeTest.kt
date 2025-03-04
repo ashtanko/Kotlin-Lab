@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class FindJudgeTest<out T : FindJudge>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class FindJudgeTest<out T : FindJudge>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 2,
@@ -95,16 +95,40 @@ internal abstract class FindJudgeTest<out T : FindJudge>(private val strategy: T
                 ),
                 -1,
             ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 1),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 3),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 4),
+                ),
+                -1,
+            ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 1),
+                ),
+                -1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `find judge test`(n: Int, trust: Array<IntArray>, expected: Int) {
-        val actual = strategy.perform(n, trust)
+    fun `find judge test`(num: Int, trust: Array<IntArray>, expected: Int) {
+        val actual = strategy.invoke(num, trust)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class FindJudgeTwoArraysTest : FindJudgeTest<FindJudgeTwoArrays>(FindJudgeTwoArrays())
-internal class FindJudgeOneArrayTest : FindJudgeTest<FindJudgeOneArray>(FindJudgeOneArray())
+class FindJudgeTwoArraysTest : FindJudgeTest<FindJudgeTwoArrays>(FindJudgeTwoArrays())
+class FindJudgeOneArrayTest : FindJudgeTest<FindJudgeOneArray>(FindJudgeOneArray())

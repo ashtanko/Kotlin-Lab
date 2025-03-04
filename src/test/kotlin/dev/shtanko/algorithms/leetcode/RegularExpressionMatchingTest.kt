@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,40 +16,64 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class RegularExpressionMatchingStrategyTest<out T : RegularExpressionMatchStrategy>(private val strategy: T) {
-
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Pair<String, String>, Boolean>> {
-            return listOf(
-                "aa" to "a" to false,
-                "aa" to "a*" to true,
-                "ab" to ".*" to true,
-                "aab" to "c*a*b" to true,
-                "mississippi" to "mis*is*p*." to false,
-            )
-        }
-    }
+abstract class RegularExpressionMatchingStrategyTest<out T : RegularExpressionMatch>(private val strategy: T) {
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `regular expression matching test`(testCase: Pair<Pair<String, String>, Boolean>) {
-        val (data, expected) = testCase
-        val (text, pattern) = data
-        val actual = strategy.perform(text = text, pattern = pattern)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `regular expression matching test`(text: String, pattern: String, expected: Boolean) {
+        val actual = strategy.invoke(text = text, pattern = pattern)
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                "aa",
+                "a",
+                false,
+            ),
+            Arguments.of(
+                "aa",
+                "a*",
+                true,
+            ),
+            Arguments.of(
+                "ab",
+                ".*",
+                true,
+            ),
+            Arguments.of(
+                "aab",
+                "c*a*b",
+                true,
+            ),
+            Arguments.of(
+                "mississippi",
+                "mis*is*p*.",
+                false,
+            ),
+            Arguments.of(
+                "",
+                "",
+                true,
+            ),
+        )
     }
 }
 
-internal class RegularExpressionMatchRecursionTest :
-    RegularExpressionMatchingStrategyTest<RegularExpressionMatchRecursion>(RegularExpressionMatchRecursion())
+class RegularExpressionMatchRecursionTest :
+    RegularExpressionMatchingStrategyTest<RegularExpressionMatch>(RegularExpressionMatchRecursion())
 
-internal class RegularExpressionMatchDPTopDownTest :
-    RegularExpressionMatchingStrategyTest<RegularExpressionMatchDPTopDown>(RegularExpressionMatchDPTopDown())
+class RegularExpressionMatchDPTopDownTest :
+    RegularExpressionMatchingStrategyTest<RegularExpressionMatch>(RegularExpressionMatchDPTopDown())
 
-internal class RegularExpressionMatchDPBottomUpTest :
-    RegularExpressionMatchingStrategyTest<RegularExpressionMatchDPBottomUp>(RegularExpressionMatchDPBottomUp())
+class RegularExpressionMatchDPBottomUpTest :
+    RegularExpressionMatchingStrategyTest<RegularExpressionMatch>(RegularExpressionMatchDPBottomUp())

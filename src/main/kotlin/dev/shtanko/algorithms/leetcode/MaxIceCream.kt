@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,17 @@ import kotlin.math.min
 
 /**
  * 1833. Maximum Ice Cream Bars
- * @link https://leetcode.com/problems/maximum-ice-cream-bars/
+ * @see <a href="https://leetcode.com/problems/maximum-ice-cream-bars/">Source</a>
  */
-interface MaxIceCream {
-    fun perform(costs: IntArray, coins: Int): Int
+fun interface MaxIceCream {
+    operator fun invoke(costs: IntArray, coins: Int): Int
 }
 
 /**
  * Approach 1 (Greedy)
  */
 class MaxIceCreamGreedy : MaxIceCream {
-    override fun perform(costs: IntArray, coins: Int): Int {
+    override operator fun invoke(costs: IntArray, coins: Int): Int {
         var c = coins
         // Store ice cream costs in increasing order.
         costs.sort()
@@ -51,7 +51,7 @@ class MaxIceCreamGreedy : MaxIceCream {
  * Approach 2 (Bucket Sort)
  */
 class MaxIceCreamBucketSort : MaxIceCream {
-    override fun perform(costs: IntArray, coins: Int): Int {
+    override operator fun invoke(costs: IntArray, coins: Int): Int {
         var c = coins
         // get the maximum cost available
         var max = costs[0]
@@ -84,7 +84,7 @@ class MaxIceCreamBucketSort : MaxIceCream {
  * Approach 3 (DP)
  */
 class MaxIceCreamDP : MaxIceCream {
-    override fun perform(costs: IntArray, coins: Int): Int {
+    override operator fun invoke(costs: IntArray, coins: Int): Int {
         var cns = coins
         var maxc = 0
 

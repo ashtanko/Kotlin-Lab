@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,15 +18,15 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 851. Loud and Rich
- * @link https://leetcode.com/problems/loud-and-rich/
+ * @see <a href="https://leetcode.com/problems/loud-and-rich/">Source</a>
  */
 fun interface LoudAndRich {
-    fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray
+    operator fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray
 }
 
 class LoudAndRichDFS : LoudAndRich {
 
-    override fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray {
+    override operator fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray {
         val n = quiet.size
         val res = IntArray(n) { -1 }
         val adj: Array<MutableList<Int>> = Array(n) { ArrayList() }
@@ -60,7 +60,7 @@ class LoudAndRichMap : LoudAndRich {
     private var richer2: HashMap<Int, MutableList<Int>> = HashMap()
     private lateinit var res: IntArray
 
-    override fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray {
+    override operator fun invoke(richer: Array<IntArray>, quiet: IntArray): IntArray {
         val n = quiet.size
         for (i in 0 until n) {
             richer2[i] = ArrayList()

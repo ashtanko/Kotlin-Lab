@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,9 +25,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class PowerOfFourTest<out T : PowOfFour>(private val strategy: T) {
+abstract class PowerOfFourTest<out T : PowOfFour>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(0, false),
             Arguments.of(1, true),
@@ -41,12 +41,12 @@ internal abstract class PowerOfFourTest<out T : PowOfFour>(private val strategy:
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `power of four test`(n: Int, expected: Boolean) {
-        val actual = strategy.isPow4(n)
+    fun `power of four test`(num: Int, expected: Boolean) {
+        val actual = strategy.isPow4(num)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class Pow4BruteForceTest : PowerOfFourTest<Pow4BruteForce>(Pow4BruteForce())
-internal class Pow4MathTest : PowerOfFourTest<Pow4Math>(Pow4Math())
-internal class Pow4BitManipulationTest : PowerOfFourTest<Pow4BitManipulation>(Pow4BitManipulation())
+class Pow4BruteForceTest : PowerOfFourTest<Pow4BruteForce>(Pow4BruteForce())
+class Pow4MathTest : PowerOfFourTest<Pow4Math>(Pow4Math())
+class Pow4BitManipulationTest : PowerOfFourTest<Pow4BitManipulation>(Pow4BitManipulation())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class AmbiguousCoordinatesTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class AmbiguousCoordinatesTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "",
@@ -71,13 +71,17 @@ internal class AmbiguousCoordinatesTest {
                 "(100)",
                 listOf("(10, 0)"),
             ),
+            Arguments.of(
+                "(1000)",
+                listOf("(100, 0)"),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `name test`(s: String, expected: List<String>) {
-        val actual = AmbiguousCoordinates().perform(s)
-        assertThat(actual).hasSameElementsAs(expected)
+    fun `name test`(str: String, expected: List<String>) {
+        val actual = AmbiguousCoordinates().invoke(str)
+        assertThat(actual).containsExactlyInAnyOrder(*expected.toTypedArray())
     }
 }

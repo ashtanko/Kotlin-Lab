@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class HighFiveTest<out T : HighFiveStrategy>(private val strategy: T) {
+abstract class HighFiveTest<out T : HighFiveStrategy>(private val strategy: T) {
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
@@ -70,11 +70,11 @@ internal abstract class HighFiveTest<out T : HighFiveStrategy>(private val strat
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `high five test`(items: Array<IntArray>, expected: Array<IntArray>) {
-        val actual = strategy.perform(items)
+    fun `high five test`(items: Array<IntArray>, expected: Array<IntArray>) {
+        val actual = strategy.invoke(items)
         assertArrayEquals(expected, actual)
     }
 }
 
-internal class HighFivePriorityQueueTest : HighFiveTest<HighFivePriorityQueue>(HighFivePriorityQueue())
-internal class HighFiveSortTest : HighFiveTest<HighFiveSort>(HighFiveSort())
+class HighFivePriorityQueueTest : HighFiveTest<HighFivePriorityQueue>(HighFivePriorityQueue())
+class HighFiveSortTest : HighFiveTest<HighFiveSort>(HighFiveSort())

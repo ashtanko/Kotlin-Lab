@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,32 +16,55 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import java.util.stream.Stream
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class MonotonicArrayTest {
+abstract class MonotonicArrayTest<out T : MonotonicArray>(private val strategy: T) {
 
-    companion object {
-        @JvmStatic
-        fun casesProvider(): List<Pair<Boolean, IntArray>> {
-            return listOf(
-                true to intArrayOf(1, 2, 2, 3),
-                true to intArrayOf(6, 5, 4, 4),
-                false to intArrayOf(1, 3, 2),
-                true to intArrayOf(1, 2, 4, 5),
-                true to intArrayOf(1, 1, 1),
-                true to intArrayOf(1, 2, 5),
-                false to intArrayOf(1, 5, 2),
-            )
-        }
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(1, 2, 2, 3),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(6, 5, 4, 4),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(1, 3, 2),
+                false,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 4, 5),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 5),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(1, 5, 2),
+                false,
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("casesProvider")
-    internal fun `is monotonic test`(testCase: Pair<Boolean, IntArray>) {
-        val (expected, arr) = testCase
-        val actual = arr.isMonotonic()
-        assertEquals(expected, actual)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `is monotonic test`(nums: IntArray, expected: Boolean) {
+        val actual = strategy(nums)
+        Assertions.assertThat(actual).isEqualTo(expected)
     }
 }
+
+class MonotonicArrayOnePassTest : MonotonicArrayTest<MonotonicArray>(MonotonicArrayOnePass())

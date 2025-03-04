@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,12 +23,12 @@ import kotlin.math.max
  * 32. Longest Valid Parentheses
  * https://leetcode.com/problems/longest-valid-parentheses/
  */
-interface LongestValidParenthesesStrategy {
-    fun perform(s: String): Int
+fun interface LongestValidParenthesesStrategy {
+    operator fun invoke(s: String): Int
 }
 
 class LongestValidParenthesesBruteForce : LongestValidParenthesesStrategy {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var maxLen = 0
         for (i in s.indices) {
             var j = i + 2
@@ -59,7 +59,7 @@ class LongestValidParenthesesBruteForce : LongestValidParenthesesStrategy {
 }
 
 class LongestValidParenthesesDP : LongestValidParenthesesStrategy {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var maxAns = 0
         val dp = IntArray(s.length)
         for (i in 1 until s.length) {
@@ -77,7 +77,7 @@ class LongestValidParenthesesDP : LongestValidParenthesesStrategy {
 }
 
 class LongestValidParenthesesStack : LongestValidParenthesesStrategy {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var maxAns = 0
         val stack = Stack<Int>()
         stack.push(-1)
@@ -98,7 +98,7 @@ class LongestValidParenthesesStack : LongestValidParenthesesStrategy {
 }
 
 class LongestValidParenthesesWithoutExtraSpace : LongestValidParenthesesStrategy {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var left = 0
         var right = 0
         var maxLength = 0

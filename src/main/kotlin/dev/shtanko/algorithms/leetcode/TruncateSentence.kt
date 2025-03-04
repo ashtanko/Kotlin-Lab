@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1816. Truncate Sentence
- * @link https://leetcode.com/problems/truncate-sentence/
+ * @see <a href="https://leetcode.com/problems/truncate-sentence/">Source</a>
  */
-interface TruncateSentence {
-    fun perform(s: String, k: Int): String
+fun interface TruncateSentence {
+    operator fun invoke(str: String, k: Int): String
 }
 
 class TruncateSentenceBruteForce : TruncateSentence {
-    override fun perform(s: String, k: Int) = s.split(" ").take(k).joinToString(" ")
+    override operator fun invoke(str: String, k: Int) = str.split(" ").take(k).joinToString(" ")
 }

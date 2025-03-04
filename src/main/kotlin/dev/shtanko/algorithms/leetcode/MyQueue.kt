@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,9 +20,9 @@ import java.util.Stack
 
 /**
  * 232. Implement Queue using Stacks
- * @link https://leetcode.com/problems/implement-queue-using-stacks/description/
+ * @see <a href="https://leetcode.com/problems/implement-queue-using-stacks">Source</a>
  */
-internal class MyQueue {
+class MyQueue {
 
     private val addStack = Stack<Int>()
     private val delStack = Stack<Int>()

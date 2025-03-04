@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.pow
 
 /**
  * 78. Subsets
- * @link https://leetcode.com/problems/subsets/
+ * @see <a href="https://leetcode.com/problems/subsets/">Source</a>
  */
 fun interface Subsets {
-    fun perform(nums: IntArray): List<List<Int>>
+    operator fun invoke(nums: IntArray): List<List<Int>>
 }
 
 /**
  * Approach 1: Cascading
  */
 class CascadingSubsets : Subsets {
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         val output: MutableList<List<Int>> = ArrayList()
         output.add(ArrayList())
 
@@ -58,7 +58,7 @@ class CascadingSubsets : Subsets {
  */
 class BacktrackingSubsets : Subsets {
 
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         val result: MutableList<List<Int>> = ArrayList()
         backtrack(result, ArrayList(), nums, 0)
         return result
@@ -80,7 +80,7 @@ class BacktrackingSubsets : Subsets {
  * Approach 3: Lexicographic (Binary Sorted) Subsets
  */
 class LexicographicSubsets : Subsets {
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         val output: MutableList<List<Int>> = ArrayList()
         val n: Int = nums.size
 

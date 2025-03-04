@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,14 @@ package dev.shtanko.algorithms.leetcode
 import java.util.Stack
 import kotlin.math.abs
 
+private const val ASCII_CASE_DIFFERENCE = 32
+
 /**
  * Make The String Great.
- * @link https://leetcode.com/problems/make-the-string-great/
+ * @see <a href="https://leetcode.com/problems/make-the-string-great/">Source</a>
  */
 fun interface MakeTheStringGreat {
-    fun perform(s: String): String
+    operator fun invoke(str: String): String
 }
 
 /**
@@ -32,12 +34,8 @@ fun interface MakeTheStringGreat {
  */
 class MakeTheStringGreatIteration : MakeTheStringGreat {
 
-    companion object {
-        private const val SIZE = 32
-    }
-
-    override fun perform(s: String): String {
-        val newS = StringBuilder(s)
+    override operator fun invoke(str: String): String {
+        val newS = StringBuilder(str)
 
         // if s has less than 2 characters, we just return itself.
         while (newS.length > 1) {
@@ -50,7 +48,7 @@ class MakeTheStringGreatIteration : MakeTheStringGreat {
                 val nextChar = newS[i + 1]
 
                 // If they make a pair, remove them from 's' and let 'find = true'.
-                if (abs(currChar.code - nextChar.code) == SIZE) {
+                if (abs(currChar.code - nextChar.code) == ASCII_CASE_DIFFERENCE) {
                     newS.deleteCharAt(i)
                     newS.deleteCharAt(i)
                     find = true
@@ -70,43 +68,39 @@ class MakeTheStringGreatIteration : MakeTheStringGreat {
  */
 class MakeTheStringGreatRecursion : MakeTheStringGreat {
 
-    companion object {
-        private const val SIZE = 32
-    }
-
-    override fun perform(s: String): String {
+    override operator fun invoke(str: String): String {
         // If we find a pair in 's', remove this pair from 's'
         // and solve the remaining string recursively.
-        for (i in 0 until s.length - 1) {
-            if (abs(s[i] - s[i + 1]) == SIZE) {
-                return perform(s.substring(0, i) + s.substring(i + 2))
+        for (i in 0 until str.length - 1) {
+            if (abs(str[i] - str[i + 1]) == ASCII_CASE_DIFFERENCE) {
+                return invoke(str.substring(0, i) + str.substring(i + 2))
             }
         }
 
         // Base case, if we can't find a pair, just return 's'.
-        return s
+        return str
     }
 }
 
 class MakeTheStringGreatStack : MakeTheStringGreat {
 
     companion object {
-        private const val ASCII_A = 97
-        private const val ASCII_a = 65
+        private const val ASCII_UPPER_CASE = 97
+        private const val ASCII_LOWER_CASE = 65
     }
 
-    override fun perform(s: String): String {
+    override operator fun invoke(str: String): String {
         val stack: Stack<Char> = Stack()
-        for (i in s.indices) {
-            if (!stack.isEmpty() && abs(stack.peek() - s[i]) == ASCII_A - ASCII_a) {
+        for (i in str.indices) {
+            if (stack.isNotEmpty() && abs(stack.peek() - str[i]) == ASCII_UPPER_CASE - ASCII_LOWER_CASE) {
                 stack.pop()
             } else {
-                stack.push(s[i])
+                stack.push(str[i])
             }
         }
         val res = CharArray(stack.size)
         var index: Int = stack.size - 1
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             res[index--] = stack.pop()
         }
         return String(res)

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,13 +43,25 @@ abstract class UniqueBinarySearchTreesTest<out T : UniqueBinarySearchTrees>(priv
                 12,
                 208012,
             ),
+            Arguments.of(
+                19,
+                1767263190,
+            ),
+            Arguments.of(
+                0,
+                1,
+            ),
+            Arguments.of(
+                2,
+                2,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `num trees test`(n: Int, expected: Int) {
-        val actual = strategy.numTrees(n)
+    fun `num trees test`(num: Int, expected: Int) {
+        val actual = strategy.invoke(num)
         assertThat(actual).isEqualTo(expected)
     }
 }

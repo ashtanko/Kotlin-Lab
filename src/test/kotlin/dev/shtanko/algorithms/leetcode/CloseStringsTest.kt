@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,6 +33,11 @@ abstract class CloseStringsTest<out T : CloseStrings>(private val strategy: T) {
                 true,
             ),
             Arguments.of(
+                "",
+                "",
+                true,
+            ),
+            Arguments.of(
                 "a",
                 "aa",
                 false,
@@ -42,13 +47,33 @@ abstract class CloseStringsTest<out T : CloseStrings>(private val strategy: T) {
                 "abbccc",
                 true,
             ),
+            Arguments.of(
+                "cabbba",
+                "aabbss",
+                false,
+            ),
+            Arguments.of(
+                "cabbba",
+                "aabbcc",
+                false,
+            ),
+            Arguments.of(
+                "cabbba",
+                "aabbccc",
+                false,
+            ),
+            Arguments.of(
+                "aaabbbbccddeeeeefffff",
+                "aaaaabbcccdddeeeeffff",
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `close strings test`(word1: String, word2: String, expected: Boolean) {
-        val actual = strategy.perform(word1, word2)
+        val actual = strategy.invoke(word1, word2)
         assertThat(actual).isEqualTo(expected)
     }
 }

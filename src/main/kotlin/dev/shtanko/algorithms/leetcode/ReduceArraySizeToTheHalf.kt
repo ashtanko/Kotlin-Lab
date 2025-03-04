@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,12 +22,12 @@ import java.util.PriorityQueue
  * Given an array arr.  You can choose a set of integers and remove all the occurrences of these integers in the array.
  * Return the minimum size of the set so that at least half of the integers of the array are removed.
  */
-interface MinSetSizeStrategy {
-    fun perform(arr: IntArray): Int
+fun interface MinSetSize {
+    operator fun invoke(arr: IntArray): Int
 }
 
-class MinSetSizeHashMap : MinSetSizeStrategy {
-    override fun perform(arr: IntArray): Int {
+class MinSetSizeHashMap : MinSetSize {
+    override operator fun invoke(arr: IntArray): Int {
         return arr.minSetSize()
     }
 
@@ -51,7 +51,7 @@ class MinSetSizeHashMap : MinSetSizeStrategy {
 
         for (i in size downTo 0) {
             val cur = list[i]
-            if (cur == null || cur.isEmpty()) continue
+            if (cur.isNullOrEmpty()) continue
             for (num in cur) {
                 steps += i
                 res++
@@ -65,8 +65,8 @@ class MinSetSizeHashMap : MinSetSizeStrategy {
     }
 }
 
-class MinSetSizePriorityQueue : MinSetSizeStrategy {
-    override fun perform(arr: IntArray): Int {
+class MinSetSizePriorityQueue : MinSetSize {
+    override operator fun invoke(arr: IntArray): Int {
         return arr.minSetSize2()
     }
 
@@ -82,7 +82,7 @@ class MinSetSizePriorityQueue : MinSetSizeStrategy {
         for (n in map.keys) {
             pq.offer(map[n])
         }
-        while (!pq.isEmpty()) {
+        while (pq.isNotEmpty()) {
             sum += pq.poll()
             res++
             val local = size + 1

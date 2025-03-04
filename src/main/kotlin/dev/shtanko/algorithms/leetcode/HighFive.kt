@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,20 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.second
+import dev.shtanko.extensions.second
 import java.util.PriorityQueue
 import java.util.TreeMap
 
 private const val CAPACITY = 5
 private const val SIZE = 2
 
-interface HighFiveStrategy {
-    fun perform(items: Array<IntArray>): Array<IntArray>
+fun interface HighFiveStrategy {
+    operator fun invoke(items: Array<IntArray>): Array<IntArray>
 }
 
 class HighFivePriorityQueue : HighFiveStrategy {
 
-    override fun perform(items: Array<IntArray>): Array<IntArray> {
+    override operator fun invoke(items: Array<IntArray>): Array<IntArray> {
         val map: TreeMap<Int, PriorityQueue<Int>> = TreeMap<Int, PriorityQueue<Int>>()
 
         for (item in items) {
@@ -56,7 +56,7 @@ class HighFivePriorityQueue : HighFiveStrategy {
             val pq: PriorityQueue<Int> = map[id] ?: break
             var sum = 0
             val size: Int = pq.size
-            while (!pq.isEmpty()) {
+            while (pq.isNotEmpty()) {
                 sum += pq.poll()
             }
             res[index][1] = sum / size
@@ -68,7 +68,7 @@ class HighFivePriorityQueue : HighFiveStrategy {
 
 class HighFiveSort : HighFiveStrategy {
 
-    override fun perform(items: Array<IntArray>): Array<IntArray> {
+    override operator fun invoke(items: Array<IntArray>): Array<IntArray> {
         items.sortWith { t1, t2 ->
             // put item[id, score] with same id together
             // for each id/student, item[id, score] is ordered by score (increasing)

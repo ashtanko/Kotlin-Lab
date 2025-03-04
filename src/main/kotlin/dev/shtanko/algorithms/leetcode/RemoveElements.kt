@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 203. Remove Linked List Elements
- * @link https://leetcode.com/problems/remove-linked-list-elements/
+ * @see <a href="https://leetcode.com/problems/remove-linked-list-elements/">Source</a>
  */
-interface RemoveElements {
-    fun perform(head: ListNode?, value: Int): ListNode?
+fun interface RemoveElements {
+    operator fun invoke(head: ListNode?, value: Int): ListNode?
 }
 
 class RemoveElementsIterative : RemoveElements {
-    override fun perform(head: ListNode?, value: Int): ListNode? {
+    override operator fun invoke(head: ListNode?, value: Int): ListNode? {
         if (head == null) {
             return null
         }
@@ -47,13 +47,13 @@ class RemoveElementsIterative : RemoveElements {
 }
 
 class RemoveElementsRecursive : RemoveElements {
-    override fun perform(head: ListNode?, value: Int): ListNode? {
+    override operator fun invoke(head: ListNode?, value: Int): ListNode? {
         if (head == null) {
             return null
         }
 
         // Once removeElements call is done, right side of the list is solved.
-        val rightSideHead: ListNode? = perform(head.next, value)
+        val rightSideHead: ListNode? = invoke(head.next, value)
         if (head.value == value) {
             return rightSideHead
         }

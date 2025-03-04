@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2244. Minimum Rounds to Complete All Tasks
- * @link https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/
+ * @see <a href="https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/">Source</a>
  */
-interface MinimumRounds {
-    fun perform(tasks: IntArray): Int
+fun interface MinimumRounds {
+    operator fun invoke(tasks: IntArray): Int
 }
 
 class MinimumRoundsSumUp : MinimumRounds {
-    override fun perform(tasks: IntArray): Int {
+    override operator fun invoke(tasks: IntArray): Int {
         val count = HashMap<Int, Int>()
         for (a in tasks) {
             count[a] = count.getOrDefault(a, 0) + 1
@@ -39,7 +39,7 @@ class MinimumRoundsSumUp : MinimumRounds {
 }
 
 class MinimumRoundsGreedy : MinimumRounds {
-    override fun perform(tasks: IntArray): Int {
+    override operator fun invoke(tasks: IntArray): Int {
         return tasks.groupBy {
             it
         }.map {

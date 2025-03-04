@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,10 +21,10 @@ import java.util.TreeMap
 
 /**
  * 1094. Car Pooling
- * @link https://leetcode.com/problems/car-pooling/
+ * @see <a href="https://leetcode.com/problems/car-pooling/">Source</a>
  */
 fun interface CarPooling {
-    fun invoke(trips: Array<IntArray>, capacity: Int): Boolean
+    operator fun invoke(trips: Array<IntArray>, capacity: Int): Boolean
 }
 
 class ThousandOneStops : CarPooling {
@@ -32,7 +32,7 @@ class ThousandOneStops : CarPooling {
         private const val STOPS = 1001
     }
 
-    override fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
+    override operator fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
         val nums = IntArray(STOPS)
         for (trip in trips) {
             if (trip.isEmpty()) return false
@@ -48,7 +48,7 @@ class ThousandOneStops : CarPooling {
 }
 
 class CarPoolingMeetingRoom : CarPooling {
-    override fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
+    override operator fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
         var c = capacity
         val m: MutableMap<Int, Int> = TreeMap()
         for (t in trips) {
@@ -67,7 +67,7 @@ class CarPoolingMeetingRoom : CarPooling {
 }
 
 class CarPoolingInterval : CarPooling {
-    override fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
+    override operator fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
         if (trips.isEmpty() || capacity == 0) return false
         trips.sortWith(compareBy({ it[1] }, { it[2] }))
         val pq = PriorityQueue<IntArray>(compareBy({ it.first() }, { it.last() })).apply {
@@ -91,7 +91,7 @@ class CarPoolingStream : CarPooling {
         private const val STOPS = 1001
     }
 
-    override fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
+    override operator fun invoke(trips: Array<IntArray>, capacity: Int): Boolean {
         val count = IntArray(STOPS)
         for (t in trips) {
             if (t.isEmpty()) return false

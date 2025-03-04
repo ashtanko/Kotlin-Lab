@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,24 +24,26 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class FindLuckyTest<out T : FindLuckyStrategy>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class FindLuckyTest<out T : FindLuckyStrategy>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(2, 2, 3, 4), 2),
             Arguments.of(intArrayOf(1, 2, 2, 3, 3, 3), 3),
             Arguments.of(intArrayOf(2, 2, 2, 3, 3), -1),
             Arguments.of(intArrayOf(5), -1),
             Arguments.of(intArrayOf(7, 7, 7, 7, 7, 7, 7), 7),
+            Arguments.of(intArrayOf(), -1),
+            Arguments.of(intArrayOf(1, 1, 2, 2, 2, 3, 3, 3, 3, 3), -1),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `simple test`(arr: IntArray, expected: Int) {
-        val actual = strategy.perform(arr)
+    fun `simple test`(arr: IntArray, expected: Int) {
+        val actual = strategy.invoke(arr)
         assertEquals(expected, actual)
     }
 }
 
-internal class FindLuckyStraightForwardTest : FindLuckyTest<FindLuckyStraightForward>(FindLuckyStraightForward())
-internal class FindLuckyMapTest : FindLuckyTest<FindLuckyMap>(FindLuckyMap())
+class FindLuckyStraightForwardTest : FindLuckyTest<FindLuckyStraightForward>(FindLuckyStraightForward())
+class FindLuckyMapTest : FindLuckyTest<FindLuckyMap>(FindLuckyMap())

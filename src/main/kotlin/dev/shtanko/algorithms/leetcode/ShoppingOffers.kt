@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.min
 
 /**
  * 638. Shopping Offers
- * @link https://leetcode.com/problems/shopping-offers/
+ * @see <a href="https://leetcode.com/problems/shopping-offers/">Source</a>
  */
-interface ShoppingOffers {
-    fun perform(price: List<Int>, special: List<List<Int>>, needs: List<Int>): Int
+fun interface ShoppingOffers {
+    operator fun invoke(price: List<Int>, special: List<List<Int>>, needs: List<Int>): Int
 }
 
 class ShoppingOffersRecursive : ShoppingOffers {
-    override fun perform(price: List<Int>, special: List<List<Int>>, needs: List<Int>): Int {
+    override operator fun invoke(price: List<Int>, special: List<List<Int>>, needs: List<Int>): Int {
         return backTrace(price, special, needs, 0)
     }
 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,23 @@ abstract class DistributeRepeatingIntegersTest<out T : DistributeRepeatingIntege
                 intArrayOf(2, 2),
                 true,
             ),
+            Arguments.of(
+                intArrayOf(1, 1, 2, 3),
+                intArrayOf(2, 2),
+                false,
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1),
+                intArrayOf(2, 3),
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `can distribute test`(nums: IntArray, quantity: IntArray, expected: Boolean) {
-        val actual = strategy.canDistribute(nums, quantity)
+        val actual = strategy.invoke(nums, quantity)
         Assertions.assertThat(actual).isEqualTo(expected)
     }
 }

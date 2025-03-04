@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface SqrtStrategy {
-    fun mySqrt(x: Int): Int
+fun interface SqrtStrategy {
+    operator fun invoke(x: Int): Int
 }
 
 class SqrtBruteForce : SqrtStrategy {
-    override fun mySqrt(x: Int): Int {
+    override fun invoke(x: Int): Int {
         if (x == 0) return 0
         var i = 1
         while (i <= x / i) {
@@ -35,7 +35,7 @@ class SqrtBruteForce : SqrtStrategy {
 }
 
 class SqrtBS : SqrtStrategy {
-    override fun mySqrt(x: Int): Int {
+    override fun invoke(x: Int): Int {
         if (x == 0) return 0
         var start = 1
         var end = x
@@ -57,7 +57,7 @@ class SqrtBS : SqrtStrategy {
 }
 
 class SqrtNewton : SqrtStrategy {
-    override fun mySqrt(x: Int): Int {
+    override fun invoke(x: Int): Int {
         if (x == 0) return 0
         var i = x.toLong()
         while (i > x / i) {

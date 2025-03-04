@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,19 +47,29 @@ abstract class TopKFrequentTest<out T : TopKFrequent>(private val strategy: T) {
                 0,
                 emptyList<String>(),
             ),
+            Arguments.of(
+                arrayOf("a", "b"),
+                1,
+                listOf("a"),
+            ),
+            Arguments.of(
+                arrayOf("a", "b"),
+                2,
+                listOf("a", "b"),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `top K frequent test`(words: Array<String>, k: Int, expected: List<String>) {
-        val actual = strategy.perform(words, k)
+        val actual = strategy.invoke(words, k)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
 class TopKFrequentMapTest : TopKFrequentTest<TopKFrequent>(TopKFrequentMap())
 class TopKFrequentSortingTest : TopKFrequentTest<TopKFrequent>(TopKFrequentSorting())
-class TopKFrequentMinHeapTest : TopKFrequentTest<TopKFrequent>(TopKFrequentMinHeap())
+class TopKFrequentFurthestBuildingMinHeapTest : TopKFrequentTest<TopKFrequent>(TopKFrequentMinHeap())
 class TopKFrequentTrieTest : TopKFrequentTest<TopKFrequent>(TopKFrequentTrie())
 class TopKFrequentBucketSortTest : TopKFrequentTest<TopKFrequent>(TopKFrequentBucketSort())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 74. Search a 2D Matrix
- * @link https://leetcode.com/problems/search-a-2d-matrix/
+ * @see <a href="https://leetcode.com/problems/search-a-2d-matrix/">Source</a>
  */
-interface SearchMatrix {
-    fun perform(matrix: Array<IntArray>, target: Int): Boolean
+fun interface SearchMatrix {
+    operator fun invoke(matrix: Array<IntArray>, target: Int): Boolean
 }
 
 class SearchMatrixBS : SearchMatrix {
-    override fun perform(matrix: Array<IntArray>, target: Int): Boolean {
+    override operator fun invoke(matrix: Array<IntArray>, target: Int): Boolean {
         if (matrix.isEmpty()) {
             return false
         }

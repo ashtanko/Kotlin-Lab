@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.second
+import dev.shtanko.extensions.second
 
 /**
  * 370. Range Addition
- * @link https://leetcode.com/problems/range-addition/
+ * @see <a href="https://leetcode.com/problems/range-addition/">Source</a>
  */
-interface RangeAddition {
-    fun perform(length: Int, updates: Array<IntArray>): IntArray
+fun interface RangeAddition {
+    operator fun invoke(length: Int, updates: Array<IntArray>): IntArray
 }
 
 /**
@@ -32,7 +32,7 @@ interface RangeAddition {
  * Space complexity : O(1)
  */
 class RangeAdditionBruteForce : RangeAddition {
-    override fun perform(length: Int, updates: Array<IntArray>): IntArray {
+    override operator fun invoke(length: Int, updates: Array<IntArray>): IntArray {
         val ans = IntArray(length) { 0 }
         for (triplet in updates) {
             val startIndex = triplet.first()
@@ -52,7 +52,7 @@ class RangeAdditionBruteForce : RangeAddition {
  * Space complexity : O(1)
  */
 class RangeAdditionCaching : RangeAddition {
-    override fun perform(length: Int, updates: Array<IntArray>): IntArray {
+    override operator fun invoke(length: Int, updates: Array<IntArray>): IntArray {
         val ans = IntArray(length) { 0 }
         for (triplet in updates) {
             val startIndex = triplet.first()

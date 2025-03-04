@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,7 @@ package dev.shtanko.algorithms.leetcode
 /**
  * Unique Binary Search Trees 2
  */
-internal fun generateTrees(n: Int): MutableList<TreeNode?> {
+fun invoke(n: Int): MutableList<TreeNode?> {
     var res: MutableList<TreeNode?> = ArrayList()
     if (n <= 0) return res
     res.add(null)
@@ -39,7 +39,8 @@ internal fun generateTrees(n: Int): MutableList<TreeNode?> {
             /* Other Cases: put n on root.left, root.left.left, root.left....left,
              * the root of the new tree is still @node,
              * i put on insertParent.left,
-             * and the original left tree of the insertParent is set as the right subtree of the new node since i is small than values in the subtree.
+             * and the original left tree of the insertParent is set as the right subtree of the new node since i is
+             * small than values in the subtree.
              */
             var insertParent = node
             while (insertParent != null) {

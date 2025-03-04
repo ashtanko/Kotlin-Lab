@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,28 +16,37 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class NimGameTest {
-
-    companion object {
-        @JvmStatic
-        fun casesProvider(): List<Pair<Boolean, Int>> {
-            return listOf(
-                false to 4,
-                true to 1,
-                true to 2,
-            )
-        }
-    }
+class NimGameTest {
 
     @ParameterizedTest
-    @MethodSource("casesProvider")
-    internal fun `nim game test`(testCase: Pair<Boolean, Int>) {
-        val (expected, n) = testCase
-        val actual = canWinNim(n)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `nim game test`(num: Int, expected: Boolean) {
+        val actual = canWinNim(num)
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                4,
+                false,
+            ),
+            Arguments.of(
+                1,
+                true,
+            ),
+            Arguments.of(
+                2,
+                true,
+            ),
+        )
     }
 }

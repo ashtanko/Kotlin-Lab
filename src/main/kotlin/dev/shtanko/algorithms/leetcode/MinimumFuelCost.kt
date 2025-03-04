@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2477. Minimum Fuel Cost to Report to the Capital
- * @link https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/
+ * @see <a href="https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/">Source</a>
  */
-interface MinimumFuelCost {
-    fun perform(roads: Array<IntArray>, seats: Int): Long
+fun interface MinimumFuelCost {
+    operator fun invoke(roads: Array<IntArray>, seats: Int): Long
 }
 
 class MinimumFuelCostDFS : MinimumFuelCost {
@@ -29,7 +29,7 @@ class MinimumFuelCostDFS : MinimumFuelCost {
     private var ans: Long = 0
     private var s: Int = 0
 
-    override fun perform(roads: Array<IntArray>, seats: Int): Long {
+    override operator fun invoke(roads: Array<IntArray>, seats: Int): Long {
         val graph: MutableList<MutableList<Int>> = ArrayList()
         s = seats
         for (i in 0 until roads.size + 1) {

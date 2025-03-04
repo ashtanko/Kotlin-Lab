@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class CountSquaresTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class CountSquaresTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -44,13 +44,30 @@ internal class CountSquaresTest {
                 ),
                 7,
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 1),
+                ),
+                14,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 1),
+                ),
+                20,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `count squares test`(matrix: Array<IntArray>, expected: Int) {
-        val actual = CountSquares.perform(matrix)
+    fun `count squares test`(matrix: Array<IntArray>, expected: Int) {
+        val actual = CountSquares.invoke(matrix)
         assertThat(actual, equalTo(expected))
     }
 }

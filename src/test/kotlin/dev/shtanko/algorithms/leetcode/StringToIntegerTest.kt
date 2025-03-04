@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class StringToIntegerTest {
+class StringToIntegerTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
@@ -72,13 +72,45 @@ internal class StringToIntegerTest {
                 "A",
                 0,
             ),
+            Arguments.of(
+                "A 1",
+                0,
+            ),
+            Arguments.of(
+                " 1 A",
+                1,
+            ),
+            Arguments.of(
+                " 1 A 2",
+                1,
+            ),
+            Arguments.of(
+                " 1 2 A",
+                1,
+            ),
+            Arguments.of(
+                " 1 2 A 3",
+                1,
+            ),
+            Arguments.of(
+                " 1 2 3 A",
+                1,
+            ),
+            Arguments.of(
+                " 1 2 3 A 4",
+                1,
+            ),
+            Arguments.of(
+                " 1 2 3 4 A",
+                1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `string to int test`(s: String, expected: Int) {
-        val actual = s.atoi()
+    fun `string to int test`(str: String, expected: Int) {
+        val actual = str.atoi()
         assertEquals(expected, actual)
     }
 }

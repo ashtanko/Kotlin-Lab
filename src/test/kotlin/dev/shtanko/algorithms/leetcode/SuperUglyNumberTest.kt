@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,34 +16,42 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SuperUglyNumberTest<out T : SuperUglyNumberStrategy>(private val strategy: T) {
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Pair<Int, IntArray>, Int>> {
-            return listOf(
-                12 to intArrayOf(2, 7, 13, 19) to 32,
-            )
-        }
-    }
+abstract class SuperUglyNumberTest<out T : SuperUglyNumber>(private val strategy: T) {
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `super ugly number test`(testCase: Pair<Pair<Int, IntArray>, Int>) {
-        val (data, expected) = testCase
-        val (n, primes) = data
-        val actual = strategy.perform(n, primes)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `super ugly number test`(num: Int, primes: IntArray, expected: Int) {
+        val actual = strategy.invoke(num, primes)
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                12,
+                intArrayOf(2, 7, 13, 19),
+                32,
+            ),
+            Arguments.of(
+                1,
+                intArrayOf(1),
+                1,
+            ),
+        )
     }
 }
 
-internal class SuperUglyNumberCommonTest : SuperUglyNumberTest<SuperUglyNumberCommon>(SuperUglyNumberCommon())
+class SuperUglyNumberCommonTest : SuperUglyNumberTest<SuperUglyNumber>(SuperUglyNumberCommon())
 
-internal class SuperUglyNumberRedundantMultiplicationTest :
-    SuperUglyNumberTest<SuperUglyNumberRedundantMultiplication>(SuperUglyNumberRedundantMultiplication())
+class SuperUglyNumberRedundantMultiplicationTest :
+    SuperUglyNumberTest<SuperUglyNumber>(SuperUglyNumberRedundantMultiplication())
 
-internal class SuperUglyNumberHeapTest :
-    SuperUglyNumberTest<SuperUglyNumberHeap>(SuperUglyNumberHeap())
+class SuperUglyNumberHeapTest : SuperUglyNumberTest<SuperUglyNumber>(SuperUglyNumberHeap())

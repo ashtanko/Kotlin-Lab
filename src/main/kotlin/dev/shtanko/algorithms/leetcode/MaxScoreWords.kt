@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,84 +16,133 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import kotlin.math.max
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 
 /**
  * 1255. Maximum Score Words Formed by Letters
- * @link https://leetcode.com/problems/maximum-score-words-formed-by-letters/
+ * @see <a href="https://leetcode.com/problems/maximum-score-words-formed-by-letters/">Source</a>
  */
-interface MaxScoreWords {
-    fun perform(words: Array<String>, letters: CharArray, score: IntArray): Int
+fun interface MaxScoreWords {
+    operator fun invoke(words: Array<String>, letters: CharArray, score: IntArray): Int
 }
 
+/**
+ * # Intuition
+ *
+ * - The problem can be solved using backtracking.
+ * - We can iterate over all the words and check if we can form the word using the given letters.
+ * - If we can form the word, we can calculate the score and recursively call the function for the next word.
+ * - We can return the maximum score.
+ *
+ * # Approach
+ *
+ * - Create a helper function that takes the words, letter counts, scores, and the current word index.
+ * - Iterate over all the words.
+ * - For each word, check if we can form the word using the given letters.
+ * - If we can form the word, calculate the score and recursively call the function for the next word.
+ * - Return the maximum score.
+ *
+ * # Complexity
+ *
+ * - Time complexity:
+ * - The time complexity of the backtracking solution is $$O(2^n)$$.
+ *
+ * - Space complexity:
+ *
+ * - The space complexity of the backtracking solution is $$O(n)$$.
+ */
 class MaxScoreWordsBacktracking : MaxScoreWords {
-    override fun perform(words: Array<String>, letters: CharArray, score: IntArray): Int {
-        if (words.isEmpty() || letters.isEmpty() || score.isEmpty()) return 0
-        val count = IntArray(score.size)
-        for (ch in letters) {
-            count[ch.code - 'a'.code]++
-        }
-        return backtrack(words, count, score, 0)
-    }
-
-    private fun backtrack(words: Array<String>, count: IntArray, score: IntArray, index: Int): Int {
-        var max = 0
-        for (i in index until words.size) {
-            var res = 0
-            var isValid = true
-            for (ch in words[i].toCharArray()) {
-                count[ch.code - 'a'.code]--
-                res += score[ch.code - 'a'.code]
-                if (count[ch.code - 'a'.code] < 0) isValid = false
-            }
-            if (isValid) {
-                res += backtrack(words, count, score, i + 1)
-                max = max(res, max)
-            }
-            for (ch in words[i].toCharArray()) {
-                count[ch.code - 'a'.code]++
-            }
-        }
-        return max
-    }
-}
-
-class MaxScoreWordsDFS : MaxScoreWords {
-    override fun perform(words: Array<String>, letters: CharArray, score: IntArray): Int {
-        val memo = IntArray(ARR_SIZE)
-        for (l in letters) {
-            memo[l.code - 'a'.code]++
-        }
-        return dfs(0, memo, score, words)
-    }
-
-    fun dfs(index: Int, memo: IntArray, score: IntArray, words: Array<String>): Int {
-        if (index == words.size) {
+    override operator fun invoke(words: Array<String>, letters: CharArray, score: IntArray): Int {
+        if (words.isEmpty() || letters.isEmpty() || score.isEmpty()) {
             return 0
         }
-        var res = 0
-        val w = words[index]
-        var count = 0
-        var i = 0
-        val temp: IntArray = memo.copyOf(memo.size)
-        while (i < w.length) {
-            val c = w[i]
-            count += if (temp[c.code - 'a'.code] > 0) {
-                temp[c.code - 'a'.code]--
-                score[c.code - 'a'.code]
+        val letterCounts = IntArray(score.size)
+        for (letter in letters) {
+            letterCounts[letter.code - 'a'.code]++
+        }
+        return backtrack(words, letterCounts, score, 0)
+    }
+
+    private fun backtrack(words: Array<String>, letterCounts: IntArray, score: IntArray, wordIndex: Int): Int {
+        var maxScore = 0
+        for (i in wordIndex until words.size) {
+            var currentScore = 0
+            var isWordValid = true
+            for (character in words[i].toCharArray()) {
+                letterCounts[character.code - 'a'.code]--
+                currentScore += score[character.code - 'a'.code]
+                if (letterCounts[character.code - 'a'.code] < 0) isWordValid = false
+            }
+            if (isWordValid) {
+                currentScore += backtrack(words, letterCounts, score, i + 1)
+                maxScore = kotlin.math.max(currentScore, maxScore)
+            }
+            for (character in words[i].toCharArray()) {
+                letterCounts[character.code - 'a'.code]++
+            }
+        }
+        return maxScore
+    }
+}
+
+/**
+ * # Intuition
+ * - The problem can be solved using depth-first search.
+ * - We can iterate over all the words and check if we can form the word using the given letters.
+ * - If we can form the word, we can calculate the score and recursively call the function for the next word.
+ * - We can return the maximum score.
+ *
+ * # Approach
+ *
+ * - Create a helper function that takes the words, letter counts, scores, and the current word index.
+ * - Iterate over all the words.
+ * - For each word, check if we can form the word using the given letters.
+ * - If we can form the word, calculate the score and recursively call the function for the next word.
+ * - Return the maximum score.
+ *
+ * # Complexity
+ *
+ * - Time complexity:
+ * - The time complexity of the depth-first search solution is $$O(2^n)$$.
+ *
+ * - Space complexity:
+ * - The space complexity of the depth-first search solution is $$O(n)$$.
+ */
+class MaxScoreWordsDFS : MaxScoreWords {
+    override operator fun invoke(words: Array<String>, letters: CharArray, score: IntArray): Int {
+        val letterCounts = IntArray(ALPHABET_LETTERS_COUNT)
+        for (letter in letters) {
+            letterCounts[letter.code - 'a'.code]++
+        }
+        return depthFirstSearch(0, letterCounts, score, words)
+    }
+
+    private fun depthFirstSearch(wordIndex: Int, letterCounts: IntArray, score: IntArray, words: Array<String>): Int {
+        if (wordIndex == words.size) {
+            return 0
+        }
+        var maxScore = 0
+        val currentWord = words[wordIndex]
+        var currentScore = 0
+        var letterIndex = 0
+        val tempLetterCounts: IntArray = letterCounts.copyOf(letterCounts.size)
+        while (letterIndex < currentWord.length) {
+            val currentLetter = currentWord[letterIndex]
+            currentScore += if (tempLetterCounts[currentLetter.code - 'a'.code] > 0) {
+                tempLetterCounts[currentLetter.code - 'a'.code]--
+                score[currentLetter.code - 'a'.code]
             } else {
                 break
             }
-            i++
+            letterIndex++
         }
-        if (i == w.length) {
-            res = max(res, count + dfs(index + 1, temp, score, words))
+        if (letterIndex == currentWord.length) {
+            maxScore = kotlin.math.max(
+                maxScore,
+                currentScore + depthFirstSearch(wordIndex + 1, tempLetterCounts, score, words),
+            )
         }
-        res = max(dfs(index + 1, memo, score, words), res)
-        return res
-    }
-
-    companion object {
-        private const val ARR_SIZE = 26
+        maxScore = kotlin.math.max(depthFirstSearch(wordIndex + 1, letterCounts, score, words), maxScore)
+        return maxScore
     }
 }

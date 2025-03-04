@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -84,13 +84,37 @@ abstract class BinaryTreePruningTest<out T : BinaryTreePruning>(private val stra
                 TreeNode(1),
                 TreeNode(1),
             ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0)
+                    right = TreeNode(0)
+                },
+                TreeNode(1),
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(0)
+                    }
+                    right = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                },
+                TreeNode(1).apply {
+                    right = TreeNode(1).apply {
+                        right = TreeNode(1)
+                    }
+                },
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `prune tree test`(root: TreeNode?, expected: TreeNode?) {
-        val actual = strategy.pruneTree(root)
+        val actual = strategy.invoke(root)
         assertThat(actual.postOrderTraversal()).containsAll(expected.postOrderTraversal())
     }
 }

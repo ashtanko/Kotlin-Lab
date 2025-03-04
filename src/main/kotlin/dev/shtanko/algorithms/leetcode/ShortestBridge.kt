@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.DP
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 934. Shortest Bridge
- * @link https://leetcode.com/problems/shortest-bridge/
+ * @see <a href="https://leetcode.com/problems/shortest-bridge/">Source</a>
  */
-interface ShortestBridge {
-    fun invoke(grid: Array<IntArray>): Int
+fun interface ShortestBridge {
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
+@DP
 class ShortestBridgeDP : ShortestBridge {
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         val queue: Queue<IntArray> = LinkedList()
         var flag = false
         for (i in grid.indices) {
@@ -51,7 +54,7 @@ class ShortestBridgeDP : ShortestBridge {
     ): Int {
         var step = 0
         val dirs = arrayOf(intArrayOf(-1, 0), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(0, 1))
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val size: Int = queue.size
             for (i in 0 until size) {
                 val point: IntArray = queue.poll()
@@ -83,8 +86,9 @@ class ShortestBridgeDP : ShortestBridge {
     }
 }
 
+@DFS
 class ShortestBridgeDFS : ShortestBridge {
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         return shortestBridge(grid)
     }
 
@@ -121,7 +125,7 @@ class ShortestBridgeDFS : ShortestBridge {
         dirs: Array<IntArray>,
     ): Int {
         var step = 0
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             var size = q.size
             while (size-- > 0) {
                 val cur = q.poll()

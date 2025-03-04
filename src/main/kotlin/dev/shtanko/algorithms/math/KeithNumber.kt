@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,13 +16,13 @@
 
 package dev.shtanko.algorithms.math
 
-import dev.shtanko.algorithms.leetcode.DECIMAL
+import dev.shtanko.algorithms.DECIMAL
 
 /**
  * Keith Number
- * @link https://en.wikipedia.org/wiki/Keith_number
+ * @see <a href="https://en.wikipedia.org/wiki/Keith_number">leetcode page</a>
  */
-interface KeithNumber {
+fun interface KeithNumber {
     fun isKeith(num: Int): Boolean
 }
 

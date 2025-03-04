@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory
 
 /**
  * AVL Tree
- * @link https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+ * @see <a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">leetcode page</a>
  */
 class AVLTree {
 
@@ -110,7 +110,7 @@ class AVLTree {
 
         //  Update heights
         x.height = max(height(x.left), height(x.right)) + 1
-        y?.height = max(height(y?.left), height(y?.right)) + 1
+        y?.height = max(height(y.left), height(y.right)) + 1
 
         // Return new root
         return y
@@ -128,7 +128,7 @@ class AVLTree {
 
         // Update heights
         y.height = max(height(y.left), height(y.right)) + 1
-        x?.height = max(height(x?.left), height(x?.right)) + 1
+        x?.height = max(height(x.left), height(x.right)) + 1
 
         // Return new root
         return x

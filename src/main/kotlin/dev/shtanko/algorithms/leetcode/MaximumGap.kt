@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+
 /**
  * Maximum Gap
- * @link https://leetcode.com/problems/maximum-gap/
+ * @see <a href="https://leetcode.com/problems/maximum-gap/">Source</a>
  */
-interface MaximumGap {
-    fun perform(nums: IntArray): Int
+fun interface MaximumGap {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
@@ -30,7 +32,7 @@ interface MaximumGap {
  * Space complexity: No extra space needed, other than the input array (since sorting can usually be done in-place).
  */
 class MaximumGapComparisonSorting : MaximumGap {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         if (nums.isEmpty() || nums.size < 2) {
             return 0
         }
@@ -50,7 +52,7 @@ class MaximumGapComparisonSorting : MaximumGap {
  * Space complexity: O(n)O(n+k)≈O(n) extra space.
  */
 class MaximumGapRadixSort : MaximumGap {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         if (nums.isEmpty() || nums.size < 2) {
             return 0
         }
@@ -93,7 +95,7 @@ class MaximumGapRadixSort : MaximumGap {
  * Approach 3: Buckets and The Pigeonhole Principle
  */
 class MaximumGapBuckets : MaximumGap {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         if (nums.isEmpty() || nums.size < 2) {
             return 0
         }

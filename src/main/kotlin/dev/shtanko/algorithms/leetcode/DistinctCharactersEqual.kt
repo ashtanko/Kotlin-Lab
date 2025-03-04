@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,11 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * 2531. Make Number of Distinct Characters Equal
- * @link https://leetcode.com/problems/make-number-of-distinct-characters-equal/
+ * @see <a href="https://leetcode.com/problems/make-number-of-distinct-characters-equal/">Source</a>
  */
-interface DistinctCharactersEqual {
+fun interface DistinctCharactersEqual {
     fun isItPossible(word1: String, word2: String): Boolean
 }
 
@@ -67,14 +69,15 @@ class DistinctCharactersEqualMap : DistinctCharactersEqual {
         // made this helper fxn for easy removal from hashmap
         mp[toInsert] = mp.getOrDefault(toInsert, 0) + 1 // increment freq for char to be inserted
         mp[toRemove] = mp.getOrDefault(toRemove, 0) - 1 // decrement freq for char to be removed
-        if (mp[toRemove] == 0) mp.remove(toRemove) // if freq of that char reaches zero, then remove the key from hashmap
+        // if freq of that char reaches zero, then remove the key from hashmap
+        if (mp[toRemove] == 0) mp.remove(toRemove)
     }
 }
 
 class DistinctCharactersEqualArray : DistinctCharactersEqual {
     override fun isItPossible(word1: String, word2: String): Boolean {
-        val map1 = IntArray(ARR_SIZE)
-        val map2 = IntArray(ARR_SIZE)
+        val map1 = IntArray(ALPHABET_LETTERS_COUNT)
+        val map2 = IntArray(ALPHABET_LETTERS_COUNT)
 
         // store frequency of characters
         for (element in word1) map1[element - 'a']++
@@ -83,7 +86,7 @@ class DistinctCharactersEqualArray : DistinctCharactersEqual {
         var count1 = 0
         var count2 = 0
         // count no of distinct characters in each string
-        for (i in 0 until ARR_SIZE) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
             if (map1[i] > 0) count1++
             if (map2[i] > 0) count2++
         }
@@ -91,8 +94,8 @@ class DistinctCharactersEqualArray : DistinctCharactersEqual {
         // as explained in step 3
         if (count1 == count2 && word1.length == word2.length) return true
 
-        for (i in 0 until ARR_SIZE) {
-            for (j in 0 until ARR_SIZE) {
+        for (i in 0 until ALPHABET_LETTERS_COUNT) {
+            for (j in 0 until ALPHABET_LETTERS_COUNT) {
                 if (map1[i] == 0 || map2[j] == 0) continue
                 var uniqueCharInMap1 = count1
                 var uniqueCharInMap2 = count2
@@ -119,9 +122,5 @@ class DistinctCharactersEqualArray : DistinctCharactersEqual {
         }
 
         return false
-    }
-
-    companion object {
-        private const val ARR_SIZE = 26
     }
 }

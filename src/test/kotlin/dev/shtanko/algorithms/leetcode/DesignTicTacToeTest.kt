@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
 class DesignTicTacToeTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(TTTOptimizedBruteForce(3)),
             Arguments.of(TTTOptimised(3)),
@@ -34,7 +34,7 @@ class DesignTicTacToeTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `move test`(ticTacToe: DesignTicTacToe) {
+    fun `move test`(ticTacToe: DesignTicTacToe) {
         // |X| | |
         // | | | |    // Player 1 makes a move at (0, 0).
         // | | | |
@@ -73,7 +73,7 @@ class DesignTicTacToeTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `dead heat test`(ticTacToe: DesignTicTacToe) {
+    fun `dead heat test`(ticTacToe: DesignTicTacToe) {
         // |X| | |
         // | | | |    // Player 1 makes a move at (0, 0).
         // | | | |
@@ -122,7 +122,7 @@ class DesignTicTacToeTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `win X row 0 test`(ticTacToe: DesignTicTacToe) {
+    fun `win X row 0 test`(ticTacToe: DesignTicTacToe) {
         // |X| | |
         // | | | |    // Player 1 makes a move at (0, 0).
         // | | | |

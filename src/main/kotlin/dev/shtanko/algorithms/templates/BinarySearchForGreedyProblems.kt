@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,9 +19,10 @@ package dev.shtanko.algorithms.templates
 /**
  * Binary search: for greedy problems
  */
+@Suppress("UNUSED_PARAMETER", "unused")
 private fun fn(arr: IntArray?): Int {
-    val minimumPossibleAnswer = Int.MAX_VALUE // TODO
-    val maximumPossibleAnswer = Int.MAX_VALUE // TODO
+    val minimumPossibleAnswer = Int.MAX_VALUE
+    val maximumPossibleAnswer = Int.MAX_VALUE
     var left: Int = minimumPossibleAnswer
     var right: Int = maximumPossibleAnswer
     while (left <= right) {
@@ -35,8 +36,9 @@ private fun fn(arr: IntArray?): Int {
     return left
 }
 
+@Suppress("UNUSED_PARAMETER")
 private fun check(x: Int): Boolean {
     // this function is implemented depending on the problem
-    val b = false // TODO
-    return b // TODO
+    val b = false
+    return b
 }

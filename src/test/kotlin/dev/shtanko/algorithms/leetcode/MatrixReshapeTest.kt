@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,17 +55,17 @@ abstract class MatrixReshapeTest<out T : MatrixReshape>(private val strategy: T)
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `matrix reshape test`(mat: Array<IntArray>, r: Int, c: Int, expected: Array<IntArray>) {
-        val actual = strategy.perform(mat, r, c)
+    fun `matrix reshape test`(mat: Array<IntArray>, r: Int, c: Int, expected: Array<IntArray>) {
+        val actual = strategy.invoke(mat, r, c)
         assertThat(actual).isDeepEqualTo(expected)
     }
 }
 
-internal class MRUsingQueueTest :
+class MRUsingQueueTest :
     MatrixReshapeTest<MatrixReshapeStrategy.UsingQueue>(MatrixReshapeStrategy.UsingQueue())
 
-internal class MRWithoutUsingExtraSpaceTest :
+class MRWithoutUsingExtraSpaceTest :
     MatrixReshapeTest<MatrixReshapeStrategy.WithoutUsingExtraSpace>(MatrixReshapeStrategy.WithoutUsingExtraSpace())
 
-internal class MRUsingDivisionTest :
+class MRUsingDivisionTest :
     MatrixReshapeTest<MatrixReshapeStrategy.UsingDivision>(MatrixReshapeStrategy.UsingDivision())

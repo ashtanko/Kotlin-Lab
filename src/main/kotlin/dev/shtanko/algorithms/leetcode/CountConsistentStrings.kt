@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,31 +18,31 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1684. Count the Number of Consistent Strings
- * @link https://leetcode.com/problems/count-the-number-of-consistent-strings/
+ * @see <a href="https://leetcode.com/problems/count-the-number-of-consistent-strings/">Source</a>
  */
-interface CountConsistentStrings {
-    fun perform(allowed: String, words: Array<String>): Int
+fun interface CountConsistentStrings {
+    operator fun invoke(allowed: String, words: Array<String>): Int
 }
 
 class CountConsistentStringsMap : CountConsistentStrings {
-    override fun perform(allowed: String, words: Array<String>): Int {
-        var ans = 0
-        val map = HashSet<Char>()
-        for (ch in allowed.toCharArray()) {
-            map.add(ch)
+    override operator fun invoke(allowed: String, words: Array<String>): Int {
+        var consistentStringCount = 0
+        val allowedChars = HashSet<Char>()
+        for (char in allowed.toCharArray()) {
+            allowedChars.add(char)
         }
-        var c: Int
-        for (s in words) {
-            c = 0
-            for (ch in s.toCharArray()) {
-                if (!map.contains(ch)) {
-                    c++
+        var inconsistentCharCount: Int
+        for (word in words) {
+            inconsistentCharCount = 0
+            for (char in word.toCharArray()) {
+                if (!allowedChars.contains(char)) {
+                    inconsistentCharCount++
                 }
             }
-            if (c == 0) {
-                ans++
+            if (inconsistentCharCount == 0) {
+                consistentStringCount++
             }
         }
-        return ans
+        return consistentStringCount
     }
 }

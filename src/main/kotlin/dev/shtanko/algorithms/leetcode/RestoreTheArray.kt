@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,25 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.BottomUpDP
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.TopDownDP
 import kotlin.math.min
 
 /**
  * 1416. Restore The Array
- * @link https://leetcode.com/problems/restore-the-array/
+ * @see <a href="https://leetcode.com/problems/restore-the-array/">Source</a>
  */
-interface RestoreTheArray {
+fun interface RestoreTheArray {
     fun numberOfArrays(s: String, k: Int): Int
 }
 
 /**
  * Approach 1: Dynamic Programming (Top Down)
  */
+@TopDownDP
 class RestoreTheArrayTopDown : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val m: Int = s.length
@@ -65,6 +71,7 @@ class RestoreTheArrayTopDown : RestoreTheArray {
 /**
  * Approach 2: Dynamic Programming (Bottom Up)
  */
+@BottomUpDP
 class RestoreTheArrayBottomUp : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val m: Int = s.length
@@ -92,6 +99,7 @@ class RestoreTheArrayBottomUp : RestoreTheArray {
     }
 }
 
+@DFS
 class RestoreTheArrayMemoization : RestoreTheArray {
     override fun numberOfArrays(s: String, k: Int): Int {
         val dp = arrayOfNulls<Int>(s.length) // dp[i] is number of ways to print valid arrays from string s start at i
@@ -101,7 +109,8 @@ class RestoreTheArrayMemoization : RestoreTheArray {
 
     private fun dfs(s: String, k: Long, i: Int, dp: Array<Int?>): Int {
         if (i == s.length) return 1 // base case -> Found a valid way
-        if (s[i] == '0') return 0 // all numbers are in range [1, k] and there are no leading zeros -> So numbers starting with 0 mean invalid!
+        if (s[i] == '0') return 0 // all numbers are in range [1, k] and there are no leading zeros ->
+        // So numbers starting with 0 mean invalid!
         if (dp[i] != null) return dp[i] ?: -1
         var ans = 0
         var num: Long = 0

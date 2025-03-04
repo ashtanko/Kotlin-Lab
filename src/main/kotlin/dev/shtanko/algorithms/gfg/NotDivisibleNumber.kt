@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,16 +19,16 @@ package dev.shtanko.algorithms.gfg
 /**
  * Number that are not divisible
  */
-interface NotDivisibleNumber {
-    fun perform(n: Long): Long
+fun interface NotDivisibleNumber {
+    operator fun invoke(num: Long): Long
 }
 
 class NotDivisibleNumberBruteForce : NotDivisibleNumber {
-    override fun perform(n: Long): Long {
-        val primes = prime.sumOf { n / it }
-        val a = numbersA.sumOf { n / it }
-        val b = numbersB.sumOf { n / it } - n / LAST
-        return n - (primes - a + b)
+    override fun invoke(num: Long): Long {
+        val primes = prime.sumOf { num / it }
+        val a = numbersA.sumOf { num / it }
+        val b = numbersB.sumOf { num / it } - num / LAST
+        return num - (primes - a + b)
     }
 
     companion object {

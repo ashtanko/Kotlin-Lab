@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,12 +20,29 @@ import java.util.LinkedList
 import java.util.Queue
 import java.util.Stack
 
-internal interface SumOfLeftLeavesStrategy {
-    fun perform(root: TreeNode?): Int
+/**
+ * 404. Sum of Left Leaves
+ * @see <a href="https://leetcode.com/problems/sum-of-left-leaves">Source</a>
+ */
+fun interface SumOfLeftLeavesStrategy {
+    /**
+     * Calculates the sum of left leaves in a binary tree.
+     * @param root The root node of the binary tree.
+     * @return The sum of left leaves.
+     */
+    operator fun invoke(root: TreeNode?): Int
 }
 
-internal class SumOfLeftLeavesIterative : SumOfLeftLeavesStrategy {
-    override fun perform(root: TreeNode?): Int {
+/**
+ * Implementation of SumOfLeftLeavesStrategy using an iterative approach.
+ */
+class SumOfLeftLeavesIterative : SumOfLeftLeavesStrategy {
+    /**
+     * Calculates the sum of left leaves in a binary tree using an iterative approach.
+     * @param root The root node of the binary tree.
+     * @return The sum of left leaves.
+     */
+    override operator fun invoke(root: TreeNode?): Int {
         if (root == null) return 0
         var ans = 0
         val stack: Stack<TreeNode> = Stack<TreeNode>()
@@ -40,40 +57,54 @@ internal class SumOfLeftLeavesIterative : SumOfLeftLeavesStrategy {
                     stack.push(node.left)
                 }
             }
-            if (node.right != null) {
-                if (node.right?.left != null || node.right?.right != null) {
-                    stack.push(node.right)
-                }
+            if (node.right != null && node.right?.left != null || node.right?.right != null) {
+                stack.push(node.right)
             }
         }
         return ans
     }
 }
 
-internal class SumOfLeftLeavesRecursive : SumOfLeftLeavesStrategy {
-    override fun perform(root: TreeNode?): Int {
+/**
+ * Implementation of SumOfLeftLeavesStrategy using a recursive approach.
+ */
+class SumOfLeftLeavesRecursive : SumOfLeftLeavesStrategy {
+    /**
+     * Calculates the sum of left leaves in a binary tree using a recursive approach.
+     * @param root The root node of the binary tree.
+     * @return The sum of left leaves.
+     */
+    override operator fun invoke(root: TreeNode?): Int {
         if (root == null) return 0
         var ans = 0
         if (root.left != null) {
             ans += if (root.left?.left == null && root.left?.right == null) {
                 root.left?.value ?: 0
             } else {
-                perform(root.left)
+                invoke(root.left)
             }
         }
-        ans += perform(root.right)
+        ans += invoke(root.right)
         return ans
     }
 }
 
-internal class SumOfLeftLeavesBSF : SumOfLeftLeavesStrategy {
-    override fun perform(root: TreeNode?): Int {
+/**
+ * Implementation of SumOfLeftLeavesStrategy using a breadth-first search (BFS) approach.
+ */
+class SumOfLeftLeavesBSF : SumOfLeftLeavesStrategy {
+    /**
+     * Calculates the sum of left leaves in a binary tree using a breadth-first search (BFS) approach.
+     * @param root The root node of the binary tree.
+     * @return The sum of left leaves.
+     */
+    override operator fun invoke(root: TreeNode?): Int {
         if (root == null) return 0
 
         val queue: Queue<TreeNode> = LinkedList()
         queue.add(root)
         var sum = 0
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val presentNode: TreeNode = queue.poll()
             if (presentNode.left != null) {
                 queue.add(presentNode.left)
@@ -81,7 +112,7 @@ internal class SumOfLeftLeavesBSF : SumOfLeftLeavesStrategy {
             if (presentNode.right != null) {
                 queue.add(presentNode.right)
             }
-            if (presentNode.left != null && presentNode.left!!.left == null && presentNode.left!!.right == null) {
+            if (presentNode.left != null && presentNode.left?.left == null && presentNode.left?.right == null) {
                 sum += presentNode.left?.value ?: 0
             }
         }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.max
 
 /**
  * 53. Maximum Subarray
- * @link https://leetcode.com/problems/maximum-subarray/
+ * @see <a href="https://leetcode.com/problems/maximum-subarray/">Source</a>
  */
-interface MaximumSubarray {
-    fun perform(nums: IntArray): Int
+fun interface MaximumSubarray {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
@@ -32,7 +32,7 @@ interface MaximumSubarray {
  * Space complexity: O(1)
  */
 class MaximumSubarrayBruteForce : MaximumSubarray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var maxSubarray = Int.MIN_VALUE
         for (i in nums.indices) {
             var currentSubarray = 0
@@ -51,7 +51,7 @@ class MaximumSubarrayBruteForce : MaximumSubarray {
  * Space complexity: O(1)
  */
 class DPKadanesAlgorithm : MaximumSubarray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         if (nums.isEmpty()) return Int.MIN_VALUE
         var currentSubarray = nums.first()
         var maxSubarray = nums.first()
@@ -73,7 +73,7 @@ class DPKadanesAlgorithm : MaximumSubarray {
  */
 class MSDivideAndConquer : MaximumSubarray {
 
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         // Our helper function is designed to solve this problem for
         // any array - so just call it using the entire input!
         return findBestSubarray(nums, 0, nums.size - 1)

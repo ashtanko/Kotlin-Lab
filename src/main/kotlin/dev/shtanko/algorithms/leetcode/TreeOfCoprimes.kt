@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1766. Tree of Coprimes
- * @link https://leetcode.com/problems/tree-of-coprimes/
+ * @see <a href="https://leetcode.com/problems/tree-of-coprimes/">Source</a>
  */
-interface TreeOfCoprimes {
-    fun getCoprimes(nums: IntArray, edges: Array<IntArray>): IntArray
+fun interface TreeOfCoprimes {
+    operator fun invoke(nums: IntArray, edges: Array<IntArray>): IntArray
 }
 
+@DFS
 class TreeOfCoprimesDFS : TreeOfCoprimes {
 
     lateinit var ans: IntArray
 
-    override fun getCoprimes(nums: IntArray, edges: Array<IntArray>): IntArray {
+    override fun invoke(nums: IntArray, edges: Array<IntArray>): IntArray {
         val path: Array<MutableList<Pair>> = Array(LIMIT) { ArrayList() }
         for (i in 0 until LIMIT) path[i] = ArrayList()
         val n = nums.size
@@ -55,7 +58,7 @@ class TreeOfCoprimesDFS : TreeOfCoprimes {
         var closestIdx = -1
         var maxDepth = -1
         for (i in 1 until LIMIT) {
-            if (gcd(nums[src], i) == 1 && path[i].size > 0 && path[i][path[i].size - 1].depth > maxDepth) {
+            if (gcd(nums[src], i) == 1 && path[i].isNotEmpty() && path[i][path[i].size - 1].depth > maxDepth) {
                 closestIdx = path[i][path[i].size - 1].idx
                 maxDepth = path[i][path[i].size - 1].depth
             }

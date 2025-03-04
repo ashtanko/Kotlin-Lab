@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,22 +16,80 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.Arrays
 import kotlin.math.min
 
-class MinimumCostToCutStick {
+/**
+ * 1547. Minimum Cost to Cut a Stick
+ * @see <a href="https://leetcode.com/problems/minimum-cost-to-cut-a-stick">Source</a>
+ */
+fun interface MinimumCostToCutStick {
+    fun minCost(n: Int, cuts: IntArray): Int
+}
 
-    fun perform(n: Int, cuts: IntArray): Int {
-        val c = ArrayList<Int>()
-        for (cut in cuts) c.add(cut)
-        c.addAll(listOf(0, n))
-        c.sort()
-        val dp = Array(c.size) { IntArray(c.size) }
-        for (i in c.indices.reversed()) for (j in i + 1 until c.size) {
-            for (k in i + 1 until j) dp[i][j] = min(
-                if (dp[i][j] == 0) Int.MAX_VALUE else dp[i][j],
-                c[j] - c[i] + dp[i][k] + dp[k][j],
-            )
+/**
+ * Approach 1: Top-down Dynamic Programming
+ */
+class MinimumCostToCutStickTopDown : MinimumCostToCutStick {
+
+    private lateinit var memo: Array<IntArray>
+    private lateinit var newCuts: IntArray
+    override fun minCost(n: Int, cuts: IntArray): Int {
+        val m: Int = cuts.size
+        newCuts = IntArray(m + 2)
+        System.arraycopy(cuts, 0, newCuts, 1, m)
+        newCuts[m + 1] = n
+        Arrays.sort(newCuts)
+
+        memo = Array(m + 2) { IntArray(m + 2) }
+        for (r in 0 until m + 2) {
+            Arrays.fill(memo[r], -1)
         }
-        return dp[0][c.size - 1]
+
+        return cost(0, newCuts.size - 1)
+    }
+
+    private fun cost(left: Int, right: Int): Int {
+        if (memo[left][right] != -1) {
+            return memo[left][right]
+        }
+        if (right - left == 1) {
+            return 0
+        }
+        var ans = Int.MAX_VALUE
+        for (mid in left + 1 until right) {
+            val cost = cost(left, mid) + cost(mid, right) + newCuts[right] - newCuts[left]
+            ans = min(ans, cost)
+        }
+        memo[left][right] = ans
+        return ans
+    }
+}
+
+/**
+ * Approach 2: Bottom-up Dynamic Programming
+ */
+class MinimumCostToCutStickBottomUp : MinimumCostToCutStick {
+    override fun minCost(n: Int, cuts: IntArray): Int {
+        val m: Int = cuts.size
+        val newCuts = IntArray(m + 2)
+        System.arraycopy(cuts, 0, newCuts, 1, m)
+        newCuts[m + 1] = n
+        newCuts.sort()
+
+        val dp = Array(m + 2) { IntArray(m + 2) }
+
+        for (diff in 2 until m + 2) {
+            for (left in 0 until m + 2 - diff) {
+                val right = left + diff
+                var ans = Int.MAX_VALUE
+                for (mid in left + 1 until right) {
+                    ans = min(ans, dp[left][mid] + dp[mid][right] + newCuts[right] - newCuts[left])
+                }
+                dp[left][right] = ans
+            }
+        }
+
+        return dp[0][m + 1]
     }
 }

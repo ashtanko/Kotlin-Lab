@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,10 +21,10 @@ import kotlin.math.max
 
 /**
  * 827. Making A Large Island
- * @link https://leetcode.com/problems/making-a-large-island/
+ * @see <a href="https://leetcode.com/problems/making-a-large-island/">Source</a>
  */
-interface LargestIsland {
-    fun perform(grid: Array<IntArray>): Int
+fun interface LargestIsland {
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 /**
@@ -34,7 +34,7 @@ class LargestIslandDFS : LargestIsland {
     private val dr = intArrayOf(-1, 0, 1, 0)
     private val dc = intArrayOf(0, -1, 0, 1)
 
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         val n: Int = grid.size
 
         var ans = 0
@@ -55,7 +55,7 @@ class LargestIslandDFS : LargestIsland {
         val seen: MutableSet<Int> = HashSet()
         stack.push(r0 * n + c0)
         seen.add(r0 * n + c0)
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val code: Int = stack.pop()
             val r = code / n
             val c = code % n
@@ -83,7 +83,7 @@ class LargestIslandComponentSizes : LargestIsland {
     private var grid: Array<IntArray> = arrayOf()
     private var n = 0
 
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         this.grid = grid
         n = grid.size
 
@@ -142,7 +142,7 @@ class LargestIslandComponentSizes : LargestIsland {
 }
 
 class LargestIslandUnionFind : LargestIsland {
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         val rows: Int = grid.size
         val cols: Int = grid.first().size
 

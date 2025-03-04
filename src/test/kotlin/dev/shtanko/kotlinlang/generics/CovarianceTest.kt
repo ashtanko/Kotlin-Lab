@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,30 +16,43 @@
 
 package dev.shtanko.kotlinlang.generics
 
-import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class CovarianceTest {
 
     @Test
-    internal fun `covariance test`() {
-        val s = EmptySource()
-        assertThat(demo(s)).isExactlyInstanceOf(EmptySource::class.java)
+    fun `copy copies elements from one array to another`() {
+        val from = arrayOf(1, 2, 3)
+        val to = arrayOfNulls<Any>(3)
+        copy(from, to)
+        assertEquals(arrayListOf(1, 2, 3), to.toList())
+    }
 
-        val bank1: Bank<Account> // = AccountBank() TODO
-        val bank2: Bank<Deposit> = DepositBank()
+    @Test
+    fun `DepositBank produce returns Deposit instance`() {
+        val bank: Bank<Deposit> = DepositBank()
+        val result = bank.produce(100)
+        assertEquals(Deposit::class, result::class)
+    }
 
-        // val dep: Deposit = bank2.produce(200) // TODO
-        // val acc: Account = bank1.produce(100) // TODO
+    @Test
+    fun `AccountBank produce returns Account instance`() {
+        val bank: Bank<Account> = AccountBank()
+        val result = bank.produce(100)
+        assertEquals(Account::class, result::class)
+    }
 
-        bank1 = bank2
-        assertThat(bank1).isExactlyInstanceOf(DepositBank::class.java)
+    @Test
+    fun `EmptySource nextT returns empty string`() {
+        val source: Source<String> = EmptySource()
+        assertEquals("", source.nextT())
+    }
 
-        val ints: Array<Int> = arrayOf(1, 2, 3)
-        val any = Array<Any>(3) {}
-        copy(ints, any)
-
-        // val doubleList: List<Double> = listOf(1.0, 2.0) // TODO
-        // val numberList: List<Number> = doubleList // TODO
+    @Test
+    fun `demo returns Source of Any type`() {
+        val source: Source<String> = EmptySource()
+        val result = demo(source)
+        assertEquals("", result.nextT())
     }
 }

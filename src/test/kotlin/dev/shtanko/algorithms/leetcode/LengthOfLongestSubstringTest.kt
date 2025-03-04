@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class LengthOfLongestSubstringTest<out T : LengthOfLongestSubstring>(private val solution: T) {
+abstract class LengthOfLongestSubstringTest<out T : LengthOfLongestSubstring>(private val solution: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "abcabcbb",
@@ -45,15 +45,15 @@ internal abstract class LengthOfLongestSubstringTest<out T : LengthOfLongestSubs
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `length of longest substring test`(s: String, expected: Int) {
-        val actual = solution.perform(s)
+    fun `length of longest substring test`(s: String, expected: Int) {
+        val actual = solution.invoke(s)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class LengthOfLongestSubstringBFTest :
+class LengthOfLongestSubstringBFTest :
     LengthOfLongestSubstringTest<LengthOfLongestSubstringBF>(LengthOfLongestSubstringBF())
 
-internal class LLSSlidingWindowTest : LengthOfLongestSubstringTest<LLSSlidingWindow>(LLSSlidingWindow())
+class LLSSlidingWindowTest : LengthOfLongestSubstringTest<LLSSlidingWindow>(LLSSlidingWindow())
 
-internal class LLSSlidingWindowOptTest : LengthOfLongestSubstringTest<LLSSlidingWindowOpt>(LLSSlidingWindowOpt())
+class LLSSlidingWindowOptTest : LengthOfLongestSubstringTest<LLSSlidingWindowOpt>(LLSSlidingWindowOpt())

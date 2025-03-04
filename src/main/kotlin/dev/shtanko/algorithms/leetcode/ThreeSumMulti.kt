@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,11 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+
 private const val LIMIT = 100
 private const val ARR_SIZE = LIMIT + 1
 
-interface ThreeSumMulti {
-    fun perform(arr: IntArray, target: Int): Int
+fun interface ThreeSumMulti {
+    operator fun invoke(arr: IntArray, target: Int): Int
 }
 
 /**
@@ -29,7 +31,7 @@ interface ThreeSumMulti {
  * Space Complexity: O(1).
  */
 class TSMThreePointer : ThreeSumMulti {
-    override fun perform(arr: IntArray, target: Int): Int {
+    override operator fun invoke(arr: IntArray, target: Int): Int {
         var ans: Long = 0
         arr.sort()
         for (i in arr.indices) {
@@ -37,29 +39,37 @@ class TSMThreePointer : ThreeSumMulti {
             var j = i + 1
             var k: Int = arr.size - 1
             while (j < k) {
-                if (arr[j] + arr[k] < t) {
-                    j++
-                } else if (arr[j] + arr[k] > t) {
-                    k--
-                } else if (arr[j] != arr[k]) {
-                    var left = 1
-                    var right = 1
-                    while (j + 1 < k && arr[j] == arr[j + 1]) {
-                        left++
+                when {
+                    arr[j] + arr[k] < t -> {
                         j++
                     }
-                    while (k - 1 > j && arr[k] == arr[k - 1]) {
-                        right++
+
+                    arr[j] + arr[k] > t -> {
                         k--
                     }
-                    ans += (left * right).toLong()
-                    ans %= MOD.toLong()
-                    j++
-                    k--
-                } else {
-                    ans += ((k - j + 1) * (k - j) / 2).toLong()
-                    ans %= MOD.toLong()
-                    break
+
+                    arr[j] != arr[k] -> {
+                        var left = 1
+                        var right = 1
+                        while (j + 1 < k && arr[j] == arr[j + 1]) {
+                            left++
+                            j++
+                        }
+                        while (k - 1 > j && arr[k] == arr[k - 1]) {
+                            right++
+                            k--
+                        }
+                        ans += (left * right).toLong()
+                        ans %= MOD.toLong()
+                        j++
+                        k--
+                    }
+
+                    else -> {
+                        ans += ((k - j + 1) * (k - j) / 2).toLong()
+                        ans %= MOD.toLong()
+                        break
+                    }
                 }
             }
         }
@@ -74,7 +84,7 @@ class TSMThreePointer : ThreeSumMulti {
  * Space Complexity: O(W).
  */
 class TSMCountingCases : ThreeSumMulti {
-    override fun perform(arr: IntArray, target: Int): Int {
+    override operator fun invoke(arr: IntArray, target: Int): Int {
         val count = LongArray(ARR_SIZE)
         for (x in arr) count[x]++
 
@@ -123,7 +133,7 @@ class TSMCountingCases : ThreeSumMulti {
  * Space Complexity: O(1).
  */
 class TSMAdapt : ThreeSumMulti {
-    override fun perform(arr: IntArray, target: Int): Int {
+    override operator fun invoke(arr: IntArray, target: Int): Int {
         val count = LongArray(ARR_SIZE)
         var uniq = 0
         for (x in arr) {
@@ -154,14 +164,22 @@ class TSMAdapt : ThreeSumMulti {
                     }
 
                     else -> {
-                        ans += if (j in i.plus(1) until k) {
-                            count[x] * count[y] * count[z]
-                        } else if (i == j && j < k) {
-                            count[x] * (count[x] - 1) / 2 * count[z]
-                        } else if (i < j && j == k) {
-                            count[x] * count[y] * (count[y] - 1) / 2
-                        } else {
-                            count[x] * (count[x] - 1) * (count[x] - 2) / 6
+                        ans += when {
+                            j in i.plus(1) until k -> {
+                                count[x] * count[y] * count[z]
+                            }
+
+                            i == j && j < k -> {
+                                count[x] * (count[x] - 1) / 2 * count[z]
+                            }
+
+                            i < j && j == k -> {
+                                count[x] * count[y] * (count[y] - 1) / 2
+                            }
+
+                            else -> {
+                                count[x] * (count[x] - 1) * (count[x] - 2) / 6
+                            }
                         }
                         ans %= MOD.toLong()
                         j++

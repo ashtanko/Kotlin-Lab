@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,30 @@
 
 package dev.shtanko.algorithms.leetcode
 
-fun Int.subtractProductAndSum(): Int {
-    var n = this
-    var sum = 0
-    var prod = 1
-    while (n > 0) {
-        prod *= n % DECIMAL
-        sum += n % DECIMAL
-        n /= DECIMAL
+import dev.shtanko.algorithms.DECIMAL
+
+/**
+ * This extension function calculates the difference between the product and sum of the digits of an integer.
+ * The function iterates over each digit of the integer, calculates the product and sum of the digits, and then
+ * returns the difference.
+ *
+ * @receiver Int The integer on which the function is invoked.
+ * @return The difference between the product and sum of the digits of the integer.
+ */
+fun Int.calculateDifferenceBetweenProductAndSum(): Int {
+    // Initialize the integer and the sum and product of its digits
+    var number = this
+    var sumOfDigits = 0
+    var productOfDigits = 1
+
+    // Iterate over each digit of the integer
+    while (number > 0) {
+        // Calculate the product and sum of the digits
+        productOfDigits *= number % DECIMAL
+        sumOfDigits += number % DECIMAL
+        number /= DECIMAL
     }
 
-    return prod - sum
+    // Return the difference between the product and sum of the digits
+    return productOfDigits - sumOfDigits
 }

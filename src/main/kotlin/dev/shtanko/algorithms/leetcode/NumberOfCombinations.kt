@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import java.util.PriorityQueue
 
 /**
  * 1977. Number of Ways to Separate Numbers
- * @link https://leetcode.com/problems/number-of-ways-to-separate-numbers/
+ * @see <a href="https://leetcode.com/problems/number-of-ways-to-separate-numbers/">Source</a>
  */
 fun interface NumberOfCombinations {
-    fun invoke(num: String): Int
+    operator fun invoke(num: String): Int
 }
 
 class NumberOfCombinationsBottomUp : NumberOfCombinations {
-    override fun invoke(num: String): Int {
+    override operator fun invoke(num: String): Int {
         val cs = num.toCharArray()
         val n = cs.size
         val rank = Array(n) { IntArray(n + 1) }
@@ -40,7 +41,7 @@ class NumberOfCombinationsBottomUp : NumberOfCombinations {
                 pq.add(intArrayOf(j, rank[j][i - 1] * 10 + cs[i + j - 1].code - '0'.code))
                 ++j
             }
-            while (!pq.isEmpty()) {
+            while (pq.isNotEmpty()) {
                 val cur: IntArray = pq.poll()
                 if (cur[1] != prev) c++
                 rank[cur[0]][i] = c
@@ -58,8 +59,8 @@ class NumberOfCombinationsBottomUp : NumberOfCombinations {
             dp[j][len] = 1
             var i = len - 1
             while (1 <= i) {
-                // dp[j][i] means the valid number that can start from j and the length of the first number is at least i
-                // thus here I aggregate dp[j][i + 1] into dp[j][i]
+                // dp[j][i] means the valid number that can start from j and the length of the first number
+                // is at least i thus here I aggregate dp[j][i + 1] into dp[j][i]
                 dp[j][i] = dp[j][i + 1]
                 val next = i + j
                 if (next >= n || next + i > n) {

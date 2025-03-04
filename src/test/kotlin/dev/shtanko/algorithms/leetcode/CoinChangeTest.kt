@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,13 +52,28 @@ abstract class CoinChangeTest<out T : CoinChange>(private val strategy: T) {
                 34,
                 -1,
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 5),
+                100,
+                20,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 5),
+                1000,
+                200,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 5),
+                10000,
+                2000,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `coin change test`(coins: IntArray, amount: Int, expected: Int) {
-        val actual = strategy.perform(coins, amount)
+        val actual = strategy.invoke(coins, amount)
         assertThat(actual).isEqualTo(expected)
     }
 }

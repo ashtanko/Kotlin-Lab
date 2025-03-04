@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2225. Find Players With Zero or One Losses
- * @link https://leetcode.com/problems/find-players-with-zero-or-one-losses/
+ * @see <a href="https://leetcode.com/problems/find-players-with-zero-or-one-losses/">Source</a>
  */
 fun interface FindWinners {
-    fun perform(matches: Array<IntArray>): List<List<Int>>
+    operator fun invoke(matches: Array<IntArray>): List<List<Int>>
 }
 
 /**
  * Approach 1: Hash Set
  */
 class FindWinnersHashSet : FindWinners {
-    override fun perform(matches: Array<IntArray>): List<List<Int>> {
+    override operator fun invoke(matches: Array<IntArray>): List<List<Int>> {
         val zeroLoss: MutableSet<Int> = HashSet()
         val oneLoss: MutableSet<Int> = HashSet()
         val moreLosses: MutableSet<Int> = HashSet()
@@ -40,16 +40,24 @@ class FindWinnersHashSet : FindWinners {
                 zeroLoss.add(winner)
             }
             // Add or move loser.
-            if (zeroLoss.contains(loser)) {
-                zeroLoss.remove(loser)
-                oneLoss.add(loser)
-            } else if (oneLoss.contains(loser)) {
-                oneLoss.remove(loser)
-                moreLosses.add(loser)
-            } else if (moreLosses.contains(loser)) {
-                continue
-            } else {
-                oneLoss.add(loser)
+            when {
+                zeroLoss.contains(loser) -> {
+                    zeroLoss.remove(loser)
+                    oneLoss.add(loser)
+                }
+
+                oneLoss.contains(loser) -> {
+                    oneLoss.remove(loser)
+                    moreLosses.add(loser)
+                }
+
+                moreLosses.contains(loser) -> {
+                    continue
+                }
+
+                else -> {
+                    oneLoss.add(loser)
+                }
             }
         }
         val answer: List<MutableList<Int>> = listOf(ArrayList(), ArrayList())
@@ -65,7 +73,7 @@ class FindWinnersHashSet : FindWinners {
  * Approach 2: Hash Set + Hash Map
  */
 class FindWinnersSetMap : FindWinners {
-    override fun perform(matches: Array<IntArray>): List<List<Int>> {
+    override operator fun invoke(matches: Array<IntArray>): List<List<Int>> {
         val seen: MutableSet<Int> = HashSet()
         val lossesCount: MutableMap<Int, Int> = HashMap()
 
@@ -98,7 +106,7 @@ class FindWinnersSetMap : FindWinners {
  * Approach 3: Hash Map
  */
 class FindWinnersMap : FindWinners {
-    override fun perform(matches: Array<IntArray>): List<List<Int>> {
+    override operator fun invoke(matches: Array<IntArray>): List<List<Int>> {
         val lossesCount: MutableMap<Int, Int> = HashMap()
         for (match in matches) {
             val winner = match[0]
@@ -130,7 +138,7 @@ class FindWinnersCounting : FindWinners {
         private const val LIMIT = 100001
     }
 
-    override fun perform(matches: Array<IntArray>): List<List<Int>> {
+    override operator fun invoke(matches: Array<IntArray>): List<List<Int>> {
         val lossesCount = IntArray(LIMIT) { -1 }
 
         for (match in matches) {

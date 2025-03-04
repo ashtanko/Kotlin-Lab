@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,12 @@ package dev.shtanko.algorithms.leetcode
 import java.util.Arrays
 import kotlin.math.max
 
-interface TwoSumLessThanKStrategy {
-    fun perform(nums: IntArray, k: Int): Int
+fun interface TwoSumLessThanKStrategy {
+    operator fun invoke(nums: IntArray, k: Int): Int
 }
 
 class TwoSumLessThanKBruteForce : TwoSumLessThanKStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var answer = -1
         for (i in nums.indices) {
             for (j in i + 1 until nums.size) {
@@ -39,7 +39,7 @@ class TwoSumLessThanKBruteForce : TwoSumLessThanKStrategy {
 }
 
 class TwoSumLessThanKTwoPointers : TwoSumLessThanKStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         nums.sort()
         var answer = -1
         var left = 0
@@ -58,7 +58,7 @@ class TwoSumLessThanKTwoPointers : TwoSumLessThanKStrategy {
 }
 
 class TwoSumLessThanKBinarySearch : TwoSumLessThanKStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var answer = -1
         nums.sort()
         for (i in nums.indices) {
@@ -77,7 +77,7 @@ class TwoSumLessThanKBinarySearch : TwoSumLessThanKStrategy {
 
 class TwoSumLessThanKCountingSort : TwoSumLessThanKStrategy {
 
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var answer = -1
         val count = IntArray(ARRAY_SIZE)
         for (num in nums) {

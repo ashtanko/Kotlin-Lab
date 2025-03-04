@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,13 @@
 
 package dev.shtanko.algorithms.leetcode
 
+/**
+ * This extension function checks if there exists a subset of the array with the same average as the whole array.
+ * @param leftSum The sum of the elements in the subset.
+ * @param leftNum The number of elements in the subset.
+ * @param startIndex The starting index for the subset.
+ * @return True if such a subset exists, false otherwise.
+ */
 private fun IntArray.check(leftSum: Int, leftNum: Int, startIndex: Int): Boolean {
     if (leftNum == 0) return leftSum == 0
     if (this[startIndex] > leftSum / leftNum) return false
@@ -26,6 +33,10 @@ private fun IntArray.check(leftSum: Int, leftNum: Int, startIndex: Int): Boolean
     return false
 }
 
+/**
+ * This function checks if it is possible to split the array into two non-empty subsets with the same average.
+ * @return True if it is possible to split the array into two non-empty subsets with the same average, false otherwise.
+ */
 fun IntArray.splitArraySameAverage(): Boolean {
     if (this.size == 1) return false
     var sumA = 0
@@ -34,8 +45,8 @@ fun IntArray.splitArraySameAverage(): Boolean {
     }
     this.sort()
     for (lenOfB in 1..this.size / 2) {
-        if (sumA * lenOfB % this.size == 0) {
-            if (this.check(sumA * lenOfB / this.size, lenOfB, 0)) return true
+        if (sumA * lenOfB % this.size == 0 && this.check(sumA * lenOfB / this.size, lenOfB, 0)) {
+            return true
         }
     }
     return false

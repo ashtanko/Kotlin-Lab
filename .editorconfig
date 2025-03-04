@@ -1,16 +1,23 @@
 # https://editorconfig.org
+# Top-most EditorConfig file
 root = true
 
+# Specify the character encoding for all files
 [*]
+charset = utf-8
+# Use LF (Unix) line endings
+end_of_line = lf
+
+# Use 2 spaces for indentation
 indent_style = space
 indent_size = 2
 
-end_of_line = lf
-charset = utf-8
+# Trim trailing whitespaces on save
 trim_trailing_whitespace = true
+# Ensure a newline at the end of all files
 insert_final_newline = true
 
-[*.{java,kt,kts,scala,rs,xml,kt.spec,kts.spec}]
+[*.{java,kt,kts,scala,rs,xml,kt.spec,kts.spec,.gradle,.properties}]
 indent_size = 4
 
 [*.{kt,kts}]

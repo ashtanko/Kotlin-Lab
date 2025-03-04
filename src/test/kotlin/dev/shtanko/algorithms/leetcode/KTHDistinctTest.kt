@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,28 @@ abstract class KTHDistinctTest<out T : KTHDistinct>(private val strategy: T) {
                 3,
                 "",
             ),
+            Arguments.of(
+                arrayOf<String>(),
+                0,
+                "",
+            ),
+            Arguments.of(
+                arrayOf<String>("a"),
+                0,
+                "",
+            ),
+            Arguments.of(
+                arrayOf<String>("a"),
+                1,
+                "a",
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `kth distinct test`(arr: Array<String>, k: Int, expected: String) {
-        val actual = strategy.perform(arr, k)
+        val actual = strategy.invoke(arr, k)
         assertThat(actual).isEqualTo(expected)
     }
 }

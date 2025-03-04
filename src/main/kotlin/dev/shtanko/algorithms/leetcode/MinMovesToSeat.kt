@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,40 +20,40 @@ import kotlin.math.abs
 
 /**
  * 2037. Minimum Number of Moves to Seat Everyone
- * @link https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/
+ * @see <a href="https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/">Source</a>
  */
-interface MinMovesToSeat {
-    fun perform(seats: IntArray, students: IntArray): Int
+fun interface MinMovesToSeat {
+    operator fun invoke(seatPositions: IntArray, studentPositions: IntArray): Int
 }
 
 class MinMovesToSeatBruteForce : MinMovesToSeat {
-    override fun perform(seats: IntArray, students: IntArray): Int {
-        var moves = 0
-        seats.sort()
-        students.sort()
-        for (i in seats.indices) {
-            val seat = seats[i]
-            val student = students[i]
-            if (seat > student) {
-                moves += seat.minus(student)
-            } else if (student > seat) {
-                moves += student.minus(seat)
+    override operator fun invoke(seatPositions: IntArray, studentPositions: IntArray): Int {
+        var totalMoves = 0
+        seatPositions.sort()
+        studentPositions.sort()
+        for (index in seatPositions.indices) {
+            val seatPosition = seatPositions[index]
+            val studentPosition = studentPositions[index]
+            if (seatPosition > studentPosition) {
+                totalMoves += seatPosition.minus(studentPosition)
+            } else if (studentPosition > seatPosition) {
+                totalMoves += studentPosition.minus(seatPosition)
             }
         }
-        return moves
+        return totalMoves
     }
 }
 
 class MinMovesToSeatMath : MinMovesToSeat {
-    override fun perform(seats: IntArray, students: IntArray): Int {
-        var moves = 0
-        seats.sort()
-        students.sort()
-        for (i in seats.indices) {
-            val seat = seats[i]
-            val student = students[i]
-            moves += abs(seat - student)
+    override operator fun invoke(seatPositions: IntArray, studentPositions: IntArray): Int {
+        var totalMoves = 0
+        seatPositions.sort()
+        studentPositions.sort()
+        for (index in seatPositions.indices) {
+            val seatPosition = seatPositions[index]
+            val studentPosition = studentPositions[index]
+            totalMoves += abs(seatPosition - studentPosition)
         }
-        return moves
+        return totalMoves
     }
 }

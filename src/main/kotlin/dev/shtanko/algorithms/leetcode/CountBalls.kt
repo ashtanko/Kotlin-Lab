@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
 import kotlin.math.max
 
 /**
  * 1742. Maximum Number of Balls in a Box
- * link https://leetcode.com/problems/maximum-number-of-balls-in-a-box/
+ * @see <a href="https://leetcode.com/problems/maximum-number-of-balls-in-a-box">Source</a>
  */
-interface CountBalls {
-    fun perform(lowLimit: Int, highLimit: Int): Int
+fun interface CountBalls {
+    operator fun invoke(lowLimit: Int, highLimit: Int): Int
 
     companion object {
         const val ARR_SIZE = 46
@@ -31,7 +32,7 @@ interface CountBalls {
 }
 
 class CountBallsBruteforce : CountBalls {
-    override fun perform(lowLimit: Int, highLimit: Int): Int {
+    override operator fun invoke(lowLimit: Int, highLimit: Int): Int {
         val cnt = IntArray(CountBalls.ARR_SIZE)
         var max = 0
         for (i in lowLimit..highLimit) {
@@ -48,7 +49,7 @@ class CountBallsBruteforce : CountBalls {
 }
 
 class CountBalls2 : CountBalls {
-    override fun perform(lowLimit: Int, highLimit: Int): Int {
+    override operator fun invoke(lowLimit: Int, highLimit: Int): Int {
         val box = IntArray(CountBalls.ARR_SIZE)
         var lo = lowLimit
         var id = 0

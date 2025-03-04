@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,30 +25,64 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AvoidFloodInTheCityTest<out T : AvoidFloodStrategy>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class AvoidFloodInTheCityTest<out T : AvoidFlood>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(intArrayOf(1, 2, 3, 4) to intArrayOf(-1, -1, -1, -1)),
-            Arguments.of(intArrayOf(1, 2, 0, 0, 2, 1) to intArrayOf(-1, -1, 2, 1, -1, -1)),
-            Arguments.of(intArrayOf(1, 2, 0, 1, 2) to intArrayOf()),
-            Arguments.of(intArrayOf(69, 0, 0, 0, 69) to intArrayOf(-1, 69, 1, 1, -1)),
-            Arguments.of(intArrayOf(10, 20, 20) to intArrayOf()),
-            Arguments.of(intArrayOf() to intArrayOf()),
-            Arguments.of(intArrayOf(0) to intArrayOf(1)),
-            Arguments.of(intArrayOf(1) to intArrayOf(-1)),
-            Arguments.of(intArrayOf(1, 2) to intArrayOf(-1, -1)),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4),
+                intArrayOf(-1, -1, -1, -1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 0, 0, 2, 1),
+                intArrayOf(-1, -1, 2, 1, -1, -1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 0, 1, 2),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(69, 0, 0, 0, 69),
+                intArrayOf(-1, 69, 1, 1, -1),
+            ),
+            Arguments.of(
+                intArrayOf(10, 20, 20),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(0),
+                intArrayOf(1),
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                intArrayOf(-1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2),
+                intArrayOf(-1, -1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 0, 2, 0, 2, 1),
+                intArrayOf(-1, 1, -1, 2, -1, -1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 0, 2, 0, 1, 2),
+                intArrayOf(-1, 1, -1, 2, -1, -1),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `avoid flood test`(testCase: Pair<IntArray, IntArray>) {
-        val (rains, expected) = testCase
-        val actual = strategy.perform(rains)
+    fun `avoid flood test`(rains: IntArray, expected: IntArray) {
+        val actual = strategy.invoke(rains)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class AvoidFloodTreeTest : AvoidFloodInTheCityTest<AvoidFloodTree>(AvoidFloodTree())
+class AvoidFloodTreeTest : AvoidFloodInTheCityTest<AvoidFloodTree>(AvoidFloodTree())
 
-internal class AvoidFloodSimpleTest : AvoidFloodInTheCityTest<AvoidFloodSimple>(AvoidFloodSimple())
+class AvoidFloodSimpleTest : AvoidFloodInTheCityTest<AvoidFloodSimple>(AvoidFloodSimple())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,13 +16,23 @@
 
 package dev.shtanko.datastructures.tree
 
-import dev.shtanko.datastructures.Queue
-
 /**
- * A custom implementation of BinarySearchTree
+ * A Binary Search Tree implementation of the Map interface.
+ *
+ * @param K The key type, must be Comparable.
+ * @param V The value type.
  */
 class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
 
+    /**
+     * Represents a node in the Binary Search Tree.
+     *
+     * @param key The key of the node.
+     * @param value The value associated with the key.
+     * @param left The left child node.
+     * @param right The right child node.
+     * @param size The number of nodes in the subtree rooted at this node.
+     */
     data class Node<K, V>(
         override val key: K,
         override var value: V,
@@ -52,7 +62,7 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
 
     override val values: Collection<V>
         get() {
-            val queue = Queue<V>()
+            val queue = mutableListOf<V>()
             inorder(root) { queue.add(it.value) }
             return queue
         }
@@ -80,45 +90,57 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     override fun isEmpty(): Boolean = size == 0
 
     /**
-     * @return height of the tree.
+     * Returns the height of the binary search tree.
+     *
+     * @return The height of the binary search tree.
      */
     fun height(): Int {
         return height(root)
     }
 
     /**
-     * @return min value of the tree.
+     * Returns the minimum key in the binary search tree.
+     *
+     * @return The minimum key.
+     * @throws NoSuchElementException if the tree is empty.
      */
     fun min(): K {
         return min(root).key
     }
 
     /**
-     * Add new [BinarySearchTree.Node].
-     * @param key a key of the tree [K].
-     * @param value a key of the tree [V].
+     * Adds a new key-value pair to the binary search tree.
+     *
+     * @param key The key to be added.
+     * @param value The value associated with the key.
      */
     fun add(key: K, value: V) {
         root = add(key, value, root)
     }
 
     /**
-     * @return max value of the tree.
+     * Returns the maximum key in the binary search tree.
+     *
+     * @return The maximum key.
+     * @throws NoSuchElementException if the tree is empty.
      */
     fun max(): K {
         return max(root).key
     }
 
     /**
-     * Removes node by key [K].
-     * @param key a key [K].
+     * Removes a key and its associated value from the binary search tree.
+     *
+     * @param key The key to be removed.
      */
     fun remove(key: K) {
         root = remove(key, root)
     }
 
     /**
-     * TODO
+     * Removes the minimum key and its associated value from the binary search tree.
+     *
+     * @throws NoSuchElementException if the tree is empty.
      */
     fun pollMin() {
         if (root == null) throw NoSuchElementException()
@@ -126,7 +148,9 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Removes the maximum key and its associated value from the binary search tree.
+     *
+     * @throws NoSuchElementException if the tree is empty.
      */
     fun pollMax() {
         if (root == null) throw NoSuchElementException()
@@ -134,7 +158,22 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Returns the height of the binary search tree.
+     *
+     * @param x The root node of the subtree.
+     * @return The height of the subtree rooted at node x.
+     */
+    private fun height(x: Node<K, V>?): Int {
+        if (x == null) return 0
+        return maxOf(height(x.left), height(x.right)) + 1
+    }
+
+    /**
+     * Removes the maximum key and its associated value from the binary search tree.
+     *
+     * @param x The root node of the subtree.
+     * @return The root node of the modified subtree after removal.
+     * @throws NoSuchElementException if the subtree is empty.
      */
     private fun pollMax(x: Node<K, V>): Node<K, V>? {
         if (x.right == null) return x.left
@@ -144,7 +183,11 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Returns the maximum node in the binary search tree.
+     *
+     * @param node The root node of the subtree.
+     * @return The maximum node in the subtree.
+     * @throws NoSuchElementException if the subtree is empty.
      */
     private fun max(node: Node<K, V>?): Node<K, V> {
         if (node == null) throw NoSuchElementException()
@@ -156,7 +199,11 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Returns the minimum node in the binary search tree.
+     *
+     * @param node The root node of the subtree.
+     * @return The minimum node in the subtree.
+     * @throws NoSuchElementException if the subtree is empty.
      */
     private fun min(node: Node<K, V>?): Node<K, V> {
         if (node == null) throw NoSuchElementException()
@@ -168,15 +215,12 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
-     */
-    private fun height(x: Node<K, V>?): Int {
-        if (x == null) return 0
-        return maxOf(height(x.left), height(x.right)) + 1
-    }
-
-    /**
-     * TODO
+     * Removes a key and its associated value from the binary search tree.
+     *
+     * @param key The key to be removed.
+     * @param root The root node of the subtree.
+     * @return The root node of the modified subtree after removal.
+     * @throws NoSuchElementException if the key is not found in the subtree.
      */
     private fun remove(key: K, root: Node<K, V>?): Node<K, V>? {
         var x: Node<K, V> = root ?: throw NoSuchElementException()
@@ -187,6 +231,13 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
                 if (x.left == null) return x.right
                 if (x.right == null) return x.left
                 val tmp = x
+                tmp.right?.let {
+                    pollMin(it)?.let {
+                        x = it
+                        x.right = pollMax(it)
+                        x.left = tmp.left
+                    }
+                }
                 x = pollMin(tmp.right!!)!!
                 x.right = min(tmp.right)
                 x.left = tmp.left
@@ -197,7 +248,11 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Removes the minimum key and its associated value from the binary search tree.
+     *
+     * @param x The root node of the subtree.
+     * @return The root node of the modified subtree after removal.
+     * @throws NoSuchElementException if the subtree is empty.
      */
     private fun pollMin(x: Node<K, V>): Node<K, V>? {
         if (x.left == null) return x.right
@@ -207,7 +262,12 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * TODO
+     * Adds a new key-value pair to the binary search tree.
+     *
+     * @param key The key to be added.
+     * @param value The value associated with the key.
+     * @param x The root node of the subtree.
+     * @return The root node of the modified subtree after addition.
      */
     private fun add(key: K, value: V, x: Node<K, V>?): Node<K, V> {
         if (x == null) return Node(key, value)
@@ -221,12 +281,18 @@ class BinarySearchTree<K : Comparable<K>, V> : Map<K, V> {
     }
 
     /**
-     * @return size of the tree.
+     * Returns the number of nodes in the subtree rooted at the given node.
+     *
+     * @param x The root node of the subtree.
+     * @return The number of nodes in the subtree rooted at node x.
      */
     private fun size(x: Node<K, V>?): Int = x?.size ?: 0
 
     /**
-     * TODO
+     * Performs an inorder traversal of the binary search tree.
+     *
+     * @param x The root node of the subtree.
+     * @param lambda The lambda function to apply to each node during traversal.
      */
     private fun inorder(x: Node<K, V>?, lambda: (Node<K, V>) -> Unit) {
         if (x == null) return

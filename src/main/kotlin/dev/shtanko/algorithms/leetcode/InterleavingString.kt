@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface InterleavingStringStrategy {
-    fun perform(s1: String, s2: String, s3: String): Boolean
+/**
+ * 97. Interleaving String
+ * @see <a href="https://leetcode.com/problems/interleaving-string/">Source</a>
+ */
+fun interface InterleavingStringStrategy {
+    operator fun invoke(s1: String, s2: String, s3: String): Boolean
 }
 
 class InterleavingStringBruteForce : InterleavingStringStrategy {
-    override fun perform(s1: String, s2: String, s3: String): Boolean {
+    override operator fun invoke(s1: String, s2: String, s3: String): Boolean {
         return Triple(s1, s2, s3).isInterleave(0, 0, "")
     }
 
@@ -36,7 +40,7 @@ class InterleavingStringBruteForce : InterleavingStringStrategy {
 
 // Recursion with memoization
 class InterleavingStringRecursionWithMemo : InterleavingStringStrategy {
-    override fun perform(s1: String, s2: String, s3: String): Boolean {
+    override operator fun invoke(s1: String, s2: String, s3: String): Boolean {
         val memo = Array(s1.length) { IntArray(s2.length) }
         for (i in s1.indices) {
             for (j in s2.indices) {
@@ -76,7 +80,7 @@ class InterleavingStringRecursionWithMemo : InterleavingStringStrategy {
 
 // Using 2D Dynamic Programming
 class InterleavingString2D : InterleavingStringStrategy {
-    override fun perform(s1: String, s2: String, s3: String): Boolean {
+    override operator fun invoke(s1: String, s2: String, s3: String): Boolean {
         return isInterleave(s1, s2, s3)
     }
 
@@ -91,14 +95,23 @@ class InterleavingString2D : InterleavingStringStrategy {
         }
         for (i in 0..s1.length) {
             for (j in 0..s2.length) {
-                if (i == 0 && j == 0) {
-                    dp[i][j] = true
-                } else if (i == 0) {
-                    dp[i][j] = dp[i][j - 1] && s2[j - 1] == s3[i + j - 1]
-                } else if (j == 0) {
-                    dp[i][j] = dp[i - 1][j] && s1[i - 1] == s3[i + j - 1]
-                } else {
-                    dp[i][j] = dp[i - 1][j] && s1[i - 1] == s3[i + j - 1] || dp[i][j - 1] && s2[j - 1] == s3[i + j - 1]
+                when {
+                    i == 0 && j == 0 -> {
+                        dp[i][j] = true
+                    }
+
+                    i == 0 -> {
+                        dp[i][j] = dp[i][j - 1] && s2[j - 1] == s3[i + j - 1]
+                    }
+
+                    j == 0 -> {
+                        dp[i][j] = dp[i - 1][j] && s1[i - 1] == s3[i + j - 1]
+                    }
+
+                    else -> {
+                        dp[i][j] =
+                            dp[i - 1][j] && s1[i - 1] == s3[i + j - 1] || dp[i][j - 1] && s2[j - 1] == s3[i + j - 1]
+                    }
                 }
             }
         }
@@ -108,7 +121,7 @@ class InterleavingString2D : InterleavingStringStrategy {
 
 // Using 1D Dynamic Programming
 class InterleavingString1D : InterleavingStringStrategy {
-    override fun perform(s1: String, s2: String, s3: String): Boolean {
+    override operator fun invoke(s1: String, s2: String, s3: String): Boolean {
         return isInterleave(s1, s2, s3)
     }
 
@@ -119,14 +132,22 @@ class InterleavingString1D : InterleavingStringStrategy {
         val dp = BooleanArray(s2.length + 1)
         for (i in 0..s1.length) {
             for (j in 0..s2.length) {
-                if (i == 0 && j == 0) {
-                    dp[j] = true
-                } else if (i == 0) {
-                    dp[j] = dp[j - 1] && s2[j - 1] == s3[i + j - 1]
-                } else if (j == 0) {
-                    dp[j] = dp[j] && s1[i - 1] == s3[i + j - 1]
-                } else {
-                    dp[j] = dp[j] && s1[i - 1] == s3[i + j - 1] || dp[j - 1] && s2[j - 1] == s3[i + j - 1]
+                when {
+                    i == 0 && j == 0 -> {
+                        dp[j] = true
+                    }
+
+                    i == 0 -> {
+                        dp[j] = dp[j - 1] && s2[j - 1] == s3[i + j - 1]
+                    }
+
+                    j == 0 -> {
+                        dp[j] = dp[j] && s1[i - 1] == s3[i + j - 1]
+                    }
+
+                    else -> {
+                        dp[j] = dp[j] && s1[i - 1] == s3[i + j - 1] || dp[j - 1] && s2[j - 1] == s3[i + j - 1]
+                    }
                 }
             }
         }

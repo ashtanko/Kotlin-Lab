@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import kotlin.math.min
 
 /**
@@ -25,8 +26,8 @@ import kotlin.math.min
 
 private const val LIMIT = 101
 
-interface ProfitableSchemes {
-    fun perform(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int
+fun interface ProfitableSchemes {
+    operator fun invoke(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int
 }
 
 /**
@@ -35,7 +36,7 @@ interface ProfitableSchemes {
 class ProfitableSchemesTopDown : ProfitableSchemes {
     private val memo = Array(LIMIT) { Array(LIMIT) { IntArray(LIMIT) { -1 } } }
 
-    override fun perform(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
+    override operator fun invoke(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
         return find(0, 0, 0, n, minProfit, group, profits)
     }
 
@@ -71,7 +72,7 @@ class ProfitableSchemesBottomUp : ProfitableSchemes {
 
     private val dp = Array(LIMIT) { Array(LIMIT) { IntArray(LIMIT) } }
 
-    override fun perform(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
+    override operator fun invoke(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
         // Initializing the base case.
         for (count in 0..n) {
             dp[group.size][count][minProfit] = 1
@@ -96,7 +97,7 @@ class ProfitableSchemesBottomUp : ProfitableSchemes {
 }
 
 class ProfitableSchemesDP : ProfitableSchemes {
-    override fun perform(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
+    override operator fun invoke(n: Int, minProfit: Int, group: IntArray, profits: IntArray): Int {
         val dp = Array(n + 1) { IntArray(minProfit + 1) }
         dp[0][0] = 1
         for (i in group.indices) {

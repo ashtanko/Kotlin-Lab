@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class VerifyPreorderInBinarySearchTreeTest<out T : VerifyPreorderInBinarySearchTreeStrategy>(
+abstract class VerifyPreorderInBinarySearchTreeTest<out T : VerifyPreorderInBinarySearchTreeStrategy>(
     private val strategy: T,
 ) {
 
@@ -34,28 +34,31 @@ internal abstract class VerifyPreorderInBinarySearchTreeTest<out T : VerifyPreor
     //   / \
     //  1   3
     // Preorder (Root, Left, Right)
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(5, 2, 6, 1, 3), false),
             Arguments.of(intArrayOf(5, 2, 1, 3, 6), true),
+            Arguments.of(intArrayOf(5, 2, 1, 3, 6, 7), true),
+            Arguments.of(intArrayOf(5, 2, 1, 3, 6, 4), false),
+            Arguments.of(intArrayOf(5, 2, 1, 3, 6, 4, 7), false),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `verify test`(preorder: IntArray, expected: Boolean) {
-        val actual = strategy.perform(preorder)
+    fun `verify test`(preorder: IntArray, expected: Boolean) {
+        val actual = strategy.invoke(preorder)
         assertEquals(expected, actual)
     }
 }
 
-internal class VerifyPreorderInBinarySearchTreeBFTest :
+class VerifyPreorderInBinarySearchTreeBFTest :
     VerifyPreorderInBinarySearchTreeTest<VerifyPreorderInBinarySearchTreeBF>(VerifyPreorderInBinarySearchTreeBF())
 
-internal class VerifyPreorderInBinarySearchTreeStackTest :
+class VerifyPreorderInBinarySearchTreeStackTest :
     VerifyPreorderInBinarySearchTreeTest<VerifyPreorderInBinarySearchTreeStack>(VerifyPreorderInBinarySearchTreeStack())
 
-internal class VerifyPreorderInBinarySearchTreeRecursionTest :
+class VerifyPreorderInBinarySearchTreeRecursionTest :
     VerifyPreorderInBinarySearchTreeTest<VerifyPreorderInBinarySearchTreeRecursion>(
         VerifyPreorderInBinarySearchTreeRecursion(),
     )

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -38,7 +38,7 @@ class Bank {
         }
     }
 
-    suspend fun proceed(nCoroutines: Int = 100, times: Int = 10, action: suspend () -> Unit) {
+    suspend operator fun invoke(nCoroutines: Int = 100, times: Int = 10, action: suspend () -> Unit) {
         val time = measureTimeMillis {
             coroutineScope {
                 repeat(nCoroutines) {

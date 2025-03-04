@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,15 @@ import kotlin.math.max
 
 /**
  * 309. Best Time to Buy and Sell Stock with Cooldown
- * @link https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/
+ * @see <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown">
+ *     Source</a>
  */
-interface MaxProfitStock {
-    fun perform(prices: IntArray): Int
+fun interface MaxProfitStock {
+    operator fun invoke(prices: IntArray): Int
 }
 
 class MaxProfitStockImpl : MaxProfitStock {
-    override fun perform(prices: IntArray): Int {
+    override operator fun invoke(prices: IntArray): Int {
         var coolDown = 0
         var sell = 0
         var hold = Int.MIN_VALUE

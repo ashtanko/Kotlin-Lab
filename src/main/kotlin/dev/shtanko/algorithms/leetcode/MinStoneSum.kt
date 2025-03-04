@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.max
 
 /**
  * 1962. Remove Stones to Minimize the Total
- * @link https://leetcode.com/problems/remove-stones-to-minimize-the-total/
+ * @see <a href="https://leetcode.com/problems/remove-stones-to-minimize-the-total/">Source</a>
  */
-interface MinStoneSum {
-    fun perform(piles: IntArray, k: Int): Int
+fun interface MinStoneSum {
+    operator fun invoke(piles: IntArray, k: Int): Int
 }
 
 class MinStoneSumHeap : MinStoneSum {
-    override fun perform(piles: IntArray, k: Int): Int {
+    override operator fun invoke(piles: IntArray, k: Int): Int {
         val pq: PriorityQueue<Int> = PriorityQueue { a, b -> b - a }
         var res = 0
         piles.forEach {
@@ -45,7 +45,7 @@ class MinStoneSumHeap : MinStoneSum {
 }
 
 class MinStoneSumFast : MinStoneSum {
-    override fun perform(piles: IntArray, k: Int): Int {
+    override operator fun invoke(piles: IntArray, k: Int): Int {
         val frequency = IntArray(FREQ)
         var max = -1
         for (p in piles) {

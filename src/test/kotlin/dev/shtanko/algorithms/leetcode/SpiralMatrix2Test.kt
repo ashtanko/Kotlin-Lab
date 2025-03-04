@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -50,13 +50,32 @@ abstract class SpiralMatrix2Test<out T : SpiralMatrix2>(private val strategy: T)
                     intArrayOf(7, 6, 5),
                 ),
             ),
+            Arguments.of(
+                4,
+                arrayOf(
+                    intArrayOf(1, 2, 3, 4),
+                    intArrayOf(12, 13, 14, 5),
+                    intArrayOf(11, 16, 15, 6),
+                    intArrayOf(10, 9, 8, 7),
+                ),
+            ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(1, 2, 3, 4, 5),
+                    intArrayOf(16, 17, 18, 19, 6),
+                    intArrayOf(15, 24, 25, 20, 7),
+                    intArrayOf(14, 23, 22, 21, 8),
+                    intArrayOf(13, 12, 11, 10, 9),
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `generate matrix test`(n: Int, expected: Array<IntArray>) {
-        val actual = strategy.generateMatrix(n)
+    fun `generate matrix test`(num: Int, expected: Array<IntArray>) {
+        val actual = strategy.generateMatrix(num)
         assertThat(actual).isEqualTo(expected)
     }
 }

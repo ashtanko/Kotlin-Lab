@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,30 +16,33 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class MaxSumSubMatrixTest {
-
-    companion object {
-        @JvmStatic
-        fun casesProvider(): List<Pair<Pair<Int, Array<IntArray>>, Int>> {
-            return listOf(
-                2 to arrayOf(
-                    intArrayOf(1, 0, 1),
-                    intArrayOf(0, -2, 3),
-                ) to 2,
-            )
-        }
-    }
+class MaxSumSubMatrixTest {
 
     @ParameterizedTest
-    @MethodSource("casesProvider")
-    internal fun `max sum sub matrix test`(testCase: Pair<Pair<Int, Array<IntArray>>, Int>) {
-        val (data, expected) = testCase
-        val (k, matrix) = data
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `max sum sub matrix test`(matrix: Array<IntArray>, k: Int, expected: Int) {
         val actual = maxSumSubMatrix(matrix, k)
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 0, 1),
+                    intArrayOf(0, -2, 3),
+                ),
+                2,
+                2,
+            ),
+        )
     }
 }

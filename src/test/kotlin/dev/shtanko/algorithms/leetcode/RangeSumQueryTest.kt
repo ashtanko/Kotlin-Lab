@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class RangeSumQueryTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class RangeSumQueryTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         private val arr = intArrayOf(-2, 0, 3, -5, 2, -1)
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
@@ -88,7 +88,7 @@ internal class RangeSumQueryTest {
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `sum range test`(obj: RangeSumQuery, i: Int, j: Int, expected: Int) {
-        val actual = obj.perform(i, j)
+        val actual = obj.invoke(i, j)
         assertThat(actual).isEqualTo(expected)
     }
 }

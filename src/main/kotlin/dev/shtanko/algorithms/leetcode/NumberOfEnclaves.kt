@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import java.util.Queue
 
 /**
  * 1020. Number of Enclaves
- * @link https://leetcode.com/problems/number-of-enclaves/
+ * @see <a href="https://leetcode.com/problems/number-of-enclaves/">Source</a>
  */
 fun interface NumberOfEnclaves {
-    fun invoke(grid: Array<IntArray>): Int
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 class NumberOfEnclavesDFS : NumberOfEnclaves {
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         var result = 0
         for (i in grid.indices) {
             for (j in 0 until grid[i].size) {
@@ -62,14 +62,14 @@ class NumberOfEnclavesBFS : NumberOfEnclaves {
 
     private val directions = arrayOf(intArrayOf(-1, 0), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(0, 1))
 
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         if (grid.isEmpty()) return 0
         if (grid.first().isEmpty()) return 0
         val rows = grid.size
         val cols = grid[0].size
         val visited = Array(rows) { BooleanArray(cols) }
         val q = getStartPositions(grid, visited, rows, cols)
-        while (q.size > 0) {
+        while (q.isNotEmpty()) {
             val cell = q.poll()
             for (i in directions.indices) {
                 val row = cell[0] + directions[i][0]
@@ -180,7 +180,11 @@ class NumberOfEnclavesBFS : NumberOfEnclaves {
         cols: Int,
     ): Boolean {
         if (!validCoords(row, col, rows, cols)) return false
-        return if (visited[row][col]) false else grid[row][col] == 1
+        return if (visited[row][col]) {
+            false
+        } else {
+            grid[row][col] == 1
+        }
     }
 
     private fun validCoords(row: Int, col: Int, rows: Int, cols: Int): Boolean {

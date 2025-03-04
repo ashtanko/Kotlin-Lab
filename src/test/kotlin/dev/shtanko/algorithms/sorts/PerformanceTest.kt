@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,9 @@
 
 package dev.shtanko.algorithms.sorts
 
-import dev.shtanko.algorithms.extensions.generateRandomArray
 import dev.shtanko.algorithms.utils.measureTime
+import dev.shtanko.extensions.generateRandomArray
+import java.util.Locale
 import java.util.stream.Stream
 import kotlin.system.measureTimeMillis
 import org.assertj.core.api.Assertions.assertThat
@@ -129,8 +130,8 @@ internal class PerformanceTest {
 
     @ParameterizedTest
     @ArgumentsSource(SlowScopeStrategiesInputArgumentsProvider::class)
-    internal fun `slow strategies performance test`(n: Int, expected: Boolean) {
-        val arr = n.generateRandomArray().toTypedArray()
+    internal fun `slow strategies performance test`(num: Int, expected: Boolean) {
+        val arr = num.generateRandomArray().toTypedArray()
         val fastStrategies = listOf(
             BubbleSort(),
             SimpleBubbleSort(),
@@ -147,8 +148,8 @@ internal class PerformanceTest {
 
     @ParameterizedTest
     @ArgumentsSource(FastScopeStrategiesInputArgumentsProvider::class)
-    internal fun `fast strategies performance test`(n: Int, expected: Boolean) {
-        val arr = n.generateRandomArray().toTypedArray()
+    internal fun `fast strategies performance test`(num: Int, expected: Boolean) {
+        val arr = num.generateRandomArray().toTypedArray()
         val fastStrategies = listOf(
             MergeSort(),
             QuickSort(),
@@ -166,6 +167,7 @@ internal class PerformanceTest {
         }
         println(
             String.format(
+                Locale.getDefault(),
                 "Given arrays of length %d %s Consumed time: %d ms",
                 arr.size,
                 "Fast strategies",

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,7 +54,7 @@ internal abstract class UniqueCharactersTest<out T : UniqueCharacters>(private v
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     internal fun `find unique characters test`(str: String, expected: Boolean) {
-        val actual = strategy.perform(str)
+        val actual = strategy.invoke(str)
         assertEquals(expected, actual)
     }
 }

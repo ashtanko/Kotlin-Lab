@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface AbstractCountNegativesStrategy {
-    fun perform(grid: Array<IntArray>): Int
+fun interface AbstractCountNegativesStrategy {
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 /**
  *
  */
 class SimpleCountNegatives : AbstractCountNegativesStrategy {
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         return grid.count()
     }
 
@@ -49,7 +49,7 @@ class SimpleCountNegatives : AbstractCountNegativesStrategy {
  *
  */
 class CountNegativesTwoPointers : AbstractCountNegativesStrategy {
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         return grid.count()
     }
 
@@ -75,14 +75,14 @@ class CountNegativesTwoPointers : AbstractCountNegativesStrategy {
  *
  */
 class CountNegativesBinary : AbstractCountNegativesStrategy {
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         return grid.count()
     }
 
     private fun Array<IntArray>.count(): Int {
         if (this.isEmpty()) return 0
-        if (this.size < 2) {
-            if (first().isEmpty()) return 0
+        if (this.size < 2 && first().isEmpty()) {
+            return 0
         }
         var min = this[0].size - 1
         var res = 0

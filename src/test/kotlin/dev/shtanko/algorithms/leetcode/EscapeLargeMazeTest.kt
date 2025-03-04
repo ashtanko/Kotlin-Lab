@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,32 @@ abstract class EscapeLargeMazeTest<out T : EscapeLargeMaze>(private val strategy
                 intArrayOf(999999, 999999),
                 true,
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(1, 0),
+                ),
+                intArrayOf(0, 0),
+                intArrayOf(0, 1),
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(0, 1, 1),
+                    intArrayOf(1, 0, 1),
+                    intArrayOf(1, 1, 0),
+                ),
+                intArrayOf(0, 0),
+                intArrayOf(2, 2),
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `is escape possible test`(blocked: Array<IntArray>, source: IntArray, target: IntArray, expected: Boolean) {
-        val actual = strategy.isEscapePossible(blocked, source, target)
+        val actual = strategy.invoke(blocked, source, target)
         assertThat(actual).isEqualTo(expected)
     }
 }

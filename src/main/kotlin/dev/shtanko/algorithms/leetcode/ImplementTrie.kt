@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 interface Trie {
     fun insert(word: String)
 
@@ -24,7 +26,7 @@ interface Trie {
     fun startsWith(prefix: String): Boolean
 }
 
-internal class TrieArray : Trie {
+class TrieArray : Trie {
 
     private val root = TrieNode()
 
@@ -61,9 +63,9 @@ internal class TrieArray : Trie {
         return node
     }
 
-    data class TrieNode(var isEnd: Boolean = false) {
+    private data class TrieNode(var isEnd: Boolean = false) {
 
-        private val links: Array<TrieNode?> = Array(R) { null }
+        private val links: Array<TrieNode?> = Array(ALPHABET_LETTERS_COUNT) { null }
 
         fun containsKey(ch: Char): Boolean {
             return links[ch - 'a'] != null
@@ -77,8 +79,17 @@ internal class TrieArray : Trie {
             links[ch - 'a'] = node
         }
 
-        companion object {
-            private const val R = 26
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as TrieNode
+
+            return links.contentEquals(other.links)
+        }
+
+        override fun hashCode(): Int {
+            return links.contentHashCode()
         }
     }
 }
@@ -129,5 +140,5 @@ class TrieHashMap : Trie {
         return true
     }
 
-    data class TrieNode(val charToNode: MutableMap<Char, TrieNode> = HashMap(), var isEnd: Boolean = false)
+    private data class TrieNode(val charToNode: MutableMap<Char, TrieNode> = HashMap(), var isEnd: Boolean = false)
 }

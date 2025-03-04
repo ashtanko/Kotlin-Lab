@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import java.util.Arrays
 
 /**
  * 1498. Number of Subsequences That Satisfy the Given Sum Condition
- * @link https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/
+ * @see <a href="https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition">
+ *     Source</a>
  */
-interface NumSubseq {
-    fun perform(nums: IntArray, target: Int): Int
+fun interface NumSubseq {
+    operator fun invoke(nums: IntArray, target: Int): Int
 }
 
 class NumSubseqBinarySearch : NumSubseq {
-    override fun perform(nums: IntArray, target: Int): Int {
+    override operator fun invoke(nums: IntArray, target: Int): Int {
         val n: Int = nums.size
         Arrays.sort(nums)
 
@@ -69,7 +71,7 @@ class NumSubseqBinarySearch : NumSubseq {
 }
 
 class NumSubseqTwoPointers : NumSubseq {
-    override fun perform(nums: IntArray, target: Int): Int {
+    override operator fun invoke(nums: IntArray, target: Int): Int {
         val n: Int = nums.size
         nums.sort()
 

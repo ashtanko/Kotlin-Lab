@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,13 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal data class BuddyStringsTestCase(
-    val buddyString: Pair<String, String>,
-    val expected: Boolean,
-)
-
-internal class BuddyStringsTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class BuddyStringsTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "ab",
@@ -77,12 +72,27 @@ internal class BuddyStringsTest {
                 "a",
                 false,
             ),
+            Arguments.of(
+                "ab",
+                "ac",
+                false,
+            ),
+            Arguments.of(
+                "ab",
+                "ca",
+                false,
+            ),
+            Arguments.of(
+                "ab",
+                "cd",
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `buddy strings test`(s1: String, s2: String, expected: Boolean) {
+    fun `buddy strings test`(s1: String, s2: String, expected: Boolean) {
         val actual = (s1 to s2).buddyStrings()
         assertThat(actual).isEqualTo(expected)
     }

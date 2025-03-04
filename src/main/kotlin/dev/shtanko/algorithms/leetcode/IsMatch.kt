@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,26 +20,27 @@ package dev.shtanko.algorithms.leetcode
  * Wildcard Matching
  */
 fun Pair<String, String>.isMatch(): Boolean {
-    val m = first.length
-    val n = second.length
-    val ws = first.toCharArray()
-    val wp = second.toCharArray()
-    val dp = Array(m + 1) { BooleanArray(n + 1) }
-    dp[0][0] = true
-    for (j in 1..n) {
-        dp[0][j] = dp[0][j - 1] && wp[j - 1] == '*'
+    val stringLength = first.length
+    val patternLength = second.length
+    val stringChars = first.toCharArray()
+    val patternChars = second.toCharArray()
+    val matchMatrix = Array(stringLength + 1) { BooleanArray(patternLength + 1) }
+    matchMatrix[0][0] = true
+    for (patternIndex in 1..patternLength) {
+        matchMatrix[0][patternIndex] = matchMatrix[0][patternIndex - 1] && patternChars[patternIndex - 1] == '*'
     }
-    for (i in 1..m) {
-        dp[i][0] = false
+    for (stringIndex in 1..stringLength) {
+        matchMatrix[stringIndex][0] = false
     }
-    for (i in 1..m) {
-        for (j in 1..n) {
-            if (wp[j - 1] == '?' || ws[i - 1] == wp[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1]
-            } else if (wp[j - 1] == '*') {
-                dp[i][j] = dp[i - 1][j] || dp[i][j - 1]
+    for (stringIdx in 1..stringLength) {
+        for (patternIdx in 1..patternLength) {
+            if (patternChars[patternIdx - 1] == '?' || stringChars[stringIdx - 1] == patternChars[patternIdx - 1]) {
+                matchMatrix[stringIdx][patternIdx] = matchMatrix[stringIdx - 1][patternIdx - 1]
+            } else if (patternChars[patternIdx - 1] == '*') {
+                matchMatrix[stringIdx][patternIdx] =
+                    matchMatrix[stringIdx - 1][patternIdx] || matchMatrix[stringIdx][patternIdx - 1]
             }
         }
     }
-    return dp[m][n]
+    return matchMatrix[stringLength][patternLength]
 }

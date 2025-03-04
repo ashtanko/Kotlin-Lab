@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,17 +19,21 @@ package dev.shtanko.algorithms.leetcode
 import java.util.LinkedList
 import java.util.Queue
 
-interface EvenOddTreeStrategy {
-    fun perform(tree: TreeNode?): Boolean
+/**
+ * 1609. Even Odd Tree
+ * @see <a href="https://leetcode.com/problems/even-odd-tree">Source</a>
+ */
+fun interface EvenOddTree {
+    operator fun invoke(tree: TreeNode?): Boolean
 }
 
-class EvenOddTreeBSF : EvenOddTreeStrategy {
-    override fun perform(tree: TreeNode?): Boolean {
-        var root: TreeNode? = tree ?: return true
+class EvenOddTreeBSF : EvenOddTree {
+    override operator fun invoke(tree: TreeNode?): Boolean {
+        var root: TreeNode = tree ?: return true
         val q: Queue<TreeNode> = LinkedList()
         q.add(root)
         var even = true
-        while (q.size > 0) {
+        while (q.isNotEmpty()) {
             var size: Int = q.size
             var prevVal = if (even) Int.MIN_VALUE else Int.MAX_VALUE // init preVal based on level even or odd
             while (size-- > 0) { // level by level
@@ -43,6 +47,46 @@ class EvenOddTreeBSF : EvenOddTreeStrategy {
             even = !even // alter the levels
         }
 
+        return true
+    }
+}
+
+class EvenOddTreeBFS : EvenOddTree {
+    override fun invoke(tree: TreeNode?): Boolean {
+        var current: TreeNode = tree ?: return true
+        val queue: Queue<TreeNode?> = LinkedList()
+        queue.add(current)
+        var even = true
+        while (queue.isNotEmpty()) {
+            var size = queue.size
+            var prev = Int.MAX_VALUE
+            if (even) {
+                prev = Int.MIN_VALUE
+            }
+            while (size > 0) {
+                current = queue.poll() ?: return true
+                val isCurrentEven = current.value % 2 == 0
+                val isCurrentLessThanOrEqualToPrev = current.value <= prev
+                val isCurrentGreaterThanEqualToPrev = current.value >= prev
+
+                val isFirstCondition = even && (isCurrentEven || isCurrentLessThanOrEqualToPrev)
+                val isSecondCondition = !even && (!isCurrentEven || isCurrentGreaterThanEqualToPrev)
+
+                if (isFirstCondition || isSecondCondition) {
+                    return false
+                }
+
+                prev = current.value
+                if (current.left != null) {
+                    queue.add(current.left)
+                }
+                if (current.right != null) {
+                    queue.add(current.right)
+                }
+                size--
+            }
+            even = !even
+        }
         return true
     }
 }

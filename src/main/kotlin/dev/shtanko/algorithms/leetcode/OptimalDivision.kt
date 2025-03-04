@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,13 +23,13 @@ class Division {
     var maxStr: String = ""
 }
 
-interface OptimalDivisionStrategy {
-    fun perform(nums: IntArray): String
+fun interface OptimalDivisionStrategy {
+    operator fun invoke(nums: IntArray): String
 }
 
 class OptimalDivisionBruteForce : OptimalDivisionStrategy {
 
-    override fun perform(nums: IntArray): String {
+    override operator fun invoke(nums: IntArray): String {
         val t = optimal(nums, 0, nums.size - 1)
         return t.maxStr
     }
@@ -66,7 +66,7 @@ class OptimalDivisionBruteForce : OptimalDivisionStrategy {
 }
 
 class OptimalDivisionMemorization : OptimalDivisionStrategy {
-    override fun perform(nums: IntArray): String {
+    override operator fun invoke(nums: IntArray): String {
         val memo: Array<Array<Division>> = Array(nums.size) { Array<Division>(nums.size) { Division() } }
         val division: Division = optimal(nums, 0, nums.size - 1, memo)
         return division.maxStr
@@ -111,7 +111,7 @@ class OptimalDivisionMemorization : OptimalDivisionStrategy {
 }
 
 class MathOptimalDivision : OptimalDivisionStrategy {
-    override fun perform(nums: IntArray): String {
+    override operator fun invoke(nums: IntArray): String {
         if (nums.isEmpty()) return ""
         if (nums.size == 1) return nums.first().toString() + ""
         if (nums.size == 2) return nums.first().toString() + "/" + nums[1]

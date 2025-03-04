@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface SuperEggDropStrategy {
-    fun perform(eggs: Int, floors: Int): Int
+fun interface SuperEggDrop {
+    operator fun invoke(eggs: Int, floors: Int): Int
 }
 
-class SuperEggDropDPBinarySearch : SuperEggDropStrategy {
+class SuperEggDropDPBinarySearch : SuperEggDrop {
 
     private var memo: MutableMap<Int, Int?> = HashMap()
 
-    override fun perform(eggs: Int, floors: Int): Int {
+    override operator fun invoke(eggs: Int, floors: Int): Int {
         return calculate(eggs, floors)
     }
 
@@ -64,8 +64,8 @@ class SuperEggDropDPBinarySearch : SuperEggDropStrategy {
     }
 }
 
-class SuperEggDropDPOptimalityCriterion : SuperEggDropStrategy {
-    override fun perform(eggs: Int, floors: Int): Int {
+class SuperEggDropDPOptimalityCriterion : SuperEggDrop {
+    override operator fun invoke(eggs: Int, floors: Int): Int {
         // Right now, dp[i] represents dp(1, i)
         // Right now, dp[i] represents dp(1, i)
         var dp = IntArray(floors + 1)
@@ -94,8 +94,8 @@ class SuperEggDropDPOptimalityCriterion : SuperEggDropStrategy {
     }
 }
 
-class SuperEggDropMathematical : SuperEggDropStrategy {
-    override fun perform(eggs: Int, floors: Int): Int {
+class SuperEggDropMathematical : SuperEggDrop {
+    override operator fun invoke(eggs: Int, floors: Int): Int {
         var lo = 1
         var hi: Int = floors
         while (lo < hi) {

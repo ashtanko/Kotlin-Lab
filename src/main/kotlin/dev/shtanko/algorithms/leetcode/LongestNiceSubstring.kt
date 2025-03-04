@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1763. Longest Nice Substring
- * @link https://leetcode.com/problems/longest-nice-substring/
+ * @see <a href="https://leetcode.com/problems/longest-nice-substring/">Source</a>
  */
-interface LongestNiceSubstring {
-    fun perform(s: String): String
+fun interface LongestNiceSubstring {
+    operator fun invoke(s: String): String
 }
 
 class LNSDivideAndConquer : LongestNiceSubstring {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         if (s.length < 2) return ""
         val arr = s.toCharArray()
         val set: MutableSet<Char> = HashSet()
@@ -33,8 +33,8 @@ class LNSDivideAndConquer : LongestNiceSubstring {
         for (i in arr.indices) {
             val c = arr[i]
             if (set.contains(c.uppercaseChar()) && set.contains(c.lowercaseChar())) continue
-            val sub1: String = perform(s.substring(0, i))
-            val sub2: String = perform(s.substring(i + 1))
+            val sub1: String = invoke(s.substring(0, i))
+            val sub2: String = invoke(s.substring(i + 1))
             return if (sub1.length >= sub2.length) sub1 else sub2
         }
         return s

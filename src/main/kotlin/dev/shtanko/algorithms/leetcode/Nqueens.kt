@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,8 @@
 package dev.shtanko.algorithms.leetcode
 
 /**
- * The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+ * The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens
+ * attack each other.
  * Given an integer n, return all distinct solutions to the n-queens puzzle.
  * Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a
  * queen and an empty space respectively.

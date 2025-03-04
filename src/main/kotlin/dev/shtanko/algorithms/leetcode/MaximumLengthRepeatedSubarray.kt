@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import java.math.BigInteger
 import kotlin.math.max
 import kotlin.math.min
 
 /**
  * 718. Maximum Length of Repeated Subarray
- * @link https://leetcode.com/problems/maximum-length-of-repeated-subarray/
+ * @see <a href="https://leetcode.com/problems/maximum-length-of-repeated-subarray/">Source</a>
  */
-interface MaximumLengthRepeatedSubarray {
+fun interface MaximumLengthRepeatedSubarray {
     fun findLength(nums1: IntArray, nums2: IntArray): Int
 }
 
@@ -89,7 +90,7 @@ sealed class MaximumLengthRepeatedSubarrayStrategy {
     }
 
     /**
-     * Approach #3: Dynamic Programming [Accepted]
+     * Approach #3: Dynamic Programming (Accepted)
      */
     class DynamicProgramming : MaximumLengthRepeatedSubarray {
         override fun findLength(nums1: IntArray, nums2: IntArray): Int {

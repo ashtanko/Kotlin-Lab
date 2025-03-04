@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,9 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 134. Gas Station
- * @link https://leetcode.com/problems/gas-station/
+ * @see <a href="https://leetcode.com/problems/gas-station/">Source</a>
  */
-interface GasStation {
+fun interface GasStation {
     fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int
 }
 

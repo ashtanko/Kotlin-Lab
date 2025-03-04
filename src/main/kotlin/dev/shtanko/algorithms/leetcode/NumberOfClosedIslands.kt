@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,9 @@ import java.util.Queue
 
 /**
  * 1254. Number of Closed Islands
- * @link https://leetcode.com/problems/number-of-closed-islands/
+ * @see <a href="https://leetcode.com/problems/number-of-closed-islands/">Source</a>
  */
-interface NumberOfClosedIslands {
+fun interface NumberOfClosedIslands {
     fun closedIsland(grid: Array<IntArray>): Int
 }
 
@@ -55,7 +55,7 @@ class NumberOfClosedIslandsBFS : NumberOfClosedIslands {
         var isClosed = true
         val dirX = intArrayOf(0, 1, 0, -1)
         val dirY = intArrayOf(-1, 0, 1, 0)
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val temp: IntArray = q.poll()
             x1 = temp[0]
             y1 = temp[1]

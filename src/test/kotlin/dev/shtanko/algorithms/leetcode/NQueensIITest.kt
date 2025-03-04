@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class NQueensIITest<out T : TotalNQueensStrategy>(private val strategy: T) {
+abstract class NQueensIITest<out T : TotalNQueensStrategy>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(4, 2),
             Arguments.of(1, 1),
@@ -35,13 +35,13 @@ internal abstract class NQueensIITest<out T : TotalNQueensStrategy>(private val 
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `n queens 2 test`(n: Int, expected: Int) {
-        val actual = strategy.perform(n)
+    fun `n queens 2 test`(num: Int, expected: Int) {
+        val actual = strategy.invoke(num)
         assertEquals(expected, actual)
     }
 }
 
-internal class TotalNQueensStraightForwardTest :
+class TotalNQueensStraightForwardTest :
     NQueensIITest<TotalNQueensStraightForward>(TotalNQueensStraightForward())
 
-internal class TotalNQueensRecursiveTest : NQueensIITest<TotalNQueensRecursive>(TotalNQueensRecursive())
+class TotalNQueensRecursiveTest : NQueensIITest<TotalNQueensRecursive>(TotalNQueensRecursive())

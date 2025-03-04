@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,19 +18,19 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 446. Arithmetic Slices II - Subsequence
- * @link https://leetcode.com/problems/arithmetic-slices-ii-subsequence/
+ * @see <a href="https://leetcode.com/problems/arithmetic-slices-ii-subsequence/">Source</a>
  */
-interface NumberOfArithmeticSlices {
-    fun perform(nums: IntArray): Int
+fun interface NumberOfArithmeticSlices {
+    operator fun invoke(nums: IntArray): Int
 }
 
 class NumberOfArithmeticSlicesBruteForce : NumberOfArithmeticSlices {
 
-    private var n = 0
+    private var size = 0
     private var ans = 0
 
-    override fun perform(nums: IntArray): Int {
-        n = nums.size
+    override operator fun invoke(nums: IntArray): Int {
+        size = nums.size
         ans = 0
         val cur: MutableList<Long> = ArrayList()
         dfs(0, nums, cur)
@@ -38,7 +38,7 @@ class NumberOfArithmeticSlicesBruteForce : NumberOfArithmeticSlices {
     }
 
     private fun dfs(dep: Int, nums: IntArray, cur: MutableList<Long>) {
-        if (dep == n) {
+        if (dep == size) {
             if (cur.size < 3) {
                 return
             }
@@ -59,17 +59,14 @@ class NumberOfArithmeticSlicesBruteForce : NumberOfArithmeticSlices {
 }
 
 class NumberOfArithmeticSlicesDP : NumberOfArithmeticSlices {
-    override fun perform(nums: IntArray): Int {
-        val n: Int = nums.size
+    override operator fun invoke(nums: IntArray): Int {
+        val size: Int = nums.size
         var ans: Long = 0
-        val cnt: Array<MutableMap<Int, Int>> = Array(n) { mutableMapOf() }
-        for (i in 0 until n) {
+        val cnt: Array<MutableMap<Int, Int>> = Array(size) { mutableMapOf() }
+        for (i in 0 until size) {
             cnt[i] = HashMap(i)
             for (j in 0 until i) {
                 val delta = nums[i] - nums[j]
-                if (delta < Int.MIN_VALUE || delta > Int.MAX_VALUE) {
-                    continue
-                }
                 val sum = cnt[j].getOrDefault(delta, 0)
                 val origin = cnt[i].getOrDefault(delta, 0)
                 cnt[i][delta] = origin + sum + 1
@@ -81,12 +78,12 @@ class NumberOfArithmeticSlicesDP : NumberOfArithmeticSlices {
 }
 
 class NumberOfArithmeticSlicesDP2 : NumberOfArithmeticSlices {
-    override fun perform(nums: IntArray): Int {
-        val n: Int = nums.size
+    override operator fun invoke(nums: IntArray): Int {
+        val size: Int = nums.size
         var ans = 0
-        val dp: Array<HashMap<Long, Int>> = Array(n) { HashMap() }
-        for (i in 0 until n) dp[i] = HashMap()
-        for (i in 1 until n) {
+        val dp: Array<HashMap<Long, Int>> = Array(size) { HashMap() }
+        for (i in 0 until size) dp[i] = HashMap()
+        for (i in 1 until size) {
             for (j in 0 until i) {
                 val diff = nums[i].toLong() - nums[j].toLong()
                 val cnt = dp[j].getOrDefault(diff, 0)

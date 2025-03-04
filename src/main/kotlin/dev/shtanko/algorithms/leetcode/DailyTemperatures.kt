@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,24 +16,26 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.Deque
 import java.util.LinkedList
 import java.util.Stack
 
 /**
  * 739. Daily Temperatures
- * @link https://leetcode.com/problems/daily-temperatures/description/
+ * @see <a href="https://leetcode.com/problems/daily-temperatures">Source</a>
  */
-interface DailyTemperatures {
-    fun perform(temperatures: IntArray): IntArray
+@Medium("https://leetcode.com/problems/daily-temperatures")
+fun interface DailyTemperatures {
+    operator fun invoke(temperatures: IntArray): IntArray
 }
 
 class DailyTemperaturesStack : DailyTemperatures {
-    override fun perform(temperatures: IntArray): IntArray {
+    override operator fun invoke(temperatures: IntArray): IntArray {
         val stack: Stack<Int> = Stack()
         val ret = IntArray(temperatures.size)
         for (i in temperatures.indices) {
-            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+            while (stack.isNotEmpty() && temperatures[i] > temperatures[stack.peek()]) {
                 val idx: Int = stack.pop()
                 ret[idx] = i - idx
             }
@@ -44,7 +46,7 @@ class DailyTemperaturesStack : DailyTemperatures {
 }
 
 class DailyTemperaturesArr : DailyTemperatures {
-    override fun perform(temperatures: IntArray): IntArray {
+    override operator fun invoke(temperatures: IntArray): IntArray {
         val stack = IntArray(temperatures.size)
         var top = -1
         val ret = IntArray(temperatures.size)
@@ -60,7 +62,7 @@ class DailyTemperaturesArr : DailyTemperatures {
 }
 
 class DailyTemperaturesDeque : DailyTemperatures {
-    override fun perform(temperatures: IntArray): IntArray {
+    override operator fun invoke(temperatures: IntArray): IntArray {
         if (temperatures.isEmpty()) {
             return intArrayOf()
         }
@@ -71,10 +73,10 @@ class DailyTemperaturesDeque : DailyTemperatures {
             if (stack.isEmpty()) {
                 // case1 : stack is empty, feel free to push
                 stack.offerFirst(i)
-            } else if (!stack.isEmpty() && temperatures[i] > temperatures[stack.peekFirst()]) {
+            } else if (stack.isNotEmpty() && temperatures[i] > temperatures[stack.peekFirst()]) {
                 // case2 : descending order happens:
                 // pop all the smaller element out, then push the current element
-                while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peekFirst()]) {
+                while (stack.isNotEmpty() && temperatures[i] > temperatures[stack.peekFirst()]) {
                     res[stack.peekFirst()] = i - stack.peekFirst()
                     stack.pollFirst()
                 }

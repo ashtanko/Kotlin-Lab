@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,15 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1964. Find the Longest Valid Obstacle Course at Each Position
- * @link https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/
+ * @see <a href="https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position">
+ *     Source</a>
  */
-interface LongestObstacleCourse {
-    fun perform(obstacles: IntArray): IntArray
+fun interface LongestObstacleCourse {
+    operator fun invoke(obstacles: IntArray): IntArray
 }
 
 class LongestObstacleCourseGreedyBS : LongestObstacleCourse {
-    override fun perform(obstacles: IntArray): IntArray {
+    override operator fun invoke(obstacles: IntArray): IntArray {
         val n = obstacles.size
         var lisLength = 0
         // lis[i] records the lowest increasing sequence of length i + 1.

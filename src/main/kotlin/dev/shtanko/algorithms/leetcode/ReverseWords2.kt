@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import dev.shtanko.algorithms.utils.reverse
 
 /**
  * 186. Reverse Words in a String II
- * @link https://leetcode.com/problems/reverse-words-in-a-string-ii/
+ * @see <a href="https://leetcode.com/problems/reverse-words-in-a-string-ii/">Source</a>
  */
 fun reverseWords2(s: CharArray) {
     // reverse the whole string

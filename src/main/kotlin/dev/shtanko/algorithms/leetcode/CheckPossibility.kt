@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Greedy
+
 /**
  * 665. Non-decreasing Array
  * https://leetcode.com/problems/non-decreasing-array/
  */
-interface CheckPossibility {
-    fun perform(nums: IntArray): Boolean
+fun interface CheckPossibility {
+    operator fun invoke(nums: IntArray): Boolean
 }
 
 /**
  * Approach: Greedy
  */
+@Greedy
 class CheckPossibilityGreedy : CheckPossibility {
-    override fun perform(nums: IntArray): Boolean {
+    override operator fun invoke(nums: IntArray): Boolean {
         var numViolations = 0
         for (i in 1 until nums.size) {
             if (nums[i - 1] > nums[i]) {

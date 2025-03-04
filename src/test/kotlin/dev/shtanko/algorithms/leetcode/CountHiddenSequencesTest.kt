@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,12 +45,30 @@ abstract class CountHiddenSequencesTest<out T : CountHiddenSequences>(private va
                 6,
                 0,
             ),
+            Arguments.of(
+                intArrayOf(-1, 2, -3, 4, 5, -6, 7),
+                0,
+                7,
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                1,
+                3,
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                3,
+                3,
+                0,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `number of Arrays test`(differences: IntArray, lower: Int, upper: Int, expected: Int) {
+    fun `number of arrays test`(differences: IntArray, lower: Int, upper: Int, expected: Int) {
         val actual = strategy.numberOfArrays(differences, lower, upper)
         assertThat(actual).isEqualTo(expected)
     }

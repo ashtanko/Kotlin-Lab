@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,36 +16,53 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AbstractIntersectionTest<out T : IntersectionStrategy>(private val strategy: T) {
+abstract class AbstractIntersectionTest<out T : IntersectionStrategy>(private val strategy: T) {
 
-    companion object {
-
-        @JvmStatic
-        fun dataProvider(): List<Pair<Pair<IntArray, IntArray>, IntArray>> = listOf(
-            intArrayOf(1, 2, 2, 1) to intArrayOf(2, 2) to intArrayOf(2),
-            intArrayOf(4, 9, 5) to intArrayOf(9, 4, 9, 8, 4) to intArrayOf(4, 9),
-            intArrayOf(4, 8) to intArrayOf(15, 16, 23, 4) to intArrayOf(4),
-            intArrayOf(4, 8) to intArrayOf(15, 16, 23, 42) to intArrayOf(),
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(1, 2, 2, 1),
+                intArrayOf(2, 2),
+                intArrayOf(2),
+            ),
+            Arguments.of(
+                intArrayOf(4, 9, 5),
+                intArrayOf(9, 4, 9, 8, 4),
+                intArrayOf(4, 9),
+            ),
+            Arguments.of(
+                intArrayOf(4, 8),
+                intArrayOf(15, 16, 23, 4),
+                intArrayOf(4),
+            ),
+            Arguments.of(
+                intArrayOf(4, 8),
+                intArrayOf(15, 16, 23, 42),
+                intArrayOf(),
+            ),
         )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `intersection test`(testCase: Pair<Pair<IntArray, IntArray>, IntArray>) {
-        val (pair, expected) = testCase
-        val actual = strategy.perform(pair)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `intersection test`(nums1: IntArray, nums2: IntArray, expected: IntArray) {
+        val actual = strategy.invoke(nums1, nums2)
         assertArrayEquals(expected, actual)
     }
 }
 
-internal class IntersectionTwoSetsTest : AbstractIntersectionTest<IntersectionTwoSets>(IntersectionTwoSets())
+class IntersectionTwoSetsTest : AbstractIntersectionTest<IntersectionTwoSets>(IntersectionTwoSets())
 
-internal class IntersectionTwoPointersTest :
+class IntersectionTwoPointersTest :
     AbstractIntersectionTest<IntersectionTwoPointers>(IntersectionTwoPointers())
 
-internal class IntersectionBinarySearchTest :
+class IntersectionBinarySearchTest :
     AbstractIntersectionTest<IntersectionBinarySearch>(IntersectionBinarySearch())

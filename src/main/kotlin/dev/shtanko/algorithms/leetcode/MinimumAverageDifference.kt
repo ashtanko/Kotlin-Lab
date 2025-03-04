@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.abs
 
 /**
  * 2256. Minimum Average Difference
- * @link https://leetcode.com/problems/minimum-average-difference/
+ * @see <a href="https://leetcode.com/problems/minimum-average-difference/">Source</a>
  */
-interface MinimumAverageDifference {
-    fun perform(nums: IntArray): Int
+fun interface MinimumAverageDifference {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
  * Approach 1: Brute Force
  */
 class MinimumAverageDifferenceBruteForce : MinimumAverageDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         var ans = -1
         var minAvgDiff = Int.MAX_VALUE
@@ -70,7 +70,7 @@ class MinimumAverageDifferenceBruteForce : MinimumAverageDifference {
  * Approach 2: Prefix Sum
  */
 class MinimumAverageDifferencePrefixSum : MinimumAverageDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         var ans = -1
         var minAvgDiff = Int.MAX_VALUE
@@ -117,7 +117,7 @@ class MinimumAverageDifferencePrefixSum : MinimumAverageDifference {
  * Approach 3: Prefix Sum Optimized
  */
 class MinimumAverageDifferencePrefixSumOpt : MinimumAverageDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         var ans = -1
         var minAvgDiff = Int.MAX_VALUE
@@ -158,7 +158,7 @@ class MinimumAverageDifferencePrefixSumOpt : MinimumAverageDifference {
 }
 
 class MinimumAverageDifferenceKt : MinimumAverageDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var sum = 0L
         nums.forEach { sum += it.toLong() }
         var leftSum = 0L

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,10 +19,10 @@ package dev.shtanko.algorithms.leetcode
 /**
  * Given three integer arrays arr1, arr2 and arr3 sorted in strictly increasing order,
  * return a sorted array of only the integers that appeared in all three arrays.
- * @link https://leetcode.com/problems/intersection-of-three-sorted-arrays/
+ * @see <a href="https://leetcode.com/problems/intersection-of-three-sorted-arrays/">Source</a>
  */
-interface IntersectionThreeSortedArrays {
-    fun perform(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int>
+fun interface IntersectionThreeSortedArrays {
+    operator fun invoke(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int>
 }
 
 /**
@@ -30,7 +30,7 @@ interface IntersectionThreeSortedArrays {
  * Space Complexity: O(n)
  */
 class IntersectionThreeSortedBruteForce : IntersectionThreeSortedArrays {
-    override fun perform(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int> {
+    override operator fun invoke(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int> {
         val ans: MutableList<Int> = ArrayList()
         val counter: MutableMap<Int, Int> = HashMap()
         // iterate through arr1, arr2, and arr3 to count the frequencies
@@ -58,7 +58,7 @@ class IntersectionThreeSortedBruteForce : IntersectionThreeSortedArrays {
  * Space Complexity: O(1)
  */
 class IntersectionThreeSortedThreePointers : IntersectionThreeSortedArrays {
-    override fun perform(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int> {
+    override operator fun invoke(arr1: IntArray, arr2: IntArray, arr3: IntArray): List<Int> {
         val ans: MutableList<Int> = ArrayList()
         // prepare three pointers to iterate through three arrays
         // p1, p2, and p3 point to the beginning of arr1, arr2, and arr3 accordingly

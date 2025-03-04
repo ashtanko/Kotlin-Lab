@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,36 +16,55 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AbstractMinSubsequenceStrategyTest<T : MinSubsequenceStrategy>(val strategy: T) {
-
-    companion object {
-        @JvmStatic
-        fun casesProvider(): List<Pair<List<Int>, IntArray>> {
-            return listOf(
-                listOf(10, 9) to intArrayOf(4, 3, 10, 9, 8),
-                listOf(7, 7, 6) to intArrayOf(4, 4, 7, 6, 7),
-                listOf(6) to intArrayOf(6),
-                listOf(1, 1, 1) to intArrayOf(1, 1, 1, 1, 1),
-                listOf(5, 3) to intArrayOf(1, 1, 1, 1, 1, 3, 5),
-            )
-        }
-    }
+abstract class AbstractMinSubsequenceStrategyTest<T : MinSubsequenceStrategy>(val strategy: T) {
 
     @ParameterizedTest
-    @MethodSource("casesProvider")
-    internal fun `min subsequence test`(testCase: Pair<List<Int>, IntArray>) {
-        val (expected, arr) = testCase
-        val actual = strategy.perform(arr)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `min subsequence test`(arr: IntArray, expected: List<Int>) {
+        val actual = strategy(arr)
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(4, 3, 10, 9, 8),
+                listOf(10, 9),
+            ),
+            Arguments.of(
+                intArrayOf(4, 4, 7, 6, 7),
+                listOf(7, 7, 6),
+            ),
+            Arguments.of(
+                intArrayOf(6),
+                listOf(6),
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1),
+                listOf(1, 1, 1),
+            ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1, 3, 5),
+                listOf(5, 3),
+            ),
+            Arguments.of(
+                intArrayOf(),
+                listOf<Int>(),
+            ),
+        )
     }
 }
 
-internal class MinSubsequenceCountingSortTest :
+class MinSubsequenceCountingSortTest :
     AbstractMinSubsequenceStrategyTest<MinSubsequenceCountingSort>(MinSubsequenceCountingSort())
 
-internal class MinSubsequencePriorityQueueTest :
+class MinSubsequencePriorityQueueTest :
     AbstractMinSubsequenceStrategyTest<MinSubsequencePriorityQueue>(MinSubsequencePriorityQueue())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+
 /**
  * 1411. Number of Ways to Paint N × 3 Grid
- * @link https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/description/
+ * @see <a href="https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid">Source</a>
  */
-interface NumOfWaysGrid {
-    fun perform(n: Int): Int
+fun interface NumOfWaysGrid {
+    operator fun invoke(n: Int): Int
 }
 
 class NumOfWaysGridDP : NumOfWaysGrid {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val dp = Array(2) { LongArray(2) { 6 } }
         for (i in 1 until n) {
             dp[i % 2][0] = (dp[(i - 1) % 2][0] * 3 + dp[(i - 1) % 2][1] * 2) % MOD

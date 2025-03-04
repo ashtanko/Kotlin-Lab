@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import java.util.TreeMap
 
 /**
  * 2300. Successful Pairs of Spells and Potions
- * @link https://leetcode.com/problems/successful-pairs-of-spells-and-potions/
+ * @see <a href="https://leetcode.com/problems/successful-pairs-of-spells-and-potions/">Source</a>
  */
-interface SuccessfulPairs {
-    fun perform(spells: IntArray, potions: IntArray, success: Long): IntArray
+fun interface SuccessfulPairs {
+    operator fun invoke(spells: IntArray, potions: IntArray, success: Long): IntArray
 }
 
 /**
@@ -32,7 +32,7 @@ interface SuccessfulPairs {
  * Space O(n)
  */
 class SuccessfulPairsSF : SuccessfulPairs {
-    override fun perform(spells: IntArray, potions: IntArray, success: Long): IntArray {
+    override operator fun invoke(spells: IntArray, potions: IntArray, success: Long): IntArray {
         potions.sort()
         val map = TreeMap<Long, Int>()
         map[Long.MAX_VALUE] = potions.size
@@ -53,7 +53,7 @@ class SuccessfulPairsSF : SuccessfulPairs {
  * Space O(n)
  */
 class SuccessfulPairsTwoSum : SuccessfulPairs {
-    override fun perform(spells: IntArray, potions: IntArray, success: Long): IntArray {
+    override operator fun invoke(spells: IntArray, potions: IntArray, success: Long): IntArray {
         val spells0 = spells.clone()
         potions.sort()
         spells.sort()

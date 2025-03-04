@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2154. Keep Multiplying Found Values by Two
- * link https://leetcode.com/problems/keep-multiplying-found-values-by-two/
+ * @see <a href="https://leetcode.com/problems/keep-multiplying-found-values-by-two">Source</a>
  */
-interface FindFinalValue {
-    fun perform(nums: IntArray, original: Int): Int
+fun interface FindFinalValue {
+    operator fun invoke(nums: IntArray, original: Int): Int
 }
 
 class FindFinalValueHashMap : FindFinalValue {
-    override fun perform(nums: IntArray, original: Int): Int {
+    override operator fun invoke(nums: IntArray, original: Int): Int {
         var o = original
         val set = HashSet<Int>()
         for (i in nums) if (i >= o) set.add(i)

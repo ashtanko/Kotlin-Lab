@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
 import java.util.Stack
 
 /**
  * 1028. Recover a Tree From Preorder Traversal
- * @link https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/
+ * @see <a href="https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/">Source</a>
  */
-interface RecoverFromPreorder {
-    fun perform(traversal: String): TreeNode?
+fun interface RecoverFromPreorder {
+    operator fun invoke(traversal: String): TreeNode?
 }
 
 class RecoverFromPreorderIterative : RecoverFromPreorder {
-    override fun perform(traversal: String): TreeNode? {
+    override operator fun invoke(traversal: String): TreeNode? {
         var level: Int
         var value: Int
         val stack: Stack<TreeNode> = Stack()
@@ -48,7 +49,7 @@ class RecoverFromPreorderIterative : RecoverFromPreorder {
                 stack.pop()
             }
             val node = TreeNode(value)
-            if (!stack.isEmpty()) {
+            if (stack.isNotEmpty()) {
                 if (stack.peek().left == null) {
                     stack.peek().left = node
                 } else {
@@ -67,7 +68,7 @@ class RecoverFromPreorderIterative : RecoverFromPreorder {
 
 class RecoverFromPreorderRecursive : RecoverFromPreorder {
     var i = 0
-    override fun perform(traversal: String): TreeNode? {
+    override operator fun invoke(traversal: String): TreeNode? {
         return helper(traversal, -1)
     }
 

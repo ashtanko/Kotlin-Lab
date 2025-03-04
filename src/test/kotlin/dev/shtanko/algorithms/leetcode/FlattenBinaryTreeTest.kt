@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class FlattenBinaryTreeTest<out T : FlattenBinaryTree>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class FlattenBinaryTreeTest<out T : FlattenBinaryTree>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(1).apply {
@@ -39,16 +39,35 @@ internal abstract class FlattenBinaryTreeTest<out T : FlattenBinaryTree>(private
                 },
                 listOf(1, 2, 3, 4, 5, 6),
             ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(3).apply {
+                            left = TreeNode(4)
+                            right = TreeNode(5)
+                        }
+                        right = TreeNode(6).apply {
+                            left = TreeNode(7)
+                            right = TreeNode(8)
+                        }
+                    }
+                    right = TreeNode(9).apply {
+                        left = TreeNode(10)
+                        right = TreeNode(11)
+                    }
+                },
+                listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `flatten test`(root: TreeNode?, expected: List<Int>) {
+    fun `flatten test`(root: TreeNode?, expected: List<Int>) {
         strategy.flatten(root)
         assertThat(root.preorderTraversal()).hasSameElementsAs(expected)
     }
 }
 
-internal class FlattenRecursionTest : FlattenBinaryTreeTest<FlattenRecursion>(FlattenRecursion())
-internal class FlattenStackTest : FlattenBinaryTreeTest<FlattenStack>(FlattenStack())
+class FlattenRecursionTest : FlattenBinaryTreeTest<FlattenRecursion>(FlattenRecursion())
+class FlattenStackTest : FlattenBinaryTreeTest<FlattenStack>(FlattenStack())

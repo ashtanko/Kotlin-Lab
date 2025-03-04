@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ import java.util.Queue
 
 /**
  * 433. Minimum Genetic Mutation
- * @link https://leetcode.com/problems/minimum-genetic-mutation/
+ * @see <a href="https://leetcode.com/problems/minimum-genetic-mutation/">Source</a>
  */
 fun interface MinimumGeneticMutation {
     fun minMutation(start: String, end: String, bank: Array<String>): Int
@@ -39,7 +39,7 @@ class MinimumGeneticMutationBFS : MinimumGeneticMutation {
 
         var steps = 0
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val nodesInQueue: Int = queue.size
             for (j in 0 until nodesInQueue) {
                 val node: String = queue.remove()

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,12 +23,12 @@ import java.util.stream.Collectors
  * Implement an algorithm to determine if a string has all unique characters
  * What if you can not use additional data structures?
  */
-interface UniqueCharacters {
-    fun perform(str: String): Boolean
+fun interface UniqueCharacters {
+    operator fun invoke(str: String): Boolean
 }
 
 class UniqueCharactersSet : UniqueCharacters {
-    override fun perform(str: String): Boolean {
+    override fun invoke(str: String): Boolean {
         if (str.isBlank()) return false
         return str.length == str.toSet().size
     }
@@ -38,7 +38,7 @@ class UniqueCharactersSet : UniqueCharacters {
  * Not use additional data structures
  */
 class UniqueCharactersSort : UniqueCharacters {
-    override fun perform(str: String): Boolean {
+    override fun invoke(str: String): Boolean {
         if (str.isBlank()) return false
         val chars = str.toCharArray().sorted()
         for (i in 0 until chars.size - 1) {
@@ -54,7 +54,7 @@ class UniqueCharactersSort : UniqueCharacters {
 
 class UniqueCharactersStream : UniqueCharacters {
 
-    override fun perform(str: String): Boolean {
+    override fun invoke(str: String): Boolean {
         if (str.isBlank()) return false
 
         return str.chars().filter { e ->
@@ -67,7 +67,7 @@ class UniqueCharactersStream : UniqueCharacters {
 }
 
 class UniqueCharactersBruteForce : UniqueCharacters {
-    override fun perform(str: String): Boolean {
+    override fun invoke(str: String): Boolean {
         if (str.isBlank()) return false
         for (i in str.indices) {
             for (j in i + 1 until str.length) {

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import java.util.ArrayDeque
 import java.util.Deque
 
 /**
- * @link https://leetcode.com/problems/deepest-leaves-sum/solution/
+ * @see <a href="https://leetcode.com/problems/deepest-leaves-sum">Source</a>
  */
-interface DeepestLeavesSum {
-    fun perform(root: TreeNode): Int
+fun interface DeepestLeavesSum {
+    operator fun invoke(root: TreeNode): Int
 }
 
 class DeepestLeavesSumDFS : DeepestLeavesSum {
-    override fun perform(root: TreeNode): Int {
+    override operator fun invoke(root: TreeNode): Int {
         var deepestSum = 0
         var depth = 0
         var currDepth: Int
@@ -35,7 +35,7 @@ class DeepestLeavesSumDFS : DeepestLeavesSum {
         val stack: Deque<Pair<TreeNode, Int>> = ArrayDeque()
         stack.push(node to 0)
 
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val p = stack.pop()
             node = p.first
             currDepth = p.second
@@ -63,7 +63,7 @@ class DeepestLeavesSumDFS : DeepestLeavesSum {
  * Approach 2: Iterative BFS Traversal.
  */
 class DeepestLeavesSumBFS : DeepestLeavesSum {
-    override fun perform(root: TreeNode): Int {
+    override operator fun invoke(root: TreeNode): Int {
         var deepestSum = 0
         var depth = 0
         var currDepth: Int
@@ -71,7 +71,7 @@ class DeepestLeavesSumBFS : DeepestLeavesSum {
         var node: TreeNode = root
         queue.offer(Pair(node, 0))
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val p = queue.poll()
             node = p.first
             currDepth = p.second
@@ -99,12 +99,12 @@ class DeepestLeavesSumBFS : DeepestLeavesSum {
  * Approach 3: Optimized Iterative BFS Traversal.
  */
 class DeepestLeavesSumOptimizedBFS : DeepestLeavesSum {
-    override fun perform(root: TreeNode): Int {
+    override operator fun invoke(root: TreeNode): Int {
         val nextLevel: ArrayDeque<TreeNode> = ArrayDeque()
         var currLevel: ArrayDeque<TreeNode> = ArrayDeque()
         nextLevel.offer(root)
 
-        while (!nextLevel.isEmpty()) {
+        while (nextLevel.isNotEmpty()) {
             currLevel = nextLevel.clone()
             nextLevel.clear()
             for (node in currLevel) {

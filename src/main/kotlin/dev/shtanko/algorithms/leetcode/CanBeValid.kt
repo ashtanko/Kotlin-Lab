@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Iterative
 import kotlin.math.abs
 
 /**
  * 2116. Check if a Parentheses String Can Be Valid
- * @link https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/
+ * @see <a href="https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/">Source</a>
  */
-interface CanBeValid {
-    fun perform(s: String, locked: String): Boolean
+fun interface CanBeValid {
+    operator fun invoke(s: String, locked: String): Boolean
 }
 
+@Iterative
 class CanBeValidLeftRight : CanBeValid {
-    override fun perform(s: String, locked: String): Boolean {
+    override operator fun invoke(s: String, locked: String): Boolean {
         return s.length % 2 == 0 && validate(s, locked, '(') && validate(s, locked, ')')
     }
 
@@ -46,19 +48,28 @@ class CanBeValidLeftRight : CanBeValid {
     }
 }
 
+@Iterative
 class CanBeValidCountingBrackets : CanBeValid {
-    override fun perform(s: String, locked: String): Boolean {
+    override operator fun invoke(s: String, locked: String): Boolean {
         if (s.length % 2 == 1) return false
         var total = 0
         var open = 0
         var closed = 0
         for (i in s.length - 1 downTo 0) {
-            if (locked[i] == '0') total += 1 else if (s[i] == '(') open += 1 else if (s[i] == ')') closed += 1
+            when {
+                locked[i] == '0' -> total += 1
+                s[i] == '(' -> open += 1
+                s[i] == ')' -> closed += 1
+            }
             if (total - open + closed < 0) return false
         }
         total = 0.also { closed = it }.also { open = it }
         for (i in s.indices) {
-            if (locked[i] == '0') total += 1 else if (s[i] == '(') open += 1 else if (s[i] == ')') closed += 1
+            when {
+                locked[i] == '0' -> total += 1
+                s[i] == '(' -> open += 1
+                s[i] == ')' -> closed += 1
+            }
             if (total + open - closed < 0) return false
         }
         return true

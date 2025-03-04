@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,10 +24,15 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SubArraySumStrategyTest<out T : SubarraySumStrategy>(private val strategy: T) {
+abstract class SubArraySumStrategyTest<out T : SubarraySumStrategy>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(),
+                0,
+                0,
+            ),
             Arguments.of(
                 intArrayOf(0),
                 0,
@@ -38,22 +43,37 @@ internal abstract class SubArraySumStrategyTest<out T : SubarraySumStrategy>(pri
                 2,
                 2,
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 3),
+                3,
+                2,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4),
+                3,
+                2,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4),
+                5,
+                1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `sub array sum test`(arr: IntArray, k: Int, expected: Int) {
-        val actual = strategy.perform(arr, k)
+    fun `sub array sum test`(arr: IntArray, k: Int, expected: Int) {
+        val actual = strategy.invoke(arr, k)
         assertEquals(expected, actual)
     }
 }
 
-internal class SubArraySumBruteForceTest : SubArraySumStrategyTest<SubarraySumBruteForce>(SubarraySumBruteForce())
+class SubArraySumBruteForceTest : SubArraySumStrategyTest<SubarraySumBruteForce>(SubarraySumBruteForce())
 
-internal class SubArraySumUsingCumulativeSumTest :
+class SubArraySumUsingCumulativeSumTest :
     SubArraySumStrategyTest<SubarraySumUsingCumulativeSum>(SubarraySumUsingCumulativeSum())
 
-internal class SubArraySumWithoutSpaceTest : SubArraySumStrategyTest<SubarraySumWithoutSpace>(SubarraySumWithoutSpace())
+class SubArraySumWithoutSpaceTest : SubArraySumStrategyTest<SubarraySumWithoutSpace>(SubarraySumWithoutSpace())
 
-internal class SubArraySumUsingHashmapTest : SubArraySumStrategyTest<SubarraySumUsingHashmap>(SubarraySumUsingHashmap())
+class SubArraySumUsingHashmapTest : SubArraySumStrategyTest<SubarraySumUsingHashmap>(SubarraySumUsingHashmap())

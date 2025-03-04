@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 1125. Smallest Sufficient Team
- * @link https://leetcode.com/problems/smallest-sufficient-team/
+ * @see <a href="https://leetcode.com/problems/smallest-sufficient-team/">Source</a>
  */
-interface SmallestSufficientTeam {
-    fun perform(reqSkills: Array<String>, people: List<List<String>>): IntArray
+fun interface SmallestSufficientTeam {
+    operator fun invoke(reqSkills: Array<String>, people: List<List<String>>): IntArray
 }
 
+@DFS
 class SmallestSufficientTeamDFS : SmallestSufficientTeam {
     private var sol: MutableList<Int> = ArrayList()
 
-    override fun perform(reqSkills: Array<String>, people: List<List<String>>): IntArray {
+    override operator fun invoke(reqSkills: Array<String>, people: List<List<String>>): IntArray {
         val idx: MutableMap<String, Int> = HashMap()
         var n = 0
         for (s in reqSkills) idx[s] = n++ // skills are represented by 0, 1, 2....
@@ -46,15 +49,15 @@ class SmallestSufficientTeamDFS : SmallestSufficientTeam {
         return ans
     }
 
-    fun search(cur: Int, pe: IntArray, onesol: MutableList<Int>, n: Int) {
+    private fun search(cur: Int, pe: IntArray, onesol: MutableList<Int>, n: Int) {
         // when all bits are 1, all skills are covered
         if (cur == (1 shl n) - 1) {
-            if (sol.size == 0 || onesol.size < sol.size) {
+            if (sol.isEmpty() || onesol.size < sol.size) {
                 sol = ArrayList(onesol)
             }
             return
         }
-        if (sol.size != 0 && onesol.size >= sol.size) {
+        if (sol.isNotEmpty() && onesol.size >= sol.size) {
             return
         }
         var zeroBit = 0

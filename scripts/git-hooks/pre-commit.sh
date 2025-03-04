@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 echo "Running static analysis..."
 
 JAVA_HOME=$(/usr/libexec/java_home -v 11)

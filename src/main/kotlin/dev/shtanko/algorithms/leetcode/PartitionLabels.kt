@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import kotlin.math.max
 
 /**
@@ -24,8 +25,8 @@ import kotlin.math.max
  * Space Complexity: O(1).
  */
 class PartitionLabels {
-    fun perform(s: String): List<Int> {
-        val last = IntArray(MAX_SIZE)
+    operator fun invoke(s: String): List<Int> {
+        val last = IntArray(ALPHABET_LETTERS_COUNT)
         for (i in s.indices) {
             last[s[i] - 'a'] = i
         }
@@ -40,9 +41,5 @@ class PartitionLabels {
             }
         }
         return ans
-    }
-
-    companion object {
-        private const val MAX_SIZE = 26
     }
 }

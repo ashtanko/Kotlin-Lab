@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,33 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Bitwise
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.math.BigInteger
 
 /**
  * Given two binary strings a and b, return their sum as a binary string.
+ * @see <a href="https://leetcode.com/problems/add-binary">Source</a>
  */
-interface AddBinaryStrategy {
-    fun perform(a: String, b: String): String
+@Easy(link = "https://leetcode.com/problems/add-binary")
+fun interface AddBinary {
+    operator fun invoke(a: String, b: String): String
 }
 
 /**
  * Time complexity: O(max(N,M)), where N and M are lengths of the input strings a and b.
  * Space complexity: O(max(N,M)) to keep the answer.
  */
-class AddBinaryBitByBitComputation : AddBinaryStrategy {
-    override fun perform(a: String, b: String): String {
+@Bitwise
+class AddBinaryBitByBitComputation : AddBinary {
+    /**
+     * Adds two binary strings and returns their sum as a binary string.
+     *
+     * @param a the first binary string
+     * @param b the second binary string
+     * @return the sum of the binary strings as a binary string
+     */
+    override operator fun invoke(a: String, b: String): String {
         val sb = StringBuilder()
         var i: Int = a.length - 1
         var j: Int = b.length - 1
@@ -51,20 +63,39 @@ class AddBinaryBitByBitComputation : AddBinaryStrategy {
  * Time complexity : O(N+M), where N and M are lengths of the input strings a and b.
  * Space complexity: O(max(N,M)) to keep the answer.
  */
-class AddBinaryBitManipulation : AddBinaryStrategy {
-    override fun perform(a: String, b: String): String {
-        if (a.isEmpty() || b.isEmpty()) return ""
-        var x = BigInteger(a, 2)
-        var y = BigInteger(b, 2)
+@Bitwise
+class AddBinaryBitManipulation : AddBinary {
+    /**
+     * Performs binary addition of two strings and returns the sum as a binary string.
+     *
+     * @param firstBinary The first binary string.
+     * @param secondBinary The second binary string.
+     * @return The sum of the two binary strings as a binary string.
+     */
+    override operator fun invoke(firstBinary: String, secondBinary: String): String {
+        if (firstBinary.isEmpty() || secondBinary.isEmpty()) return ""
+        val firstOperand = BigInteger(firstBinary, 2)
+        val secondOperand = BigInteger(secondBinary, 2)
         val zero = BigInteger("0", 2)
-        var carry: BigInteger
-        var answer: BigInteger
+
+        return addBinary(firstOperand, secondOperand, zero).toString(2)
+    }
+
+    private fun addBinary(
+        firstOperand: BigInteger,
+        secondOperand: BigInteger,
+        zero: BigInteger,
+    ): BigInteger {
+        var tempResult: BigInteger
+        var carryResult: BigInteger
+        var x = firstOperand
+        var y = secondOperand
         while (y.compareTo(zero) != 0) {
-            answer = x.xor(y)
-            carry = x.and(y).shiftLeft(1)
-            x = answer
-            y = carry
+            tempResult = x.xor(y)
+            carryResult = x.and(y).shiftLeft(1)
+            x = tempResult
+            y = carryResult
         }
-        return x.toString(2)
+        return x
     }
 }

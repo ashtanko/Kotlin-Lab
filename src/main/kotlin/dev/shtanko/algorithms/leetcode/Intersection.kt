@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,10 +17,11 @@
 package dev.shtanko.algorithms.leetcode
 
 /**
- * Given two arrays, write a function to compute their intersection.
+ * 349. Intersection of Two Arrays
+ * @see <a href="https://leetcode.com/problems/intersection-of-two-arrays">Source</a>
  */
-interface IntersectionStrategy {
-    fun perform(p: Pair<IntArray, IntArray>): IntArray
+fun interface IntersectionStrategy {
+    operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray
 }
 
 /**
@@ -28,11 +29,11 @@ interface IntersectionStrategy {
  * Time complexity: O(n)
  */
 class IntersectionTwoSets : IntersectionStrategy {
-    override fun perform(p: Pair<IntArray, IntArray>): IntArray {
-        val set = p.first.toSet()
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
+        val set = nums1.toSet()
         val intersect: MutableSet<Int> = HashSet()
 
-        for (num in p.second) {
+        for (num in nums2) {
             if (set.contains(num)) {
                 intersect.add(num)
             }
@@ -52,24 +53,24 @@ class IntersectionTwoSets : IntersectionStrategy {
  * Time complexity: O(nlogn)
  */
 class IntersectionTwoPointers : IntersectionStrategy {
-    override fun perform(p: Pair<IntArray, IntArray>): IntArray {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
         val set: MutableSet<Int> = HashSet()
-        p.first.sort()
-        p.second.sort()
+        nums1.sort()
+        nums2.sort()
         var i = 0
         var j = 0
-        while (i < p.first.size && j < p.second.size) {
+        while (i < nums1.size && j < nums2.size) {
             when {
-                p.first[i] < p.second[j] -> {
+                nums1[i] < nums2[j] -> {
                     i++
                 }
 
-                p.first[i] > p.second[j] -> {
+                nums1[i] > nums2[j] -> {
                     j++
                 }
 
                 else -> {
-                    set.add(p.first[i])
+                    set.add(nums1[i])
                     i++
                     j++
                 }
@@ -88,11 +89,11 @@ class IntersectionTwoPointers : IntersectionStrategy {
  *
  */
 class IntersectionBinarySearch : IntersectionStrategy {
-    override fun perform(p: Pair<IntArray, IntArray>): IntArray {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
         val set: MutableSet<Int> = HashSet()
-        p.second.sort()
-        for (num in p.first) {
-            if (binarySearch(p.second, num)) {
+        nums2.sort()
+        for (num in nums1) {
+            if (binarySearch(nums2, num)) {
                 set.add(num)
             }
         }

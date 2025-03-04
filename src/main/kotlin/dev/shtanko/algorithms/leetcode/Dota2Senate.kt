@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,14 +24,14 @@ private const val DIRE = "Dire"
 
 /**
  * 649. Dota2 Senate
- * @link https://leetcode.com/problems/dota2-senate/
+ * @see <a href="https://leetcode.com/problems/dota2-senate/">Source</a>
  */
-interface Dota2Senate {
-    fun predictPartyVictory(senate: String): String
+fun interface Dota2Senate {
+    operator fun invoke(senate: String): String
 }
 
 class Dota2SenateGreedy : Dota2Senate {
-    override fun predictPartyVictory(senate: String): String {
+    override fun invoke(senate: String): String {
         // Convert to StringBuilder for easy deletion
         val senateArray = StringBuilder(senate)
 
@@ -103,7 +103,7 @@ class Dota2SenateGreedy : Dota2Senate {
 }
 
 class Dota2SenateBooleanArray : Dota2Senate {
-    override fun predictPartyVictory(senate: String): String {
+    override fun invoke(senate: String): String {
         // To mark Banned Senators
         val banned = BooleanArray(senate.length)
 
@@ -153,7 +153,7 @@ class Dota2SenateBooleanArray : Dota2Senate {
 }
 
 class Dota2SenateTwoQueues : Dota2Senate {
-    override fun predictPartyVictory(senate: String): String {
+    override fun invoke(senate: String): String {
         // Number of Senator
         val n: Int = senate.length
 
@@ -172,7 +172,7 @@ class Dota2SenateTwoQueues : Dota2Senate {
         }
 
         // While both parties have at least one Senator
-        while (!rQueue.isEmpty() && !dQueue.isEmpty()) {
+        while (rQueue.isNotEmpty() && dQueue.isNotEmpty()) {
             // Pop the Next-Turn Senate from both Q.
             val rTurn: Int = rQueue.poll()
             val dTurn: Int = dQueue.poll()
@@ -193,7 +193,7 @@ class Dota2SenateTwoQueues : Dota2Senate {
 }
 
 class Dota2SenateSingleQueue : Dota2Senate {
-    override fun predictPartyVictory(senate: String): String {
+    override fun invoke(senate: String): String {
         // Number of Senators of each party
         var rCount = 0
         var dCount = 0

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,13 +21,13 @@ import java.util.Queue
 
 /**
  * 261. Graph Valid Tree
- * @link https://leetcode.com/problems/graph-valid-tree/
+ * @see <a href="https://leetcode.com/problems/graph-valid-tree/">Source</a>
  */
-interface GraphValidTree {
+fun interface GraphValidTree {
     fun validTree(n: Int, edges: Array<IntArray>): Boolean
 }
 
-private class UnionFind(val n: Int) {
+private class GraphValidTreeUnionFind(n: Int) {
     private val parent: IntArray = IntArray(n)
     private val size: IntArray = IntArray(n)
 
@@ -98,7 +98,7 @@ class GVTSimpleIterativeDFS : GraphValidTree {
         val queue: Queue<Int> = LinkedList()
         queue.offer(0)
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val node: Int = queue.poll()
             for (neighbour in adjacencyList[node]) {
                 if (parent[node] == neighbour) {
@@ -140,7 +140,7 @@ class GVTAdvancedIterativeDFS : GraphValidTree {
         queue.offer(0)
         seen.add(0)
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val node = queue.poll()
             for (neighbour in adjacencyList[node]) {
                 if (seen.contains(neighbour)) continue
@@ -162,7 +162,7 @@ class GVTAdvancedUnionFind : GraphValidTree {
         if (edges.size != n - 1) return false
         // Condition 2: The graph must contain a single connected component.
         // Create a new UnionFind object with n nodes.
-        val unionFind = UnionFind(n)
+        val unionFind = GraphValidTreeUnionFind(n)
         // Add each edge. Check if a merge happened, because if it
         // didn't, there must be a cycle.
         for (edge in edges) {

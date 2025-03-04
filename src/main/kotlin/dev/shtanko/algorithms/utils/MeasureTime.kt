@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package dev.shtanko.algorithms.utils
 
 import dev.shtanko.algorithms.sorts.AbstractSortStrategy
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.system.measureNanoTime
 import kotlin.time.DurationUnit
@@ -27,6 +28,7 @@ fun measureTime(strategy: AbstractSortStrategy, array: IntArray, task: () -> Uni
     val elapsed = measureTime(DurationUnit.MILLISECONDS, task)
     println(
         String.format(
+            Locale.getDefault(),
             "Arrays of length %d Strategy %s Consumed time: %d ms",
             array.size,
             strategy::class.java.simpleName,
@@ -37,7 +39,7 @@ fun measureTime(strategy: AbstractSortStrategy, array: IntArray, task: () -> Uni
 
 fun measureTime(taskName: String, task: () -> Unit) {
     val elapsed = measureTime(DurationUnit.MILLISECONDS, task)
-    println(String.format("Task %s Consumed time: %d ms", taskName, elapsed))
+    println(String.format(Locale.getDefault(), "Task %s Consumed time: %d ms", taskName, elapsed))
 }
 
 @OptIn(ExperimentalTime::class)

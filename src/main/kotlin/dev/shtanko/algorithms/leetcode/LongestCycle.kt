@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,10 +22,10 @@ import kotlin.math.max
 
 /**
  * 2360. Longest Cycle in a Graph
- * @link https://leetcode.com/problems/longest-cycle-in-a-graph/
+ * @see <a href="https://leetcode.com/problems/longest-cycle-in-a-graph/">Source</a>
  */
-interface LongestCycle {
-    fun perform(edges: IntArray): Int
+fun interface LongestCycle {
+    operator fun invoke(edges: IntArray): Int
 }
 
 /**
@@ -34,7 +34,7 @@ interface LongestCycle {
 class LongestCycleDFS : LongestCycle {
     private var answer = -1
 
-    override fun perform(edges: IntArray): Int {
+    override operator fun invoke(edges: IntArray): Int {
         val n: Int = edges.size
         val visit = BooleanArray(n)
 
@@ -64,7 +64,7 @@ class LongestCycleDFS : LongestCycle {
  * Approach 2: Kahn's Algorithm
  */
 class LongestCycleKahnsAlgorithm : LongestCycle {
-    override fun perform(edges: IntArray): Int {
+    override operator fun invoke(edges: IntArray): Int {
         val n: Int = edges.size
         val visit = BooleanArray(n)
         val inDegree = IntArray(n)
@@ -82,7 +82,7 @@ class LongestCycleKahnsAlgorithm : LongestCycle {
             }
         }
 
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val node: Int = q.poll()
             visit[node] = true
             val neighbor = edges[node]

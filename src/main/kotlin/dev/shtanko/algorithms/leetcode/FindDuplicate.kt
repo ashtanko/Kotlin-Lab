@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Find Duplicate File in System
- * @link https://leetcode.com/problems/find-duplicate-file-in-system/
+ * @see <a href="https://leetcode.com/problems/find-duplicate-file-in-system/">Source</a>
  */
-interface FindDuplicate {
-    fun perform(paths: Array<String>): List<List<String>>
+fun interface FindDuplicate {
+    operator fun invoke(paths: Array<String>): List<List<String>>
 }
 
 /**
@@ -30,7 +30,7 @@ interface FindDuplicate {
  * Space complexity : O(n*x).
  */
 class FindDuplicateBruteForce : FindDuplicate {
-    override fun perform(paths: Array<String>): List<List<String>> {
+    override operator fun invoke(paths: Array<String>): List<List<String>> {
         val list: MutableList<Array<String>> = ArrayList()
         for (path in paths) {
             val values = path.split(" ".toRegex()).toTypedArray()
@@ -56,7 +56,7 @@ class FindDuplicateBruteForce : FindDuplicate {
                     visited[j] = true
                 }
             }
-            if (l.size > 0) {
+            if (l.isNotEmpty()) {
                 l.add(list[i][0])
                 res.add(l)
             }
@@ -69,7 +69,7 @@ class FindDuplicateBruteForce : FindDuplicate {
  * Approach #2 Using HashMap
  */
 class FindDuplicateHashMap : FindDuplicate {
-    override fun perform(paths: Array<String>): List<List<String>> {
+    override operator fun invoke(paths: Array<String>): List<List<String>> {
         val map = HashMap<String, MutableList<String>>()
         for (path in paths) {
             val values = path.split(" ".toRegex()).toTypedArray()

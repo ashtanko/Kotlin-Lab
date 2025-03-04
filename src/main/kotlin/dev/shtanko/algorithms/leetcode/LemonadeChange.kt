@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,33 +17,32 @@
 package dev.shtanko.algorithms.leetcode
 
 class LemonadeChange {
-
-    fun perform(bills: IntArray): Boolean {
-        var five = 0
-        var ten = 0
-        for (i in bills) {
+    operator fun invoke(bills: IntArray): Boolean {
+        var fiveDollarCount = 0
+        var tenDollarCount = 0
+        for (bill in bills) {
             when {
-                i == BILL_FIVE -> five++
-                i == BILL_TEN -> {
-                    five--
-                    ten++
+                bill == FIVE_DOLLAR -> fiveDollarCount++
+                bill == TEN_DOLLAR -> {
+                    fiveDollarCount--
+                    tenDollarCount++
                 }
 
-                ten > 0 -> {
-                    ten--
-                    five--
+                tenDollarCount > 0 -> {
+                    tenDollarCount--
+                    fiveDollarCount--
                 }
 
-                else -> five -= BILL_THREE
+                else -> fiveDollarCount -= THREE_DOLLAR
             }
-            if (five < 0) return false
+            if (fiveDollarCount < 0) return false
         }
         return true
     }
 
     companion object {
-        private const val BILL_FIVE = 5
-        private const val BILL_THREE = 3
-        private const val BILL_TEN = 10
+        private const val FIVE_DOLLAR = 5
+        private const val THREE_DOLLAR = 3
+        private const val TEN_DOLLAR = 10
     }
 }

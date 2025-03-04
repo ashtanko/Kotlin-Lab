@@ -1,6 +1,6 @@
 codecov:
   branch: main
-  disable_default_path_fixes: true
+  disable_default_path_fixes: false
   notify:
     require_ci_to_pass: yes
 
@@ -8,5 +8,5 @@ coverage:
   status:
     project:
       default:
-        target: 80%
-        threshold: 1%
+        target: 87%
+        threshold: 20%

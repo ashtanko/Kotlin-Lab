@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,35 +16,47 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AbstractSortByParityStrategyTest<out T : AbstractSortByParityStrategy>(private val strategy: T) {
-
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<IntArray, IntArray>> {
-            return listOf(
-                intArrayOf(4, 2, 5, 7) to intArrayOf(4, 5, 2, 7),
-                intArrayOf(1, 2, 3, 4) to intArrayOf(2, 1, 4, 3),
-                intArrayOf(4, 8, 15, 16, 23, 41) to intArrayOf(4, 15, 8, 23, 16, 41),
-            )
-        }
-    }
+abstract class AbstractSortByParityTest<out T : AbstractSortByParity>(private val strategy: T) {
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `sort by parity test`(testCase: Pair<IntArray, IntArray>) {
-        val (arr, expected) = testCase
-        val actual = strategy.perform(arr)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `sort by parity test`(arr: IntArray, expected: IntArray) {
+        val actual = strategy.invoke(arr)
         assertArrayEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(4, 2, 5, 7),
+                intArrayOf(4, 5, 2, 7),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4),
+                intArrayOf(2, 1, 4, 3),
+            ),
+            Arguments.of(
+                intArrayOf(4, 8, 15, 16, 23, 41),
+                intArrayOf(4, 15, 8, 23, 16, 41),
+            ),
+            Arguments.of(
+                intArrayOf(),
+                intArrayOf(),
+            ),
+        )
     }
 }
 
-internal class SortByParityTwoPassTest : AbstractSortByParityStrategyTest<SortByParityTwoPass>(SortByParityTwoPass())
+class SortByParityTwoPassTest : AbstractSortByParityTest<AbstractSortByParity>(SortByParityTwoPass())
 
-internal class SortByParityHeadsTest : AbstractSortByParityStrategyTest<SortByParityHeads>(SortByParityHeads())
+class SortByParityHeadsTest : AbstractSortByParityTest<AbstractSortByParity>(SortByParityHeads())
 
-internal class SortByParityStraightForwardTest :
-    AbstractSortByParityStrategyTest<SortByParityStraightForward>(SortByParityStraightForward())
+class SortByParityStraightForwardTest : AbstractSortByParityTest<AbstractSortByParity>(SortByParityStraightForward())

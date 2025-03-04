@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class WordAbbreviationTest<out T : WordAbbreviation>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class WordAbbreviationTest<out T : WordAbbreviation>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 emptyList<String>(),
@@ -124,12 +124,12 @@ internal abstract class WordAbbreviationTest<out T : WordAbbreviation>(private v
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `words abbreviation test`(dict: List<String>, expected: List<String>) {
-        val actual = strategy.perform(dict)
+    fun `words abbreviation test`(dict: List<String>, expected: List<String>) {
+        val actual = strategy.invoke(dict)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class WordAbbreviationGreedyTest : WordAbbreviationTest<WordAbbreviationGreedy>(WordAbbreviationGreedy())
-internal class WordAbbreviationLCPTest : WordAbbreviationTest<WordAbbreviationLCP>(WordAbbreviationLCP())
-internal class WordAbbreviationTrieTest : WordAbbreviationTest<WordAbbreviationTrie>(WordAbbreviationTrie())
+class WordAbbreviationGreedyTest : WordAbbreviationTest<WordAbbreviationGreedy>(WordAbbreviationGreedy())
+class WordAbbreviationLCPTest : WordAbbreviationTest<WordAbbreviationLCP>(WordAbbreviationLCP())
+class WordAbbreviationTrieTest : WordAbbreviationTest<WordAbbreviationTrie>(WordAbbreviationTrie())

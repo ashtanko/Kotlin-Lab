@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +16,23 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isEven
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.isEven
+import dev.shtanko.extensions.swap
 import java.util.Arrays
 
 /**
- * Given an array A of non-negative integers, return an array consisting of all the even elements of A,
- * followed by all the odd elements of A.
+ * 905. Sort Array By Parity
+ * @see <a href="https://leetcode.com/problems/sort-array-by-parity">Source</a>
  */
-interface SortArrayByParity {
-    fun perform(nums: IntArray): IntArray
+fun interface SortArrayByParity {
+    operator fun invoke(nums: IntArray): IntArray
 }
 
 /**
  * Approach 1: Stream
  */
 class SortArrayByParityStream : SortArrayByParity {
-    override fun perform(nums: IntArray): IntArray {
+    override operator fun invoke(nums: IntArray): IntArray {
         return Arrays.stream(nums)
             .boxed()
             .sorted { a, b -> (a % 2).compareTo(b % 2) }
@@ -45,13 +45,13 @@ class SortArrayByParityStream : SortArrayByParity {
  * Approach 1: Kotlin
  */
 class SortArrayByParityKotlin : SortArrayByParity {
-    override fun perform(nums: IntArray): IntArray = nums
+    override operator fun invoke(nums: IntArray): IntArray = nums
         .sortedWith { a, b -> (a % 2).compareTo(b % 2) }
         .toIntArray()
 }
 
 class SortArrayByParityTwoPass : SortArrayByParity {
-    override fun perform(nums: IntArray): IntArray {
+    override operator fun invoke(nums: IntArray): IntArray {
         val ans = IntArray(nums.size)
         var t = 0
 
@@ -68,25 +68,25 @@ class SortArrayByParityTwoPass : SortArrayByParity {
 }
 
 class SortArrayByParityInPlace : SortArrayByParity {
-    override fun perform(nums: IntArray): IntArray = nums.sortArrayByParity()
-}
+    override operator fun invoke(nums: IntArray): IntArray = nums.sortArrayByParity()
 
-fun IntArray.sortArrayByParity(): IntArray {
-    var i = 0
-    var j = size - 1
-    while (i < j) {
-        if (this[i].isEven) {
-            i++
-        } else {
-            if (!this[j].isEven) {
-                j--
-            }
-            if (this[j].isEven) {
-                swap(i, j)
+    private fun IntArray.sortArrayByParity(): IntArray {
+        var i = 0
+        var j = size - 1
+        while (i < j) {
+            if (this[i].isEven) {
                 i++
-                j--
+            } else {
+                if (!this[j].isEven) {
+                    j--
+                }
+                if (this[j].isEven) {
+                    swap(i, j)
+                    i++
+                    j--
+                }
             }
         }
+        return this
     }
-    return this
 }

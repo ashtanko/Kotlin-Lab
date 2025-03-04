@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,53 +16,68 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.LinkedList
 import java.util.Queue
 import kotlin.math.min
 
 /**
  * 542. 01 Matrix
- * @link https://leetcode.com/problems/01-matrix/
+ * @see <a href="https://leetcode.com/problems/01-matrix/">Source</a>
  */
-interface ZeroOneMatrix {
-    fun updateMatrix(mat: Array<IntArray>): Array<IntArray>
+@Medium("https://leetcode.com/problems/01-matrix")
+fun interface ZeroOneMatrix {
+    operator fun invoke(matrix: Array<IntArray>): Array<IntArray>
 }
 
 /**
  * Approach 2: Using BFS
  */
 class ZeroOneMatrixBFS : ZeroOneMatrix {
-    private val dir = intArrayOf(0, 1, 0, -1, 0)
+    private val directions = intArrayOf(0, 1, 0, -1, 0)
 
-    override fun updateMatrix(mat: Array<IntArray>): Array<IntArray> {
-        val m: Int = mat.size
-        val n: Int = mat[0].size // The distance of cells is up to (M+N)
+    override fun invoke(matrix: Array<IntArray>): Array<IntArray> {
+        val queue: Queue<IntArray> = LinkedList()
 
-        val q: Queue<IntArray> = LinkedList()
-        for (r in 0 until m) for (c in 0 until n) {
-            if (mat[r][c] == 0) {
-                q.offer(intArrayOf(r, c))
-            } else {
-                mat[r][c] = -1 // Marked as not processed yet!
-            }
+        initializeQueue(matrix, queue)
+
+        while (queue.isNotEmpty()) {
+            processQueue(matrix, queue)
         }
 
-        while (!q.isEmpty()) {
-            val curr: IntArray = q.poll()
-            val r = curr[0]
-            val c = curr[1]
-            for (i in 0..3) {
-                val nr: Int = r + dir[i]
-                val nc: Int = c + dir[i + 1]
-                val local = nr < 0 || nr == m || nc < 0
-                if (local || nc == n || mat[nr][nc] != -1) {
-                    continue
+        return matrix
+    }
+
+    private fun initializeQueue(matrix: Array<IntArray>, queue: Queue<IntArray>) {
+        for (row in matrix.indices) {
+            for (col in matrix[0].indices) {
+                if (matrix[row][col] == 0) {
+                    queue.offer(intArrayOf(row, col))
+                } else {
+                    matrix[row][col] = -1 // Marked as not processed yet!
                 }
-                mat[nr][nc] = mat[r][c] + 1
-                q.offer(intArrayOf(nr, nc))
             }
         }
-        return mat
+    }
+
+    private fun processQueue(matrix: Array<IntArray>, queue: Queue<IntArray>) {
+        val current = queue.poll()
+        val row = current[0]
+        val col = current[1]
+
+        for (i in 0..3) {
+            val newRow = row + directions[i]
+            val newCol = col + directions[i + 1]
+
+            val outOfBounds = newRow < 0 || newRow == matrix.size || newCol < 0 || newCol == matrix[0].size
+
+            if (outOfBounds || matrix[newRow][newCol] != -1) {
+                continue
+            }
+
+            matrix[newRow][newCol] = matrix[row][col] + 1
+            queue.offer(intArrayOf(newRow, newCol))
+        }
     }
 }
 
@@ -70,43 +85,44 @@ class ZeroOneMatrixBFS : ZeroOneMatrix {
  * Approach 3: Dynamic Programming
  */
 class ZeroOneMatrixDP : ZeroOneMatrix {
-    override fun updateMatrix(mat: Array<IntArray>): Array<IntArray> {
-        val m: Int = mat.size
-        val n: Int = mat.first().size
-        val inf = m + n // The distance of cells is up to (M+N)
 
-        for (r in 0 until m) {
-            for (c in 0 until n) {
-                if (mat[r][c] == 0) {
-                    continue
-                }
-                var top = inf
-                var left = inf
-                if (r - 1 >= 0) {
-                    top = mat[r - 1][c]
-                }
-                if (c - 1 >= 0) {
-                    left = mat[r][c - 1]
-                }
-                mat[r][c] = min(top, left) + 1
+    override fun invoke(matrix: Array<IntArray>): Array<IntArray> {
+        val rows: Int = matrix.size
+        val cols: Int = matrix.firstOrNull()?.size ?: 0
+
+        fillTopLeft(matrix, rows, cols)
+        fillBottomRight(matrix, rows, cols)
+
+        return matrix
+    }
+
+    private fun fillTopLeft(matrix: Array<IntArray>, rows: Int, cols: Int) {
+        val inf = rows + cols
+
+        for (row in 0 until rows) {
+            for (col in 0 until cols) {
+                if (matrix[row][col] == 0) continue
+
+                val top = if (row - 1 >= 0) matrix[row - 1][col] else inf
+                val left = if (col - 1 >= 0) matrix[row][col - 1] else inf
+
+                matrix[row][col] = min(top, left) + 1
             }
         }
-        for (r in m - 1 downTo 0) {
-            for (c in n - 1 downTo 0) {
-                if (mat[r][c] == 0) {
-                    continue
-                }
-                var bottom = inf
-                var right = inf
-                if (r + 1 < m) {
-                    bottom = mat[r + 1][c]
-                }
-                if (c + 1 < n) {
-                    right = mat[r][c + 1]
-                }
-                mat[r][c] = min(mat[r][c], min(bottom, right) + 1)
+    }
+
+    private fun fillBottomRight(matrix: Array<IntArray>, rows: Int, cols: Int) {
+        val inf = rows + cols
+
+        for (row in rows - 1 downTo 0) {
+            for (col in cols - 1 downTo 0) {
+                if (matrix[row][col] == 0) continue
+
+                val bottom = if (row + 1 < rows) matrix[row + 1][col] else inf
+                val right = if (col + 1 < cols) matrix[row][col + 1] else inf
+
+                matrix[row][col] = min(matrix[row][col], min(bottom, right) + 1)
             }
         }
-        return mat
     }
 }

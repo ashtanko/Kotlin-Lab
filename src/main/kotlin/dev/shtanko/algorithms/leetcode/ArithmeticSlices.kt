@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BruteForce
+import dev.shtanko.algorithms.annotations.BruteForceOptimized
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Math
+import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Medium
+import dev.shtanko.algorithms.complexity.RuntimeComplexity
+import dev.shtanko.algorithms.complexity.SpaceComplexity
+
 /**
  * Arithmetic Slices
- * @link https://leetcode.com/problems/arithmetic-slices/
+ * @see <a href="https://leetcode.com/problems/arithmetic-slices/">Source</a>
  */
-interface ArithmeticSlices {
-    fun numberOfArithmeticSlices(arr: IntArray): Int
+@Medium("https://leetcode.com/problems/arithmetic-slices")
+fun interface ArithmeticSlices {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
@@ -29,18 +39,21 @@ interface ArithmeticSlices {
  * Time complexity : O(n^3).
  * Space complexity : O(1).
  */
+@RuntimeComplexity(short = "O(n^3)")
+@SpaceComplexity(short = "O(1)")
+@BruteForce
 class ArSlicesBruteForce : ArithmeticSlices {
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
+    override fun invoke(arr: IntArray): Int {
         var count = 0
-        for (s in 0 until arr.size - 2) {
-            val d: Int = arr[s + 1] - arr[s]
-            for (e in s + 2 until arr.size) {
-                var i: Int = s + 1
-                while (i <= e) {
-                    if (arr[i] - arr[i - 1] != d) break
-                    i++
+        for (start in 0 until arr.size - 2) {
+            val difference: Int = arr[start + 1] - arr[start]
+            for (end in start + 2 until arr.size) {
+                var index: Int = start + 1
+                while (index <= end) {
+                    if (arr[index] - arr[index - 1] != difference) break
+                    index++
                 }
-                if (i > e) count++
+                if (index > end) count++
             }
         }
         return count
@@ -52,13 +65,16 @@ class ArSlicesBruteForce : ArithmeticSlices {
  * Time complexity : O(n^2).
  * Space complexity : O(1).
  */
+@RuntimeComplexity(short = "O(n^2)")
+@SpaceComplexity(short = "O(1)")
+@BruteForceOptimized
 class ArSlicesBetterBruteForce : ArithmeticSlices {
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
+    override fun invoke(arr: IntArray): Int {
         var count = 0
-        for (s in 0 until arr.size - 2) {
-            val d: Int = arr[s + 1] - arr[s]
-            for (e in s + 2 until arr.size) {
-                if (arr[e] - arr[e - 1] == d) count++ else break
+        for (start in 0 until arr.size - 2) {
+            val difference: Int = arr[start + 1] - arr[start]
+            for (end in start + 2 until arr.size) {
+                if (arr[end] - arr[end - 1] == difference) count++ else break
             }
         }
         return count
@@ -70,25 +86,24 @@ class ArSlicesBetterBruteForce : ArithmeticSlices {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@Recursive
 class ArSlicesRecursion : ArithmeticSlices {
-
-    private var sum = 0
-
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
-        slices(arr, arr.size - 1)
-        return sum
+    private var totalSum = 0
+    override fun invoke(array: IntArray): Int {
+        calculateSlices(array, array.size - 1)
+        return totalSum
     }
 
-    private fun slices(arr: IntArray, i: Int): Int {
-        if (i < 2) return 0
-        var ap = 0
-        if (arr[i] - arr[i - 1] == arr[i - 1] - arr[i - 2]) {
-            ap = 1 + slices(arr, i - 1)
-            sum += ap
+    private fun calculateSlices(array: IntArray, index: Int): Int {
+        if (index < 2) return 0
+        var arithmeticProgression = 0
+        if (array[index] - array[index - 1] == array[index - 1] - array[index - 2]) {
+            arithmeticProgression = 1 + calculateSlices(array, index - 1)
+            totalSum += arithmeticProgression
         } else {
-            slices(arr, i - 1)
+            calculateSlices(array, index - 1)
         }
-        return ap
+        return arithmeticProgression
     }
 }
 
@@ -97,8 +112,9 @@ class ArSlicesRecursion : ArithmeticSlices {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@DP
 class ArSlicesDP : ArithmeticSlices {
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
+    override fun invoke(arr: IntArray): Int {
         val dp = IntArray(arr.size)
         var sum = 0
         for (i in 2 until dp.size) {
@@ -116,8 +132,9 @@ class ArSlicesDP : ArithmeticSlices {
  * Time complexity : O(n).
  * Space complexity : O(1).
  */
+@DP("Constant Space DP")
 class ArSlicesConstantSpaceDP : ArithmeticSlices {
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
+    override fun invoke(arr: IntArray): Int {
         var dp = 0
         var sum = 0
         for (i in 2 until arr.size) {
@@ -137,8 +154,9 @@ class ArSlicesConstantSpaceDP : ArithmeticSlices {
  * Time complexity : O(n).
  * Space complexity : O(1).
  */
+@Math
 class ArSlicesFormula : ArithmeticSlices {
-    override fun numberOfArithmeticSlices(arr: IntArray): Int {
+    override fun invoke(arr: IntArray): Int {
         var count = 0
         var sum = 0
         for (i in 2 until arr.size) {

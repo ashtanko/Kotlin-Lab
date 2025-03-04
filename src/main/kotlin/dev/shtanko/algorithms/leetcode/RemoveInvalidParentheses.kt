@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 301. Remove Invalid Parentheses
- * @link https://leetcode.com/problems/remove-invalid-parentheses/
+ * @see <a href="https://leetcode.com/problems/remove-invalid-parentheses/">Source</a>
  */
-interface RemoveInvalidParentheses {
-    fun perform(s: String): List<String>
+fun interface RemoveInvalidParentheses {
+    operator fun invoke(s: String): List<String>
 }
 
 /**
@@ -33,7 +33,7 @@ class RemoveInvalidParenthesesBacktracking : RemoveInvalidParentheses {
     private var minimumRemoved = Int.MAX_VALUE
     private val expression = StringBuilder()
 
-    override fun perform(s: String): List<String> {
+    override operator fun invoke(s: String): List<String> {
         recurse(s, 0, 0, 0, 0)
         return validExpressions.toList()
     }
@@ -48,19 +48,21 @@ class RemoveInvalidParenthesesBacktracking : RemoveInvalidParentheses {
         // If we have reached the end of string.
         if (index == s.length) {
             // If the current expression is valid.
-            if (leftCount == rightCount) {
-                // If the current count of removed parentheses is <= the current minimum count
-                if (removedCount <= minimumRemoved) {
-                    // Convert StringBuilder to a String. This is an expensive operation.
-                    // So we only perform this when needed.
-                    val possibleAnswer = expression.toString()
+            when (leftCount) {
+                rightCount -> {
+                    // If the current count of removed parentheses is <= the current minimum count
+                    if (removedCount <= minimumRemoved) {
+                        // Convert StringBuilder to a String. This is an expensive operation.
+                        // So we only perform this when needed.
+                        val possibleAnswer = expression.toString()
 
-                    // If the current count beats the overall minimum we have till now
-                    if (removedCount < minimumRemoved) {
-                        validExpressions.clear()
-                        minimumRemoved = removedCount
+                        // If the current count beats the overall minimum we have till now
+                        if (removedCount < minimumRemoved) {
+                            validExpressions.clear()
+                            minimumRemoved = removedCount
+                        }
+                        validExpressions.add(possibleAnswer)
                     }
-                    validExpressions.add(possibleAnswer)
                 }
             }
         } else {
@@ -100,7 +102,7 @@ class RemoveInvalidParenthesesLBacktracking : RemoveInvalidParentheses {
 
     private val validExpressions: MutableSet<String> = HashSet()
 
-    override fun perform(s: String): List<String> {
+    override operator fun invoke(s: String): List<String> {
         var left = 0
         var right = 0
 
@@ -159,14 +161,20 @@ class RemoveInvalidParenthesesLBacktracking : RemoveInvalidParentheses {
             expression.append(character)
 
             // Simply recurse one step further if the current character is not a parenthesis.
-            if (character != '(' && character != ')') {
-                recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression)
-            } else if (character == '(') {
-                // Consider an opening bracket.
-                recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression)
-            } else if (rightCount < leftCount) {
-                // Consider a closing bracket.
-                recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression)
+            when {
+                character != '(' && character != ')' -> {
+                    recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression)
+                }
+
+                character == '(' -> {
+                    // Consider an opening bracket.
+                    recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression)
+                }
+
+                rightCount < leftCount -> {
+                    // Consider a closing bracket.
+                    recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression)
+                }
             }
 
             // Delete for backtracking.
@@ -176,7 +184,7 @@ class RemoveInvalidParenthesesLBacktracking : RemoveInvalidParentheses {
 }
 
 class RemoveInvalidParenthesesFast : RemoveInvalidParentheses {
-    override fun perform(s: String): List<String> {
+    override operator fun invoke(s: String): List<String> {
         val ans: MutableList<String> = ArrayList()
         remove(s, ans, 0, 0, charArrayOf('(', ')'))
         return ans

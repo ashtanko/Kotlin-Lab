@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -41,6 +41,30 @@ abstract class FindOriginalArrayTest<out T : FindOriginalArray>(private val stra
             ),
             Arguments.of(
                 intArrayOf(),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 2, 4),
+                intArrayOf(1, 2),
+            ),
+            Arguments.of(
+                intArrayOf(1, 3, 2, 6, 4, 8),
+                intArrayOf(1, 3, 4),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 2, 4, 4),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 2, 4, 8),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 2, 2, 4, 4, 8, 8),
+                intArrayOf(),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 2, 2, 4, 4, 8, 8, 8),
                 intArrayOf(),
             ),
         )

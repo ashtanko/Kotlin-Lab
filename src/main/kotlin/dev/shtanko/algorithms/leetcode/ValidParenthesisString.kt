@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.max
 
 /**
  * 678. Valid Parenthesis String
- * @link https://leetcode.com/problems/valid-parenthesis-string/
+ * @see <a href="https://leetcode.com/problems/valid-parenthesis-string/">Source</a>
  */
-interface ValidParenthesisString {
-    fun checkValidString(s: String): Boolean
+fun interface ValidParenthesisString {
+    operator fun invoke(str: String): Boolean
 }
 
 /**
@@ -31,8 +31,8 @@ interface ValidParenthesisString {
  */
 class ValidParenthesisStringBruteForce : ValidParenthesisString {
     private var ans = false
-    override fun checkValidString(s: String): Boolean {
-        solve(StringBuilder(s), 0)
+    override fun invoke(str: String): Boolean {
+        solve(StringBuilder(str), 0)
         return ans
     }
 
@@ -51,7 +51,7 @@ class ValidParenthesisStringBruteForce : ValidParenthesisString {
         }
     }
 
-    fun valid(sb: StringBuilder): Boolean {
+    private fun valid(sb: StringBuilder): Boolean {
         var bal = 0
         for (element in sb) {
             if (element == '(') bal++
@@ -66,26 +66,26 @@ class ValidParenthesisStringBruteForce : ValidParenthesisString {
  * Approach #2: Dynamic Programming
  */
 class ValidParenthesisStringDP : ValidParenthesisString {
-    override fun checkValidString(s: String): Boolean {
-        val n: Int = s.length
-        if (n == 0) return true
-        val dp = Array(n) { BooleanArray(n) }
+    override fun invoke(str: String): Boolean {
+        val len: Int = str.length
+        if (len == 0) return true
+        val dp = Array(len) { BooleanArray(len) }
 
-        for (i in 0 until n) {
-            if (s[i] == '*') dp[i][i] = true
-            val local = s[i] == '(' || s[i] == '*'
-            if (i < n - 1 && local && (s[i + 1] == ')' || s[i + 1] == '*')) {
+        for (i in 0 until len) {
+            if (str[i] == '*') dp[i][i] = true
+            val local = str[i] == '(' || str[i] == '*'
+            if (i < len - 1 && local && (str[i + 1] == ')' || str[i + 1] == '*')) {
                 dp[i][i + 1] = true
             }
         }
-        dp(s, n, dp)
-        return dp[0][n - 1]
+        dp(str, len, dp)
+        return dp[0][len - 1]
     }
 
-    private fun dp(s: String, n: Int, dp: Array<BooleanArray>) {
-        for (size in 2 until n) {
+    private fun dp(s: String, len: Int, dp: Array<BooleanArray>) {
+        for (size in 2 until len) {
             var i = 0
-            while (i + size < n) {
+            while (i + size < len) {
                 if (s[i] == '*' && dp[i + 1][i + size]) {
                     dp[i][i + size] = true
                 } else if (s[i] == '(' || s[i] == '*') {
@@ -106,12 +106,12 @@ class ValidParenthesisStringDP : ValidParenthesisString {
  * Approach #3: Greedy
  */
 class ValidParenthesisStringGreedy : ValidParenthesisString {
-    override fun checkValidString(s: String): Boolean {
+    override fun invoke(str: String): Boolean {
         var lo = 0
         var hi = 0
-        for (c in s.toCharArray()) {
-            lo += if (c == '(') 1 else -1
-            hi += if (c != ')') 1 else -1
+        for (character in str.toCharArray()) {
+            lo += if (character == '(') 1 else -1
+            hi += if (character != ')') 1 else -1
             if (hi < 0) break
             lo = max(lo, 0)
         }

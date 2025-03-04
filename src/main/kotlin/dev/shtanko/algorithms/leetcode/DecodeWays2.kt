@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,20 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.lessThanZero
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.extensions.lessThanZero
 
 // TODO Rename constants
 private const val NINE = 9
 private const val SIX = 6
 private const val FIFTEEN = 15
 
-interface DecodeWays2Strategy {
-    fun perform(s: String): Int
+fun interface DecodeWays2Strategy {
+    operator fun invoke(s: String): Int
 }
 
 class DecodeWays2RecursionWithMemoization : DecodeWays2Strategy {
 
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         if (s.isBlank()) return 0
         val memo = arrayOfNulls<Int>(s.length)
         return ways(s, s.length - 1, memo)
@@ -95,7 +96,7 @@ class DecodeWays2RecursionWithMemoization : DecodeWays2Strategy {
 
 class DecodeWays2DynamicProgramming : DecodeWays2Strategy {
 
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         if (s.isBlank()) return 0
         val dp = LongArray(s.length + 1)
         dp[0] = 1
@@ -154,7 +155,7 @@ class DecodeWays2DynamicProgramming : DecodeWays2Strategy {
 
 class DecodeWays2ConstantSpaceDynamicProgramming : DecodeWays2Strategy {
 
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         if (s.isBlank()) return 0
         var first: Long = 1
         var second = if (s[0] == '*') NINE.toLong() else if (s[0] == '0') 0 else 1.toLong()

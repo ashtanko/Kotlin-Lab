@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.pow
 
 /**
  * 1062. Longest Repeating Substring
- * @link https://leetcode.com/problems/longest-repeating-substring/
+ * @see <a href="https://leetcode.com/problems/longest-repeating-substring/">Source</a>
  */
 interface LongestRepeatingSubstring {
-    fun perform(s: String): Int {
+    operator fun invoke(s: String): Int {
         val n = s.length
         var left = 1
         var right = n
@@ -85,7 +85,7 @@ class LRSHashes : LongestRepeatingSubstring {
  */
 class LRSRabinKarp : LongestRepeatingSubstring {
 
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         val n = s.length
         // convert string to array of integers
         // to implement constant time slice

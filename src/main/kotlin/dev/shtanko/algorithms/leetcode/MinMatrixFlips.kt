@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,15 +20,16 @@ import kotlin.math.min
 
 /**
  * 1284. Minimum Number of Flips to Convert Binary Matrix to Zero Matrix
- * @link https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix/
+ * @see <a href="https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix">
+ *     Source</a>
  */
-interface MinMatrixFlips {
-    fun perform(mat: Array<IntArray>): Int
+fun interface MinMatrixFlips {
+    operator fun invoke(mat: Array<IntArray>): Int
 }
 
 class MinMatrixFlipsBFS : MinMatrixFlips {
 
-    override fun perform(mat: Array<IntArray>): Int {
+    override operator fun invoke(mat: Array<IntArray>): Int {
         val n = mat.size
         val m = mat[0].size
         val dp: HashMap<String, Int> = HashMap()
@@ -55,7 +56,7 @@ class MinMatrixFlipsBFS : MinMatrixFlips {
 
     private fun func(mat: Array<IntArray>, n: Int, m: Int, set: HashSet<String>, dp: HashMap<String, Int>): Int {
         if (check(mat, n, m)) return 0
-        var t: String = ""
+        var t = ""
         for (i in 0 until n) {
             for (j in 0 until m) {
                 t += mat[i][j].toString()

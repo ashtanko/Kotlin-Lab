@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,22 +27,58 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 abstract class KInversePairsArrayTest<out T : KInversePairsArray>(private val strategy: T) {
     private class InputArgumentsProvide : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(3, 0, 1),
-            Arguments.of(3, 1, 2),
-            Arguments.of(0, 0, 0),
-            Arguments.of(1, 1, 0),
-            Arguments.of(2, 0, 1),
-            Arguments.of(4, 0, 1),
-            Arguments.of(5, 2, 9),
-            Arguments.of(15, 7, 66013),
-            Arguments.of(20, 12, 67163518),
+            Arguments.of(
+                3,
+                0,
+                1,
+            ),
+            Arguments.of(
+                3,
+                1,
+                2,
+            ),
+            Arguments.of(
+                0,
+                0,
+                0,
+            ),
+            Arguments.of(
+                1,
+                1,
+                0,
+            ),
+            Arguments.of(
+                2,
+                0,
+                1,
+            ),
+            Arguments.of(
+                4,
+                0,
+                1,
+            ),
+            Arguments.of(
+                5,
+                2,
+                9,
+            ),
+            Arguments.of(
+                15,
+                7,
+                66013,
+            ),
+            Arguments.of(
+                20,
+                12,
+                67163518,
+            ),
         )
     }
 
     @ArgumentsSource(InputArgumentsProvide::class)
     @ParameterizedTest
-    fun `k inverse pairs test`(n: Int, k: Int, expected: Int) {
-        val actual = strategy.perform(n, k)
+    fun `k inverse pairs test`(num: Int, k: Int, expected: Int) {
+        val actual = strategy.invoke(num, k)
         assertThat(actual).isEqualTo(expected)
     }
 }

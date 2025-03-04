@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 958. Check Completeness of a Binary Tree
- * @link https://leetcode.com/problems/check-completeness-of-a-binary-tree/
+ * @see <a href="https://leetcode.com/problems/check-completeness-of-a-binary-tree/">Source</a>
  */
-interface CheckCompletenessOfBinaryTree {
+fun interface CheckCompletenessOfBinaryTree {
     fun isCompleteTree(root: TreeNode?): Boolean
 }
 
+@BFS
 class CheckCompletenessOfBinaryTreeBFS : CheckCompletenessOfBinaryTree {
     override fun isCompleteTree(root: TreeNode?): Boolean {
         val bfs: Queue<TreeNode> = LinkedList()
@@ -36,11 +39,12 @@ class CheckCompletenessOfBinaryTreeBFS : CheckCompletenessOfBinaryTree {
             bfs.offer(node.left)
             bfs.offer(node.right)
         }
-        while (!bfs.isEmpty() && bfs.peek() == null) bfs.poll()
+        while (bfs.isNotEmpty() && bfs.peek() == null) bfs.poll()
         return bfs.isEmpty()
     }
 }
 
+@DFS
 class CheckCompletenessOfBinaryTreeDFS : CheckCompletenessOfBinaryTree {
     override fun isCompleteTree(root: TreeNode?): Boolean {
         return dfs(root) >= 0

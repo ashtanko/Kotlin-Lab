@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +16,25 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
 import java.awt.Point
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 815. Bus Routes
- * @link https://leetcode.com/problems/bus-routes/
+ * @see <a href="https://leetcode.com/problems/bus-routes/">Source</a>
  */
-interface BusRoutes {
-    fun numBusesToDestination(routes: Array<IntArray>, source: Int, target: Int): Int
+fun interface BusRoutes {
+    operator fun invoke(routes: Array<IntArray>, source: Int, target: Int): Int
 }
 
 /**
  * Approach #1: Breadth First Search
  */
+@BFS
 class BusRoutesBFS : BusRoutes {
-    override fun numBusesToDestination(routes: Array<IntArray>, source: Int, target: Int): Int {
+    override fun invoke(routes: Array<IntArray>, source: Int, target: Int): Int {
         if (source == target) return 0
         val n: Int = routes.size
 
@@ -66,7 +68,7 @@ class BusRoutesBFS : BusRoutes {
             }
         }
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val info: Point = queue.poll()
             val node: Int = info.x
             val depth: Int = info.y
@@ -92,8 +94,9 @@ class BusRoutesBFS : BusRoutes {
     }
 }
 
+@BFS
 class BusRoutesBFS2 : BusRoutes {
-    override fun numBusesToDestination(routes: Array<IntArray>, source: Int, target: Int): Int {
+    override fun invoke(routes: Array<IntArray>, source: Int, target: Int): Int {
         val n: Int = routes.size
         val toRoutes = HashMap<Int, HashSet<Int>>()
         for (i in routes.indices) {
@@ -107,7 +110,7 @@ class BusRoutesBFS2 : BusRoutes {
         val seen = HashSet<Int>()
         seen.add(source)
         val seenRoutes = BooleanArray(n)
-        while (!bfs.isEmpty()) {
+        while (bfs.isNotEmpty()) {
             val stop = bfs.peek()[0]
             val bus = bfs.peek()[1]
             bfs.poll()

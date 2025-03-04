@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,23 +24,9 @@ import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ArgumentsSource
 
 internal class StackTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of()
-    }
-
-    companion object {
-        @JvmStatic
-        fun reverseStringProvider(): List<Pair<String, String>> {
-            return listOf(
-                "rap" to "par",
-                "car" to "rac",
-                "tenet" to "tenet",
-            )
-        }
-    }
 
     @Test
     internal fun `sort values in stack`() {
@@ -59,10 +45,30 @@ internal class StackTest {
     }
 
     @ParameterizedTest
-    @MethodSource("reverseStringProvider")
-    internal fun `reverse string using stack`(testCase: Pair<String, String>) {
-        val (str, expected) = testCase
+    @ArgumentsSource(InputArgumentsProvider::class)
+    internal fun `reverse string using stack`(str: String, expected: String) {
         val actual = str.reversed()
         assertEquals(expected, actual)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                "rap",
+                "par",
+            ),
+            Arguments.of(
+                "car",
+                "rac",
+            ),
+            Arguments.of(
+                "tenet",
+                "tenet",
+            ),
+            Arguments.of(
+                "",
+                "",
+            ),
+        )
     }
 }

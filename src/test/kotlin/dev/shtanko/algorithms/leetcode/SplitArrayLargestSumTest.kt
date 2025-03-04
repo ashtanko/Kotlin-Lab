@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,19 +42,51 @@ abstract class SplitArrayLargestSumTest<out T : SplitArrayLargestSum>(private va
                 2,
                 2,
             ),
+            Arguments.of(
+                intArrayOf(1, 4, 4),
+                3,
+                4,
+            ),
+            Arguments.of(
+                intArrayOf(1, 4, 4),
+                2,
+                5,
+            ),
+            Arguments.of(
+                intArrayOf(),
+                0,
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                1,
+                1,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                2,
+                9,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                3,
+                6,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `split array test`(nums: IntArray, k: Int, expected: Int) {
-        val actual = strategy.splitArray(nums, k)
+        val actual = strategy.invoke(nums, k)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
 class SplitArrayLargestSumMaxSumTest : SplitArrayLargestSumTest<SplitArrayLargestSum>(SplitArrayLargestSumMaxSum())
+
 class SplitArrayLargestSumGreedyTest : SplitArrayLargestSumTest<SplitArrayLargestSum>(SplitArrayLargestSumGreedy())
+
 class SplitArrayLargestSumBinarySearchTest :
     SplitArrayLargestSumTest<SplitArrayLargestSum>(SplitArrayLargestSumBinarySearch())
 

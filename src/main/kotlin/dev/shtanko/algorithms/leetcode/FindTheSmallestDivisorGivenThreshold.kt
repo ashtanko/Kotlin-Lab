@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,20 +17,20 @@
 package dev.shtanko.algorithms.leetcode
 
 // Find the Smallest Divisor Given a Threshold
-interface SmallestDivisorStrategy {
-    fun perform(nums: IntArray, threshold: Int): Int
+fun interface SmallestDivisorStrategy {
+    operator fun invoke(nums: IntArray, threshold: Int): Int
 
-    fun computeSum(nums: IntArray, x: Int): Long {
-        var s: Long = 0
-        for (n in nums) {
-            s += (n / x + if (n % x == 0) 0 else 1).toLong()
+    fun computeSum(nums: IntArray, divisor: Int): Long {
+        var sum: Long = 0
+        for (number in nums) {
+            sum += (number / divisor + if (number % divisor == 0) 0 else 1).toLong()
         }
-        return s
+        return sum
     }
 }
 
 class SmallestDivisorBinarySearch : SmallestDivisorStrategy {
-    override fun perform(nums: IntArray, threshold: Int): Int {
+    override operator fun invoke(nums: IntArray, threshold: Int): Int {
         // search boundaries for the divisor
         var left = 1
         var right = 2
@@ -59,10 +59,9 @@ class SmallestDivisorBinarySearch : SmallestDivisorStrategy {
 }
 
 class SmallestDivisorMath : SmallestDivisorStrategy {
-    override fun perform(nums: IntArray, threshold: Int): Int {
-        // binary search
-        // binary search
+    override operator fun invoke(nums: IntArray, threshold: Int): Int {
         var left = 1
+
         var right = nums[nums.size - 1]
         while (left <= right) {
             val pivot = left + (right - left shr 1)
@@ -73,16 +72,6 @@ class SmallestDivisorMath : SmallestDivisorStrategy {
                 right = pivot - 1
             }
         }
-
-        // at the end of loop, left > right,
-        // computeSum(right) > threshold
-        // computeSum(left) <= threshold
-        // --> return left
-
-        // at the end of loop, left > right,
-        // computeSum(right) > threshold
-        // computeSum(left) <= threshold
-        // --> return left
         return left
     }
 }

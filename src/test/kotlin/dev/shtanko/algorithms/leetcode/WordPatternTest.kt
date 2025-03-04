@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,28 @@ abstract class WordPatternTest<out T : WordPattern>(private val strategy: T) {
                 "dog cat cat dog",
                 false,
             ),
+            Arguments.of(
+                "abba",
+                "dog dog dog dog",
+                false,
+            ),
+            Arguments.of(
+                "ab",
+                "dog dog",
+                false,
+            ),
+            Arguments.of(
+                "",
+                "",
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `word pattern test`(pattern: String, s: String, expected: Boolean) {
-        val actual = strategy.perform(pattern, s)
+        val actual = strategy.invoke(pattern, s)
         assertThat(actual).isEqualTo(expected)
     }
 }

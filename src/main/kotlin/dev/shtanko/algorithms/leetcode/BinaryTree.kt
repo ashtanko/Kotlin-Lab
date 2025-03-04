@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2024 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,18 @@ package dev.shtanko.algorithms.leetcode
 
 import org.slf4j.LoggerFactory
 
-internal class BinaryTree {
+/**
+ * Class representing a binary tree.
+ */
+class BinaryTree {
+    /**
+     * The root node of the binary tree.
+     */
     var root: TreeNode? = null
 
+    /**
+     * Prints the binary tree in level order.
+     */
     fun printLevelOrder() {
         val h = height(root)
         for (i in 1 until h) {
@@ -28,6 +37,12 @@ internal class BinaryTree {
         }
     }
 
+    /**
+     * Prints all nodes at a given level.
+     *
+     * @param root The root node of the binary tree.
+     * @param level The level to print.
+     */
     private fun printGivenLevel(root: TreeNode?, level: Int) {
         if (root == null) {
             return
@@ -40,6 +55,12 @@ internal class BinaryTree {
         }
     }
 
+    /**
+     * Computes the height of the binary tree.
+     *
+     * @param root The root node of the binary tree.
+     * @return The height of the binary tree.
+     */
     private fun height(root: TreeNode?): Int {
         return if (root == null) {
             0
@@ -56,6 +77,9 @@ internal class BinaryTree {
     }
 
     companion object {
+        /**
+         * Logger for the BinaryTree class.
+         */
         private val LOGGER = LoggerFactory.getLogger(BinaryTree::class.java)
     }
 }

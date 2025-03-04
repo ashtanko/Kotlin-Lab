@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SingleRowKeyboardTest<out T : SingleRowKeyboard>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class SingleRowKeyboardTest<out T : SingleRowKeyboard>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "abcdefghijklmnopqrstuvwxyz",
@@ -42,10 +42,10 @@ internal abstract class SingleRowKeyboardTest<out T : SingleRowKeyboard>(private
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `single row keyboard test`(keyboard: String, word: String, expected: Int) {
-        val actual = strategy.perform(keyboard, word)
+    fun `single row keyboard test`(keyboard: String, word: String, expected: Int) {
+        val actual = strategy.invoke(keyboard, word)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class SingleRowKeyboardNaiveTest : SingleRowKeyboardTest<SingleRowKeyboardNaive>(SingleRowKeyboardNaive())
+class SingleRowKeyboardNaiveTest : SingleRowKeyboardTest<SingleRowKeyboardNaive>(SingleRowKeyboardNaive())

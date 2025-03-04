@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +16,24 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 1971. Find if Path Exists in Graph
- * @link https://leetcode.com/problems/find-if-path-exists-in-graph/description/
+ * @see <a href="https://leetcode.com/problems/find-if-path-exists-in-graph">Source</a>
  */
-interface ValidPathInGraph {
-    fun perform(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean
+fun interface ValidPathInGraph {
+    operator fun invoke(num: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean
 }
 
 /**
  * 1. Simple union-find without any rank consideration
  */
 class ValidPathUnionFind : ValidPathInGraph {
-    override fun perform(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
-        val set = DisjointSetUnion(n)
+    override operator fun invoke(num: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+        val set = DisjointSetUnion(num)
         for (edge in edges) {
             set.union(edge[0], edge[1])
         }
@@ -75,8 +76,8 @@ class ValidPathUnionFind : ValidPathInGraph {
  * 2. Disjoint Set Union by Rank
  */
 class ValidPathUnionByRank : ValidPathInGraph {
-    override fun perform(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
-        val set = DisjointSetUnion(n)
+    override operator fun invoke(num: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+        val set = DisjointSetUnion(num)
         for (edge in edges) {
             set.union(edge[0], edge[1])
         }
@@ -131,13 +132,14 @@ class ValidPathUnionByRank : ValidPathInGraph {
 /**
  * 3. DFS - Depth First Search
  */
+@DFS
 class ValidPathDFS : ValidPathInGraph {
 
     private var seen = false
 
-    override fun perform(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
-        val visited = BooleanArray(n)
-        val graph: Array<HashSet<Int>> = Array(n) { HashSet() }
+    override operator fun invoke(num: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+        val visited = BooleanArray(num)
+        val graph: Array<HashSet<Int>> = Array(num) { HashSet() }
         for (edge in edges) {
             graph[edge[0]].add(edge[1])
             graph[edge[1]].add(edge[0])
@@ -171,9 +173,9 @@ class ValidPathDFS : ValidPathInGraph {
  * 3. BFS - Breadth First Search
  */
 class ValidPathBFS : ValidPathInGraph {
-    override fun perform(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
-        val visited = BooleanArray(n)
-        val graph: Array<HashSet<Int>> = Array(n) { java.util.HashSet() }
+    override operator fun invoke(num: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+        val visited = BooleanArray(num)
+        val graph: Array<HashSet<Int>> = Array(num) { java.util.HashSet() }
         for (edge in edges) {
             graph[edge[0]].add(edge[1])
             graph[edge[1]].add(edge[0])
@@ -189,7 +191,7 @@ class ValidPathBFS : ValidPathInGraph {
         queue.offer(source)
         visited[source] = true
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             current = queue.poll()
             if (current == destination) {
                 return true

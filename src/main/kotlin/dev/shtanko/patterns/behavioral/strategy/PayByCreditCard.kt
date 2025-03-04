@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,8 +23,21 @@ import java.io.InputStreamReader
 /**
  * Concrete strategy. Implements credit card payment method.
  */
-class PayByCreditCard : PayStrategy {
+interface InputReader {
+    fun readLine(): String?
+}
+
+class ConsoleInputReader : InputReader {
     private val bufferedReader = BufferedReader(InputStreamReader(System.`in`))
+
+    override fun readLine(): String? {
+        return bufferedReader.readLine()
+    }
+}
+
+class NoInputException : IOException("No input")
+
+class PayByCreditCard(private val inputReader: InputReader = ConsoleInputReader()) : PayStrategy {
     private lateinit var card: CreditCard
 
     /**
@@ -33,26 +46,26 @@ class PayByCreditCard : PayStrategy {
     override fun collectPaymentDetails() {
         try {
             print("Enter the card number: ")
-            val number = bufferedReader.readLine()
+            val number = inputReader.readLine() ?: throw NoInputException()
             print("Enter the card expiration date 'mm/yy': ")
-            val date = bufferedReader.readLine()
+            val date = inputReader.readLine() ?: throw NoInputException()
             print("Enter the CVV code: ")
-            val cvv = bufferedReader.readLine()
+            val cvv = inputReader.readLine() ?: throw NoInputException()
             card = CreditCard(number, date, cvv)
 
             // Validate credit card number...
-        } catch (ex: IOException) {
+        } catch (ex: NoInputException) {
             ex.printStackTrace()
         }
     }
 
     /**
-     * After card validation we can charge customer's credit card.
+     * After card validation, we can charge the customer's credit card.
      */
     override fun pay(paymentAmount: Int): Boolean {
         return if (cardIsPresent()) {
-            println("Paying $paymentAmount using Credit Card.")
-            card.amount = card.amount - paymentAmount
+            println("Paying $$paymentAmount using Credit Card.")
+            card.amount -= paymentAmount
             true
         } else {
             false

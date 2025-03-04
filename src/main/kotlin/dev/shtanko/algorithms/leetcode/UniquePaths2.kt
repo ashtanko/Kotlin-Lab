@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Unique Paths II
- * @link https://leetcode.com/problems/unique-paths-ii/
+ * @see <a href="https://leetcode.com/problems/unique-paths-ii/">Source</a>
  */
-interface UniquePaths2 {
-    fun perform(obstacleGrid: Array<IntArray>): Int
+fun interface UniquePaths2 {
+    /**
+     * Calculates the number of unique paths from the top-left corner to the bottom-right corner
+     * of a grid, considering obstacles.
+     *
+     * @param obstacleGrid A 2D array representing the grid with obstacles (0 for open cell, 1 for obstacle).
+     * @return The number of unique paths from top-left to bottom-right.
+     */
+    operator fun invoke(obstacleGrid: Array<IntArray>): Int
 }
 
 /**
@@ -30,7 +37,7 @@ interface UniquePaths2 {
  * Space Complexity: O(1).
  */
 class UniquePaths2DP : UniquePaths2 {
-    override fun perform(obstacleGrid: Array<IntArray>): Int {
+    override operator fun invoke(obstacleGrid: Array<IntArray>): Int {
         val r: Int = obstacleGrid.size
         val c: Int = obstacleGrid[0].size
 
@@ -68,5 +75,22 @@ class UniquePaths2DP : UniquePaths2 {
 
         // Return value stored in rightmost bottommost cell. That is the destination.
         return obstacleGrid[r - 1][c - 1]
+    }
+}
+
+/**
+ * A more concise approach using Kotlin features.
+ */
+class UniquePaths2Short : UniquePaths2 {
+    override operator fun invoke(obstacleGrid: Array<IntArray>): Int {
+        val width = obstacleGrid[0].size
+        val dp = IntArray(width) { 0 }
+        dp[0] = 1
+        obstacleGrid.forEach { row ->
+            for (j in 0 until width) {
+                dp[j] = if (row[j] == 1) 0 else dp.getOrElse(j - 1) { 0 } + dp[j]
+            }
+        }
+        return dp.last()
     }
 }

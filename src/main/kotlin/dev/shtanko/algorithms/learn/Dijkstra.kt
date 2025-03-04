@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -106,8 +106,8 @@ internal class Graph(
 
     /** Implementation of dijkstra's algorithm using a binary heap */
     private fun dijkstra(q: TreeSet<Vertex>) {
-        while (!q.isEmpty()) {
-            // vertex with shortest distance (first iteration will return source)
+        while (q.isNotEmpty()) {
+            // vertex with the shortest distance (first iteration will return source)
             val u = q.pollFirst() ?: return
             // if distance is infinite we can ignore 'u' (and any other remaining vertices)
             // since they are unreachable

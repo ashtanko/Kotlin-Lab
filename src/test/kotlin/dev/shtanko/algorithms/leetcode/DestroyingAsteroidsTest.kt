@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,13 +37,23 @@ abstract class DestroyingAsteroidsTest<out T : DestroyingAsteroids>(private val 
                 intArrayOf(4, 9, 23, 4),
                 false,
             ),
+            Arguments.of(
+                10,
+                intArrayOf(4, 9, 19, 5, 21),
+                true,
+            ),
+            Arguments.of(
+                10,
+                intArrayOf(4, 9, 19, 5, 21, 10),
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `asteroids destroyed test`(mass: Int, asteroids: IntArray, expected: Boolean) {
-        val actual = strategy.perform(mass, asteroids)
+        val actual = strategy.invoke(mass, asteroids)
         assertThat(actual).isEqualTo(expected)
     }
 }

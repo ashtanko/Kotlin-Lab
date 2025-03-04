@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,18 @@ import kotlin.math.min
 
 /**
  * 1981. Minimize the Difference Between Target and Chosen Elements
- * @link https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/
+ * @see <a href="https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements">
+ *     Source</a>
  */
-interface MinimizeTheDifference {
-    fun perform(mat: Array<IntArray>, target: Int): Int
+fun interface MinimizeTheDifference {
+    operator fun invoke(mat: Array<IntArray>, target: Int): Int
 }
 
 /**
  * DP + Memo
  */
 class MinimizeTheDifferenceDP : MinimizeTheDifference {
-    override fun perform(mat: Array<IntArray>, target: Int): Int {
+    override operator fun invoke(mat: Array<IntArray>, target: Int): Int {
         val dp = Array(mat.size) { arrayOfNulls<Int>(SIZE) }
         return minDiff(mat, 0, target, 0, dp)
     }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,36 +16,38 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Easy
+
 /**
  * 1941. Check if All Characters Have Equal Number of Occurrences
- * link https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
+ * @see <a href="https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/">Source</a>
  */
-interface AreOccurrencesEqual {
-    fun perform(s: String): Boolean
+@Easy("https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences")
+fun interface AreOccurrencesEqual {
+    operator fun invoke(str: String): Boolean
 }
 
+@Iterative
 class AreOccurrencesEqualKotlin : AreOccurrencesEqual {
-    override fun perform(s: String): Boolean {
-        val num = s.count { it == s[0] }
-        for (i in 1 until s.length) {
-            if (num != s.count { it == s[i] }) return false
+    override operator fun invoke(str: String): Boolean {
+        val num = str.count { it == str[0] }
+        for (i in 1 until str.length) {
+            if (num != str.count { it == str[i] }) return false
         }
         return true
     }
 }
 
 class AreOccurrencesEqualBF : AreOccurrencesEqual {
-    override fun perform(s: String): Boolean {
-        val fr = IntArray(ARR_SIZE)
-        s.chars().forEach { c -> fr[c - 'a'.code]++ }
+    override operator fun invoke(str: String): Boolean {
+        val fr = IntArray(ALPHABET_LETTERS_COUNT)
+        str.chars().forEach { c -> fr[c - 'a'.code]++ }
         return fr.filter { f ->
             f > 0
         }.all { f ->
             f == fr.max()
         }
-    }
-
-    companion object {
-        private const val ARR_SIZE = 26
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,16 +21,16 @@ import java.util.Queue
 
 /**
  * 1293. Shortest Path in a Grid with Obstacles Elimination
- * @link https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/
+ * @see <a href="https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/">Source</a>
  */
-interface ShortestPath {
-    fun perform(grid: Array<IntArray>, k: Int): Int
+fun interface ShortestPath {
+    operator fun invoke(grid: Array<IntArray>, k: Int): Int
 }
 
 class ShortestPathBFS : ShortestPath {
 
     private val dirs = arrayOf(intArrayOf(0, 1), intArrayOf(0, -1), intArrayOf(1, 0), intArrayOf(-1, 0))
-    override fun perform(grid: Array<IntArray>, k: Int): Int {
+    override operator fun invoke(grid: Array<IntArray>, k: Int): Int {
         val n: Int = grid.size
         val m: Int = grid[0].size
         if (n <= 1 && m <= 1) return 0
@@ -58,7 +58,7 @@ class ShortestPathBFS : ShortestPath {
         k: Int,
     ): Int {
         var step = 0
-        while (!ls.isEmpty()) {
+        while (ls.isNotEmpty()) {
             var size: Int = ls.size
             step++
             while (size-- > 0) {
@@ -93,7 +93,7 @@ class ShortestPathBFS2 : ShortestPath {
 
     private val dirs = intArrayOf(0, 1, 0, -1, 0)
 
-    override fun perform(grid: Array<IntArray>, k: Int): Int {
+    override operator fun invoke(grid: Array<IntArray>, k: Int): Int {
         val m: Int = grid.size
         val n: Int = grid[0].size
         if (k >= m + n - 2) return m + n - 2 // if we can go by manhattan distance -> let's go
@@ -118,7 +118,7 @@ class ShortestPathBFS2 : ShortestPath {
         n: Int,
         visited: Array<Array<BooleanArray>>,
     ): Int {
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val top: IntArray = q.poll()
             val r = top[0]
             val c = top[1]

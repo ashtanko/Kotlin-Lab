@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -79,13 +79,29 @@ abstract class AreOccurrencesEqualTest<out T : AreOccurrencesEqual>(private val 
                 "jfdntzwmzrsurunnoezrybmtm",
                 false,
             ),
+            Arguments.of(
+                "z",
+                true,
+            ),
+            Arguments.of(
+                "zz",
+                true,
+            ),
+            Arguments.of(
+                "zzz",
+                true,
+            ),
+            Arguments.of(
+                "zzzz",
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `are occurrences equal test`(s: String, expected: Boolean) {
-        val actual = strategy.perform(s)
+    fun `are occurrences equal test`(str: String, expected: Boolean) {
+        val actual = strategy.invoke(str)
         assertThat(actual).isEqualTo(expected)
     }
 }

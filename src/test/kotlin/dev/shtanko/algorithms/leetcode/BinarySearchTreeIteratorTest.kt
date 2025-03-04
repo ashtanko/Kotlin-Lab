@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,10 +32,10 @@ private fun getTree(): TreeNode {
     }
 }
 
-internal abstract class BinarySearchTreeIteratorTest<out T : BSTIterator>(private val iterator: T) {
+abstract class BinarySearchTreeIteratorTest<out T : BSTIterator>(private val iterator: T) {
 
     @Test
-    internal fun `bst iterator test`() {
+    fun `bst iterator test`() {
         assertEquals(3, iterator.next())
         assertEquals(7, iterator.next())
         assertTrue(iterator.hasNext())
@@ -48,8 +48,8 @@ internal abstract class BinarySearchTreeIteratorTest<out T : BSTIterator>(privat
     }
 }
 
-internal class BSTIteratorFlatteningTest :
+class BSTIteratorFlatteningTest :
     BinarySearchTreeIteratorTest<BSTIteratorFlattening>(BSTIteratorFlattening(getTree()))
 
-internal class BSTIteratorControlledRecursionTest :
+class BSTIteratorControlledRecursionTest :
     BinarySearchTreeIteratorTest<BSTIteratorControlledRecursion>(BSTIteratorControlledRecursion(getTree()))

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,9 @@ import java.util.stream.IntStream
 
 /**
  * 1161. Maximum Level Sum of a Binary Tree
- * @link https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
+ * @see <a href="https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/">Source</a>
  */
-interface MaximumLevelSumOfBinaryTree {
+fun interface MaximumLevelSumOfBinaryTree {
     fun maxLevelSum(root: TreeNode?): Int
 }
 
@@ -35,7 +35,7 @@ class MaximumLevelSumOfBinaryTreeBFS : MaximumLevelSumOfBinaryTree {
         val q: Queue<TreeNode> = LinkedList()
         q.offer(root)
         var level = 1
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             var sum = 0
             for (sz in q.size downTo 1) {
                 val n: TreeNode = q.poll()

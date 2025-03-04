@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,29 +16,31 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+
 /**
  * Multiply Strings.
- * @link https://leetcode.com/problems/multiply-strings/
+ * @see <a href="https://leetcode.com/problems/multiply-strings/">Source</a>
  */
 object MultiplyStrings {
-    fun perform(num1: String, num2: String): String {
-        val m: Int = num1.length
-        val n: Int = num2.length
-        val pos = IntArray(m + n)
+    operator fun invoke(num1: String, num2: String): String {
+        val length1: Int = num1.length
+        val length2: Int = num2.length
+        val position = IntArray(length1 + length2)
 
-        for (i in m - 1 downTo 0) {
-            for (j in n - 1 downTo 0) {
-                val mul: Int = (num1[i] - '0') * (num2[j] - '0')
-                val p1 = i + j
-                val p2 = i + j + 1
-                val sum = mul + pos[p2]
-                pos[p1] += sum / DECIMAL
-                pos[p2] = sum % DECIMAL
+        for (i in length1 - 1 downTo 0) {
+            for (j in length2 - 1 downTo 0) {
+                val product: Int = (num1[i] - '0') * (num2[j] - '0')
+                val currentPosition1 = i + j
+                val currentPosition2 = i + j + 1
+                val sum = product + position[currentPosition2]
+                position[currentPosition1] += sum / DECIMAL
+                position[currentPosition2] = sum % DECIMAL
             }
         }
 
-        val sb = StringBuilder()
-        for (p in pos) if (!(sb.isEmpty() && p == 0)) sb.append(p)
-        return if (sb.isEmpty()) "0" else sb.toString()
+        val stringBuilder = StringBuilder()
+        for (p in position) if (!(stringBuilder.isEmpty() && p == 0)) stringBuilder.append(p)
+        return if (stringBuilder.isEmpty()) "0" else stringBuilder.toString()
     }
 }

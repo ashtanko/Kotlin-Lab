@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,12 +28,30 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 abstract class AverageSalaryTest<out T : AverageSalary>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(intArrayOf(4000, 3000, 1000, 2000), 2500.00000),
-            Arguments.of(intArrayOf(1000, 2000, 3000), 2000.00000),
-            Arguments.of(intArrayOf(6000, 5000, 4000, 3000, 2000, 1000), 3500.00000),
-            Arguments.of(intArrayOf(8000, 9000, 2000, 3000, 6000, 1000), 4750.00000),
-            Arguments.of(intArrayOf(500, 2000, 3000), 2000.0),
-            Arguments.of(intArrayOf(10, 25, 15, 40, 55, 23), 25.75),
+            Arguments.of(
+                intArrayOf(4000, 3000, 1000, 2000),
+                2500.00000,
+            ),
+            Arguments.of(
+                intArrayOf(1000, 2000, 3000),
+                2000.00000,
+            ),
+            Arguments.of(
+                intArrayOf(6000, 5000, 4000, 3000, 2000, 1000),
+                3500.00000,
+            ),
+            Arguments.of(
+                intArrayOf(8000, 9000, 2000, 3000, 6000, 1000),
+                4750.00000,
+            ),
+            Arguments.of(
+                intArrayOf(500, 2000, 3000),
+                2000.0,
+            ),
+            Arguments.of(
+                intArrayOf(10, 25, 15, 40, 55, 23),
+                25.75,
+            ),
             Arguments.of(
                 intArrayOf(
                     344,

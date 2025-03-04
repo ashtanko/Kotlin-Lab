@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.min
 
 /**
  * Count Binary Substrings
- * @link https://leetcode.com/problems/count-binary-substrings/solution/
+ * @see <a href="https://leetcode.com/problems/count-binary-substrings">Source</a>
  */
-interface CountBinarySubstrings {
-    fun perform(s: String): Int
+fun interface CountBinarySubstrings {
+    operator fun invoke(str: String): Int
 }
 
 /**
@@ -32,12 +32,15 @@ interface CountBinarySubstrings {
  * Space Complexity: O(N)
  */
 class GroupByCharacter : CountBinarySubstrings {
-    override fun perform(s: String): Int {
-        val groups = IntArray(s.length)
+    override operator fun invoke(str: String): Int {
+        if (str.isEmpty()) {
+            return 0
+        }
+        val groups = IntArray(str.length)
         var t = 0
         groups[0] = 1
-        for (i in 1 until s.length) {
-            if (s[i - 1] != s[i]) {
+        for (i in 1 until str.length) {
+            if (str[i - 1] != str[i]) {
                 groups[++t] = 1
             } else {
                 groups[t]++
@@ -58,12 +61,12 @@ class GroupByCharacter : CountBinarySubstrings {
  * Space Complexity: O(1)
  */
 class CBSLinearScan : CountBinarySubstrings {
-    override fun perform(s: String): Int {
+    override operator fun invoke(str: String): Int {
         var ans = 0
         var prev = 0
         var cur = 1
-        for (i in 1 until s.length) {
-            if (s[i - 1] != s[i]) {
+        for (i in 1 until str.length) {
+            if (str[i - 1] != str[i]) {
                 ans += min(prev, cur)
                 prev = cur
                 cur = 1

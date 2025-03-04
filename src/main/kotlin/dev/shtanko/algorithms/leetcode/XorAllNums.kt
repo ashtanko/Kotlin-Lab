@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,26 +16,33 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 2425. Bitwise XOR of All Pairings
- * @link https://leetcode.com/problems/bitwise-xor-of-all-pairings/
+ * @see <a href="https://leetcode.com/problems/bitwise-xor-of-all-pairings/">Source</a>
  */
+@Medium("https://leetcode.com/problems/bitwise-xor-of-all-pairings")
 fun interface XorAllNums {
-    fun perform(nums1: IntArray, nums2: IntArray): Int
+    operator fun invoke(nums1: IntArray, nums2: IntArray): Int
 }
 
 class XorAllNumsConcise : XorAllNums {
-    override fun perform(nums1: IntArray, nums2: IntArray): Int {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): Int {
         var x = 0
         var y = 0
-        for (a in nums1) x = x xor a
-        for (b in nums2) y = y xor b
+        for (a in nums1) {
+            x = x xor a
+        }
+        for (b in nums2) {
+            y = y xor b
+        }
         return nums1.size % 2 * y xor nums2.size % 2 * x
     }
 }
 
 class XorAllNumsSimple : XorAllNums {
-    override fun perform(nums1: IntArray, nums2: IntArray): Int {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): Int {
         if (nums1.size % 2 == 0 && nums2.size % 2 == 0) { // if both arrays have even length
             return 0
         }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class ScheduleCourse3Test<out T : ScheduleCourse3>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class ScheduleCourse3Test<out T : ScheduleCourse3>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -54,19 +54,19 @@ internal abstract class ScheduleCourse3Test<out T : ScheduleCourse3>(private val
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `schedule course test`(courses: Array<IntArray>, expected: Int) {
-        val actual = strategy.perform(courses)
+    fun `schedule course test`(courses: Array<IntArray>, expected: Int) {
+        val actual = strategy.invoke(courses)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class ScheduleCourse3RecursionTest : ScheduleCourse3Test<ScheduleCourse3Recursion>(ScheduleCourse3Recursion())
-internal class ScheduleCourse3IterativeTest : ScheduleCourse3Test<ScheduleCourse3Iterative>(ScheduleCourse3Iterative())
-internal class ScheduleCourse3OptimizedIterativeTest :
+class ScheduleCourse3RecursionTest : ScheduleCourse3Test<ScheduleCourse3Recursion>(ScheduleCourse3Recursion())
+class ScheduleCourse3IterativeTest : ScheduleCourse3Test<ScheduleCourse3Iterative>(ScheduleCourse3Iterative())
+class ScheduleCourse3OptimizedIterativeTest :
     ScheduleCourse3Test<ScheduleCourse3OptimizedIterative>(ScheduleCourse3OptimizedIterative())
 
-internal class ScheduleCourse3ExtraListTest :
+class ScheduleCourse3ExtraListTest :
     ScheduleCourse3Test<ScheduleCourse3ExtraList>(ScheduleCourse3ExtraList())
 
-internal class ScheduleCourse3PriorityQueueTest :
+class ScheduleCourse3PriorityQueueTest :
     ScheduleCourse3Test<ScheduleCourse3PriorityQueue>(ScheduleCourse3PriorityQueue())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,15 +20,15 @@ import kotlin.math.max
 
 /**
  * 2049. Count Nodes With the Highest Score
- * @link https://leetcode.com/problems/count-nodes-with-the-highest-score/
+ * @see <a href="https://leetcode.com/problems/count-nodes-with-the-highest-score/">Source</a>
  */
 fun interface CountHighestScoreNodes {
-    fun invoke(parents: IntArray): Int
+    operator fun invoke(parents: IntArray): Int
 }
 
 class CountHighestScoreNodesDfs : CountHighestScoreNodes {
 
-    override fun invoke(parents: IntArray): Int {
+    override operator fun invoke(parents: IntArray): Int {
         if (parents.isEmpty()) return 0
         val al: MutableList<MutableList<Int>> = ArrayList()
         for (i in parents.indices) {

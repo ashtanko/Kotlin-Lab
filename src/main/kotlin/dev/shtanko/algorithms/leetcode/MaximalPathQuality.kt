@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.max
 
 /**
  * 2065. Maximum Path Quality of a Graph
- * @link https://leetcode.com/problems/maximum-path-quality-of-a-graph/
+ * @see <a href="https://leetcode.com/problems/maximum-path-quality-of-a-graph/">Source</a>
  */
 fun interface MaximalPathQuality {
-    fun invoke(values: IntArray, edges: Array<IntArray>, maxTime: Int): Int
+    operator fun invoke(values: IntArray, edges: Array<IntArray>, maxTime: Int): Int
 }
 
 class MaximalPathQualityDFS : MaximalPathQuality {
-    override fun invoke(values: IntArray, edges: Array<IntArray>, maxTime: Int): Int {
+    override operator fun invoke(values: IntArray, edges: Array<IntArray>, maxTime: Int): Int {
         if (values.isEmpty()) return 0
         if (edges.isEmpty()) return 0
         if (edges.first().isEmpty()) return 0

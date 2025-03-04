@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,20 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.Locale
+
 /**
  * Binary Watch
- * @link https://leetcode.com/problems/binary-watch/
+ * @see <a href="https://leetcode.com/problems/binary-watch/">Source</a>
  */
 object BinaryWatch {
     private const val SKIP_HOUR_1 = 11
     private const val SKIP_HOUR_2 = 59
 
-    fun perform(num: Int): List<String> {
+    operator fun invoke(num: Int): List<String> {
         val result = ArrayList<String>()
         for (i in 0..SKIP_HOUR_1) {
             for (j in 0..SKIP_HOUR_2) {
                 if (Integer.bitCount(i) + Integer.bitCount(j) == num) {
-                    result.add(String.format("%d:%02d", i, j))
+                    result.add(String.format(Locale.getDefault(), "%d:%02d", i, j))
                 }
             }
         }

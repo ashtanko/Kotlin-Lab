@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SymmetricTreeTest<out T : SymmetricTree>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class SymmetricTreeTest<out T : SymmetricTree>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(2),
@@ -74,6 +74,17 @@ internal abstract class SymmetricTreeTest<out T : SymmetricTree>(private val str
                 asymmetricTree,
                 false,
             ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(3)
+                    }
+                    right = TreeNode(2).apply {
+                        right = TreeNode(3)
+                    }
+                },
+                true,
+            ),
         )
 
         private val symmetricTree = TreeNode(1).apply {
@@ -99,11 +110,11 @@ internal abstract class SymmetricTreeTest<out T : SymmetricTree>(private val str
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `is symmetric tree test`(root: TreeNode, expected: Boolean) {
-        val actual = strategy.isSymmetric(root)
+    fun `is symmetric tree test`(root: TreeNode, expected: Boolean) {
+        val actual = strategy.invoke(root)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class SymmetricTreeRecursiveTest : SymmetricTreeTest<SymmetricTree>(SymmetricTreeRecursive())
-internal class SymmetricTreeIterativeTest : SymmetricTreeTest<SymmetricTree>(SymmetricTreeIterative())
+class SymmetricTreeRecursiveTest : SymmetricTreeTest<SymmetricTree>(SymmetricTreeRecursive())
+class SymmetricTreeIterativeTest : SymmetricTreeTest<SymmetricTree>(SymmetricTreeIterative())

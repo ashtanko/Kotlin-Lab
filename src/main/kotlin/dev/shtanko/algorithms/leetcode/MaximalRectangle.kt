@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -67,7 +67,7 @@ private fun IntArray.maxArea(): Int {
         }
     }
 
-    while (!stack.isEmpty()) {
+    while (stack.isNotEmpty()) {
         val top = stack.pop()
         val current = this[top] * if (stack.isEmpty()) i else i - stack.peek() - 1
         max = kotlin.math.max(max, current)

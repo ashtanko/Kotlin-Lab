@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,13 +55,37 @@ abstract class FrogPositionTest<out T : FrogPosition>(private val strategy: T) {
                 7,
                 0.3333333333333333,
             ),
+            Arguments.of(
+                7,
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(1, 3),
+                    intArrayOf(1, 7),
+                    intArrayOf(2, 4),
+                    intArrayOf(2, 6),
+                    intArrayOf(3, 5),
+                ),
+                20,
+                6,
+                0.16666666666666666,
+            ),
+            Arguments.of(
+                3,
+                arrayOf(
+                    intArrayOf(2, 1),
+                    intArrayOf(3, 2),
+                ),
+                1,
+                2,
+                1.0,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `frog position test`(n: Int, edges: Array<IntArray>, t: Int, target: Int, expected: Double) {
-        val actual = strategy.proceed(n, edges, t, target)
+    fun `frog position test`(num: Int, edges: Array<IntArray>, t: Int, target: Int, expected: Double) {
+        val actual = strategy.invoke(num, edges, t, target)
         assertThat(actual).isEqualTo(expected)
     }
 }

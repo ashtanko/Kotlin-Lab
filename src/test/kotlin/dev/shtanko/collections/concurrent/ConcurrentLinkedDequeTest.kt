@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,23 +19,20 @@ package dev.shtanko.collections.concurrent
 import java.util.concurrent.ConcurrentLinkedDeque
 import org.jetbrains.kotlinx.lincheck.annotations.Operation
 import org.jetbrains.kotlinx.lincheck.check
-import org.jetbrains.kotlinx.lincheck.strategy.stress.StressOptions
-import org.jetbrains.kotlinx.lincheck.verifier.VerifierState
+import org.jetbrains.kotlinx.lincheck.strategy.managed.modelchecking.ModelCheckingOptions
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
-class ConcurrentLinkedDequeTest : VerifierState() {
+@Disabled("Requires a lot of time to execute")
+class ConcurrentLinkedDequeTest {
     private val deque = ConcurrentLinkedDeque<Int>()
 
     @Operation
-    fun addFirst(value: Int) = deque.addFirst(value)
+    fun addFirst(e: Int) = deque.addFirst(e)
 
     @Operation
-    fun addLast(value: Int) = deque.addLast(value)
-
-    @Operation
-    fun getFirst() = deque.peekFirst()
-
-    @Operation // this operation is non-linearizable!
-    fun getLast() = deque.peekLast()
+    fun addLast(e: Int) = deque.addLast(e)
 
     @Operation
     fun pollFirst() = deque.pollFirst()
@@ -43,9 +40,16 @@ class ConcurrentLinkedDequeTest : VerifierState() {
     @Operation
     fun pollLast() = deque.pollLast()
 
-    override fun extractState() = deque.toList()
+    @Operation
+    fun peekFirst() = deque.peekFirst()
 
-    // @Test
-    fun runModelCheckingTest() = StressOptions()
-        .check(ConcurrentLinkedDequeTest::class)
+    @Operation
+    fun peekLast() = deque.peekLast()
+
+    @Test
+    fun modelCheckingTest() {
+        assertThrows<AssertionError> {
+            ModelCheckingOptions().check(this::class)
+        }
+    }
 }

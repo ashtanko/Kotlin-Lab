@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,38 +16,47 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.second
+import dev.shtanko.extensions.second
 
 /**
  * 1643. Kth The Smallest Instructions
- * @link https://leetcode.com/problems/kth-smallest-instructions/
+ * @see <a href="https://leetcode.com/problems/kth-smallest-instructions/">Source</a>
  */
 fun interface KthSmallestPath {
-    fun invoke(destination: IntArray, k: Int): String
+    operator fun invoke(destination: IntArray, k: Int): String
 }
 
 class KthSmallestPathImpl : KthSmallestPath {
-    override fun invoke(destination: IntArray, k: Int): String {
+    override operator fun invoke(destination: IntArray, k: Int): String {
         if (destination.isEmpty()) return ""
         val ti = destination.first()
         val tj = destination.second()
         val dp = Array(ti + 1) { IntArray(tj + 1) }
         for (i in ti downTo 0) {
             for (j in tj downTo 0) {
-                if (i == ti && j == tj) {
-                    dp[i][j] = 1
-                } else if (i == ti) {
-                    dp[i][j] = dp[i][j + 1]
-                } else if (j == tj) {
-                    dp[i][j] = dp[i + 1][j]
-                } else {
-                    dp[i][j] = dp[i + 1][j] + dp[i][j + 1]
+                when {
+                    i == ti && j == tj -> {
+                        dp[i][j] = 1
+                    }
+
+                    i == ti -> {
+                        dp[i][j] = dp[i][j + 1]
+                    }
+
+                    j == tj -> {
+                        dp[i][j] = dp[i + 1][j]
+                    }
+
+                    else -> {
+                        dp[i][j] = dp[i + 1][j] + dp[i][j + 1]
+                    }
                 }
             }
         }
 
         // in each (i, j), we have dp[i][j] kind of instructions, which equal to dp[i][j+1] + dp[i+1][j]
-        // all dp[i][j+1] kinds of instructions are lexicographically smaller than the left dp[i+1][j] kinds of instructions.
+        // all dp[i][j+1] kinds of instructions are lexicographically smaller than the left dp[i+1][j]
+        // kinds of instructions.
         // we can just compare k with dp[i][j+1] to determine how to choose next step.
         val sb = StringBuilder()
         helper(dp, 0, 0, k, sb)

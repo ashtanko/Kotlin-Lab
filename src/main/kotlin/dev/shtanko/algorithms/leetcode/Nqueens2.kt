@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 52. N-Queens II
- * @link https://leetcode.com/problems/n-queens-ii/
+ * @see <a href="https://leetcode.com/problems/n-queens-ii/">Source</a>
  */
-interface TotalNQueensStrategy {
-    fun perform(n: Int): Int
+fun interface TotalNQueensStrategy {
+    operator fun invoke(n: Int): Int
 }
 
 /**
@@ -34,7 +34,7 @@ class TotalNQueensStraightForward : TotalNQueensStrategy {
     private val occupiedDiag1s = hashSetOf<Int>()
     private val occupiedDiag2s = hashSetOf<Int>()
 
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         return n.totalNQueensHelper(0, 0)
     }
 
@@ -74,7 +74,7 @@ class TotalNQueensStraightForward : TotalNQueensStrategy {
 class TotalNQueensRecursive : TotalNQueensStrategy {
     private var count = 0
 
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val cols = BooleanArray(n)
         val d1 = BooleanArray(2 * n)
         val d2 = BooleanArray(2 * n)

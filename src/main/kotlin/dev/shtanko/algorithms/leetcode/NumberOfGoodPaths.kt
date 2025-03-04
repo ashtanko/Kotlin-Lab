@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import java.util.TreeMap
 
 /**
  * 2421. Number of Good Paths
- * @link https://leetcode.com/problems/number-of-good-paths/
+ * @see <a href="https://leetcode.com/problems/number-of-good-paths/">Source</a>
  */
-interface NumberOfGoodPaths {
-    fun perform(vals: IntArray, edges: Array<IntArray>): Int
+fun interface NumberOfGoodPaths {
+    operator fun invoke(vals: IntArray, edges: Array<IntArray>): Int
 }
 
 class NumberOfGoodPathsUnionFind : NumberOfGoodPaths {
-    override fun perform(vals: IntArray, edges: Array<IntArray>): Int {
+    override operator fun invoke(vals: IntArray, edges: Array<IntArray>): Int {
         val n = vals.size
         val adj: Array<MutableList<Int>> = Array(n) { ArrayList() }
         val sameValues = TreeMap<Int, ArrayList<Int>>()
@@ -69,7 +69,7 @@ class NumberOfGoodPathsUnionFind : NumberOfGoodPaths {
         return ans
     }
 
-    internal class UF(len: Int) {
+    class UF(len: Int) {
         private val parent: IntArray = IntArray(len) { -1 }
 
         fun find(a: Int): Int {

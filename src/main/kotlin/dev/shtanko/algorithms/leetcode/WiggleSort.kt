@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,17 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.extensions.swap
 
-interface WiggleSort {
-    fun perform(nums: IntArray)
+fun interface WiggleSort {
+    operator fun invoke(nums: IntArray)
 }
 
 /**
  * Approach #1 (Sorting)
  */
 class WiggleSortBruteForce : WiggleSort {
-    override fun perform(nums: IntArray) {
+    override operator fun invoke(nums: IntArray) {
         for (i in 1 until nums.size) {
             val a = nums[i - 1]
             if (i % 2 == 1 == a > nums[i]) {
@@ -41,7 +41,7 @@ class WiggleSortBruteForce : WiggleSort {
  * Approach #2 (One-pass Swap)
  */
 class WiggleSortOnePassSwap : WiggleSort {
-    override fun perform(nums: IntArray) {
+    override operator fun invoke(nums: IntArray) {
         var less = true
         for (i in 0 until nums.size - 1) {
             if (less) {

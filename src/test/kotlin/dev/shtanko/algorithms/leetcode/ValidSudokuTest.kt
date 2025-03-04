@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,13 +55,41 @@ abstract class ValidSudokuTest<out T : ValidSudoku>(private val strategy: T) {
                 ),
                 false,
             ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf('.', '.', '.', '.', '5', '.', '.', '1', '.'),
+                    charArrayOf('.', '4', '.', '3', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '.', '.', '.', '3', '.', '.', '1'),
+                    charArrayOf('8', '.', '.', '.', '.', '.', '.', '2', '.'),
+                    charArrayOf('.', '.', '2', '.', '7', '.', '.', '.', '.'),
+                    charArrayOf('.', '1', '5', '.', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '.', '.', '.', '2', '.', '.', '.'),
+                    charArrayOf('.', '2', '.', '9', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '4', '.', '.', '.', '.', '.', '.'),
+                ),
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf('.', '.', '.', '.', '5', '.', '.', '1', '.'),
+                    charArrayOf('.', '4', '.', '3', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '.', '.', '.', '3', '.', '.', '1'),
+                    charArrayOf('8', '.', '.', '.', '.', '.', '.', '2', '.'),
+                    charArrayOf('.', '.', '2', '.', '7', '.', '.', '.', '.'),
+                    charArrayOf('.', '1', '5', '.', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '.', '.', '.', '2', '.', '.', '.'),
+                    charArrayOf('.', '2', '.', '9', '.', '.', '.', '.', '.'),
+                    charArrayOf('.', '.', '4', '.', '.', '.', '.', '.', '9'),
+                ),
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `is valid sudoku test`(board: Array<CharArray>, expected: Boolean) {
-        val actual = strategy.isValidSudoku(board)
+        val actual = strategy.invoke(board)
         assertThat(actual).isEqualTo(expected)
     }
 }

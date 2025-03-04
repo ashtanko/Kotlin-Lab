@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,37 +16,45 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface FindPeakElementStrategy {
-    fun perform(nums: IntArray): Int
+fun interface FindPeakElementStrategy {
+    operator fun invoke(nums: IntArray): Int
 }
 
 class FindPeakElementLinear : FindPeakElementStrategy {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         return helper(nums, 0, nums.lastIndex)
     }
 
     private fun helper(num: IntArray, start: Int, end: Int): Int {
-        return if (num.isEmpty()) {
-            0
-        } else if (start == end) {
-            start
-        } else if (start + 1 == end) {
-            if (num[start] > num[end]) start else end
-        } else {
-            val m = (start + end) / 2
-            if (num[m] > num[m - 1] && num[m] > num[m + 1]) {
-                m
-            } else if (num[m - 1] > num[m] && num[m] > num[m + 1]) {
-                helper(num, start, m - 1)
-            } else {
-                helper(num, m + 1, end)
+        return when {
+            num.isEmpty() -> {
+                0
+            }
+
+            start == end -> {
+                start
+            }
+
+            start + 1 == end -> {
+                if (num[start] > num[end]) start else end
+            }
+
+            else -> {
+                val m = (start + end) / 2
+                if (num[m] > num[m - 1] && num[m] > num[m + 1]) {
+                    m
+                } else if (num[m - 1] > num[m] && num[m] > num[m + 1]) {
+                    helper(num, start, m - 1)
+                } else {
+                    helper(num, m + 1, end)
+                }
             }
         }
     }
 }
 
 class FindPeakElementRecursiveBinarySearch : FindPeakElementStrategy {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         return search(nums, 0, nums.lastIndex)
     }
 
@@ -59,7 +67,7 @@ class FindPeakElementRecursiveBinarySearch : FindPeakElementStrategy {
 }
 
 class FindPeakElementIterativeBinarySearch : FindPeakElementStrategy {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var l = 0
         var r: Int = nums.lastIndex
         while (l < r) {

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,17 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 653. Two Sum IV - Input is a BST
- * @link https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+ * @see <a href="https://leetcode.com/problems/two-sum-iv-input-is-a-bst/">Source</a>
  */
-interface TwoSum4 {
-    fun findTarget(root: TreeNode, k: Int): Boolean
+fun interface TwoSum4 {
+    operator fun invoke(root: TreeNode, k: Int): Boolean
 }
 
 /**
@@ -33,7 +35,7 @@ interface TwoSum4 {
  * Space complexity : O(n).
  */
 class TwoSum4HashSet : TwoSum4 {
-    override fun findTarget(root: TreeNode, k: Int): Boolean {
+    override fun invoke(root: TreeNode, k: Int): Boolean {
         val set: MutableSet<Int?> = HashSet()
         return find(root, k, set)
     }
@@ -51,12 +53,13 @@ class TwoSum4HashSet : TwoSum4 {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@BFS
 class TwoSum4BFS : TwoSum4 {
-    override fun findTarget(root: TreeNode, k: Int): Boolean {
+    override fun invoke(root: TreeNode, k: Int): Boolean {
         val set: MutableSet<Int?> = HashSet()
         val queue: Queue<TreeNode> = LinkedList()
         queue.add(root)
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             if (queue.peek() != null) {
                 val node: TreeNode = queue.remove()
                 if (set.contains(k - node.value)) return true
@@ -76,8 +79,9 @@ class TwoSum4BFS : TwoSum4 {
  * Time complexity : O(n).
  * Space complexity : O(n).
  */
+@BFS
 class TwoSum4BST : TwoSum4 {
-    override fun findTarget(root: TreeNode, k: Int): Boolean {
+    override fun invoke(root: TreeNode, k: Int): Boolean {
         val list: MutableList<Int> = ArrayList()
         inorder(root, list)
         var l = 0
@@ -98,8 +102,9 @@ class TwoSum4BST : TwoSum4 {
     }
 }
 
+@DFS
 class TwoSum4DFS : TwoSum4 {
-    override fun findTarget(root: TreeNode, k: Int): Boolean {
+    override fun invoke(root: TreeNode, k: Int): Boolean {
         return dfs(root, root, k)
     }
 

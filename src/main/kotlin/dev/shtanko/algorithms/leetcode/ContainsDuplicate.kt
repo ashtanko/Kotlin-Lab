@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.OCTAL
 import kotlin.experimental.and
 import kotlin.experimental.or
 
 /**
  * Given an array of integers, find if the array contains any duplicates.
- * @link https://leetcode.com/problems/contains-duplicate/
+ * @see <a href="https://leetcode.com/problems/contains-duplicate/">Source</a>
  */
-interface ContainsDuplicateStrategy {
-    fun perform(arr: IntArray): Boolean
+fun interface ContainsDuplicateStrategy {
+    operator fun invoke(arr: IntArray): Boolean
 }
 
 /**
@@ -33,7 +34,7 @@ interface ContainsDuplicateStrategy {
  * Space complexity: O(1).
  */
 class IsContainsDuplicateBrutForce : ContainsDuplicateStrategy {
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         for (i in arr.indices) {
             for (j in i + 1 until arr.size) {
                 if (arr[i] == arr[j]) return true
@@ -48,7 +49,7 @@ class IsContainsDuplicateBrutForce : ContainsDuplicateStrategy {
  * Space complexity: O(1) - not counting the memory used by sort
  */
 class IsContainsDuplicateSort : ContainsDuplicateStrategy {
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         arr.sort()
         for (i in 0 until arr.size - 1) {
             if (arr[i] == arr[i + 1]) return true
@@ -62,7 +63,7 @@ class IsContainsDuplicateSort : ContainsDuplicateStrategy {
  * Space complexity: O(n).
  */
 class IsContainsDuplicateSortSetSize : ContainsDuplicateStrategy {
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         return arr.toHashSet().size < arr.size
     }
 }
@@ -72,7 +73,7 @@ class IsContainsDuplicateSortSetSize : ContainsDuplicateStrategy {
  * Space complexity: O(n).
  */
 class IsContainsDuplicateSortSet : ContainsDuplicateStrategy {
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         val set = hashSetOf<Int>()
 
         for (i in arr.indices) {
@@ -85,7 +86,7 @@ class IsContainsDuplicateSortSet : ContainsDuplicateStrategy {
 }
 
 class IsContainsDuplicateSortSetOptimized : ContainsDuplicateStrategy {
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         val set = hashSetOf<Int>()
 
         for (i in arr.indices) {
@@ -97,7 +98,7 @@ class IsContainsDuplicateSortSetOptimized : ContainsDuplicateStrategy {
 
 class IsContainsDuplicateBitManipulation : ContainsDuplicateStrategy {
 
-    override fun perform(arr: IntArray): Boolean {
+    override operator fun invoke(arr: IntArray): Boolean {
         val mark = ByteArray(ARR_SIZE)
         for (i in arr) {
             val j = i / OCTAL

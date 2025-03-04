@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,8 @@ class LFUCache<K, V>(val capacity: Int = 100) {
      * This method returns value present in the cache corresponding to the key passed as parameter
      *
      * @param <K> key for which value is to be retrieved
-     * @returns <V> object corresponding to the key passed as parameter, returns null if <K> key is not present in the cache
+     * @returns <V> object corresponding to the key passed as parameter, returns null if <K> key is not present in
+     * the cache
      */
     operator fun get(key: K): V? {
         if (map[key] == null) {
@@ -113,7 +114,7 @@ class LFUCache<K, V>(val capacity: Int = 100) {
     /**
      * This method removes node from the cache
      *
-     * @param Node<K,V> node which is to be removed in the cache
+     * @param node which is to be removed in the cache
      */
     private fun removeNode(node: Node<K, V>?) {
         if (node?.previous != null) {

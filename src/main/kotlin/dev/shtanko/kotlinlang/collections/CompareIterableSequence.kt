@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,14 @@
 
 package dev.shtanko.kotlinlang.collections
 
-import dev.shtanko.algorithms.extensions.isEven
+import dev.shtanko.extensions.isEven
 
+/**
+ * Retrieves the first element from a list after applying a series of transformations.
+ *
+ * @param list The input list of integers.
+ * @return A [Triple] containing the counts of map, filter, and forEach operations performed.
+ */
 fun getFirstFromList(list: IntRange): Triple<Int, Int, Int> {
     var mapCount = 0
     var filterCount = 0
@@ -30,6 +36,12 @@ fun getFirstFromList(list: IntRange): Triple<Int, Int, Int> {
     return Triple(mapCount, filterCount, forEachCount)
 }
 
+/**
+ * Retrieves the first element from a sequence after applying a series of transformations.
+ *
+ * @param sequence The input sequence of integers.
+ * @return A [Triple] containing the counts of map, filter, and forEach operations performed.
+ */
 fun getFirstFromSequence(sequence: Sequence<Int>): Triple<Int, Int, Int> {
     var mapCount = 0
     var filterCount = 0

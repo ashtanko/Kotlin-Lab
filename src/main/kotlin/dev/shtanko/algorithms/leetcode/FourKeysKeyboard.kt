@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,23 +20,23 @@ import kotlin.math.max
 
 /**
  *  4 Keys Keyboard.
- *  @link https://leetcode.com/problems/4-keys-keyboard/
+ *  @see <a href="https://leetcode.com/problems/4-keys-keyboard/">Source</a>
  */
-interface FourKeysKeyboard {
-    fun maxA(n: Int): Int
+fun interface FourKeysKeyboard {
+    operator fun invoke(num: Int): Int
 }
 
 /**
  * Approach #1: Dynamic Programming.
  */
 class FourKeysKeyboardDP : FourKeysKeyboard {
-    override fun maxA(n: Int): Int {
-        val best = IntArray(n + 1)
-        for (k in 1..n) {
+    override fun invoke(num: Int): Int {
+        val best = IntArray(num + 1)
+        for (k in 1..num) {
             best[k] = best[k - 1] + 1
             for (x in 0 until k - 1) best[k] = max(best[k], best[x] * (k - x - 1))
         }
-        return best[n]
+        return best[num]
     }
 }
 
@@ -44,9 +44,9 @@ class FourKeysKeyboardDP : FourKeysKeyboard {
  * Approach #3: Mathematical.
  */
 class FourKeysKeyboardMath : FourKeysKeyboard {
-    override fun maxA(n: Int): Int {
-        val q = if (n > MAX) (n - N_MAX) / MULTIPLY_LIMIT else 0
-        return best[n - MULTIPLY_LIMIT * q] shl 2 * q
+    override fun invoke(inputNumber: Int): Int {
+        val quotient = if (inputNumber > MAX_VALUE) (inputNumber - MAX_N_VALUE) / MULTIPLICATION_LIMIT else 0
+        return best[inputNumber - MULTIPLICATION_LIMIT * quotient] shl 2 * quotient
     }
 
     companion object {
@@ -54,8 +54,8 @@ class FourKeysKeyboardMath : FourKeysKeyboard {
             0, 1, 2, 3, 4, 5, 6, 9, 12,
             16, 20, 27, 36, 48, 64, 81,
         )
-        private const val MAX = 15
-        private const val N_MAX = 11
-        private const val MULTIPLY_LIMIT = 5
+        private const val MAX_VALUE = 15
+        private const val MAX_N_VALUE = 11
+        private const val MULTIPLICATION_LIMIT = 5
     }
 }

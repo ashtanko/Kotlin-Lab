@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,9 +21,9 @@ import java.util.Queue
 
 /**
  * 913. Cat and Mouse
- * @link https://leetcode.com/problems/cat-and-mouse/
+ * @see <a href="https://leetcode.com/problems/cat-and-mouse/">Source</a>
  */
-interface CatAndMouse {
+fun interface CatAndMouse {
     fun catMouseGame(graph: Array<IntArray>): Int
 }
 
@@ -54,7 +54,7 @@ class CatAndMouseMinimax : CatAndMouse {
         val queue = enqueuedAllNodes(n, status)
 
         // percolate nodes that we know who wins in the end
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val node: IntArray = queue.remove()
             val m = node[0]
             val c = node[1]

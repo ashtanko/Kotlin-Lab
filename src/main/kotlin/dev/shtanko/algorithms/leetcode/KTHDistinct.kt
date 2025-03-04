@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,21 +18,21 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2053. Kth Distinct String in an Array
- * link https://leetcode.com/problems/kth-distinct-string-in-an-array/
+ * @see <a href="https://leetcode.com/problems/kth-distinct-string-in-an-array">Source</a>
  */
-interface KTHDistinct {
-    fun perform(arr: Array<String>, k: Int): String
+fun interface KTHDistinct {
+    operator fun invoke(arr: Array<String>, k: Int): String
 }
 
 class KTHDistinctImpl : KTHDistinct {
-    override fun perform(arr: Array<String>, k: Int): String {
-        val map: MutableMap<String, Boolean> = HashMap()
-        var k0 = k
-        for (s in arr) {
-            map[s] = !map.containsKey(s)
+    override operator fun invoke(arr: Array<String>, k: Int): String {
+        val distinctMap: MutableMap<String, Boolean> = HashMap()
+        var remainingK = k
+        for (str in arr) {
+            distinctMap[str] = !distinctMap.containsKey(str)
         }
-        for (s in arr) {
-            if (map[s]!! && k0-- == 1) return s
+        for (str in arr) {
+            if (distinctMap.getOrDefault(str, false) && remainingK-- == 1) return str
         }
         return ""
     }

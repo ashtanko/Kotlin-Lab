@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Generate Parentheses.
- * @link https://leetcode.com/problems/generate-parentheses/
+ * @see <a href="https://leetcode.com/problems/generate-parentheses/">Source</a>
  */
-interface GenerateParentheses {
-    fun perform(n: Int): List<String>
+fun interface GenerateParentheses {
+    operator fun invoke(n: Int): List<String>
 }
 
 /**
  * Approach 1: Brute Force
  */
 class GenerateParenthesesBruteForce : GenerateParentheses {
-    override fun perform(n: Int): List<String> {
+    override operator fun invoke(n: Int): List<String> {
         val combinations: MutableList<String> = ArrayList()
         generateAll(CharArray(2 * n), 0, combinations)
         return combinations
@@ -59,7 +59,7 @@ class GenerateParenthesesBruteForce : GenerateParentheses {
  * Approach 2: Backtracking
  */
 class GenerateParenthesesBacktracking : GenerateParentheses {
-    override fun perform(n: Int): List<String> {
+    override operator fun invoke(n: Int): List<String> {
         val ans: MutableList<String> = ArrayList()
         backtrack(ans, "", 0, 0, n)
         return ans
@@ -79,12 +79,12 @@ class GenerateParenthesesBacktracking : GenerateParentheses {
  * Approach 3: Closure Number
  */
 class GenerateParenthesesClosureNumber : GenerateParentheses {
-    override fun perform(n: Int): List<String> {
+    override operator fun invoke(n: Int): List<String> {
         val ans: MutableList<String> = ArrayList()
         if (n == 0) {
             ans.add("")
         } else {
-            for (c in 0 until n) for (left in perform(c)) for (right in perform(n - 1 - c)) ans.add(
+            for (c in 0 until n) for (left in invoke(c)) for (right in invoke(n - 1 - c)) ans.add(
                 "($left)$right",
             )
         }

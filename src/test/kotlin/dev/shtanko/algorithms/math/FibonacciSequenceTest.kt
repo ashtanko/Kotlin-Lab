@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -71,22 +71,22 @@ internal class FibonacciSequenceTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputSimpleArgumentsProvider::class)
-    internal fun `simple test`(n: Int, expected: Int) {
-        val actual = n.toFibonacciSequence()
+    internal fun `simple test`(num: Int, expected: Int) {
+        val actual = num.toFibonacciSequence()
         assertThat(actual, equalTo(expected))
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputIterativeArgumentsProvider::class)
-    internal fun `iterative test`(n: Long, expected: Long) {
-        val actual = Fibonacci.ITERATIVE.invoke(n)
+    internal fun `iterative test`(num: Long, expected: Long) {
+        val actual = Fibonacci.ITERATIVE.invoke(num)
         assertThat(actual, equalTo(expected))
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputRecursiveArgumentsProvider::class)
-    internal fun `recursive test`(n: Long, expected: Long) {
-        val actual = Fibonacci.RECURSIVE.invoke(n)
+    internal fun `recursive test`(num: Long, expected: Long) {
+        val actual = Fibonacci.RECURSIVE.invoke(num)
         assertThat(actual, equalTo(expected))
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 686. Repeated String Match
- * @link https://leetcode.com/problems/repeated-string-match/description/
+ * @see <a href="https://leetcode.com/problems/repeated-string-match">Source</a>
  */
-interface RepeatedStringMatch {
-    fun perform(a: String, b: String): Int
+fun interface RepeatedStringMatch {
+    operator fun invoke(a: String, b: String): Int
 }
 
 class RepeatedStringMatchSB : RepeatedStringMatch {
-    override fun perform(a: String, b: String): Int {
+    override operator fun invoke(a: String, b: String): Int {
         val sb = StringBuilder().apply {
             append(a)
         }

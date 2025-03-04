@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,28 +16,30 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * 242. Valid Anagram
- * @link https://leetcode.com/problems/valid-anagram/
+ * @see <a href="https://leetcode.com/problems/valid-anagram/">Source</a>
  */
-interface ValidAnagram {
-    fun isAnagram(s: String, t: String): Boolean
+fun interface ValidAnagram {
+    operator fun invoke(source: String, target: String): Boolean
 }
 
 class ValidAnagramHashMap : ValidAnagram {
-    override fun isAnagram(s: String, t: String): Boolean {
-        val sMap = HashMap<Char, Int>()
-        val sl: Int = s.length
-        val tl: Int = t.length
-        if (sl != tl) {
+    override fun invoke(source: String, target: String): Boolean {
+        val charFrequencyMap = HashMap<Char, Int>()
+        val sourceLength: Int = source.length
+        val targetLength: Int = target.length
+        if (sourceLength != targetLength) {
             return false
         }
-        for (i in 0 until sl) {
-            sMap[s[i]] = sMap.getOrDefault(s[i], 0) + 1
-            sMap[t[i]] = sMap.getOrDefault(t[i], 0) - 1
+        for (index in 0 until sourceLength) {
+            charFrequencyMap[source[index]] = charFrequencyMap.getOrDefault(source[index], 0) + 1
+            charFrequencyMap[target[index]] = charFrequencyMap.getOrDefault(target[index], 0) - 1
         }
-        for (c in sMap.keys) {
-            if (sMap[c] != 0) {
+        for (char in charFrequencyMap.keys) {
+            if (charFrequencyMap[char] != 0) {
                 return false
             }
         }
@@ -46,14 +48,14 @@ class ValidAnagramHashMap : ValidAnagram {
 }
 
 class ValidAnagramImpl : ValidAnagram {
-    override fun isAnagram(s: String, t: String): Boolean {
-        val alphabet = IntArray(ALPHABET_SIZE)
-        for (i in s.indices) {
-            alphabet[s[i] - ALPHABET_FIRST_LETTER]++
+    override fun invoke(source: String, target: String): Boolean {
+        val alphabet = IntArray(ALPHABET_LETTERS_COUNT)
+        for (i in source.indices) {
+            alphabet[source[i] - ALPHABET_FIRST_LETTER]++
         }
-        for (i in t.indices) {
-            alphabet[t[i] - ALPHABET_FIRST_LETTER]--
-            if (alphabet[t[i] - ALPHABET_FIRST_LETTER] < 0) {
+        for (i in target.indices) {
+            alphabet[target[i] - ALPHABET_FIRST_LETTER]--
+            if (alphabet[target[i] - ALPHABET_FIRST_LETTER] < 0) {
                 return false
             }
         }
@@ -66,7 +68,6 @@ class ValidAnagramImpl : ValidAnagram {
     }
 
     companion object {
-        private const val ALPHABET_SIZE = 26
         private const val ALPHABET_FIRST_LETTER = 'a'
     }
 }

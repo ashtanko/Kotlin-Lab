@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Minimum Number of Vertices to Reach All Nodes.
- * @link https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/
+ * @see <a href="https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/">Source</a>
  */
 object FindSmallestSetOfVertices {
-    fun perform(n: Int, edges: List<List<Int>>): List<Int> {
+    operator fun invoke(n: Int, edges: List<List<Int>>): List<Int> {
         val res: MutableList<Int> = ArrayList()
         val seen = BooleanArray(n)
         for (edge in edges) {

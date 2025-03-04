@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
 import dev.shtanko.algorithms.utils.Dp
 
 /**
  * 139. Word Break
  */
-interface WordBreak {
-    fun perform(s: String, wordDict: List<String>): Boolean
+fun interface WordBreak {
+    operator fun invoke(s: String, wordDict: List<String>): Boolean
 }
 
 class WordBreakBruteForce : WordBreak {
-    override fun perform(s: String, wordDict: List<String>): Boolean {
+    override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         return wb(s, HashSet(wordDict))
     }
 
@@ -46,7 +48,7 @@ class WordBreakBruteForce : WordBreak {
 
 @Dp
 class WordBreakDP : WordBreak {
-    override fun perform(s: String, wordDict: List<String>): Boolean {
+    override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         val dp = BooleanArray(s.length + 1)
         val set: MutableSet<String> = HashSet()
         set.addAll(wordDict)
@@ -71,8 +73,9 @@ class WordBreakDP : WordBreak {
  * References:
  *  https://leetcode.com/problems/word-break/discuss/43819/DFS-with-Path-Memorizing-Java-Solution
  */
+@DFS
 class WordBreakDFS : WordBreak {
-    override fun perform(s: String, wordDict: List<String>): Boolean {
+    override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         if (s.isEmpty()) return false
 
         val wordSet = HashSet(wordDict)
@@ -112,37 +115,49 @@ class WordBreakDFS : WordBreak {
  * Time Complexity:     O(L ^ 2) + O(N * L) / O(N) ~ O(L ^ 2)
  * Space Complexity:    O(N)
  */
+@BFS
 class WordBreakBFS : WordBreak {
-    override fun perform(s: String, wordDict: List<String>): Boolean {
+    override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         if (s.isEmpty()) return false
 
         val wordSet = HashSet(wordDict)
-
         val queue = ArrayDeque<String>()
-        queue.addLast(s)
-
         val seen = HashSet<String>()
+
+        queue.add(s)
         seen.add(s)
 
         while (queue.isNotEmpty()) {
             val size = queue.size
-
             for (sz in 0 until size) {
                 val cur = queue.removeFirst()
                 val len = cur.length
 
-                for (idx in 1..len) {
-                    if (!wordSet.contains(cur.substring(0, idx))) continue
-
-                    if (idx == len) return true
-
-                    val sub = cur.substring(idx)
-                    if (!seen.add(sub)) continue
-                    queue.addLast(sub)
+                if (processSubstring(cur, len, wordSet, seen, queue)) {
+                    return true
                 }
             }
         }
 
+        return false
+    }
+
+    private fun processSubstring(
+        cur: String,
+        len: Int,
+        wordSet: Set<String>,
+        seen: MutableSet<String>,
+        queue: MutableList<String>,
+    ): Boolean {
+        for (idx in 1..len) {
+            if (!wordSet.contains(cur.substring(0, idx))) continue
+
+            if (idx == len) return true
+
+            val sub = cur.substring(idx)
+            if (!seen.add(sub)) continue
+            queue.add(sub)
+        }
         return false
     }
 }
@@ -157,7 +172,7 @@ class WordBreakBFS : WordBreak {
  *  https://leetcode.com/problems/word-break/discuss/43790/Java-implementation-using-DP-in-two-ways
  */
 class WordBreakDP2 : WordBreak {
-    override fun perform(s: String, wordDict: List<String>): Boolean {
+    override operator fun invoke(s: String, wordDict: List<String>): Boolean {
         if (s.isEmpty()) return false
 
         val len = s.length

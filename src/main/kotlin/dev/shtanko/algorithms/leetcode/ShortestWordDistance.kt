@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,12 @@ package dev.shtanko.algorithms.leetcode
 import kotlin.math.abs
 import kotlin.math.min
 
-interface ShortestWordDistanceStrategy {
-    fun perform(words: Array<String>, word1: String, word2: String): Int
+fun interface ShortestWordDistanceStrategy {
+    operator fun invoke(words: Array<String>, word1: String, word2: String): Int
 }
 
 class ShortestWordDistanceBruteForce : ShortestWordDistanceStrategy {
-    override fun perform(words: Array<String>, word1: String, word2: String): Int {
+    override operator fun invoke(words: Array<String>, word1: String, word2: String): Int {
         var minDistance: Int = words.size
         for (i in words.indices) {
             if (words[i] == word1) {
@@ -40,20 +40,20 @@ class ShortestWordDistanceBruteForce : ShortestWordDistanceStrategy {
 }
 
 class ShortestWordDistanceOnePass : ShortestWordDistanceStrategy {
-    override fun perform(words: Array<String>, word1: String, word2: String): Int {
-        var i1 = -1
-        var i2 = -1
-        var minDistance: Int = words.size
-        for (i in words.indices) {
-            if (words[i] == word1) {
-                i1 = i
-            } else if (words[i] == word2) {
-                i2 = i
+    override operator fun invoke(words: Array<String>, word1: String, word2: String): Int {
+        var word1Index = -1
+        var word2Index = -1
+        var minimumDistance: Int = words.size
+        for (currentIndex in words.indices) {
+            if (words[currentIndex] == word1) {
+                word1Index = currentIndex
+            } else if (words[currentIndex] == word2) {
+                word2Index = currentIndex
             }
-            if (i1 != -1 && i2 != -1) {
-                minDistance = min(minDistance, abs(i1 - i2))
+            if (word1Index != -1 && word2Index != -1) {
+                minimumDistance = min(minimumDistance, abs(word1Index - word2Index))
             }
         }
-        return minDistance
+        return minimumDistance
     }
 }

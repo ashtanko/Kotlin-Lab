@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.max
 
 /**
  * 329. Longest Increasing Path in a Matrix
- * @link https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
+ * @see <a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/">Source</a>
  */
-interface LongestIncreasingPathInMatrix {
-    fun perform(matrix: Array<IntArray>): Int
+fun interface LongestIncreasingPathInMatrix {
+    operator fun invoke(matrix: Array<IntArray>): Int
 }
 
 class LongestIncreasingPathInMatrixDFS : LongestIncreasingPathInMatrix {
 
     private val dirs = arrayOf(intArrayOf(0, 1), intArrayOf(1, 0), intArrayOf(0, -1), intArrayOf(-1, 0))
 
-    override fun perform(matrix: Array<IntArray>): Int {
+    override operator fun invoke(matrix: Array<IntArray>): Int {
         if (matrix.isEmpty()) return 0
         val m: Int = matrix.size
         val n: Int = matrix[0].size

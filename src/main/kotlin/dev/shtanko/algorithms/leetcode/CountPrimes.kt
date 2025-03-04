@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface CountPrimesStrategy {
-    fun perform(n: Int): Int
+fun interface CountPrimesStrategy {
+    operator fun invoke(n: Int): Int
 }
 
 class CountPrimesBrutForce : CountPrimesStrategy {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val notPrime = BooleanArray(n)
         var count = 0
         for (i in 2 until n) {
@@ -39,15 +39,16 @@ class CountPrimesBrutForce : CountPrimesStrategy {
 }
 
 class CountPrimesTimeComplexity : CountPrimesStrategy {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         if (n < 2) return 0
         val nonPrime = BooleanArray(n)
         nonPrime[1] = true
         var numNonPrimes = 1
-        for (i in 2 until n) { // O(n)
+        for (i in 2 until n) { // Complexity: O(n)
             if (nonPrime[i]) continue
             var j = i * 2
-            while (j < n) { // O(log(log(n)))
+            // Complexity: O(log(log(n)))
+            while (j < n) {
                 if (!nonPrime[j]) {
                     nonPrime[j] = true
                     numNonPrimes++

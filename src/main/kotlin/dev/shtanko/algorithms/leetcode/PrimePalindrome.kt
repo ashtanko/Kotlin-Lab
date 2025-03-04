@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.isPrime
+import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.extensions.isPrime
 import kotlin.math.pow
 
 /**
  * Prime Palindrome
- * @link https://leetcode.com/problems/prime-palindrome/
+ * @see <a href="https://leetcode.com/problems/prime-palindrome/">Source</a>
  */
-interface PrimePalindrome {
-    fun perform(n: Int): Int
+fun interface PrimePalindrome {
+    operator fun invoke(n: Int): Int
 }
 
 /**
@@ -33,7 +34,7 @@ interface PrimePalindrome {
  * Space Complexity: O(logN).
  */
 class IteratePalindromes : PrimePalindrome {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         for (L in 1..MAX) {
             // Check for odd-length palindromes
             val local = DECIMAL.toDouble().pow((L - 1).toDouble()).toInt()
@@ -67,7 +68,7 @@ class IteratePalindromes : PrimePalindrome {
  * Space Complexity: O(1).
  */
 class PrimePalindromeBruteForce : PrimePalindrome {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         var x = n
         while (true) {
             if (x == reverse(x) && x.isPrime()) {

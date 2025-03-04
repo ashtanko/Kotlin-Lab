@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,54 +16,66 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.LinkedList
 import java.util.Queue
 
-internal interface AverageOfLevelsInBinaryTreeStrategy {
-    fun perform(root: TreeNode?): DoubleArray
+/**
+ * 637. Average of Levels in Binary Tree
+ * @see <a href="https://leetcode.com/problems/average-of-levels-in-binary-tree/">Source</a>
+ */
+@Easy("https://leetcode.com/problems/average-of-levels-in-binary-tree")
+fun interface AverageOfLevelsInBinaryTreeStrategy {
+    operator fun invoke(root: TreeNode?): DoubleArray
 }
 
 // Using Depth First Search
-internal class AverageOfLevelsInBinaryTreeDFS : AverageOfLevelsInBinaryTreeStrategy {
-    override fun perform(root: TreeNode?): DoubleArray {
+@DFS
+class AverageOfLevelsInBinaryTreeDFS : AverageOfLevelsInBinaryTreeStrategy {
+    override operator fun invoke(root: TreeNode?): DoubleArray {
         val count: MutableList<Int> = ArrayList()
         val res: MutableList<Double> = ArrayList()
         average(root, 0, res, count)
-        for (i in res.indices) res[i] = res[i] / count[i]
+        for (i in res.indices) {
+            res[i] = res[i] / count[i]
+        }
         return res.toDoubleArray()
     }
 
-    fun average(t: TreeNode?, i: Int, sum: MutableList<Double>, count: MutableList<Int>) {
-        if (t == null) return
-        if (i < sum.size) {
-            sum[i] = sum[i] + t.value
-            count[i] = count[i] + 1
+    fun average(tree: TreeNode?, index: Int, sum: MutableList<Double>, count: MutableList<Int>) {
+        if (tree == null) return
+        if (index < sum.size) {
+            sum[index] = sum[index] + tree.value
+            count[index] = count[index] + 1
         } else {
-            sum.add(1.0 * t.value)
+            sum.add(1.0 * tree.value)
             count.add(1)
         }
-        average(t.left, i + 1, sum, count)
-        average(t.right, i + 1, sum, count)
+        average(tree.left, index + 1, sum, count)
+        average(tree.right, index + 1, sum, count)
     }
 }
 
 // Using Breadth First Search
-internal class AverageOfLevelsInBinaryTreeBFS : AverageOfLevelsInBinaryTreeStrategy {
-    override fun perform(root: TreeNode?): DoubleArray {
+@BFS
+class AverageOfLevelsInBinaryTreeBFS : AverageOfLevelsInBinaryTreeStrategy {
+    override operator fun invoke(root: TreeNode?): DoubleArray {
         val res: MutableList<Double> = ArrayList()
         var queue: Queue<TreeNode?> = LinkedList()
         queue.add(root)
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             var sum: Long = 0
             var count: Long = 0
             val temp: Queue<TreeNode?> = LinkedList()
-            while (!queue.isEmpty()) {
-                val n: TreeNode? = queue.remove()
-                if (n != null) {
-                    sum += n.value
+            while (queue.isNotEmpty()) {
+                val node: TreeNode? = queue.remove()
+                if (node != null) {
+                    sum += node.value
                     count++
-                    if (n.left != null) temp.add(n.left)
-                    if (n.right != null) temp.add(n.right)
+                    if (node.left != null) temp.add(node.left)
+                    if (node.right != null) temp.add(node.right)
                 }
             }
             queue = temp

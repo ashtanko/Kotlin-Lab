@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import kotlin.math.max
 
 /**
  * 835. Image Overlap
- * @link https://leetcode.com/problems/image-overlap/
+ * @see <a href="https://leetcode.com/problems/image-overlap/">Source</a>
  */
 fun interface ImageOverlap {
     fun largestOverlap(img1: Array<IntArray>, img2: Array<IntArray>): Int
@@ -36,7 +36,8 @@ class ImageOverlapShiftAndCount : ImageOverlap {
             for (xShift in img1.indices) {
                 // move the matrix A to the up-right and up-left directions.
                 maxOverlaps = max(maxOverlaps, shiftAndCount(xShift, yShift, img1, img2))
-                // move the matrix B to the up-right and up-left directions, which is equivalent to moving A to the down-right and down-left directions
+                // move the matrix B to the up-right and up-left directions, which is equivalent to moving A to the
+                // down-right and down-left directions
                 maxOverlaps = max(maxOverlaps, shiftAndCount(xShift, yShift, img2, img1))
             }
         }

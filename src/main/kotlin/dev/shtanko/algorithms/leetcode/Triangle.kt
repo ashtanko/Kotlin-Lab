@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.min
 
 /**
  * Triangle
- * @link https://leetcode.com/problems/triangle/
+ * @see <a href="https://leetcode.com/problems/triangle/">Source</a>
  */
-interface Triangle {
-    fun perform(triangle: List<List<Int>>): Int
+fun interface Triangle {
+    operator fun invoke(triangle: List<List<Int>>): Int
 }
 
 /**
@@ -32,7 +32,7 @@ interface Triangle {
  * Space Complexity: O(1).
  */
 class TriangleBottomUp : Triangle {
-    override fun perform(triangle: List<List<Int>>): Int {
+    override operator fun invoke(triangle: List<List<Int>>): Int {
         val result = triangle.toMutableList().map { it.toMutableList() }
         for (row in 1 until result.size) {
             for (col in 0..row) {
@@ -57,7 +57,7 @@ class TriangleBottomUp : Triangle {
  * Space Complexity: O(n).
  */
 class TriangleAuxiliarySpace : Triangle {
-    override fun perform(triangle: List<List<Int>>): Int {
+    override operator fun invoke(triangle: List<List<Int>>): Int {
         var prevRow = triangle[0]
         for (row in 1 until triangle.size) {
             val currRow: MutableList<Int> = ArrayList()
@@ -81,7 +81,7 @@ class TriangleAuxiliarySpace : Triangle {
  * Approach 3: Dynamic Programming (Bottom-up: Flip Triangle Upside Down)
  */
 class TriangleUpsideDown : Triangle {
-    override fun perform(triangle: List<List<Int>>): Int {
+    override operator fun invoke(triangle: List<List<Int>>): Int {
         var belowRow = triangle[triangle.size - 1]
         for (row in triangle.size - 2 downTo 0) {
             val currRow: MutableList<Int> = ArrayList()
@@ -104,7 +104,7 @@ class TriangleMemoization : Triangle {
     private var memoTable: MutableMap<String, Int> = HashMap()
     private lateinit var triangle: List<List<Int>>
 
-    override fun perform(triangle: List<List<Int>>): Int {
+    override operator fun invoke(triangle: List<List<Int>>): Int {
         this.triangle = triangle
         return minPath(0, 0)
     }

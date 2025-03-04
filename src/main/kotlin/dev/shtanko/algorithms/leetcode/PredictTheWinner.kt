@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,15 +21,15 @@ import kotlin.math.max
 /**
  * 486. Predict the Winner
  */
-interface PredictTheWinner {
-    fun perform(nums: IntArray): Boolean
+fun interface PredictTheWinner {
+    operator fun invoke(nums: IntArray): Boolean
 }
 
 /**
  * Approach #1 Using Recursion
  */
 class PredictTheWinnerRecursion : PredictTheWinner {
-    override fun perform(nums: IntArray): Boolean {
+    override operator fun invoke(nums: IntArray): Boolean {
         return winner(nums, 0, nums.size - 1, 1) >= 0
     }
 
@@ -45,7 +45,7 @@ class PredictTheWinnerRecursion : PredictTheWinner {
  * Approach #2 Similar Approach
  */
 class PredictTheWinnerMemo : PredictTheWinner {
-    override fun perform(nums: IntArray): Boolean {
+    override operator fun invoke(nums: IntArray): Boolean {
         val memo = Array(nums.size) {
             arrayOfNulls<Int>(nums.size)
         }
@@ -66,7 +66,7 @@ class PredictTheWinnerMemo : PredictTheWinner {
  * Approach #3 Dynamic Programming
  */
 class PredictTheWinnerDP : PredictTheWinner {
-    override fun perform(nums: IntArray): Boolean {
+    override operator fun invoke(nums: IntArray): Boolean {
         val dp = Array(nums.size) { IntArray(nums.size) }
         for (s in nums.size downTo 0) {
             for (e in s until nums.size) {
@@ -87,7 +87,7 @@ class PredictTheWinnerDP : PredictTheWinner {
  * Approach #4 1-D Dynamic Programming
  */
 class PredictTheWinnerDP2 : PredictTheWinner {
-    override fun perform(nums: IntArray): Boolean {
+    override operator fun invoke(nums: IntArray): Boolean {
         val dp = IntArray(nums.size)
         for (s in nums.size downTo 0) {
             for (e in s until nums.size) {

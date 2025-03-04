@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1228. Missing Number In Arithmetic Progression
- * @link https://leetcode.com/problems/missing-number-in-arithmetic-progression/
+ * @see <a href="https://leetcode.com/problems/missing-number-in-arithmetic-progression/">Source</a>
  */
-interface MissingNumberInProgression {
-    fun perform(arr: IntArray): Int
+fun interface MissingNumberInProgression {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
@@ -30,7 +30,7 @@ interface MissingNumberInProgression {
  * Space complexity : O(1).
  */
 class MNLinearSearch : MissingNumberInProgression {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         if (arr.isEmpty() || arr.size < 2) return 0
         val n = arr.size
         val diff = arr.last().minus(arr.first()).div(n)
@@ -50,7 +50,7 @@ class MNLinearSearch : MissingNumberInProgression {
  * Space complexity : O(1).
  */
 class MNBinarySearch : MissingNumberInProgression {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         if (arr.isEmpty() || arr.size < 2) return 0
         val n = arr.size
         val diff = arr.last().minus(arr.first()).div(n)

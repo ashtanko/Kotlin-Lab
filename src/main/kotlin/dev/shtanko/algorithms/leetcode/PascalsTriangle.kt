@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,31 @@
 
 package dev.shtanko.algorithms.leetcode
 
-fun Int.pascalsTriangle(): List<List<Int>> {
-    val triangle: MutableList<MutableList<Int>> = ArrayList()
-    if (this <= 0) {
+/**
+ * 118. Pascal's Triangle
+ * @see <a href="https://leetcode.com/problems/pascals-triangle">Source</a>
+ */
+fun interface PascalsTriangle {
+    operator fun invoke(numRows: Int): List<List<Int>>
+}
+
+class PascalsTriangleSolution : PascalsTriangle {
+    override fun invoke(numRows: Int): List<List<Int>> {
+        val triangle: MutableList<MutableList<Int>> = ArrayList()
+        if (numRows <= 0) {
+            return triangle
+        }
+        for (i in 0 until numRows) {
+            val row: MutableList<Int> = ArrayList()
+            for (j in 0 until i + 1) {
+                if (j == 0 || j == i) {
+                    row.add(1)
+                } else {
+                    row.add(triangle[i - 1][j - 1] + triangle[i - 1][j])
+                }
+            }
+            triangle.add(row)
+        }
         return triangle
     }
-    for (i in 0 until this) {
-        val row: MutableList<Int> = ArrayList()
-        for (j in 0 until i + 1) {
-            if (j == 0 || j == i) {
-                row.add(1)
-            } else {
-                row.add(triangle[i - 1][j - 1] + triangle[i - 1][j])
-            }
-        }
-        triangle.add(row)
-    }
-    return triangle
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ import kotlin.math.min
  * 774. Minimize Max Distance to Gas Station
  */
 fun interface MinMaxGasDist {
-    fun perform(stations: IntArray, k: Int): Double
+    operator fun invoke(stations: IntArray, k: Int): Double
 
     companion object {
         const val LIMIT = 999999999.0
@@ -112,7 +112,7 @@ val minMaxGasDistHeap = MinMaxGasDist { stations, station ->
  * Approach #4: Binary Search
  */
 class MinMaxGasDistBS : MinMaxGasDist {
-    override fun perform(stations: IntArray, k: Int): Double {
+    override operator fun invoke(stations: IntArray, k: Int): Double {
         if (stations.isEmpty() || k <= 0) return 0.0
 
         val n: Int = stations.size

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,26 +16,28 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DP
 import kotlin.math.max
 import kotlin.math.min
 
 /**
  * 741. Cherry Pickup
- * @link https://leetcode.com/problems/cherry-pickup/
+ * @see <a href="https://leetcode.com/problems/cherry-pickup/">Source</a>
  */
-interface CherryPickup {
-    fun perform(grid: Array<IntArray>): Int
+fun interface CherryPickup {
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 /**
  * Approach #2: Dynamic Programming (Top Down)
  */
+@DP("Top Down")
 class CherryPickupTopDown : CherryPickup {
     private lateinit var memo: Array<Array<IntArray>>
     private lateinit var grid: Array<IntArray>
     var n = 0
 
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         this.grid = grid
         n = grid.size
         memo = Array(n) { Array(n) { IntArray(n) { Int.MIN_VALUE } } }
@@ -45,24 +47,32 @@ class CherryPickupTopDown : CherryPickup {
     private fun dp(r1: Int, c1: Int, c2: Int): Int {
         val r2 = r1 + c1 - c2
         val helper = n == r1 || n == r2 || n == c1 || n == c2
-        if (grid.isNotEmpty()) {
-            if (grid.first().isEmpty()) return 0
+        if (grid.isNotEmpty() && grid.first().isEmpty()) {
+            return 0
         }
-        return if (helper || grid[r1][c1] == -1 || grid[r2][c2] == -1) {
-            LIMIT
-        } else if (r1 == n - 1 && c1 == n - 1) {
-            grid[r1][c1]
-        } else if (memo[r1][c1][c2] != Int.MIN_VALUE) {
-            memo[r1][c1][c2]
-        } else {
-            var ans = grid[r1][c1]
-            if (c1 != c2) ans += grid[r2][c2]
-            ans += max(
-                max(dp(r1, c1 + 1, c2 + 1), dp(r1 + 1, c1, c2 + 1)),
-                max(dp(r1, c1 + 1, c2), dp(r1 + 1, c1, c2)),
-            )
-            memo[r1][c1][c2] = ans
-            ans
+        return when {
+            helper || grid[r1][c1] == -1 || grid[r2][c2] == -1 -> {
+                LIMIT
+            }
+
+            r1 == n - 1 && c1 == n - 1 -> {
+                grid[r1][c1]
+            }
+
+            memo[r1][c1][c2] != Int.MIN_VALUE -> {
+                memo[r1][c1][c2]
+            }
+
+            else -> {
+                var ans = grid[r1][c1]
+                if (c1 != c2) ans += grid[r2][c2]
+                ans += max(
+                    max(dp(r1, c1 + 1, c2 + 1), dp(r1 + 1, c1, c2 + 1)),
+                    max(dp(r1, c1 + 1, c2), dp(r1 + 1, c1, c2)),
+                )
+                memo[r1][c1][c2] = ans
+                ans
+            }
         }
     }
 
@@ -74,13 +84,14 @@ class CherryPickupTopDown : CherryPickup {
 /**
  * Approach #3: Dynamic Programming (Bottom Up)
  */
+@DP("Bottom Up")
 class CherryPickupBottomUp : CherryPickup {
-    override fun perform(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         if (grid.isEmpty()) return 0
         val n: Int = grid.size
         var dp = Array(n) { IntArray(n) { Int.MIN_VALUE } }
-        if (grid.isNotEmpty()) {
-            if (grid.first().isEmpty()) return 0
+        if (grid.isNotEmpty() && grid.first().isEmpty()) {
+            return 0
         }
         dp.first()[0] = grid.first().first()
 

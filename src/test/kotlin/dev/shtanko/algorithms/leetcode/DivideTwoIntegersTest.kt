@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class DivideTwoIntegersTest<out T : DivideTwoIntegers>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class DivideTwoIntegersTest<out T : DivideTwoIntegers>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 10,
@@ -47,19 +47,64 @@ internal abstract class DivideTwoIntegersTest<out T : DivideTwoIntegers>(private
                 1,
                 1,
             ),
+            Arguments.of(
+                Int.MIN_VALUE,
+                -1,
+                Int.MAX_VALUE,
+            ),
+            Arguments.of(
+                Int.MIN_VALUE,
+                1,
+                Int.MIN_VALUE,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                1,
+                Int.MAX_VALUE,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                2,
+                1073741823,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                3,
+                715827882,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                4,
+                536870911,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                5,
+                429496729,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                6,
+                357913941,
+            ),
+            Arguments.of(
+                Int.MAX_VALUE,
+                7,
+                306783378,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `divide two integers test`(dividend: Int, divisor: Int, expected: Int) {
+    fun `divide two integers test`(dividend: Int, divisor: Int, expected: Int) {
         val actual = strategy.divide(dividend, divisor)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class DivideIntegersBitShiftingTest :
+class DivideIntegersBitShiftingTest :
     DivideTwoIntegersTest<DivideIntegersBitShifting>(DivideIntegersBitShifting())
 
-internal class DivideIntegersBitShiftingTest2 :
+class DivideIntegersBitShiftingTest2 :
     DivideTwoIntegersTest<DivideIntegersBitShifting2>(DivideIntegersBitShifting2())

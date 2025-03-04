@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,26 +16,49 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class DuplicateZerosTest {
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<IntArray, IntArray>> {
-            return listOf(
-                intArrayOf(1, 0, 2, 3, 0, 4, 5, 0) to intArrayOf(1, 0, 0, 2, 3, 0, 0, 4),
-                intArrayOf(1, 2, 3) to intArrayOf(1, 2, 3),
-            )
-        }
+class DuplicateZerosTest {
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(1, 0, 2, 3, 0, 4, 5, 0),
+                intArrayOf(1, 0, 0, 2, 3, 0, 0, 4),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3),
+                intArrayOf(1, 2, 3),
+            ),
+            Arguments.of(
+                intArrayOf(0, 0, 0, 0, 0, 0, 0),
+                intArrayOf(0, 0, 0, 0, 0, 0, 0),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 0, 0, 0),
+                intArrayOf(1, 2, 3, 0, 0, 0),
+            ),
+            Arguments.of(
+                intArrayOf(0, 1, 7, 6, 0, 2, 0, 7),
+                intArrayOf(0, 0, 1, 7, 6, 0, 0, 2),
+            ),
+            Arguments.of(
+                intArrayOf(0, 0, 0, 0, 0, 0, 0),
+                intArrayOf(0, 0, 0, 0, 0, 0, 0),
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `duplicate zeros test`(testCase: Pair<IntArray, IntArray>) {
-        val (arr, expected) = testCase
-        duplicateZeros(arr)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `duplicate zeros test`(arr: IntArray, expected: IntArray) {
+        arr.duplicateZeros()
         assertArrayEquals(expected, arr)
     }
 }

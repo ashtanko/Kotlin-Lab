@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 389. Find the Difference
- * @link https://leetcode.com/problems/find-the-difference/
+ * @see <a href="https://leetcode.com/problems/find-the-difference/">Source</a>
  */
-interface FindDifference {
-    fun perform(s: String, t: String): Char
+fun interface FindDifference {
+    operator fun invoke(s: String, t: String): Char
 }
 
 class FindDifferenceSimple : FindDifference {
-    override fun perform(s: String, t: String): Char {
+    override operator fun invoke(s: String, t: String): Char {
         var charCode = t[s.length]
         // Iterate through both strings and char codes
         for (i in s.indices) {
@@ -37,7 +37,7 @@ class FindDifferenceSimple : FindDifference {
 }
 
 class FindDifferenceBitwise : FindDifference {
-    override fun perform(s: String, t: String): Char {
+    override operator fun invoke(s: String, t: String): Char {
         val n = t.length
         var c = t[n - 1].code
         for (i in 0 until n - 1) {

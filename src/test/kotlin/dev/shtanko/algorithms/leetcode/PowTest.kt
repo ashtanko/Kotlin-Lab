@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class PowTest<out T : Pow>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class PowTest<out T : Pow>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 2.00000,
@@ -48,12 +48,12 @@ internal abstract class PowTest<out T : Pow>(private val strategy: T) {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `pow test`(x: Double, n: Int, expected: Double) {
-        val actual = strategy.perform(x, n)
+    fun `pow test`(x: Double, num: Int, expected: Double) {
+        val actual = strategy.invoke(x, num)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class PowBruteForceTest : PowTest<PowBruteForce>(PowBruteForce())
-internal class PowFastRecursiveTest : PowTest<PowFastRecursive>(PowFastRecursive())
-internal class PowFastIterativeTest : PowTest<PowFastIterative>(PowFastIterative())
+class PowBruteForceTest : PowTest<PowBruteForce>(PowBruteForce())
+class PowFastRecursiveTest : PowTest<PowFastRecursive>(PowFastRecursive())
+class PowFastIterativeTest : PowTest<PowFastIterative>(PowFastIterative())

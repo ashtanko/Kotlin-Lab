@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,13 +20,13 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import org.junit.jupiter.api.Test
 
-internal class PrintInOrderTest {
+class PrintInOrderTest {
 
     private val printInOrder = PrintInOrder()
 
     @Test
     @Throws(InterruptedException::class)
-    internal fun `test print in order with concurrency test`() {
+    fun `test print in order with concurrency test`() {
         val service = Executors.newFixedThreadPool(3)
         val latch = CountDownLatch(3)
 
@@ -56,7 +56,7 @@ internal class PrintInOrderTest {
 
     @Test
     @Throws(InterruptedException::class)
-    internal fun `test print in order with concurrency 2 test`() {
+    fun `test print in order with concurrency 2 test`() {
         val service = Executors.newFixedThreadPool(3)
         val latch = CountDownLatch(3)
 

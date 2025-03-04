@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,14 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.TreeMap
 
 /**
  * 2502. Design Memory Allocator
- * @link https://leetcode.com/problems/design-memory-allocator/description/
+ * @see <a href="https://leetcode.com/problems/design-memory-allocator">Source</a>
  */
+@Medium(link = "https://leetcode.com/problems/design-memory-allocator")
 interface Malloc {
     fun allocate(size: Int, mID: Int): Int
 
@@ -29,20 +31,20 @@ interface Malloc {
 }
 
 class Allocator(n: Int) : Malloc {
-    internal data class Node(val l: Int, val r: Int)
+    data class Node(val l: Int, val r: Int)
 
     // certain area of memory is allocated or not
     private var a: BooleanArray = BooleanArray(n)
 
     // Track all allocations for each mID
-    private val m: Array<MutableList<Node>?> = arrayOfNulls(LIMIT)
+    private val mIds: Array<MutableList<Node>?> = arrayOfNulls(LIMIT)
 
     override fun allocate(size: Int, mID: Int): Int {
         val l = findFirstAvailable(size)
         if (l == -1) return -1
         // find the list of memories allocated for this mID
-        if (m[mID] == null) m[mID] = ArrayList() // if new, create the empty memList for this mID
-        m[mID]?.add(Node(l, l + size)) // append to memList allocated to this mID
+        if (mIds[mID] == null) mIds[mID] = ArrayList() // if new, create the empty memList for this mID
+        mIds[mID]?.add(Node(l, l + size)) // append to memList allocated to this mID
 
         // allocate memory
         var i = l
@@ -55,14 +57,13 @@ class Allocator(n: Int) : Malloc {
     }
 
     override fun free(mID: Int): Int {
-        if (m[mID] == null) return 0
         var size = 0
         // free all memory allocated to this mID
-        for ((l, r) in m[mID]!!) {
+        for ((l, r) in mIds[mID] ?: return 0) {
             size += r - l
             for (i in l until r) a[i] = false // free memory
         }
-        m[mID]?.clear() // this mID is gone
+        mIds[mID]?.clear() // this mID is gone
         return size
     }
 
@@ -97,26 +98,30 @@ class TAllocator(n: Int) : Malloc {
         memory[0] = ranges // 0 means free block
     }
 
+    class Range(val start: Int, val end: Int)
+
     override fun allocate(size: Int, mID: Int): Int {
-        var addr = -1
-        val availableRange = intArrayOf(-1, -1)
-        for ((startAdd, endAdd) in memory[0] ?: emptyMap()) {
-            if (endAdd - startAdd + 1 >= size) {
-                addr = startAdd
-                availableRange[0] = startAdd
-                availableRange[1] = endAdd
-                break
-            }
-        }
-        if (addr != -1) {
-            memory.computeIfAbsent(mID) { _: Int? -> TreeMap() }[availableRange[0]] = availableRange[0] + size - 1
-            memory[0]?.remove(availableRange[0])
-            if (availableRange[1] - availableRange[0] + 1 > size) {
-                memory[0]!![availableRange[0] + size] = availableRange[1]
-            }
+        val emptyRange = Range(start = -1, end = -1)
+        val foundRange = findSuitableMemoryRange(size) ?: emptyRange
+
+        if (foundRange.start != -1) {
+            allocateMemoryRange(mID, size, foundRange)
         }
         mergeRanges(mID)
-        return addr
+        return foundRange.start
+    }
+
+    private fun findSuitableMemoryRange(size: Int): Range? {
+        return memory[0]?.entries?.find { it.value - it.key + 1 >= size }?.let { Range(it.key, it.value) }
+    }
+
+    private fun allocateMemoryRange(mID: Int, size: Int, foundRange: Range) {
+        memory.computeIfAbsent(mID) { TreeMap() }[foundRange.start] = foundRange.start + size - 1
+        memory[0]?.remove(foundRange.start)
+        val remainingSize = foundRange.end - foundRange.start + 1
+        if (remainingSize > size) {
+            memory.getOrDefault(0, TreeMap())[foundRange.start + size] = foundRange.end
+        }
     }
 
     override fun free(mID: Int): Int {
@@ -125,7 +130,7 @@ class TAllocator(n: Int) : Malloc {
         if (freeRanges != null) {
             for ((startAdd, endAdd) in freeRanges) {
                 cnt += endAdd - startAdd + 1
-                memory[0]!![startAdd] = endAdd
+                memory.getOrDefault(0, TreeMap())[startAdd] = endAdd
             }
         }
         memory.remove(mID)

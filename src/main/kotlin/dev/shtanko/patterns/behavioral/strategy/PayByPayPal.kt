@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,23 +23,26 @@ import java.io.InputStreamReader
 /**
  * Concrete strategy. Implements PayPal payment method.
  */
-class PayByPayPal : PayStrategy {
-    private val bufferedReader = BufferedReader(InputStreamReader(System.`in`))
+class PayByPayPal(
+    private val bufferedReader: BufferedReader = BufferedReader(InputStreamReader(System.`in`)), // For normal usage
+    private val credentialsVerifier: (String?, String?) -> Boolean = { email, password ->
+        email == DATA_BASE[password]
+    }, // For verification logic
+) : PayStrategy {
+
     private var email: String? = null
     private var password: String? = null
     private var signedIn = false
 
-    /**
-     * Collect customer's data.
-     */
     override fun collectPaymentDetails() {
         try {
             while (!signedIn) {
-                print("Enter the user's email: ")
+                println("Enter the user's email:")
                 email = bufferedReader.readLine()
-                print("Enter the password: ")
+                println("Enter the password:")
                 password = bufferedReader.readLine()
-                if (verify()) {
+                if (credentialsVerifier(email, password)) {
+                    setSignedIn(true)
                     println("Data verification has been successful.")
                 } else {
                     println("Wrong email or password!")
@@ -50,14 +53,10 @@ class PayByPayPal : PayStrategy {
         }
     }
 
-    private fun verify(): Boolean {
-        setSignedIn(email == DATA_BASE[password])
-        return signedIn
+    private fun setSignedIn(signedIn: Boolean) {
+        this.signedIn = signedIn
     }
 
-    /**
-     * Save customer data for future shopping attempts.
-     */
     override fun pay(paymentAmount: Int): Boolean {
         return if (signedIn) {
             println("Paying $paymentAmount using PayPal.")
@@ -65,10 +64,6 @@ class PayByPayPal : PayStrategy {
         } else {
             false
         }
-    }
-
-    private fun setSignedIn(signedIn: Boolean) {
-        this.signedIn = signedIn
     }
 
     companion object {

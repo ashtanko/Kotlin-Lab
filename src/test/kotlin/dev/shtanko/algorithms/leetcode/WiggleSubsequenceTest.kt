@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class WiggleSubsequenceTest<out T : WiggleSubsequence>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class WiggleSubsequenceTest<out T : WiggleSubsequence>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -47,19 +47,27 @@ internal abstract class WiggleSubsequenceTest<out T : WiggleSubsequence>(private
                 intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9),
                 2,
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                2,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+                2,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `wiggle max length test`(nums: IntArray, expected: Int) {
-        val actual = strategy.perform(nums)
+    fun `wiggle max length test`(nums: IntArray, expected: Int) {
+        val actual = strategy.invoke(nums)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class WSBruteForceTest : WiggleSubsequenceTest<WSBruteForce>(WSBruteForce())
-internal class WSDPTest : WiggleSubsequenceTest<WSDP>(WSDP())
-internal class WSLinearDPTest : WiggleSubsequenceTest<WSLinearDP>(WSLinearDP())
-internal class WSSpaceOptimizedDPTest : WiggleSubsequenceTest<WSSpaceOptimizedDP>(WSSpaceOptimizedDP())
-internal class WSGreedyTest : WiggleSubsequenceTest<WSGreedy>(WSGreedy())
+class WSBruteForceTest : WiggleSubsequenceTest<WSBruteForce>(WSBruteForce())
+class WSDPTest : WiggleSubsequenceTest<WSDP>(WSDP())
+class WSLinearDPTest : WiggleSubsequenceTest<WSLinearDP>(WSLinearDP())
+class WSSpaceOptimizedDPTest : WiggleSubsequenceTest<WSSpaceOptimizedDP>(WSSpaceOptimizedDP())
+class WSGreedyTest : WiggleSubsequenceTest<WSGreedy>(WSGreedy())

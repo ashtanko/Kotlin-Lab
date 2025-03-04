@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-internal class MergeTwoBinaryTreesTest {
+class MergeTwoBinaryTreesTest {
 
     private lateinit var appender: InMemoryAppender
 
@@ -36,13 +36,13 @@ internal class MergeTwoBinaryTreesTest {
     }
 
     @Test
-    internal fun `print level order in root is null test`() {
+    fun `print level order in root is null test`() {
         val tree = BinaryTree()
         tree.printLevelOrder()
     }
 
     @Test
-    internal fun `print level order in root tree test`() {
+    fun `print level order in root tree test`() {
         val tree = BinaryTree().apply {
             root = TreeNode(1)
         }
@@ -50,7 +50,7 @@ internal class MergeTwoBinaryTreesTest {
     }
 
     @Test
-    internal fun `merge two binary trees test`() {
+    fun `merge two binary trees test`() {
         val tree1 = BinaryTree().apply {
             root = TreeNode(1).apply {
                 left = TreeNode(3).apply {

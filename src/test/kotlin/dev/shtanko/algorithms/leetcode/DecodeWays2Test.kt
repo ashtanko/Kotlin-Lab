@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AbstractDecodeWays2StrategyTest<out T : DecodeWays2Strategy>(private val strategy: DecodeWays2Strategy) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class AbstractDecodeWays2StrategyTest<out T : DecodeWays2Strategy>(private val strategy: DecodeWays2Strategy) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of("", 0),
             Arguments.of("0", 0),
@@ -49,24 +49,28 @@ internal abstract class AbstractDecodeWays2StrategyTest<out T : DecodeWays2Strat
             Arguments.of("*6", 11),
             Arguments.of("*7", 10),
             Arguments.of("3*7", 10),
+            Arguments.of("1*7", 19),
+            Arguments.of("2*7", 16),
+            Arguments.of("2*6", 17),
+            Arguments.of("2*9", 16),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `simple test`(str: String, expected: Int) {
-        val actual = strategy.perform(str)
+    fun `simple test`(str: String, expected: Int) {
+        val actual = strategy.invoke(str)
         assertEquals(expected, actual)
     }
 }
 
-internal class DecodeWays2RecursionWithMemoizationTest :
+class DecodeWays2RecursionWithMemoizationTest :
     AbstractDecodeWays2StrategyTest<DecodeWays2RecursionWithMemoization>(DecodeWays2RecursionWithMemoization())
 
-internal class DecodeWays2DynamicProgrammingTest :
+class DecodeWays2DynamicProgrammingTest :
     AbstractDecodeWays2StrategyTest<DecodeWays2DynamicProgramming>(DecodeWays2DynamicProgramming())
 
-internal class DecodeWays2ConstantSpaceDynamicProgrammingTest :
+class DecodeWays2ConstantSpaceDynamicProgrammingTest :
     AbstractDecodeWays2StrategyTest<DecodeWays2ConstantSpaceDynamicProgramming>(
         DecodeWays2ConstantSpaceDynamicProgramming(),
     )

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,6 +45,15 @@ abstract class WordSearch2Test<out T : WordSearch2>(private val strategy: T) {
                 arrayOf("abcb"),
                 emptyList<String>(),
             ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf('a', 'b', 'c', 'e'),
+                    charArrayOf('s', 'f', 'c', 's'),
+                    charArrayOf('a', 'd', 'e', 'e'),
+                ),
+                arrayOf("abcced", "see", "abcb"),
+                listOf("abcced", "see"),
+            ),
         )
     }
 
@@ -55,7 +64,7 @@ abstract class WordSearch2Test<out T : WordSearch2>(private val strategy: T) {
         words: Array<String>,
         expected: List<String>,
     ) {
-        val actual = strategy.findWords(board, words)
+        val actual = strategy.invoke(board, words)
         Assertions.assertThat(actual).containsExactlyInAnyOrderElementsOf(expected)
     }
 }

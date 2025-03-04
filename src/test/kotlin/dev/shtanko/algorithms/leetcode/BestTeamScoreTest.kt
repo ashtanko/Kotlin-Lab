@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,23 @@ abstract class BestTeamScoreTest<out T : BestTeamScore>(private val strategy: T)
                 intArrayOf(8, 9, 10, 1),
                 6,
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                intArrayOf(8, 9, 10, 1, 1),
+                9,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5),
+                intArrayOf(1, 2, 3, 4, 5),
+                15,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `best team score test`(scores: IntArray, ages: IntArray, expected: Int) {
-        val actual = strategy.perform(scores, ages)
+        val actual = strategy.invoke(scores, ages)
         assertThat(actual).isEqualTo(expected)
     }
 }

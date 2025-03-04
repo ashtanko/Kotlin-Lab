@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -57,13 +57,71 @@ abstract class FindWinnersTest<out T : FindWinners>(private val strategy: T) {
                     listOf(),
                 ),
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                ),
+                listOf(
+                    listOf(1),
+                    listOf(2, 3, 4, 5),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 6),
+                    intArrayOf(6, 7),
+                    intArrayOf(7, 8),
+                    intArrayOf(8, 9),
+                    intArrayOf(9, 10),
+                    intArrayOf(10, 1),
+                ),
+                listOf(
+                    listOf(),
+                    listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 6),
+                    intArrayOf(6, 7),
+                    intArrayOf(7, 8),
+                    intArrayOf(8, 9),
+                    intArrayOf(9, 10),
+                    intArrayOf(10, 1),
+                    intArrayOf(1, 3),
+                    intArrayOf(3, 5),
+                    intArrayOf(5, 7),
+                    intArrayOf(7, 9),
+                    intArrayOf(9, 2),
+                    intArrayOf(2, 4),
+                    intArrayOf(4, 6),
+                    intArrayOf(6, 8),
+                    intArrayOf(8, 10),
+                    intArrayOf(10, 1),
+                ),
+                listOf(
+                    listOf(),
+                    listOf<Int>(),
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `find winners test`(matches: Array<IntArray>, expected: List<List<Int>>) {
-        val actual = strategy.perform(matches)
+        val actual = strategy.invoke(matches)
         assertThat(actual).isEqualTo(expected)
     }
 }

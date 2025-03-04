@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,17 @@ import java.util.Queue
 
 /**
  * 1926. Nearest Exit from Entrance in Maze
- * @link https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/
+ * @see <a href="https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/">Source</a>
  */
 fun interface NearestExit {
-    fun perform(maze: Array<CharArray>, entrance: IntArray): Int
+    operator fun invoke(maze: Array<CharArray>, entrance: IntArray): Int
 }
 
 /**
  * Approach 1: Breadth First Search (BFS)
  */
 class NearestExitBFS : NearestExit {
-    override fun perform(maze: Array<CharArray>, entrance: IntArray): Int {
+    override operator fun invoke(maze: Array<CharArray>, entrance: IntArray): Int {
         val rows: Int = maze.size
         val cols: Int = maze[0].size
         val dirs = arrayOf(intArrayOf(1, 0), intArrayOf(-1, 0), intArrayOf(0, 1), intArrayOf(0, -1))
@@ -46,7 +46,7 @@ class NearestExitBFS : NearestExit {
         val queue: Queue<IntArray> = LinkedList()
         queue.offer(intArrayOf(startRow, startCol, 0))
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val currState: IntArray = queue.poll()
             val currRow = currState[0]
             val currCol = currState[1]

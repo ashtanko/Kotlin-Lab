@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import java.util.Queue
 
 /**
  * 1377. Frog Position After T Seconds
- * @link https://leetcode.com/problems/frog-position-after-t-seconds/
+ * @see <a href="https://leetcode.com/problems/frog-position-after-t-seconds/">Source</a>
  */
-interface FrogPosition {
-    fun proceed(n: Int, edges: Array<IntArray>, t: Int, target: Int): Double
+fun interface FrogPosition {
+    operator fun invoke(n: Int, edges: Array<IntArray>, t: Int, target: Int): Double
 }
 
 class FrogPositionBFS : FrogPosition {
-    override fun proceed(n: Int, edges: Array<IntArray>, t: Int, target: Int): Double {
+    override operator fun invoke(n: Int, edges: Array<IntArray>, t: Int, target: Int): Double {
         var t0 = t
         val graph: Map<Int, List<Int>> = initialize(edges)
         val visited: BooleanArray = BooleanArray(n).apply {
@@ -41,7 +41,7 @@ class FrogPositionBFS : FrogPosition {
             offer(0)
         }
 
-        while (!q.isEmpty() && t0-- > 0) {
+        while (q.isNotEmpty() && t0-- > 0) {
             for (size in q.size downTo 1) {
                 val u = q.poll()
                 val nextVerticesCount = adjacentVerticesCount(graph, visited, u)

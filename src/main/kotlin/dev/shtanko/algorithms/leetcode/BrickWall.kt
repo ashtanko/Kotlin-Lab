@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BruteForce
+import dev.shtanko.algorithms.annotations.BruteForceOptimized
 import kotlin.math.min
 
 /**
  * 554. Brick Wall
- * @link https://leetcode.com/problems/brick-wall/
+ * @see <a href="https://leetcode.com/problems/brick-wall/">Source</a>
  */
-interface BrickWall {
-    fun perform(wall: List<List<Int>>): Int
+fun interface BrickWall {
+    operator fun invoke(wall: List<List<Int>>): Int
 }
 
 /**
@@ -31,8 +33,9 @@ interface BrickWall {
  * Time complexity : O(n*m)
  * Space complexity : O(m)
  */
+@BruteForce
 class BrickWallBruteForce : BrickWall {
-    override fun perform(wall: List<List<Int>>): Int {
+    override operator fun invoke(wall: List<List<Int>>): Int {
         if (wall.isEmpty()) return 0
         val pos = IntArray(wall.size)
         var sum = 0
@@ -59,8 +62,9 @@ class BrickWallBruteForce : BrickWall {
  * Time complexity : O(n*m)
  * Space complexity : O(m)
  */
+@BruteForceOptimized
 class BrickWallBetterBruteForce : BrickWall {
-    override fun perform(wall: List<List<Int>>): Int {
+    override operator fun invoke(wall: List<List<Int>>): Int {
         if (wall.isEmpty()) return 0
         val pos = IntArray(wall.size)
         var sum = 0
@@ -97,7 +101,7 @@ class BrickWallBetterBruteForce : BrickWall {
  * Space complexity : O(m)
  */
 class BrickWallHashMap : BrickWall {
-    override fun perform(wall: List<List<Int>>): Int {
+    override operator fun invoke(wall: List<List<Int>>): Int {
         val map: HashMap<Int, Int> = HashMap()
         for (row in wall) {
             var sum = 0

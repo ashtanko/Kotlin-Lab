@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  *  Range Sum Query - Immutable
- *  @link https://leetcode.com/problems/range-sum-query-immutable/
+ *  @see <a href="https://leetcode.com/problems/range-sum-query-immutable/">Source</a>
  */
-interface RangeSumQuery {
-    fun perform(i: Int, j: Int): Int
+fun interface RangeSumQuery {
+    operator fun invoke(i: Int, j: Int): Int
 }
 
 class RangeSumQueryBruteForce(val nums: IntArray) : RangeSumQuery {
-    override fun perform(i: Int, j: Int): Int {
+    override operator fun invoke(i: Int, j: Int): Int {
         var sum = 0
         for (k in i..j) {
             sum += nums[k]
@@ -48,7 +48,7 @@ class RangeSumQueryCaching(val nums: IntArray) : RangeSumQuery {
         }
     }
 
-    override fun perform(i: Int, j: Int): Int {
+    override operator fun invoke(i: Int, j: Int): Int {
         return map[i to j] ?: 0
     }
 }
@@ -63,7 +63,7 @@ class RangeSumQueryCachingOptimized(val nums: IntArray) : RangeSumQuery {
         }
     }
 
-    override fun perform(i: Int, j: Int): Int {
+    override operator fun invoke(i: Int, j: Int): Int {
         return sum[j + 1] - sum[i]
     }
 }

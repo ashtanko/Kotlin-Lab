@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import java.util.Arrays
 
 /**
  * 2466. Count Ways To Build Good Strings
- * @link https://leetcode.com/problems/count-ways-to-build-good-strings/
+ * @see <a href="https://leetcode.com/problems/count-ways-to-build-good-strings/">Source</a>
  */
-interface CountGoodStrings {
-    fun perform(low: Int, high: Int, zero: Int, one: Int): Int
+fun interface CountGoodStrings {
+    operator fun invoke(low: Int, high: Int, zero: Int, one: Int): Int
 }
 
 /**
@@ -31,7 +32,7 @@ interface CountGoodStrings {
  */
 class CountGoodStringsDPRecursive : CountGoodStrings {
 
-    override fun perform(low: Int, high: Int, zero: Int, one: Int): Int {
+    override operator fun invoke(low: Int, high: Int, zero: Int, one: Int): Int {
         // Use dp[i] to record to number of good strings of length i.
         val dp = IntArray(high + 1)
         dp[0] = 1
@@ -66,7 +67,7 @@ class CountGoodStringsDPIterative : CountGoodStrings {
     // Use dp[i] to record to number of good strings of length i.
     private lateinit var dp: IntArray
 
-    override fun perform(low: Int, high: Int, zero: Int, one: Int): Int {
+    override operator fun invoke(low: Int, high: Int, zero: Int, one: Int): Int {
         dp = IntArray(high + 1)
         Arrays.fill(dp, -1)
         dp[0] = 1

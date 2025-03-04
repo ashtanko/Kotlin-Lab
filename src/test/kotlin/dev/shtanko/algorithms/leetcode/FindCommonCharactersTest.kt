@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.randomString
+import dev.shtanko.extensions.randomString
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -28,8 +28,8 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 private const val RANDOM_STRING_LENGTH = 6
 private const val RANDOM_ARRAY_SIZE = 100_000
 
-internal class FindCommonCharactersTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class FindCommonCharactersTest<out T : FindCommonCharacters>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf<String>(), listOf<String>()),
             Arguments.of(arrayOf("bella", "label", "roller"), listOf("e", "l", "l")),
@@ -45,8 +45,10 @@ internal class FindCommonCharactersTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `name test`(arr: Array<String>, expected: List<String>) {
-        val actual = arr.commonChars()
+    fun `name test`(arr: Array<String>, expected: List<String>) {
+        val actual = strategy(arr)
         assertThat(actual).isEqualTo(expected)
     }
 }
+
+class FrequencyIntersectionImplTest : FindCommonCharactersTest<FrequencyIntersection>(FrequencyIntersection())

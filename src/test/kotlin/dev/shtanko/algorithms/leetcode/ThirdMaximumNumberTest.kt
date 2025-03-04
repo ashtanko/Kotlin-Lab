@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,18 +24,22 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class ThirdMaximumNumberTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class ThirdMaximumNumberTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(3, 2, 1), 1),
             Arguments.of(intArrayOf(1, 2), 2),
             Arguments.of(intArrayOf(2, 2, 3, 1), 1),
+            Arguments.of(intArrayOf(1, 2, 2, 5, 3, 5), 2),
+            Arguments.of(intArrayOf(1, 2, 2, 5, 3, 5, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15), 13),
+            Arguments.of(intArrayOf(1, 2, 2, 5, 3, 5, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), 14),
+            Arguments.of(intArrayOf(), -1),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `third max test`(nums: IntArray, expected: Int) {
+    fun `third max test`(nums: IntArray, expected: Int) {
         val actual = thirdMax(nums)
         assertEquals(expected, actual)
     }

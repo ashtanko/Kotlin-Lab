@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,16 +54,37 @@ abstract class FindMinArrowShotsTest<out T : FindMinArrowShots>(private val stra
                 ),
                 2,
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 6),
+                ),
+                3,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 5),
+                    intArrayOf(5, 6),
+                    intArrayOf(6, 7),
+                ),
+                3,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `find min arrow shots test`(points: Array<IntArray>, expected: Int) {
-        val actual = strategy.perform(points)
+        val actual = strategy.invoke(points)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-class FindMinArrowShotsGreedyTest : FindMinArrowShotsTest<FindMinArrowShots>(FindMinArrowShotsGreedy)
-class FindMinArrowShotsCompactTest : FindMinArrowShotsTest<FindMinArrowShots>(FindMinArrowShotsCompact)
+class FindMinArrowShotsGreedyTest : FindMinArrowShotsTest<FindMinArrowShots>(findMinArrowShotsGreedy)
+class FindMinArrowShotsCompactTest : FindMinArrowShotsTest<FindMinArrowShots>(findMinArrowShots)

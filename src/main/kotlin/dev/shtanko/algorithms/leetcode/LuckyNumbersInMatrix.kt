@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,58 +16,60 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface AbstractLuckyNumbersStrategy {
-    fun perform(matrix: Array<IntArray>): List<Int>
+/**
+ * 1380. Lucky Numbers in a Matrix
+ * @see <a href="https://leetcode.com/problems/lucky-numbers-in-a-matrix">Source</a>
+ */
+fun interface AbstractLuckyNumbers {
+    operator fun invoke(matrix: Array<IntArray>): List<Int>
 }
 
-class LuckyNumbers : AbstractLuckyNumbersStrategy {
-    override fun perform(matrix: Array<IntArray>): List<Int> {
-        val m = matrix.size
-        val n = matrix[0].size
-        val mi = IntArray(m) { Integer.MAX_VALUE }
-        val mx = IntArray(n)
-        for (i in 0 until m) {
-            for (j in 0 until n) {
-                mi[i] = matrix[i][j].coerceAtMost(mi[i])
-                mx[j] = matrix[i][j].coerceAtLeast(mx[j])
+class LuckyNumbers : AbstractLuckyNumbers {
+    override operator fun invoke(matrix: Array<IntArray>): List<Int> {
+        val rowCount = matrix.size
+        val colCount = matrix[0].size
+        val minRowValues = IntArray(rowCount) { Integer.MAX_VALUE }
+        val maxColValues = IntArray(colCount)
+        for (rowIndex in 0 until rowCount) {
+            for (colIndex in 0 until colCount) {
+                minRowValues[rowIndex] = matrix[rowIndex][colIndex].coerceAtMost(minRowValues[rowIndex])
+                maxColValues[colIndex] = matrix[rowIndex][colIndex].coerceAtLeast(maxColValues[colIndex])
             }
         }
-        val res: MutableList<Int> = ArrayList()
-        for (i in 0 until m) {
-            for (j in 0 until n) {
-                if (mi[i] == mx[j]) {
-                    res.add(mi[i])
+        val luckyNumbers: MutableList<Int> = ArrayList()
+        for (rowIndex in 0 until rowCount) {
+            for (colIndex in 0 until colCount) {
+                if (minRowValues[rowIndex] == maxColValues[colIndex]) {
+                    luckyNumbers.add(minRowValues[rowIndex])
                 }
             }
         }
-
-        return res
+        return luckyNumbers
     }
 }
 
-class LuckyNumbersSet : AbstractLuckyNumbersStrategy {
-    override fun perform(matrix: Array<IntArray>): List<Int> {
-        val minSet: MutableSet<Int> = HashSet()
-        val maxSet: MutableSet<Int> = HashSet()
+class LuckyNumbersSet : AbstractLuckyNumbers {
+    override operator fun invoke(matrix: Array<IntArray>): List<Int> {
+        val minimumValuesInRows: MutableSet<Int> = HashSet()
+        val luckyNumbers: MutableSet<Int> = HashSet()
 
         for (row in matrix) {
-            var mi = row[0]
+            var minimumInRow = row[0]
             for (cell in row) {
-                mi = mi.coerceAtMost(cell)
+                minimumInRow = minimumInRow.coerceAtMost(cell)
             }
-            minSet.add(mi)
+            minimumValuesInRows.add(minimumInRow)
         }
 
-        for (j in matrix[0].indices) {
-            var mx = matrix[0][j]
-            for (i in matrix.indices) {
-                mx = matrix[i][j].coerceAtLeast(mx)
+        for (columnIndex in matrix[0].indices) {
+            var maximumInColumn = matrix[0][columnIndex]
+            for (rowIndex in matrix.indices) {
+                maximumInColumn = matrix[rowIndex][columnIndex].coerceAtLeast(maximumInColumn)
             }
-            if (minSet.contains(mx)) {
-                maxSet.add(mx)
+            if (minimumValuesInRows.contains(maximumInColumn)) {
+                luckyNumbers.add(maximumInColumn)
             }
         }
-
-        return maxSet.toList()
+        return luckyNumbers.toList()
     }
 }

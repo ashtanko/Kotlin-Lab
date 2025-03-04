@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.Stack
 
-interface TagValidatorStrategy {
-    fun perform(code: String): Boolean
+fun interface TagValidatorStrategy {
+    operator fun invoke(code: String): Boolean
 }
 
 class TagValidatorStack : TagValidatorStrategy {
@@ -27,7 +27,7 @@ class TagValidatorStack : TagValidatorStrategy {
     private val stack: Stack<String> = Stack()
     private var containsTag = false
 
-    override fun perform(code: String): Boolean {
+    override operator fun invoke(code: String): Boolean {
         if (code[0] != '<' || code[code.length - 1] != '>') {
             return false
         }
@@ -39,7 +39,7 @@ class TagValidatorStack : TagValidatorStrategy {
                 return false
             }
             if (code[i] == '<') {
-                if (!stack.isEmpty() && code[i + 1] == '!') {
+                if (stack.isNotEmpty() && code[i + 1] == '!') {
                     closeIndex = code.indexOf("]]>", i + 1)
                     if (closeIndex < 0 || !isValidCdata(code.substring(i + 2, closeIndex))) {
                         return false
@@ -75,7 +75,7 @@ class TagValidatorStack : TagValidatorStrategy {
             }
         }
         if (ending) {
-            if (!stack.isEmpty() && stack.peek() == s) {
+            if (stack.isNotEmpty() && stack.peek() == s) {
                 stack.pop()
             } else {
                 return false
@@ -90,43 +90,51 @@ class TagValidatorStack : TagValidatorStrategy {
 
 class TagValidatorRegex : TagValidatorStrategy {
 
-    override fun perform(code: String): Boolean {
+    override operator fun invoke(code: String): Boolean {
         val st = Stack<String>()
         var i = 0
         while (i < code.length) {
             if (i > 0 && st.isEmpty()) {
                 return false // check if double <![CDATA[
             }
-            if (code.startsWith("<![CDATA[", i)) {
-                val j = i + 9
-                i = code.indexOf("]]>", j)
-                if (i < 0) {
-                    return false
+            when {
+                code.startsWith("<![CDATA[", i) -> {
+                    val j = i + 9
+                    i = code.indexOf("]]>", j)
+                    if (i < 0) {
+                        return false
+                    }
+                    i += 3
                 }
-                i += 3
-            } else if (code.startsWith("</", i)) {
-                val j = i + 2
-                i = code.indexOf(">", j)
-                if (i < 0 || i == j || i - j > 9) {
-                    return false
-                }
-                if (st.isEmpty() || code.substring(j, i++) != st.pop()) {
-                    return false
-                }
-            } else if (code.startsWith("<", i)) {
-                val j = i + 1
-                i = code.indexOf(">", j)
-                if (i < 0 || i == j || i - j > 9) {
-                    return false
-                }
-                for (k in j until i) {
-                    if (!Character.isUpperCase(code[k])) {
+
+                code.startsWith("</", i) -> {
+                    val j = i + 2
+                    i = code.indexOf(">", j)
+                    if (i < 0 || i == j || i - j > 9) {
+                        return false
+                    }
+                    if (st.isEmpty() || code.substring(j, i++) != st.pop()) {
                         return false
                     }
                 }
-                st.push(code.substring(j, i++))
-            } else {
-                i++
+
+                code.startsWith("<", i) -> {
+                    val j = i + 1
+                    i = code.indexOf(">", j)
+                    if (i < 0 || i == j || i - j > 9) {
+                        return false
+                    }
+                    for (k in j until i) {
+                        if (!Character.isUpperCase(code[k])) {
+                            return false
+                        }
+                    }
+                    st.push(code.substring(j, i++))
+                }
+
+                else -> {
+                    i++
+                }
             }
         }
         return st.isEmpty()

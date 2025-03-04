@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -54,13 +54,38 @@ abstract class WordSearchTest<out T : WordSearch>(private val strategy: T) {
                 "ABCB",
                 false,
             ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf(),
+                ),
+                "ABCB",
+                false,
+            ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf('A', 'B', 'C', 'E'),
+                    charArrayOf('S', 'F', 'C', 'S'),
+                    charArrayOf('A', 'D', 'E', 'E'),
+                ),
+                "",
+                true,
+            ),
+            Arguments.of(
+                arrayOf(
+                    charArrayOf('A', 'B', 'C', 'E'),
+                    charArrayOf('S', 'F', 'C', 'S'),
+                    charArrayOf('A', 'D', 'E', 'E'),
+                ),
+                "ABCESEEDAS",
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `exist test`(board: Array<CharArray>, word: String, expected: Boolean) {
-        val actual = strategy.exist(board, word)
+        val actual = strategy.invoke(board, word)
         assertThat(actual).isEqualTo(expected)
     }
 }

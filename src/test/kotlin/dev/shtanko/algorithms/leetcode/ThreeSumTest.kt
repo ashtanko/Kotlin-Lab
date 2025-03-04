@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,9 +25,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class ThreeSumTest<out T : ThreeSum>(private val strategy: T) {
+abstract class ThreeSumTest<out T : ThreeSum>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -41,17 +41,21 @@ internal abstract class ThreeSumTest<out T : ThreeSum>(private val strategy: T) 
                 intArrayOf(-1, 0, 1, 2, -1, -4),
                 listOf(listOf(-1, -1, 2), listOf(-1, 0, 1)),
             ),
+            Arguments.of(
+                intArrayOf(0, 0, 0),
+                listOf(listOf(0, 0, 0)),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `three sum test`(nums: IntArray, expected: List<List<Int>>) {
-        val actual = strategy.perform(nums)
+    fun `three sum test`(nums: IntArray, expected: List<List<Int>>) {
+        val actual = strategy.invoke(nums)
         assertThat(actual.flatten().sorted(), equalTo(expected.flatten().sorted()))
     }
 }
 
-internal class ThreeSumTwoPointersTest : ThreeSumTest<ThreeSumTwoPointers>(ThreeSumTwoPointers())
-internal class ThreeSumHashsetTest : ThreeSumTest<ThreeSumHashset>(ThreeSumHashset())
-internal class ThreeSumNoSortTest : ThreeSumTest<ThreeSumNoSort>(ThreeSumNoSort())
+class ThreeSumTwoPointersTest : ThreeSumTest<ThreeSumTwoPointers>(ThreeSumTwoPointers())
+class ThreeSumHashsetTest : ThreeSumTest<ThreeSumHashset>(ThreeSumHashset())
+class ThreeSumNoSortTest : ThreeSumTest<ThreeSumNoSort>(ThreeSumNoSort())

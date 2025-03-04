@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,78 +16,97 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import kotlin.math.min
 
 /**
  * 931. Minimum Falling Path Sum
- * @link https://leetcode.com/problems/minimum-falling-path-sum/description/
+ * @see <a href="https://leetcode.com/problems/minimum-falling-path-sum">Source</a>
  */
-interface MinFallingPathSum {
-    fun perform(matrix: Array<IntArray>): Int
+fun interface MinFallingPathSum {
+    operator fun invoke(matrix: Array<IntArray>): Int
 }
 
 class MinFallingPathSumTopDown : MinFallingPathSum {
-    override fun perform(matrix: Array<IntArray>): Int {
-        val (m, n) = listOf(matrix.size, matrix[0].size)
-        fun go(i: Int, j: Int): Int {
-            if (j < 0 || j == n) {
+    override operator fun invoke(matrix: Array<IntArray>): Int {
+        val (rowCount, colCount) = listOf(matrix.size, matrix[0].size)
+
+        fun calculatePathSum(row: Int, col: Int): Int {
+            if (col < 0 || col == colCount) {
                 return MOD
             }
-            if (i == 0) {
-                return matrix[i][j]
+            if (row == 0) {
+                return matrix[row][col]
             }
-            val a = go(i - 1, j - 1)
-            val b = go(i - 1, j)
-            val c = go(i - 1, j + 1)
-            return matrix[i][j] + listOf(a, b, c).min()
+
+            val leftSum = calculatePathSum(row - 1, col - 1)
+            val straightSum = calculatePathSum(row - 1, col)
+            val rightSum = calculatePathSum(row - 1, col + 1)
+
+            return matrix[row][col] + listOf(leftSum, straightSum, rightSum).min()
         }
 
-        var best = MOD
-        for (j in 0 until n)
-            best = min(best, go(m - 1, j))
-        return best
+        var minPathSum = MOD
+        for (currentCol in 0 until colCount) {
+            minPathSum = min(minPathSum, calculatePathSum(rowCount - 1, currentCol))
+        }
+        return minPathSum
     }
 }
 
 class MinFallingPathSumDPMemo : MinFallingPathSum {
-    override fun perform(matrix: Array<IntArray>): Int {
+    override operator fun invoke(matrix: Array<IntArray>): Int {
         val memo = mutableMapOf<String, Int>()
-        val (m, n) = listOf(matrix.size, matrix[0].size)
-        fun go(i: Int, j: Int): Int {
-            if (j < 0 || j == n) {
+        val (rowCount, colCount) = listOf(matrix.size, matrix[0].size)
+
+        fun calculatePathSum(row: Int, col: Int): Int {
+            if (col < 0 || col == colCount) {
                 return MOD
             }
-            if (i == 0) {
-                return matrix[i][j]
+            if (row == 0) {
+                return matrix[row][col]
             }
-            val k = "$i,$j"
-            if (!memo.contains(k)) {
-                val a = go(i - 1, j - 1)
-                val b = go(i - 1, j)
-                val c = go(i - 1, j + 1)
-                memo[k] = matrix[i][j] + listOf(a, b, c).min()
+
+            val memoKey = "$row,$col"
+            if (!memo.contains(memoKey)) {
+                val leftSum = calculatePathSum(row - 1, col - 1)
+                val straightSum = calculatePathSum(row - 1, col)
+                val rightSum = calculatePathSum(row - 1, col + 1)
+                memo[memoKey] = matrix[row][col] + listOf(leftSum, straightSum, rightSum).min()
             }
-            return memo[k] ?: 0
+            return memo[memoKey] ?: 0
         }
 
-        var best = MOD
-        for (j in 0 until n)
-            best = min(best, go(m - 1, j))
-        return best
+        var minPathSum = MOD
+        for (currentCol in 0 until colCount) {
+            minPathSum = min(minPathSum, calculatePathSum(rowCount - 1, currentCol))
+        }
+        return minPathSum
     }
 }
 
 class MinFallingPathSumBottomUp : MinFallingPathSum {
-    override fun perform(matrix: Array<IntArray>): Int {
-        val (m, n) = listOf(matrix.size, matrix[0].size)
-        for (i in 1 until m) {
-            for (j in 0 until n) {
-                val a = if (0 <= j - 1) matrix[i - 1][j - 1] else MOD
-                val b = matrix[i - 1][j]
-                val c = if (j + 1 < n) matrix[i - 1][j + 1] else MOD
-                matrix[i][j] += listOf(a, b, c).min()
-            }
+    override operator fun invoke(matrix: Array<IntArray>): Int {
+        val (rowCount, colCount) = matrix.size to matrix[0].size
+
+        for (currentRow in 1 until rowCount) {
+            updateMatrixRow(matrix, currentRow, colCount)
         }
-        return matrix[m - 1].min()
+
+        return matrix[rowCount - 1].min()
+    }
+
+    private fun updateMatrixRow(matrix: Array<IntArray>, row: Int, colCount: Int) {
+        for (currentCol in 0 until colCount) {
+            val leftValue = getMatrixValue(matrix, row - 1, currentCol - 1, colCount)
+            val straightValue = getMatrixValue(matrix, row - 1, currentCol, colCount)
+            val rightValue = getMatrixValue(matrix, row - 1, currentCol + 1, colCount)
+
+            matrix[row][currentCol] += listOf(leftValue, straightValue, rightValue).min()
+        }
+    }
+
+    private fun getMatrixValue(matrix: Array<IntArray>, row: Int, col: Int, colCount: Int): Int {
+        return if (col in 0 until colCount) matrix[row][col] else MOD
     }
 }

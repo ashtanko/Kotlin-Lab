@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,15 +24,15 @@ import java.util.LinkedList
  * 98. Validate Binary Search Tree
  * https://leetcode.com/problems/validate-binary-search-tree/
  */
-interface ValidateBinarySearchTree {
-    fun isValidBST(root: TreeNode): Boolean
+fun interface ValidateBinarySearchTree {
+    operator fun invoke(root: TreeNode): Boolean
 }
 
 /**
  * Approach 1: Recursive Traversal with Valid Range
  */
 class RecursiveTraversalValidRange : ValidateBinarySearchTree {
-    override fun isValidBST(root: TreeNode): Boolean {
+    override fun invoke(root: TreeNode): Boolean {
         return validate(root, null, null)
     }
 
@@ -57,14 +57,14 @@ class IterativeTraversalValidRange : ValidateBinarySearchTree {
     private val upperLimits: Deque<Int> = LinkedList()
     private val lowerLimits: Deque<Int> = LinkedList()
 
-    override fun isValidBST(root: TreeNode): Boolean {
+    override fun invoke(root: TreeNode): Boolean {
         var low: Int? = null
         var high: Int? = null
         var value: Int
         var node: TreeNode? = root
         update(node, low, high)
 
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             node = stack.poll()
             low = lowerLimits.poll()
             high = upperLimits.poll()
@@ -96,7 +96,7 @@ class RecursiveInorderTraversal : ValidateBinarySearchTree {
 
     private var prev: Int? = null
 
-    override fun isValidBST(root: TreeNode): Boolean {
+    override fun invoke(root: TreeNode): Boolean {
         return inorder(root)
     }
 
@@ -119,11 +119,11 @@ class RecursiveInorderTraversal : ValidateBinarySearchTree {
  * Approach 4: Iterative Inorder Traversal
  */
 class IterativeInorderTraversal : ValidateBinarySearchTree {
-    override fun isValidBST(root: TreeNode): Boolean {
+    override fun invoke(root: TreeNode): Boolean {
         val stack: Deque<TreeNode> = ArrayDeque()
         var prev: Int? = null
         var node: TreeNode? = root
-        while (!stack.isEmpty() || node != null) {
+        while (stack.isNotEmpty() || node != null) {
             while (node != null) {
                 stack.push(node)
                 node = node.left

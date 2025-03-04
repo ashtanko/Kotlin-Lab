@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import java.util.LinkedList
 
 /**
  * 1932. Merge BSTs to Create Single BST
- * @link https://leetcode.com/problems/merge-bsts-to-create-single-bst/
+ * @see <a href="https://leetcode.com/problems/merge-bsts-to-create-single-bst/">Source</a>
  */
-interface CanMergeBST {
-    fun perform(trees: List<TreeNode>): TreeNode?
+fun interface CanMergeBST {
+    operator fun invoke(trees: List<TreeNode>): TreeNode?
 }
 
 class CanMergeBSTImpl : CanMergeBST {
-    override fun perform(trees: List<TreeNode>): TreeNode? {
+    override operator fun invoke(trees: List<TreeNode>): TreeNode? {
         val rootMap: MutableMap<Int, TreeNode> = HashMap()
         val rootCount: MutableMap<Int, Int> = HashMap()
         for (treeNode in trees) {
@@ -55,7 +55,7 @@ class CanMergeBSTImpl : CanMergeBST {
         val node: TreeNode = root
         val queue: Deque<TreeNode?> = LinkedList()
         queue.offerFirst(node)
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val cur = queue.pollLast()
             // If cur is a leaf node and find the matching root
             if (cur != null && cur.left == null && cur.right == null && rootMap.containsKey(cur.value)) {

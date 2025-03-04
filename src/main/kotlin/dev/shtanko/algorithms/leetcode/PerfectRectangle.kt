@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,9 +23,9 @@ import kotlin.math.min
 
 /**
  * 391. Perfect Rectangle
- * @link https://leetcode.com/problems/perfect-rectangle/
+ * @see <a href="https://leetcode.com/problems/perfect-rectangle/">Source</a>
  */
-interface PerfectRectangle {
+fun interface PerfectRectangle {
     fun isRectangleCover(rectangles: Array<IntArray>): Boolean
 }
 
@@ -52,9 +52,9 @@ class PerfectRectangleSweepLine : PerfectRectangle {
             },
         )
         var yRange = 0
-        while (!pq.isEmpty()) {
+        while (pq.isNotEmpty()) {
             val time: Int = pq.peek().time
-            while (!pq.isEmpty() && pq.peek().time == time) {
+            while (pq.isNotEmpty() && pq.peek().time == time) {
                 val (_, rect) = pq.poll()
                 if (time == rect[2]) {
                     set.remove(rect)
@@ -65,7 +65,7 @@ class PerfectRectangleSweepLine : PerfectRectangle {
                 }
             }
             // check intervals' range
-            if (!pq.isEmpty() && yRange != border[1] - border[0]) {
+            if (pq.isNotEmpty() && yRange != border[1] - border[0]) {
                 return false
             }
         }
@@ -134,6 +134,10 @@ class PerfectRectangleEasy : PerfectRectangle {
         val x2y1 = !set.contains("$x2 $y1")
         val x2y2 = !set.contains("$x2 $y2")
         val condition1 = x1y1 || x1y2 || x2y1 || x2y2 || set.size != 4
-        return if (condition1) false else area == (x2 - x1) * (y2 - y1)
+        return if (condition1) {
+            false
+        } else {
+            area == (x2 - x1) * (y2 - y1)
+        }
     }
 }

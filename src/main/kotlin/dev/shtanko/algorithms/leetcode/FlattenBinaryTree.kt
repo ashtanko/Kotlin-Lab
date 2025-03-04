@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,9 +20,9 @@ import java.util.Stack
 
 /**
  * 114. Flatten Binary Tree to Linked List
- * @link https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+ * @see <a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/">Source</a>
  */
-interface FlattenBinaryTree {
+fun interface FlattenBinaryTree {
     fun flatten(root: TreeNode?)
 }
 
@@ -64,7 +64,7 @@ class FlattenStack : FlattenBinaryTree {
         val stack: Stack<Pair<TreeNode, Int>> = Stack<Pair<TreeNode, Int>>()
         stack.push(root to start)
 
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val nodeData: Pair<TreeNode, Int> = stack.pop()
             val currentNode: TreeNode = nodeData.first
             val recursionState: Int = nodeData.second

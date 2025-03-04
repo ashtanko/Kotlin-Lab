@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ class BankTest : TestBase() {
         assertThat(bank).isNotNull
 
         withContext(Dispatchers.Default) {
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(1)
                 bank.withdraw(1)
             }
@@ -44,10 +44,10 @@ class BankTest : TestBase() {
         assertThat(bank).isNotNull
 
         withContext(Dispatchers.Default) {
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(1)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(1)
             }
         }
@@ -60,16 +60,16 @@ class BankTest : TestBase() {
         assertThat(bank).isNotNull
 
         withContext(Dispatchers.Default) {
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(1)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(2)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(2)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(1)
             }
         }
@@ -82,22 +82,22 @@ class BankTest : TestBase() {
         assertThat(bank).isNotNull
 
         withContext(Dispatchers.Default) {
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(1)
                 bank.withdraw(1)
                 bank.deposit(2)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(2)
                 bank.deposit(1)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(1)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.deposit(5)
             }
-            bank.proceed(nCoroutines = 1000) {
+            bank.invoke(nCoroutines = 1000) {
                 bank.withdraw(5)
             }
         }
@@ -111,13 +111,13 @@ class BankTest : TestBase() {
 
         withContext(Dispatchers.Default) {
             for (i in 1..5) {
-                bank.proceed(nCoroutines = 1000 * i) {
+                bank.invoke(nCoroutines = 1000 * i) {
                     bank.deposit(i)
                     bank.withdraw(i)
                 }
             }
             for (j in 1..5) {
-                bank.proceed(nCoroutines = 1000 * j) {
+                bank.invoke(nCoroutines = 1000 * j) {
                     bank.deposit(j)
                     bank.withdraw(j)
                 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Backtracking
+import dev.shtanko.algorithms.annotations.Recursive
 import java.util.LinkedList
 
 /**
  * 40. Combination Sum II
- * @link https://leetcode.com/problems/combination-sum-ii/
+ * @see <a href="https://leetcode.com/problems/combination-sum-ii/">Source</a>
  */
 fun interface CombinationSum2 {
-    fun perform(candidates: IntArray, target: Int): List<List<Int>>
+    operator fun invoke(candidates: IntArray, target: Int): List<List<Int>>
 }
 
+@Backtracking
 class BacktrackingWithCounters : CombinationSum2 {
-    override fun perform(candidates: IntArray, target: Int): List<List<Int>> {
+    override operator fun invoke(candidates: IntArray, target: Int): List<List<Int>> {
         // container to hold the final combinations
         val results: MutableList<List<Int>> = ArrayList()
         val comb = LinkedList<Int>()
@@ -83,8 +86,9 @@ class BacktrackingWithCounters : CombinationSum2 {
     }
 }
 
+@Backtracking
 class BacktrackingWithIndex : CombinationSum2 {
-    override fun perform(candidates: IntArray, target: Int): List<List<Int>> {
+    override operator fun invoke(candidates: IntArray, target: Int): List<List<Int>> {
         val results: MutableList<List<Int>> = ArrayList()
         val comb = LinkedList<Int>()
         candidates.sort()
@@ -114,4 +118,33 @@ class BacktrackingWithIndex : CombinationSum2 {
             comb.removeLast()
         }
     }
+}
+
+@Recursive
+class CombinationSum2Compact : CombinationSum2 {
+    override fun invoke(candidates: IntArray, target: Int): List<List<Int>> {
+        val res = mutableListOf<List<Int>>()
+        val root = TreeNode(target)
+        fun helper(
+            candidates: IntArray,
+            node: TreeNode,
+        ): List<List<Int>> {
+            if (node.target == 0) {
+                res.add(node.path)
+                return res
+            }
+
+            for (i in node.startIndex until candidates.size) {
+                val currentNum = candidates[i]
+                val remainingTarget = node.target - currentNum
+                if (remainingTarget < 0) break
+                val child = TreeNode(remainingTarget, i + 1, node.path + currentNum)
+                helper(candidates, child)
+            }
+            return res
+        }
+        return helper(candidates.sorted().toIntArray(), root).toSet().toList()
+    }
+
+    data class TreeNode(val target: Int, val startIndex: Int = 0, val path: List<Int> = emptyList())
 }

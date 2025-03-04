@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import java.util.LinkedList
 
 /**
  * 491. Increasing Subsequences
- * @link https://leetcode.com/problems/increasing-subsequences/
+ * @see <a href="https://leetcode.com/problems/increasing-subsequences/">Source</a>
  */
 fun interface IncreasingSubsequences {
     fun findSubsequences(nums: IntArray): List<List<Int>>
@@ -38,7 +38,7 @@ class IncreasingSubsequencesBacktracking : IncreasingSubsequences {
         val used: MutableSet<Int> = HashSet()
         for (i in index until nums.size) {
             if (used.contains(nums[i])) continue
-            if (list.size == 0 || nums[i] >= list.peekLast()) {
+            if (list.isEmpty() || nums[i] >= list.peekLast()) {
                 used.add(nums[i])
                 list.add(nums[i])
                 helper(list, i + 1, nums, res)

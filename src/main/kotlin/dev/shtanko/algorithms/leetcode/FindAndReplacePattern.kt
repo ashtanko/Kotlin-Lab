@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * Find and Replace Pattern
- * @link https://leetcode.com/problems/find-and-replace-pattern/
+ * @see <a href="https://leetcode.com/problems/find-and-replace-pattern/">Source</a>
  */
-interface FindAndReplacePattern {
-    fun perform(words: Array<String>, pattern: String): List<String>
+fun interface FindAndReplacePattern {
+    operator fun invoke(words: Array<String>, pattern: String): List<String>
 }
 
 class FRPTwoMaps : FindAndReplacePattern {
-    override fun perform(words: Array<String>, pattern: String): List<String> {
+    override operator fun invoke(words: Array<String>, pattern: String): List<String> {
         val ans: MutableList<String> = ArrayList()
         for (word in words) if (match(word, pattern)) ans.add(word)
         return ans
@@ -46,7 +48,7 @@ class FRPTwoMaps : FindAndReplacePattern {
 }
 
 class FRPOneMap : FindAndReplacePattern {
-    override fun perform(words: Array<String>, pattern: String): List<String> {
+    override operator fun invoke(words: Array<String>, pattern: String): List<String> {
         val ans: MutableList<String> = ArrayList()
         for (word in words) if (match(word, pattern)) ans.add(word)
         return ans
@@ -60,15 +62,11 @@ class FRPOneMap : FindAndReplacePattern {
             if (!m.containsKey(w)) m[w] = p
             if (m[w] != p) return false
         }
-        val seen = BooleanArray(ARRAY_SIZE)
+        val seen = BooleanArray(ALPHABET_LETTERS_COUNT)
         for (p in m.values) {
             if (seen[p?.minus('a')!!]) return false
             seen[p - 'a'] = true
         }
         return true
-    }
-
-    companion object {
-        private const val ARRAY_SIZE = 26
     }
 }

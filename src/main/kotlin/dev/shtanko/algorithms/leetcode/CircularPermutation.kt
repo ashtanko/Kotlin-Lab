@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Bitwise
+
 /**
  * 1238. Circular Permutation in Binary Representation
- * @link https://leetcode.com/problems/circular-permutation-in-binary-representation/
+ * @see <a href="https://leetcode.com/problems/circular-permutation-in-binary-representation/">Source</a>
  */
 fun interface CircularPermutation {
-    fun invoke(n: Int, start: Int): List<Int>
+    operator fun invoke(n: Int, start: Int): List<Int>
 }
 
+@Bitwise
 class CircularPermutationGrayCode : CircularPermutation {
-    override fun invoke(n: Int, start: Int): List<Int> {
+    override operator fun invoke(n: Int, start: Int): List<Int> {
         val res: MutableList<Int> = ArrayList()
         for (i in 0 until (1 shl n)) {
             res.add(start xor i xor (i shr 1))
@@ -35,7 +38,7 @@ class CircularPermutationGrayCode : CircularPermutation {
 }
 
 class OneBitDiffPermutation : CircularPermutation {
-    override fun invoke(n: Int, start: Int): List<Int> {
+    override operator fun invoke(n: Int, start: Int): List<Int> {
         val res: MutableList<Int> = ArrayList()
         val tmp = genOneBitDiffPermutation(n) // generate one bit diff permutations
 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class TwoSumTest<out T : TwoSumStrategy>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class TwoSumTest<out T : TwoSumStrategy>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -63,6 +63,16 @@ internal abstract class TwoSumTest<out T : TwoSumStrategy>(private val strategy:
                 6,
                 intArrayOf(0, 1),
             ),
+            Arguments.of(
+                intArrayOf(3, 2, 3),
+                6,
+                intArrayOf(0, 2),
+            ),
+            Arguments.of(
+                intArrayOf(3, 2, 4),
+                6,
+                intArrayOf(1, 2),
+            ),
         )
     }
 
@@ -70,13 +80,13 @@ internal abstract class TwoSumTest<out T : TwoSumStrategy>(private val strategy:
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `two sum test`(array: IntArray, target: Int, expected: IntArray) {
         measureTime("Two sum array ${array.toList()}") {
-            val actual = strategy.perform(array, target)
+            val actual = strategy.invoke(array, target)
             assertThat(actual).isEqualTo(expected)
         }
     }
 }
 
-internal class TwoSumBruteForceTest : TwoSumTest<TwoSumBruteForce>(TwoSumBruteForce())
-internal class TwoSumTwoPassHashTableTest : TwoSumTest<TwoSumTwoPassHashTable>(TwoSumTwoPassHashTable())
-internal class TwoSumOnePassHashTableTest : TwoSumTest<TwoSumOnePassHashTable>(TwoSumOnePassHashTable())
-internal class TwoSumOneHashMapTest : TwoSumTest<TwoSumOneHashMap>(TwoSumOneHashMap())
+class TwoSumBruteForceTest : TwoSumTest<TwoSumStrategy>(TwoSumBruteForce())
+class TwoSumTwoPassHashTableTest : TwoSumTest<TwoSumStrategy>(TwoSumTwoPassHashTable())
+class TwoSumOnePassHashTableTest : TwoSumTest<TwoSumStrategy>(TwoSumOnePassHashTable())
+class TwoSumOneHashMapTest : TwoSumTest<TwoSumStrategy>(TwoSumOneHashMap())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * 1525. Number of Good Ways to Split a String
- * @link https://leetcode.com/problems/number-of-good-ways-to-split-a-string/
+ * @see <a href="https://leetcode.com/problems/number-of-good-ways-to-split-a-string/">Source</a>
  */
-interface NumSplits {
-    fun perform(str: String): Int
+fun interface NumSplits {
+    operator fun invoke(str: String): Int
 }
 
 class NumSplitsSplitPointer : NumSplits {
-    override fun perform(str: String): Int {
-        val l = IntArray(SIZE)
-        val r = IntArray(SIZE)
+    override operator fun invoke(str: String): Int {
+        val l = IntArray(ALPHABET_LETTERS_COUNT)
+        val r = IntArray(ALPHABET_LETTERS_COUNT)
         var dL = 0
         var dR = 0
         var res = 0
@@ -40,14 +42,10 @@ class NumSplitsSplitPointer : NumSplits {
         }
         return res
     }
-
-    companion object {
-        private const val SIZE = 26
-    }
 }
 
 class NumSplitsMap : NumSplits {
-    override fun perform(str: String): Int {
+    override operator fun invoke(str: String): Int {
         val left: HashMap<Char, Int> = HashMap()
         val right: HashMap<Char, Int> = HashMap()
 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class BitwiseComplementTest<out T : BitwiseComplement>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class BitwiseComplementTest<out T : BitwiseComplement>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 0,
@@ -47,27 +47,47 @@ internal abstract class BitwiseComplementTest<out T : BitwiseComplement>(private
                 10_000,
                 6383,
             ),
+            Arguments.of(
+                1_000_000,
+                48575,
+            ),
+            Arguments.of(
+                1_000_000_000,
+                73741823,
+            ),
+            Arguments.of(
+                1_073_741_823,
+                0,
+            ),
+            Arguments.of(
+                1_073_741_824,
+                1073741823,
+            ),
+            Arguments.of(
+                2_147_483_647,
+                0,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `bitwise complement test`(n: Int, expected: Int) {
-        val actual = strategy.perform(n)
+    fun `bitwise complement test`(num: Int, expected: Int) {
+        val actual = strategy.invoke(num)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class BitwiseComplementFlipBitTest :
+class BitwiseComplementFlipBitTest :
     BitwiseComplementTest<BitwiseComplementFlipBit>(BitwiseComplementFlipBit())
 
-internal class BitwiseComplementBitmaskTest :
+class BitwiseComplementBitmaskTest :
     BitwiseComplementTest<BitwiseComplementBitmask>(BitwiseComplementBitmask())
 
-internal class BitwiseComplementBuiltInFuncTest :
+class BitwiseComplementBuiltInFuncTest :
     BitwiseComplementTest<BitwiseComplementBuiltInFunc>(BitwiseComplementBuiltInFunc())
 
-internal class HighestOneBitTest : BitwiseComplementTest<HighestOneBit>(HighestOneBit())
+class HighestOneBitTest : BitwiseComplementTest<HighestOneBit>(HighestOneBit())
 
-internal class BitwiseComplementBruteForceTest :
+class BitwiseComplementBruteForceTest :
     BitwiseComplementTest<BitwiseComplementBruteForce>(BitwiseComplementBruteForce())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,40 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Hard
+
+/**
+ * 124. Binary Tree Maximum Path Sum
+ * @see <a href="https://leetcode.com/problems/binary-tree-maximum-path-sum/">Source</a>
+ */
+@Hard("https://leetcode.com/problems/binary-tree-maximum-path-sum")
+@Recursive
 object BinaryTreeMaximumPathSum {
 
+    /**
+     * The maximum value found so far.
+     */
     private var maxValue = Int.MIN_VALUE
 
-    internal fun TreeNode?.maxPathSum(): Int {
+    /**
+     * Extension function on TreeNode? to calculate the maximum path sum in the binary tree.
+     * The path may start and end at any node in the tree.
+     *
+     * @return Int The maximum path sum in the binary tree.
+     */
+    fun TreeNode?.maxPathSum(): Int {
         maxValue = Int.MIN_VALUE
         this.maxPathDown()
         return maxValue
     }
 
+    /**
+     * Extension function on TreeNode? to calculate the maximum path sum from the current node down.
+     * The path may start at the current node and end at any node in the tree.
+     *
+     * @return Int The maximum path sum from the current node down.
+     */
     private fun TreeNode?.maxPathDown(): Int {
         if (this == null) return 0
         val left = 0.coerceAtLeast(this.left.maxPathDown())

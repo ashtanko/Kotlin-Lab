@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -51,6 +51,16 @@ abstract class CheckCompletenessOfBinaryTreeTest<out T : CheckCompletenessOfBina
                 },
                 false,
             ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4)
+                        right = TreeNode(5)
+                    }
+                    right = TreeNode(3)
+                },
+                true,
+            ),
         )
     }
 
@@ -64,5 +74,6 @@ abstract class CheckCompletenessOfBinaryTreeTest<out T : CheckCompletenessOfBina
 
 class CheckCompletenessOfBinaryTreeBFSTest :
     CheckCompletenessOfBinaryTreeTest<CheckCompletenessOfBinaryTree>(CheckCompletenessOfBinaryTreeBFS())
+
 class CheckCompletenessOfBinaryTreeDFSTest :
     CheckCompletenessOfBinaryTreeTest<CheckCompletenessOfBinaryTree>(CheckCompletenessOfBinaryTreeDFS())

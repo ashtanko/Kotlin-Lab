@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,14 @@ import kotlin.math.min
 
 /**
  * 2492. Minimum Score of a Path Between Two Cities
- * @link https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/
+ * @see <a href="https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/">Source</a>
  */
-interface MinScore {
-    fun perform(n: Int, roads: Array<IntArray>): Int
+fun interface MinScore {
+    operator fun invoke(n: Int, roads: Array<IntArray>): Int
 }
 
 class MinScoreBFS : MinScore {
-    override fun perform(n: Int, roads: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, roads: Array<IntArray>): Int {
         var ans = Int.MAX_VALUE
         val gr: MutableList<MutableList<Pair<Int, Int>>> = ArrayList()
         for (i in 0 until n + 1) {
@@ -45,7 +45,7 @@ class MinScoreBFS : MinScore {
         val q: Queue<Int> = LinkedList()
         q.add(1)
         vis[1] = 1
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val node: Int = q.poll()
             for (pair in gr[node]) {
                 val v: Int = pair.first
@@ -65,7 +65,7 @@ class MinScoreBFS : MinScore {
 class MinScoreDFS : MinScore {
     private var ans = Int.MAX_VALUE
 
-    override fun perform(n: Int, roads: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, roads: Array<IntArray>): Int {
         val adj: MutableList<MutableList<IntArray>> = ArrayList()
         for (i in 0..n) adj.add(ArrayList())
         for (k in roads) {

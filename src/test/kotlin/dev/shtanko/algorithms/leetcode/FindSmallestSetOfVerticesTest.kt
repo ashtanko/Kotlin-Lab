@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class FindSmallestSetOfVerticesTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class FindSmallestSetOfVerticesTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 6,
@@ -51,13 +51,63 @@ internal class FindSmallestSetOfVerticesTest {
                 ),
                 listOf(0, 2, 3),
             ),
+            Arguments.of(
+                5,
+                listOf(
+                    listOf(0, 1),
+                    listOf(2, 1),
+                    listOf(3, 1),
+                    listOf(4, 1),
+                    listOf(2, 4),
+                ),
+                listOf(0, 2, 3),
+            ),
+            Arguments.of(
+                5,
+                listOf(
+                    listOf(0, 1),
+                    listOf(2, 1),
+                    listOf(3, 1),
+                    listOf(4, 1),
+                    listOf(2, 4),
+                    listOf(4, 3),
+                ),
+                listOf(0, 2),
+            ),
+            Arguments.of(
+                5,
+                listOf(
+                    listOf(0, 1),
+                    listOf(2, 1),
+                    listOf(3, 1),
+                    listOf(4, 1),
+                    listOf(2, 4),
+                    listOf(4, 3),
+                    listOf(3, 2),
+                ),
+                listOf(0),
+            ),
+            Arguments.of(
+                5,
+                listOf(
+                    listOf(0, 1),
+                    listOf(2, 1),
+                    listOf(3, 1),
+                    listOf(4, 1),
+                    listOf(2, 4),
+                    listOf(4, 3),
+                    listOf(3, 2),
+                    listOf(1, 0),
+                ),
+                listOf<Int>(),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `find smallest set of vertices test`(n: Int, edges: List<List<Int>>, expected: List<Int>) {
-        val actual = FindSmallestSetOfVertices.perform(n, edges)
+    fun `find smallest set of vertices test`(num: Int, edges: List<List<Int>>, expected: List<Int>) {
+        val actual = FindSmallestSetOfVertices.invoke(num, edges)
         assertThat(actual, equalTo(expected))
     }
 }

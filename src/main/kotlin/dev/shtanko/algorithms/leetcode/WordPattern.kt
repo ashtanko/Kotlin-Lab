@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 290. Word Pattern
- * @link https://leetcode.com/problems/word-pattern/
+ * @see <a href="https://leetcode.com/problems/word-pattern/">Source</a>
  */
-interface WordPattern {
-    fun perform(pattern: String, s: String): Boolean
+fun interface WordPattern {
+    operator fun invoke(pattern: String, s: String): Boolean
 }
 
 class WordPatternSimple : WordPattern {
-    override fun perform(pattern: String, s: String): Boolean {
+    override operator fun invoke(pattern: String, s: String): Boolean {
         val words: Array<String> = s.split(" ").toTypedArray()
         if (words.size != pattern.length) {
             return false

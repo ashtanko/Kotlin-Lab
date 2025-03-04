@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,25 +20,30 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
 
-internal abstract class CountVowelsPermutationTest<out T : CountVowelsPermutationStrategy>(private val strategy: T) {
+abstract class CountVowelsPermutationTest<out T : CountVowelsPermutationStrategy>(private val strategy: T) {
 
     @TestFactory
     fun `count vowel permutation strategies test`() = listOf(
         1 to 5,
         2 to 10,
         5 to 68,
+        10 to 1739,
+        50 to 227130014,
     ).map { (input, expected) ->
-        DynamicTest.dynamicTest("dp $strategy count vowel permutation of $input then get $expected") {
-            Assertions.assertEquals(expected, strategy.perform(input))
+        DynamicTest.dynamicTest("$strategy count vowel permutation of $input then get $expected") {
+            Assertions.assertEquals(expected, strategy.invoke(input))
         }
     }
 }
 
-internal class CountVowelsPermutationBottomUpTest :
-    CountVowelsPermutationTest<CountVowelsPermutation.BottomUp>(CountVowelsPermutation.BottomUp())
+class CountVowelsPermutationBottomUpTest :
+    CountVowelsPermutationTest<CountVowelsPermutationStrategy>(CountVowelsPermutation.BottomUp())
 
-internal class CountVowelsPermutationOptimizedSpaceTest :
-    CountVowelsPermutationTest<CountVowelsPermutation.OptimizedSpace>(CountVowelsPermutation.OptimizedSpace())
+class CountVowelsPermutationOptimizedSpaceTest :
+    CountVowelsPermutationTest<CountVowelsPermutationStrategy>(CountVowelsPermutation.OptimizedSpace())
 
-internal class CountVowelsPermutationTopDownTest :
-    CountVowelsPermutationTest<CountVowelsPermutation.TopDown>(CountVowelsPermutation.TopDown())
+class CountVowelsPermutationTopDownTest :
+    CountVowelsPermutationTest<CountVowelsPermutationStrategy>(CountVowelsPermutation.TopDown())
+
+class CountVowelsPermutationMatrixTest :
+    CountVowelsPermutationTest<CountVowelsPermutationStrategy>(CountVowelsPermutation.Matrix())

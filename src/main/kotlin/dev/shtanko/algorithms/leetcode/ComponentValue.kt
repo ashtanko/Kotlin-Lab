@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2440. Create Components With Same Value
- * @link https://leetcode.com/problems/create-components-with-same-value/
+ * @see <a href="https://leetcode.com/problems/create-components-with-same-value/">Source</a>
  */
 fun interface ComponentValue {
-    fun perform(nums: IntArray, edges: Array<IntArray>): Int
+    operator fun invoke(nums: IntArray, edges: Array<IntArray>): Int
 }
 
 class ComponentValueImpl : ComponentValue {
-    override fun perform(nums: IntArray, edges: Array<IntArray>): Int {
+    override operator fun invoke(nums: IntArray, edges: Array<IntArray>): Int {
         val n = nums.size
         val graph: Array<MutableList<Int>> = Array(n) { ArrayList() }
         for (i in 0 until n) {

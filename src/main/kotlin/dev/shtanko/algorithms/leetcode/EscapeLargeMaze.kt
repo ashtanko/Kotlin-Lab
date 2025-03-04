@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,17 @@ import java.util.Queue
 
 /**
  * 1036. Escape a Large Maze
- * @link https://leetcode.com/problems/escape-a-large-maze/description/
+ * @see <a href="https://leetcode.com/problems/escape-a-large-maze">Source</a>
  */
-interface EscapeLargeMaze {
-    fun isEscapePossible(blocked: Array<IntArray>, source: IntArray, target: IntArray): Boolean
+fun interface EscapeLargeMaze {
+    operator fun invoke(blocked: Array<IntArray>, source: IntArray, target: IntArray): Boolean
 }
 
 class EscapeLargeMazeBFS : EscapeLargeMaze {
 
     private val dirs = arrayOf(intArrayOf(0, 1), intArrayOf(1, 0), intArrayOf(-1, 0), intArrayOf(0, -1))
 
-    override fun isEscapePossible(blocked: Array<IntArray>, source: IntArray, target: IntArray): Boolean {
+    override fun invoke(blocked: Array<IntArray>, source: IntArray, target: IntArray): Boolean {
         val blocks: MutableSet<String> = HashSet()
         for (block in blocked) {
             blocks.add(block[0].toString() + ":" + block[1])
@@ -44,7 +44,7 @@ class EscapeLargeMazeBFS : EscapeLargeMaze {
         seen.add(source[0].toString() + ":" + source[1])
         val bfs: Queue<IntArray> = LinkedList()
         bfs.offer(source)
-        while (!bfs.isEmpty()) {
+        while (bfs.isNotEmpty()) {
             val cur: IntArray = bfs.poll()
             for (dir in dirs) {
                 val nextX = cur[0] + dir[0]

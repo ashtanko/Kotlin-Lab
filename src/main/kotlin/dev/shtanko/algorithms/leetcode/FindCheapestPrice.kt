@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,14 +23,14 @@ import kotlin.math.min
 
 /**
  * 787. Cheapest Flights Within K Stops
- * @link https://leetcode.com/problems/cheapest-flights-within-k-stops/
+ * @see <a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/">Source</a>
  */
-interface FindCheapestPrice {
-    fun perform(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int
+fun interface FindCheapestPrice {
+    operator fun invoke(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int
 }
 
 class FindCheapestPriceBFS : FindCheapestPrice {
-    override fun perform(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
+    override operator fun invoke(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
         val map: MutableMap<Int, MutableList<IntArray>> = HashMap()
         for (i in flights) {
             map.putIfAbsent(i[0], ArrayList())
@@ -40,7 +40,7 @@ class FindCheapestPriceBFS : FindCheapestPrice {
         val q: Queue<IntArray> = LinkedList()
         q.offer(intArrayOf(src, 0))
         var ans = Int.MAX_VALUE
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val size = q.size
             for (i in 0 until size) {
                 val curr = q.poll()
@@ -61,7 +61,7 @@ class FindCheapestPriceBFS : FindCheapestPrice {
 }
 
 class FindCheapestPriceBellmanFord : FindCheapestPrice {
-    override fun perform(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
+    override operator fun invoke(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
         var cost = IntArray(n) { Int.MAX_VALUE }
         cost[src] = 0
         for (i in 0..k) {
@@ -80,7 +80,7 @@ class FindCheapestPriceBellmanFord : FindCheapestPrice {
 }
 
 class FindCheapestPriceDijkstra : FindCheapestPrice {
-    override fun perform(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
+    override operator fun invoke(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
         val map: MutableMap<Int, MutableList<IntArray>> = HashMap()
         for (f in flights) {
             map.putIfAbsent(f[0], ArrayList())
@@ -88,7 +88,7 @@ class FindCheapestPriceDijkstra : FindCheapestPrice {
         }
         val q: PriorityQueue<IntArray> = PriorityQueue { o1, o2 -> o1[0].compareTo(o2[0]) }
         q.offer(intArrayOf(0, src, k + 1))
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val c: IntArray = q.poll()
             val cost = c[0]
             val curr = c[1]

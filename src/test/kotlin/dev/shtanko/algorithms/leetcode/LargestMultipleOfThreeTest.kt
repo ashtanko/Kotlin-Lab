@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,27 +16,40 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class LargestMultipleOfThreeTest {
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<IntArray, String>> {
-            return listOf(
-                intArrayOf(8, 1, 9) to "981",
-                intArrayOf(8, 6, 7, 1, 0) to "8760",
-                intArrayOf(1) to "",
-                intArrayOf(0, 0, 0, 0, 0, 0) to "0",
-            )
-        }
+class LargestMultipleOfThreeTest {
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                intArrayOf(8, 1, 9),
+                "981",
+            ),
+            Arguments.of(
+                intArrayOf(8, 6, 7, 1, 0),
+                "8760",
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                "",
+            ),
+            Arguments.of(
+                intArrayOf(0, 0, 0, 0, 0, 0),
+                "0",
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `largest multiple of three test`(testCase: Pair<IntArray, String>) {
-        val (digits, expected) = testCase
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `largest multiple of three test`(digits: IntArray, expected: String) {
         val actual = largestMultipleOfThree(digits)
         assertEquals(expected, actual)
     }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,8 +29,8 @@ private const val BASKET_SIZE = 5000
  * You also have a basket that can carry up to 5000 units of weight.
  * Return the maximum number of apples you can put in the basket.
  */
-interface MaxNumberOfApples {
-    fun perform(arr: IntArray): Int
+fun interface MaxNumberOfApples {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
@@ -38,7 +38,7 @@ interface MaxNumberOfApples {
  * Space Complexity: O(1).
  */
 class MaxNumberOfApplesSort : MaxNumberOfApples {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         var apples = 0
         var units = 0
@@ -58,7 +58,7 @@ class MaxNumberOfApplesSort : MaxNumberOfApples {
  * Space Complexity: O(1).
  */
 class MaxNumberOfApplesMinHeap : MaxNumberOfApples {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val heap: Queue<Int> = PriorityQueue()
         var apples = 0
         var units = 0
@@ -81,7 +81,7 @@ class MaxNumberOfApplesMinHeap : MaxNumberOfApples {
  * Space Complexity: O(W). This is because we initialize an array bucket with the size of max(arr).
  */
 class MaxNumberOfApplesBucketSort : MaxNumberOfApples {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         // initialize the bucket to store all elements
         var size = -1
         for (weight in arr) {

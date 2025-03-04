@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,65 +16,73 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
 import kotlin.math.max
 
 /**
  * 140. Word Break II
- * @link https://leetcode.com/problems/word-break-ii/
+ * @see <a href="https://leetcode.com/problems/word-break-ii/">Source</a>
  */
-interface WordBreak2 {
-    fun perform(s: String, wordDict: List<String>): List<String>
+fun interface WordBreak2 {
+    operator fun invoke(str: String, wordDict: List<String>): List<String>
 }
 
+@DFS
 class WordBreak2DPDFS : WordBreak2 {
-    override fun perform(s: String, wordDict: List<String>): List<String> {
-        val starts: Array<MutableList<Int>?> = arrayOfNulls(s.length + 1)
+    override operator fun invoke(str: String, wordDict: List<String>): List<String> {
+        val wordStartIndices: Array<MutableList<Int>?> = arrayOfNulls(str.length + 1)
 
-        starts[0] = ArrayList()
+        wordStartIndices[0] = ArrayList()
 
-        val maxLen = getMaxLen(wordDict)
-        for (i in 1..s.length) {
+        val maxWordLength = getMaxWordLength(wordDict)
+        for (i in 1..str.length) {
             var j = i - 1
-            while (j >= i - maxLen && j >= 0) {
-                if (starts[j] == null) {
+            while (j >= i - maxWordLength && j >= 0) {
+                if (wordStartIndices[j] == null) {
                     j--
                     continue
                 }
-                val word = s.substring(j, i)
+                val word = str.substring(j, i)
                 if (wordDict.contains(word)) {
-                    if (starts[i] == null) {
-                        starts[i] = ArrayList()
+                    if (wordStartIndices[i] == null) {
+                        wordStartIndices[i] = ArrayList()
                     }
-                    starts[i]?.add(j)
+                    wordStartIndices[i]?.add(j)
                 }
                 j--
             }
         }
 
-        val rst: MutableList<String> = ArrayList()
-        if (starts[s.length] == null) {
-            return rst
+        val results: MutableList<String> = ArrayList()
+        if (wordStartIndices[str.length] == null) {
+            return results
         }
 
-        dfs(rst, "", s, starts, s.length)
-        return rst
+        depthFirstSearch(results, "", str, wordStartIndices, str.length)
+        return results
     }
 
-    private fun dfs(rst: MutableList<String>, path: String, s: String, starts: Array<MutableList<Int>?>, end: Int) {
+    private fun depthFirstSearch(
+        results: MutableList<String>,
+        path: String,
+        inputString: String,
+        wordStartIndices: Array<MutableList<Int>?>,
+        end: Int,
+    ) {
         if (end == 0) {
-            rst.add(path.substring(1))
+            results.add(path.substring(1))
             return
         }
-        for (start in starts[end] ?: emptyList()) {
-            val word = s.substring(start, end)
-            dfs(rst, " $word$path", s, starts, start)
+        for (start in wordStartIndices[end] ?: emptyList()) {
+            val word = inputString.substring(start, end)
+            depthFirstSearch(results, " $word$path", inputString, wordStartIndices, start)
         }
     }
 
-    private fun getMaxLen(wordDict: List<String>): Int {
+    private fun getMaxWordLength(wordDictionary: List<String>): Int {
         var max = 0
-        for (s in wordDict) {
-            max = max(max, s.length)
+        for (word in wordDictionary) {
+            max = max(max, word.length)
         }
         return max
     }
@@ -84,68 +92,71 @@ class WordBreak2DPDFS : WordBreak2 {
  * Method 3: DP Prunning + Backtracking
  */
 class WordBreak2Backtracking : WordBreak2 {
-    override fun perform(s: String, wordDict: List<String>): List<String> {
-        val rst: MutableList<String> = ArrayList()
-        val canBreak = BooleanArray(s.length) { true }
-        val sb = StringBuilder()
-        dfs(rst, sb, s, wordDict, canBreak, 0)
-        return rst
+    override operator fun invoke(str: String, wordDict: List<String>): List<String> {
+        val results: MutableList<String> = ArrayList()
+        val canBreak = BooleanArray(str.length) { true }
+        val stringBuilder = StringBuilder()
+        depthFirstSearch(results, stringBuilder, str, wordDict, canBreak, 0)
+        return results
     }
 
-    private fun dfs(
-        rst: MutableList<String>,
-        sb: StringBuilder,
-        s: String,
-        dict: List<String>,
+    private fun depthFirstSearch(
+        results: MutableList<String>,
+        stringBuilder: StringBuilder,
+        inputString: String,
+        wordDictionary: List<String>,
         canBreak: BooleanArray,
-        start: Int,
+        startIndex: Int,
     ) {
-        if (start == s.length) {
-            rst.add(sb.substring(1))
+        if (startIndex == inputString.length) {
+            results.add(stringBuilder.substring(1))
             return
         }
-        if (!canBreak[start]) {
+        if (!canBreak[startIndex]) {
             return
         }
-        for (i in start + 1..s.length) {
-            val word = s.substring(start, i)
-            if (!dict.contains(word)) {
+        for (i in startIndex + 1..inputString.length) {
+            val word = inputString.substring(startIndex, i)
+            if (!wordDictionary.contains(word)) {
                 continue
             }
-            val sbBeforeAdd = sb.length
-            sb.append(" $word")
-            val rstBeforeDFS = rst.size
-            dfs(rst, sb, s, dict, canBreak, i)
-            if (rst.size == rstBeforeDFS) {
+            val stringBuilderLengthBeforeAdd = stringBuilder.length
+            stringBuilder.append(" $word")
+            val resultsSizeBeforeDFS = results.size
+            depthFirstSearch(results, stringBuilder, inputString, wordDictionary, canBreak, i)
+            if (results.size == resultsSizeBeforeDFS) {
                 canBreak[i] = false
             }
-            sb.delete(sbBeforeAdd, sb.length)
+            stringBuilder.delete(stringBuilderLengthBeforeAdd, stringBuilder.length)
         }
     }
 }
 
+@DFS
 class WordBreak2DFS : WordBreak2 {
-    override fun perform(s: String, wordDict: List<String>): List<String> {
-        return backtrack(s, wordDict, HashMap())
+    override operator fun invoke(str: String, wordDict: List<String>): List<String> {
+        return depthFirstSearch(str, wordDict, HashMap())
     }
 
-    // backtrack returns an array including all substrings derived from s.
-    private fun backtrack(s: String, wordDict: List<String>, mem: MutableMap<String, List<String>>): List<String> {
-        if (mem.containsKey(s)) return mem[s] ?: emptyList()
-        val result: MutableList<String> = ArrayList()
-        for (word in wordDict) if (s.startsWith(word)) {
-            val next = s.substring(word.length)
-            if (next.isEmpty()) {
-                result.add(word)
+    // backtrack returns an array including all substrings derived from str.
+    private fun depthFirstSearch(
+        inputString: String,
+        wordDictionary: List<String>,
+        memoizationMap: MutableMap<String, List<String>>,
+    ): List<String> {
+        if (memoizationMap.containsKey(inputString)) return memoizationMap[inputString] ?: emptyList()
+        val results: MutableList<String> = ArrayList()
+        for (word in wordDictionary) if (inputString.startsWith(word)) {
+            val remainingString = inputString.substring(word.length)
+            if (remainingString.isEmpty()) {
+                results.add(word)
             } else {
-                for (sub in backtrack(next, wordDict, mem)) {
-                    result.add(
-                        "$word $sub",
-                    )
+                for (substring in depthFirstSearch(remainingString, wordDictionary, memoizationMap)) {
+                    results.add("$word $substring")
                 }
             }
         }
-        mem[s] = result
-        return result
+        memoizationMap[inputString] = results
+        return results
     }
 }

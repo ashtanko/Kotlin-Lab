@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -52,7 +52,7 @@ abstract class MinimumFinishTimeTest<out T : MinimumFinishTime>(private val stra
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `minimum finish time test`(tires: Array<IntArray>, changeTime: Int, numLaps: Int, expected: Int) {
-        val actual = strategy.perform(tires, changeTime, numLaps)
+        val actual = strategy.invoke(tires, changeTime, numLaps)
         assertThat(actual).isEqualTo(expected)
     }
 }

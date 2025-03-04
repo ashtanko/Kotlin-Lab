@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2147. Number of Ways to Divide a Long Corridor
- * @link https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/
+ * @see <a href="https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/">Source</a>
  */
-interface NumberOfWays {
-    fun perform(corridor: String): Int
+fun interface NumberOfWays {
+    operator fun invoke(corridor: String): Int
 }
 
 class NumberOfWaysDP : NumberOfWays {
-    override fun perform(corridor: String): Int {
+    override operator fun invoke(corridor: String): Int {
         var res: Long = 1
         var j: Long = 0
         var k: Long = 0

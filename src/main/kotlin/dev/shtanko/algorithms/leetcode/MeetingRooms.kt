@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,7 +19,7 @@ package dev.shtanko.algorithms.leetcode
 import kotlin.math.max
 import kotlin.math.min
 
-interface MeetingRoomsStrategy {
+fun interface MeetingRoomsStrategy {
     fun canAttendMeetings(intervals: Array<IntArray>): Boolean
 }
 
@@ -46,7 +46,6 @@ class MeetingRoomsSorting : MeetingRoomsStrategy {
         intervals.sortWith { a, b ->
             a[0].compareTo(b[0])
         }
-        // Arrays.sort(intervals) { a, b -> a[0].compareTo(b[0]) }
         for (i in 0 until intervals.size - 1) {
             if (intervals[i][1] > intervals[i + 1][0]) {
                 return false

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,15 @@ import kotlin.math.min
 
 /**
  * 2035. Partition Array Into Two Arrays to Minimize Sum Difference
- * @link https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/
+ * @see <a href="https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference">
+ *     Source</a>
  */
-interface MinimizeSumDifference {
-    fun perform(nums: IntArray): Int
+fun interface MinimizeSumDifference {
+    operator fun invoke(nums: IntArray): Int
 }
 
 class MinimizeSumDifferenceSolution : MinimizeSumDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         if (n == 2) return abs(nums[1] - nums[0])
         val lists1 = generate(nums.copyOfRange(0, n / 2))
@@ -80,7 +81,7 @@ class MinimizeSumDifferenceSolution : MinimizeSumDifference {
 }
 
 class MinimizeSumDifferenceTree : MinimizeSumDifference {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val n: Int = nums.size
         var sum = 0
         for (i in nums) {

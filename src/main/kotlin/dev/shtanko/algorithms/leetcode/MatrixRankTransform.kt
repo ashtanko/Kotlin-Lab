@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.max
 
 /**
  * 1632. Rank Transform of a Matrix
- * @link https://leetcode.com/problems/rank-transform-of-a-matrix/
+ * @see <a href="https://leetcode.com/problems/rank-transform-of-a-matrix/">Source</a>
  */
-interface MatrixRankTransform {
-    fun perform(matrix: Array<IntArray>): Array<IntArray>
+fun interface MatrixRankTransform {
+    operator fun invoke(matrix: Array<IntArray>): Array<IntArray>
 }
 
 class MatrixRankTransformMap : MatrixRankTransform {
-    override fun perform(matrix: Array<IntArray>): Array<IntArray> {
+    override operator fun invoke(matrix: Array<IntArray>): Array<IntArray> {
         val m: Int = matrix.size
         val n: Int = matrix[0].size
         val map = TreeMap<Int, MutableList<IntArray>>()

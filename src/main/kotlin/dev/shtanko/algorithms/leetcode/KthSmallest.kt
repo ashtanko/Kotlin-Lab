@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,10 +22,10 @@ import kotlin.math.min
 
 /**
  * Kth Smallest Element in a Sorted Matrix
- * @link https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix
+ * @see <a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix">Source</a>
  */
-interface KthSmallest {
-    fun perform(matrix: Array<IntArray>, k: Int): Int
+fun interface KthSmallest {
+    operator fun invoke(matrix: Array<IntArray>, k: Int): Int
 }
 
 sealed class KthSmallestStrategy {
@@ -34,7 +34,7 @@ sealed class KthSmallestStrategy {
      * Space Complexity: O(X) which is occupied by the heap.
      */
     object MinHeap : KthSmallest, KthSmallestStrategy() {
-        override fun perform(matrix: Array<IntArray>, k: Int): Int {
+        override operator fun invoke(matrix: Array<IntArray>, k: Int): Int {
             val priorityQueue = PriorityQueue<Pair<Int, Int>>(compareBy { it.first })
             val indices = MutableList(matrix.size) { 0 }
             matrix.indices.forEach { priorityQueue.add(Pair(matrix[it][indices[it]++], it)) }
@@ -55,7 +55,7 @@ sealed class KthSmallestStrategy {
      * Space Complexity: O(1)
      */
     object BinarySearch : KthSmallest, KthSmallestStrategy() {
-        override fun perform(matrix: Array<IntArray>, k: Int): Int {
+        override operator fun invoke(matrix: Array<IntArray>, k: Int): Int {
             val n: Int = matrix.size
             var start = matrix[0][0]
             var end = matrix[n - 1][n - 1]

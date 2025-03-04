@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import java.util.Stack
 
 /**
  * 1047. Remove All Adjacent Duplicates In String
- * @link https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
+ * @see <a href="https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/">Source</a>
  */
 fun interface RemoveAllAdjacentDuplicatesStrategy {
-    fun perform(s: String): String
+    operator fun invoke(s: String): String
 }
 
 class RemoveAllAdjacentDuplicatesArray : RemoveAllAdjacentDuplicatesStrategy {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         var i = 0
         val n = s.length
         val res = s.toCharArray()
@@ -45,7 +45,7 @@ class RemoveAllAdjacentDuplicatesArray : RemoveAllAdjacentDuplicatesStrategy {
 }
 
 class RemoveAllAdjacentDuplicatesStack : RemoveAllAdjacentDuplicatesStrategy {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val stack: Stack<Char> = Stack()
         for (c in s) {
             if (stack.isNotEmpty() && stack.peek() == c) {
@@ -62,7 +62,7 @@ class RemoveAllAdjacentDuplicatesStack : RemoveAllAdjacentDuplicatesStrategy {
 
 // Using StringBuilder
 class RemoveAllAdjacentDuplicatesSB : RemoveAllAdjacentDuplicatesStrategy {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val sb = StringBuilder()
         for (c in s) {
             val size = sb.length

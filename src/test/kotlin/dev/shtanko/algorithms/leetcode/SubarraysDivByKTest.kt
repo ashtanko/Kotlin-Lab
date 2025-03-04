@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,16 +37,46 @@ abstract class SubarraysDivByKTest<out T : SubarraysDivByK>(private val strategy
                 9,
                 0,
             ),
+            Arguments.of(
+                intArrayOf(),
+                0,
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                5,
+                17,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                7,
+                10,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                3,
+                27,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                11,
+                5,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                1,
+                55,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `subarrays div by k test`(nums: IntArray, k: Int, expected: Int) {
-        val actual = strategy.perform(nums, k)
+        val actual = strategy.invoke(nums, k)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-class SubarraysDivByKMapTest : SubarraysDivByKTest<SubarraysDivByK>(SubarraysDivByKMap())
-class SubarraysDivByKPrefixSumTest : SubarraysDivByKTest<SubarraysDivByK>(SubarraysDivByKPrefixSum())
+class SubarraysDivByKMapTest : SubarraysDivByKTest<SubarraysDivByK>(SubarraysDivisibleByKUsingMap())
+class SubarraysDivByKPrefixSumTest : SubarraysDivByKTest<SubarraysDivByK>(SubarraysDivisibleByKUsingPrefixSum())

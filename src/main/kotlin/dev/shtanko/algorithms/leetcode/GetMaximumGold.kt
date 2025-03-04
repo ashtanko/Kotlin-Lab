@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.max
 
 /**
  * 1219. Path with Maximum Gold
- * @link https://leetcode.com/problems/path-with-maximum-gold/
+ * @see <a href="https://leetcode.com/problems/path-with-maximum-gold/">Source</a>
  */
 fun interface GetMaximumGold {
-    fun invoke(grid: Array<IntArray>): Int
+    operator fun invoke(grid: Array<IntArray>): Int
 }
 
 class GetMaximumGoldBacktracking : GetMaximumGold {
 
     private val dir = intArrayOf(0, 1, 0, -1, 0)
 
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         if (grid.isEmpty() || grid.first().isEmpty()) return 0
         val m: Int = grid.size
         val n: Int = grid.first().size
@@ -56,7 +56,7 @@ class GetMaximumGoldBacktracking : GetMaximumGold {
 }
 
 class GetMaximumGoldDFS : GetMaximumGold {
-    override fun invoke(grid: Array<IntArray>): Int {
+    override operator fun invoke(grid: Array<IntArray>): Int {
         if (grid.isEmpty()) return 0
         val m: Int = grid.size
         val n: Int = grid[0].size

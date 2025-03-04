@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 
 package dev.shtanko.kotlinlang.generics
 
-internal interface Source<out T> {
+internal fun interface Source<out T> {
     fun nextT(): T
 }
 
@@ -28,7 +28,7 @@ internal class EmptySource : Source<String> {
 
 internal fun demo(s: Source<String>): Source<Any> = s
 
-internal interface Bank<out T> {
+internal fun interface Bank<out T> {
     fun produce(sum: Int): T
 }
 
@@ -48,7 +48,7 @@ internal open class Account
 
 internal class Deposit : Account()
 
-fun copy(from: Array<out Any>, to: Array<Any>) {
+fun copy(from: Array<out Any>, to: Array<Any?>) {
     assert(from.size == to.size)
     for (i in from.indices)
         to[i] = from[i]

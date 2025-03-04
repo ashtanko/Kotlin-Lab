@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * Verifying an Alien Dictionary
- * @link https://leetcode.com/problems/verifying-an-alien-dictionary/
+ * @see <a href="https://leetcode.com/problems/verifying-an-alien-dictionary/">Source</a>
  */
-interface VerifyingAlienDictionary {
-    fun isAlienSorted(words: Array<String>, order: String): Boolean
+fun interface VerifyingAlienDictionary {
+    operator fun invoke(words: Array<String>, order: String): Boolean
 }
 
 class VerifyingAlienDictionaryCompare : VerifyingAlienDictionary {
-    override fun isAlienSorted(words: Array<String>, order: String): Boolean {
-        val orderMap = IntArray(SIZE)
+    override fun invoke(words: Array<String>, order: String): Boolean {
+        val orderMap = IntArray(ALPHABET_LETTERS_COUNT)
         for (i in order.indices) {
             orderMap[order[i] - 'a'] = i
         }
@@ -39,14 +41,14 @@ class VerifyingAlienDictionaryCompare : VerifyingAlienDictionary {
                 if (words[i][j] != words[i + 1][j]) {
                     val currentWordChar: Int = words[i][j] - 'a'
                     val nextWordChar: Int = words[i + 1][j] - 'a'
-                    return if (orderMap[currentWordChar] > orderMap[nextWordChar]) false else break
+                    return if (orderMap[currentWordChar] > orderMap[nextWordChar]) {
+                        false
+                    } else {
+                        break
+                    }
                 }
             }
         }
         return true
-    }
-
-    companion object {
-        private const val SIZE = 26
     }
 }

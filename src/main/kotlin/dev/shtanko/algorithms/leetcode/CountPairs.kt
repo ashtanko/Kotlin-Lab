@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.kotlinlang.functions.sum
+
 /**
  * 1711. Count Good Meals
- * @link https://leetcode.com/problems/count-good-meals/
+ * @see <a href="https://leetcode.com/problems/count-good-meals/">Source</a>
  */
-interface CountPairs {
-    fun perform(deliciousness: IntArray): Int
+fun interface CountPairs {
+    operator fun invoke(deliciousness: IntArray): Int
 }
 
 class CountPairsTwoSum : CountPairs {
-    override fun perform(deliciousness: IntArray): Int {
+    override operator fun invoke(deliciousness: IntArray): Int {
         val map: MutableMap<Int, Int> = HashMap()
         var res: Long = 0
 
@@ -34,7 +37,7 @@ class CountPairsTwoSum : CountPairs {
                 res += map.getOrDefault((1 shl i) - e, 0).toLong()
             }
             map.merge(e, 1) { a: Int, b: Int ->
-                Integer.sum(a, b)
+                sum(a, b)
             }
         }
         return (res % MOD).toInt()

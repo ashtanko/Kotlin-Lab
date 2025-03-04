@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,9 +22,10 @@ import java.util.Queue
 
 /**
  * 1505. Minimum Possible Integer After at Most K Adjacent Swaps On Digits
- * @link https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/
+ * @see <a href="https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/">
+ *     Source</a>
  */
-interface MinIntegerAdjacentSwaps {
+fun interface MinIntegerAdjacentSwaps {
     fun minInteger(num: String, k: Int): String
 }
 
@@ -47,7 +48,7 @@ class MinIntegerAdjacentSwapsImpl : MinIntegerAdjacentSwaps {
             // At each location, try to place 0....9
             for (digit in 0..9) {
                 // is there any occurrence of digit left?
-                if (pqs[digit].size != 0) {
+                if (pqs[digit].isNotEmpty()) {
                     // yes, there is a occurrence of digit at pos
                     val pos: Int = pqs[digit].peek()
                     // Since few numbers already shifted to left, this `pos` might be outdated.
@@ -67,7 +68,7 @@ class MinIntegerAdjacentSwapsImpl : MinIntegerAdjacentSwaps {
         return ans
     }
 
-    internal class SegmentTree(max: Int) {
+    class SegmentTree(max: Int) {
         var nodes: IntArray
         var n: Int
 

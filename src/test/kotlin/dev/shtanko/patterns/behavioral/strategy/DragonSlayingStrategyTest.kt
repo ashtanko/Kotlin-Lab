@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,27 +25,9 @@ import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ArgumentsSource
 
 class DragonSlayingStrategyTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of()
-    }
-
-    companion object {
-        @JvmStatic
-        fun dataProvider() = listOf(
-            Arguments.of(MeleeStrategy(), "With your Excalibur you sever the dragon's head!"),
-            Arguments.of(
-                ProjectileStrategy(),
-                "You shoot the dragon with the magical crossbow and it falls dead on the ground!",
-            ),
-            Arguments.of(
-                SpellStrategy(),
-                "You cast the spell of disintegration and the dragon vaporizes in a pile of dust!",
-            ),
-        )
-    }
 
     private lateinit var appender: InMemoryAppender
 
@@ -63,10 +45,24 @@ class DragonSlayingStrategyTest {
      * Test if executing the strategy gives the correct response.
      */
     @ParameterizedTest
-    @MethodSource("dataProvider")
+    @ArgumentsSource(InputArgumentsProvider::class)
     fun testExecute(strategy: DragonSlayingStrategy, expectedResult: String) {
         strategy.execute()
         assertEquals(expectedResult, appender.lastMessage)
         assertEquals(1, appender.logSize)
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = listOf(
+            Arguments.of(MeleeStrategy(), "With your Excalibur you sever the dragon's head!"),
+            Arguments.of(
+                ProjectileStrategy(),
+                "You shoot the dragon with the magical crossbow and it falls dead on the ground!",
+            ),
+            Arguments.of(
+                SpellStrategy(),
+                "You cast the spell of disintegration and the dragon vaporizes in a pile of dust!",
+            ),
+        ).stream()
     }
 }

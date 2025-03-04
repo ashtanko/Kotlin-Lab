@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -64,14 +64,94 @@ abstract class CanMergeBSTTest<out T : CanMergeBST>(private val strategy: T) {
                 ),
                 emptyList<Int>(),
             ),
+            Arguments.of(
+                listOf(
+                    TreeNode(5).apply {
+                        left = TreeNode(3)
+                        right = TreeNode(8)
+                    },
+                    TreeNode(3).apply {
+                        left = TreeNode(2)
+                        right = TreeNode(6)
+                    },
+                    TreeNode(8).apply {
+                        left = TreeNode(7)
+                    },
+                ),
+                emptyList<Int>(),
+            ),
+            Arguments.of(
+                listOf(
+                    TreeNode(5).apply {
+                        left = TreeNode(3)
+                        right = TreeNode(8)
+                    },
+                    TreeNode(3).apply {
+                        left = TreeNode(2)
+                        right = TreeNode(6)
+                    },
+                    TreeNode(8).apply {
+                        left = TreeNode(7)
+                    },
+                    TreeNode(7).apply {
+                        left = TreeNode(6)
+                    },
+                ),
+                emptyList<Int>(),
+            ),
+            Arguments.of(
+                listOf(
+                    TreeNode(5).apply {
+                        left = TreeNode(3)
+                        right = TreeNode(8)
+                    },
+                    TreeNode(3).apply {
+                        left = TreeNode(2)
+                        right = TreeNode(6)
+                    },
+                    TreeNode(8).apply {
+                        left = TreeNode(7)
+                    },
+                    TreeNode(7).apply {
+                        left = TreeNode(6)
+                    },
+                    TreeNode(6).apply {
+                        left = TreeNode(5)
+                    },
+                ),
+                emptyList<Int>(),
+            ),
+            Arguments.of(
+                listOf(
+                    TreeNode(5).apply {
+                        left = TreeNode(3)
+                        right = TreeNode(8)
+                    },
+                    TreeNode(3).apply {
+                        left = TreeNode(2)
+                        right = TreeNode(6)
+                    },
+                    TreeNode(8).apply {
+                        left = TreeNode(7)
+                    },
+                    TreeNode(7).apply {
+                        left = TreeNode(6)
+                    },
+                    TreeNode(6).apply {
+                        left = TreeNode(5)
+                    },
+                    TreeNode(4),
+                ),
+                emptyList<Int>(),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `can merge test`(trees: List<TreeNode>, expected: List<Int>) {
-        val actual = strategy.perform(trees).preorderTraversal()
-        println("$trees ${strategy.perform(trees)}")
+        val actual = strategy.invoke(trees).preorderTraversal()
+        println("$trees ${strategy.invoke(trees)}")
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected)
     }
 }

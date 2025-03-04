@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 1706. Where Will the Ball Fall
- * @link https://leetcode.com/problems/where-will-the-ball-fall/
+ * @see <a href="https://leetcode.com/problems/where-will-the-ball-fall/">Source</a>
  */
 fun interface FindBall {
-    fun invoke(grid: Array<IntArray>): IntArray
+    operator fun invoke(grid: Array<IntArray>): IntArray
 }
 
 /**
  * Approach 1: Depth First Search (DFS)
  */
 class FindBallDFS : FindBall {
-    override fun invoke(grid: Array<IntArray>): IntArray {
+    override operator fun invoke(grid: Array<IntArray>): IntArray {
         if (grid.isEmpty()) return intArrayOf()
         if (grid.first().isEmpty()) return intArrayOf()
         val result = IntArray(grid.first().size)
@@ -55,7 +55,7 @@ class FindBallDFS : FindBall {
  * Approach 2: Dynamic Programming Approach
  */
 class FindBallDP : FindBall {
-    override fun invoke(grid: Array<IntArray>): IntArray {
+    override operator fun invoke(grid: Array<IntArray>): IntArray {
         if (grid.isEmpty()) return intArrayOf()
         if (grid.first().isEmpty()) return intArrayOf()
         val result = IntArray(grid[0].size)
@@ -88,7 +88,7 @@ class FindBallDP : FindBall {
  * Approach 3: Iterative Approach, Simulation
  */
 class FindBallIterative : FindBall {
-    override fun invoke(grid: Array<IntArray>): IntArray {
+    override operator fun invoke(grid: Array<IntArray>): IntArray {
         if (grid.isEmpty()) return intArrayOf()
         if (grid.first().isEmpty()) return intArrayOf()
         val result = IntArray(grid[0].size)

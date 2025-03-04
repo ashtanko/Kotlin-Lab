@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.Stack
 
-interface NextGreaterElement1 {
-    fun perform(nums1: IntArray, nums2: IntArray): IntArray
+fun interface NextGreaterElement1 {
+    operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray
 }
 
 class NGBruteForce : NextGreaterElement1 {
-    override fun perform(nums1: IntArray, nums2: IntArray): IntArray {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
         val res = IntArray(nums1.size)
         var j: Int
         for (i in nums1.indices) {
@@ -48,7 +48,7 @@ class NGBruteForce : NextGreaterElement1 {
 }
 
 class NGBetterForce : NextGreaterElement1 {
-    override fun perform(nums1: IntArray, nums2: IntArray): IntArray {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
         val hash: HashMap<Int, Int> = HashMap()
         val res = IntArray(nums1.size)
         var j: Int
@@ -73,7 +73,7 @@ class NGBetterForce : NextGreaterElement1 {
 }
 
 class NGStack : NextGreaterElement1 {
-    override fun perform(nums1: IntArray, nums2: IntArray): IntArray {
+    override operator fun invoke(nums1: IntArray, nums2: IntArray): IntArray {
         val stack: Stack<Int> = Stack()
         val map: HashMap<Int, Int> = HashMap()
         val res = IntArray(nums1.size)

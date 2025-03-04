@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 652. Find Duplicate Subtrees
- * @link https://leetcode.com/problems/find-duplicate-subtrees/
+ * @see <a href="https://leetcode.com/problems/find-duplicate-subtrees/">Source</a>
  */
-interface FindDuplicateSubtrees {
-    fun perform(root: TreeNode): List<TreeNode>
+fun interface FindDuplicateSubtrees {
+    operator fun invoke(root: TreeNode): List<TreeNode>
 }
 
 class FindDuplicateSubtreesMap : FindDuplicateSubtrees {
-    override fun perform(root: TreeNode): List<TreeNode> {
+    override operator fun invoke(root: TreeNode): List<TreeNode> {
         val map: MutableMap<String, MutableList<TreeNode>> = HashMap()
         val dups: MutableList<TreeNode> = ArrayList()
         serialize(root, map)

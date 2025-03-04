@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,12 @@ package dev.shtanko.algorithms.leetcode
 import java.util.Stack
 
 // Verify Preorder Sequence in Binary Search Tree
-interface VerifyPreorderInBinarySearchTreeStrategy {
-    fun perform(preorder: IntArray): Boolean
+fun interface VerifyPreorderInBinarySearchTreeStrategy {
+    operator fun invoke(preorder: IntArray): Boolean
 }
 
 class VerifyPreorderInBinarySearchTreeBF : VerifyPreorderInBinarySearchTreeStrategy {
-    override fun perform(preorder: IntArray): Boolean {
+    override operator fun invoke(preorder: IntArray): Boolean {
         var low = Int.MIN_VALUE
         var i = -1
         for (p in preorder) {
@@ -37,7 +37,7 @@ class VerifyPreorderInBinarySearchTreeBF : VerifyPreorderInBinarySearchTreeStrat
 }
 
 class VerifyPreorderInBinarySearchTreeStack : VerifyPreorderInBinarySearchTreeStrategy {
-    override fun perform(preorder: IntArray): Boolean {
+    override operator fun invoke(preorder: IntArray): Boolean {
         var low = Int.MIN_VALUE
         val path: Stack<Int> = Stack()
         for (p in preorder) {
@@ -53,7 +53,7 @@ class VerifyPreorderInBinarySearchTreeRecursion : VerifyPreorderInBinarySearchTr
 
     private var i = 1
 
-    override fun perform(preorder: IntArray): Boolean {
+    override operator fun invoke(preorder: IntArray): Boolean {
         return preorder.isEmpty() || check(preorder, Integer.MIN_VALUE, preorder.first()) && check(
             preorder,
             preorder.first(),

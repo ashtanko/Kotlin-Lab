@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,13 +31,19 @@ abstract class CountingBitsTest<out T : CountingBits>(private val strategy: T) {
             Arguments.of(5, intArrayOf(0, 1, 1, 2, 1, 2)),
             Arguments.of(0, intArrayOf(0)),
             Arguments.of(1, intArrayOf(0, 1)),
+            Arguments.of(3, intArrayOf(0, 1, 1, 2)),
+            Arguments.of(4, intArrayOf(0, 1, 1, 2, 1)),
+            Arguments.of(6, intArrayOf(0, 1, 1, 2, 1, 2, 2)),
+            Arguments.of(7, intArrayOf(0, 1, 1, 2, 1, 2, 2, 3)),
+            Arguments.of(8, intArrayOf(0, 1, 1, 2, 1, 2, 2, 3, 1)),
+            Arguments.of(9, intArrayOf(0, 1, 1, 2, 1, 2, 2, 3, 1, 2)),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `counting bits test`(n: Int, expected: IntArray) {
-        val actual = strategy.perform(n)
+    fun `counting bits test`(num: Int, expected: IntArray) {
+        val actual = strategy.invoke(num)
         assertThat(actual).containsExactly(*expected)
     }
 }

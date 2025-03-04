@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,14 +47,57 @@ abstract class SubsetsTest<out T : Subsets>(private val strategy: T) {
                     listOf(0),
                 ),
             ),
+            Arguments.of(
+                intArrayOf(1, 2),
+                listOf(
+                    listOf(),
+                    listOf(1),
+                    listOf(2),
+                    listOf(1, 2),
+                ),
+            ),
+            Arguments.of(
+                intArrayOf(),
+                listOf(
+                    listOf<Int>(),
+                ),
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                listOf(
+                    listOf(),
+                    listOf(1),
+                ),
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4),
+                listOf(
+                    listOf(),
+                    listOf(1),
+                    listOf(2),
+                    listOf(1, 2),
+                    listOf(3),
+                    listOf(1, 3),
+                    listOf(2, 3),
+                    listOf(1, 2, 3),
+                    listOf(4),
+                    listOf(1, 4),
+                    listOf(2, 4),
+                    listOf(1, 2, 4),
+                    listOf(3, 4),
+                    listOf(1, 3, 4),
+                    listOf(2, 3, 4),
+                    listOf(1, 2, 3, 4),
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `subsets test`(nums: IntArray, expected: List<List<Int>>) {
-        val actual = strategy.perform(nums)
-        assertThat(actual).containsAll(expected)
+        val actual = strategy.invoke(nums)
+        assertThat(actual).containsExactlyInAnyOrderElementsOf(expected)
     }
 }
 

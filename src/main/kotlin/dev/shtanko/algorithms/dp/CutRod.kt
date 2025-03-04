@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,14 +35,22 @@ fun cutRod(price: IntArray, n: Int): Int {
     for (i in 0 until n - 1) {
         for (j in 0 until n + 1) {
             // First column => 0 length of rod => 0 profit
-            if (j == 0) {
-                continue
-            } else if (i == 0) {
-                arr[i][j] = price[i] + arr[i][j - i - 1]
-            } else if (j - i - 1 < 0) {
-                arr[i][j] = arr[i - 1][j]
-            } else {
-                arr[i][j] = max(arr[i - 1][j], price[i] + arr[i][j - i - 1])
+            when {
+                j == 0 -> {
+                    continue
+                }
+
+                i == 0 -> {
+                    arr[i][j] = price[i] + arr[i][j - i - 1]
+                }
+
+                j - i - 1 < 0 -> {
+                    arr[i][j] = arr[i - 1][j]
+                }
+
+                else -> {
+                    arr[i][j] = max(arr[i - 1][j], price[i] + arr[i][j - i - 1])
+                }
             }
         }
     }

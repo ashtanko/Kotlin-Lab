@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,12 +25,12 @@ import kotlin.math.min
  * The sequence 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, … shows the first 11 ugly numbers. By convention, 1 is included.
  * Given a number n, the task is to find n’th Ugly number.
  */
-interface UglyNumbers {
-    fun perform(n: Int): Int
+fun interface UglyNumbers {
+    operator fun invoke(n: Int): Int
 }
 
 class UglyNumbersBruteForce : UglyNumbers {
-    override fun perform(n: Int): Int {
+    override fun invoke(n: Int): Int {
         val ugly = IntArray(n)
         var i2 = 0
         var i3 = 0

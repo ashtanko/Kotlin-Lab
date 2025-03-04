@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SumOfLeftLeavesTest<out T : SumOfLeftLeavesStrategy>(val strategy: T) {
+abstract class SumOfLeftLeavesTest<out T : SumOfLeftLeavesStrategy>(val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(3).apply {
@@ -38,19 +38,131 @@ internal abstract class SumOfLeftLeavesTest<out T : SumOfLeftLeavesStrategy>(val
                 },
                 24,
             ),
+            Arguments.of(
+                TreeNode(1),
+                0,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2)
+                },
+                2,
+            ),
+            Arguments.of(
+                TreeNode(0).apply {
+                    left = TreeNode(-2).apply {
+                        left = TreeNode(2)
+                    }
+                },
+                2,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    right = TreeNode(3)
+                },
+                0,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2)
+                    right = TreeNode(3)
+                },
+                2,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4)
+                    }
+                    right = TreeNode(3)
+                },
+                4,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        right = TreeNode(4)
+                    }
+                    right = TreeNode(3)
+                },
+                0,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4)
+                        right = TreeNode(5)
+                    }
+                    right = TreeNode(3).apply {
+                        left = TreeNode(6)
+                        right = TreeNode(7)
+                    }
+                },
+                10,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4).apply {
+                            left = TreeNode(8)
+                        }
+                        right = TreeNode(5).apply {
+                            left = TreeNode(10)
+                        }
+                    }
+                    right = TreeNode(3).apply {
+                        left = TreeNode(6).apply {
+                            right = TreeNode(12)
+                        }
+                        right = TreeNode(7).apply {
+                            right = TreeNode(14)
+                        }
+                    }
+                },
+                18,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4).apply {
+                            left = TreeNode(8).apply {
+                                left = TreeNode(16)
+                            }
+                        }
+                        right = TreeNode(5).apply {
+                            left = TreeNode(10).apply {
+                                left = TreeNode(20)
+                            }
+                        }
+                    }
+                    right = TreeNode(3).apply {
+                        left = TreeNode(6).apply {
+                            right = TreeNode(12).apply {
+                                right = TreeNode(24)
+                            }
+                        }
+                        right = TreeNode(7).apply {
+                            right = TreeNode(14).apply {
+                                right = TreeNode(28)
+                            }
+                        }
+                    }
+                },
+                36,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `sum of left leaves test`(tree: TreeNode, expected: Int) {
-        val actual = strategy.perform(tree)
+    fun `sum of left leaves test`(tree: TreeNode, expected: Int) {
+        val actual = strategy.invoke(tree)
         assertEquals(expected, actual)
     }
 }
 
-internal class SumOfLeftLeavesIterativeTest : SumOfLeftLeavesTest<SumOfLeftLeavesIterative>(SumOfLeftLeavesIterative())
+class SumOfLeftLeavesIterativeTest : SumOfLeftLeavesTest<SumOfLeftLeavesIterative>(SumOfLeftLeavesIterative())
 
-internal class SumOfLeftLeavesRecursiveTest : SumOfLeftLeavesTest<SumOfLeftLeavesRecursive>(SumOfLeftLeavesRecursive())
+class SumOfLeftLeavesRecursiveTest : SumOfLeftLeavesTest<SumOfLeftLeavesRecursive>(SumOfLeftLeavesRecursive())
 
-internal class SumOfLeftLeavesBSFTest : SumOfLeftLeavesTest<SumOfLeftLeavesBSF>(SumOfLeftLeavesBSF())
+class SumOfLeftLeavesBSFTest : SumOfLeftLeavesTest<SumOfLeftLeavesBSF>(SumOfLeftLeavesBSF())

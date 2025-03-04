@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.swap
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.DFS
+import dev.shtanko.extensions.swap
 import java.util.LinkedList
 import java.util.Queue
 
 /**
  * 839. Similar String Groups
- * @link https://leetcode.com/problems/similar-string-groups/description/
+ * @see <a href="https://leetcode.com/problems/similar-string-groups">Source</a>
  */
-interface SimilarStringGroups {
-    fun numSimilarGroups(strings: Array<String>): Int
+fun interface SimilarStringGroups {
+    operator fun invoke(strings: Array<String>): Int
 }
 
 private fun numSimilarGroupsCount(
@@ -68,26 +70,27 @@ private fun numSimilarGroupsCount(
 /**
  * Approach 1: Depth First Search
  */
+@BFS
 class SimilarStringGroupsBFS : SimilarStringGroups {
 
-    override fun numSimilarGroups(strings: Array<String>): Int {
+    override fun invoke(strings: Array<String>): Int {
         return numSimilarGroupsCount(strings, ::bfs)
     }
 
     private fun bfs(n: Int, adj: Map<Int, MutableList<Int>>, visit: BooleanArray) {
         var node = n
-        val q: Queue<Int> = LinkedList()
-        q.offer(node)
+        val queue: Queue<Int> = LinkedList()
+        queue.offer(node)
         visit[node] = true
-        while (!q.isEmpty()) {
-            node = q.poll()
+        while (queue.isNotEmpty()) {
+            node = queue.poll()
             if (!adj.containsKey(node)) {
                 continue
             }
-            for (neighbor in adj[node]!!) {
+            for (neighbor in adj.getOrDefault(node, emptyList())) {
                 if (!visit[neighbor]) {
                     visit[neighbor] = true
-                    q.offer(neighbor)
+                    queue.offer(neighbor)
                 }
             }
         }
@@ -97,8 +100,9 @@ class SimilarStringGroupsBFS : SimilarStringGroups {
 /**
  * Approach 2: Breadth First Search
  */
+@DFS
 class SimilarStringGroupsDFS : SimilarStringGroups {
-    override fun numSimilarGroups(strings: Array<String>): Int {
+    override fun invoke(strings: Array<String>): Int {
         return numSimilarGroupsCount(strings, ::dfs)
     }
 
@@ -107,7 +111,7 @@ class SimilarStringGroupsDFS : SimilarStringGroups {
         if (!adj.containsKey(node)) {
             return
         }
-        for (neighbor in adj[node]!!) {
+        for (neighbor in adj.getOrDefault(node, emptyList())) {
             if (!visit[neighbor]) {
                 visit[neighbor] = true
                 dfs(neighbor, adj, visit)
@@ -120,16 +124,20 @@ class SimilarStringGroupsDFS : SimilarStringGroups {
  * Approach 3: Union-find
  */
 class SimilarStringGroupsUnionFind : SimilarStringGroups {
-    override fun numSimilarGroups(strings: Array<String>): Int {
-        val n: Int = strings.size
-        val dsu = UnionFind(n)
-        var count = n
+    override fun invoke(strings: Array<String>): Int {
+        val numStrings: Int = strings.size
+        val disjointSet = UnionFind(numStrings)
+        var count = numStrings
         // Form the required graph from the given strings array.
-        for (i in 0 until n) {
-            for (j in i + 1 until n) {
-                if (isSimilar(strings[i], strings[j]) && dsu.find(i) != dsu.find(j)) {
+        for (currentIndex in 0 until numStrings) {
+            for (comparisonIndex in currentIndex + 1 until numStrings) {
+                if (isSimilar(
+                        strings[currentIndex],
+                        strings[comparisonIndex],
+                    ) && disjointSet.find(currentIndex) != disjointSet.find(comparisonIndex)
+                ) {
                     count--
-                    dsu.unionSet(i, j)
+                    disjointSet.unionSet(currentIndex, comparisonIndex)
                 }
             }
         }
@@ -137,43 +145,14 @@ class SimilarStringGroupsUnionFind : SimilarStringGroups {
         return count
     }
 
-    private fun isSimilar(a: String, b: String): Boolean {
-        var diff = 0
-        for (i in a.indices) {
-            if (a[i] != b[i]) {
-                diff++
+    private fun isSimilar(stringA: String, stringB: String): Boolean {
+        var differenceCount = 0
+        for (i in stringA.indices) {
+            if (stringA[i] != stringB[i]) {
+                differenceCount++
             }
         }
-        return diff == 0 || diff == 2
-    }
-
-    internal class UnionFind(size: Int) {
-        var parent: IntArray = IntArray(size)
-        var rank: IntArray = IntArray(size)
-
-        init {
-            for (i in 0 until size) parent[i] = i
-        }
-
-        fun find(x: Int): Int {
-            if (parent[x] != x) parent[x] = find(parent[x])
-            return parent[x]
-        }
-
-        fun unionSet(x: Int, y: Int) {
-            val xSet = find(x)
-            val ySet = find(y)
-            if (xSet == ySet) {
-                return
-            } else if (rank[xSet] < rank[ySet]) {
-                parent[xSet] = ySet
-            } else if (rank[xSet] > rank[ySet]) {
-                parent[ySet] = xSet
-            } else {
-                parent[ySet] = xSet
-                rank[xSet]++
-            }
-        }
+        return differenceCount == 0 || differenceCount == 2
     }
 }
 
@@ -181,40 +160,49 @@ class SimilarStringGroupsUnionFind : SimilarStringGroups {
  * Approach 4: Union-find 2
  */
 class SimilarStringGroupsDSU : SimilarStringGroups {
-    override fun numSimilarGroups(strings: Array<String>): Int {
-        val n: Int = strings.size
-        val w: Int = strings[0].length
-        val dsu = DSU(n)
+    override fun invoke(strings: Array<String>): Int {
+        if (strings.isEmpty()) {
+            return 0
+        }
+        val numStrings: Int = strings.size
+        val stringLength: Int = strings[0].length
+        val disjointSet = DSU(numStrings)
 
-        if (n < w * w) { // If few words, then check for pairwise similarity: O(N^2 W)
-            for (i in 0 until n) for (j in i + 1 until n) if (similar(strings[i], strings[j])) dsu.union(i, j)
+        if (numStrings < stringLength * stringLength) { // If few words, then check for pairwise similarity: O(N^2 W)
+            for (i in 0 until numStrings) for (j in i + 1 until numStrings) if (similar(
+                    strings[i],
+                    strings[j],
+                )
+            ) {
+                disjointSet.union(i, j)
+            }
         } else { // If short words, check all neighbors: O(N W^3)
             val buckets: MutableMap<String, MutableList<Int>> = HashMap()
-            for (i in 0 until n) {
-                val l: CharArray = strings[i].toCharArray()
-                for (j0 in l.indices) {
-                    for (j1 in j0 + 1 until l.size) {
-                        l.swap(j0, j1)
-                        val sb = StringBuilder()
-                        for (c in l) sb.append(c)
-                        buckets.computeIfAbsent(sb.toString()) { ArrayList() }.add(i)
-                        l.swap(j0, j1)
+            for (i in 0 until numStrings) {
+                val charArray: CharArray = strings[i].toCharArray()
+                for (j0 in charArray.indices) {
+                    for (j1 in j0 + 1 until charArray.size) {
+                        charArray.swap(j0, j1)
+                        val stringBuilder = StringBuilder()
+                        for (c in charArray) stringBuilder.append(c)
+                        buckets.computeIfAbsent(stringBuilder.toString()) { ArrayList() }.add(i)
+                        charArray.swap(j0, j1)
                     }
                 }
             }
-            for (i1 in strings.indices) {
-                if (buckets.containsKey(strings[i1])) {
-                    for (i2 in buckets[strings[i1]]!!) {
-                        dsu.union(i1, i2)
+            for (currentIndex in strings.indices) {
+                if (buckets.containsKey(strings[currentIndex])) {
+                    for (bucketIndex in buckets.getOrDefault(strings[currentIndex], emptyList())) {
+                        disjointSet.union(currentIndex, bucketIndex)
                     }
                 }
             }
         }
 
-        var ans = 0
-        for (i in 0 until n) if (dsu.parent[i] == i) ans++
+        var numGroups = 0
+        for (i in 0 until numStrings) if (disjointSet.parent[i] == i) numGroups++
 
-        return ans
+        return numGroups
     }
 
     private fun similar(word1: String, word2: String): Boolean {
@@ -223,12 +211,12 @@ class SimilarStringGroupsDSU : SimilarStringGroups {
         return diff <= 2
     }
 
-    class DSU(n: Int) {
+    class DSU(numStrings: Int) {
 
-        var parent: IntArray = IntArray(n)
+        var parent: IntArray = IntArray(numStrings)
 
         init {
-            for (i in 0 until n) parent[i] = i
+            for (i in 0 until numStrings) parent[i] = i
         }
 
         fun find(x: Int): Int {

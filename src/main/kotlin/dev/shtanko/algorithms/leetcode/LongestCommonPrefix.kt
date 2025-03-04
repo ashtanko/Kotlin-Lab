@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.extensions.commonPrefix
+import dev.shtanko.extensions.commonPrefix
 
 /**
  * Longest Common Prefix.
- * @link https://leetcode.com/problems/longest-common-prefix/
+ * @see <a href="https://leetcode.com/problems/longest-common-prefix/">Source</a>
  */
-interface LongestCommonPrefix {
-    fun perform(strs: Array<String>): String
+fun interface LongestCommonPrefix {
+    operator fun invoke(strs: Array<String>): String
 }
 
 /**
  * Approach 1: Horizontal scanning
  */
 class LCPHorizontalScanning : LongestCommonPrefix {
-    override fun perform(strs: Array<String>): String {
+    override operator fun invoke(strs: Array<String>): String {
         if (strs.isEmpty()) return ""
         var prefix: String = strs.first()
         for (i in 1 until strs.size) {
@@ -47,7 +47,7 @@ class LCPHorizontalScanning : LongestCommonPrefix {
  * Approach 2: Vertical scanning
  */
 class LCPVerticalScanning : LongestCommonPrefix {
-    override fun perform(strs: Array<String>): String {
+    override operator fun invoke(strs: Array<String>): String {
         if (strs.isEmpty()) return ""
         for (i in strs[0].indices) {
             val c: Char = strs[0][i]
@@ -63,7 +63,7 @@ class LCPVerticalScanning : LongestCommonPrefix {
  * Approach 3: Divide and conquer
  */
 class LCPDivideAndConquer : LongestCommonPrefix {
-    override fun perform(strs: Array<String>): String {
+    override operator fun invoke(strs: Array<String>): String {
         if (strs.isEmpty()) return ""
         return longestCommonPrefix(strs, 0, strs.size - 1)
     }

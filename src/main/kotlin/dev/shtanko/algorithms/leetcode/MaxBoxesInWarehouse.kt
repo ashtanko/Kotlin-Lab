@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.min
 
 /**
  * Put Boxes Into the Warehouse I
- * @link https://leetcode.com/problems/put-boxes-into-the-warehouse-i/solution/
+ * @see <a href="https://leetcode.com/problems/put-boxes-into-the-warehouse-i">Source</a>
  */
-interface MaxBoxesInWarehouse {
-    fun perform(boxes: IntArray, warehouse: IntArray): Int
+fun interface MaxBoxesInWarehouse {
+    operator fun invoke(boxes: IntArray, warehouse: IntArray): Int
 }
 
 /**
  * Approach 1: Add Smallest Boxes to the Rightmost Warehouse Rooms
  */
 class MaxBoxesInWarehouseAdd : MaxBoxesInWarehouse {
-    override fun perform(boxes: IntArray, warehouse: IntArray): Int {
+    override operator fun invoke(boxes: IntArray, warehouse: IntArray): Int {
         // Preprocess the height of the warehouse rooms to get usable heights
         for (i in 1 until warehouse.size) {
             warehouse[i] = min(warehouse[i - 1], warehouse[i])
@@ -55,7 +55,7 @@ class MaxBoxesInWarehouseAdd : MaxBoxesInWarehouse {
  * Approach 2: Add Largest Possible Boxes from Left to Right
  */
 class MaxBoxesInWarehouseLPB : MaxBoxesInWarehouse {
-    override fun perform(boxes: IntArray, warehouse: IntArray): Int {
+    override operator fun invoke(boxes: IntArray, warehouse: IntArray): Int {
         var i: Int = boxes.size - 1
         var count = 0
         boxes.sort()

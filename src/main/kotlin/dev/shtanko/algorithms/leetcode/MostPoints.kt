@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.max
 
 /**
  * 2140. Solving Questions With Brainpower
- * @link https://leetcode.com/problems/solving-questions-with-brainpower/
+ * @see <a href="https://leetcode.com/problems/solving-questions-with-brainpower/">Source</a>
  */
-interface MostPoints {
-    fun perform(questions: Array<IntArray>): Long
+fun interface MostPoints {
+    operator fun invoke(questions: Array<IntArray>): Long
 }
 
 class MostPointsDP : MostPoints {
-    override fun perform(questions: Array<IntArray>): Long {
+    override operator fun invoke(questions: Array<IntArray>): Long {
         val n: Int = questions.size
         val dp = LongArray(n)
         dp[n - 1] = questions[n - 1][0].toLong()

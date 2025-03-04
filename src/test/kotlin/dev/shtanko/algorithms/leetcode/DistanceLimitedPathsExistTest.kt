@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -55,18 +55,32 @@ abstract class DistanceLimitedPathsExistTest<out T : DistanceLimitedPathsExist>(
                 ),
                 booleanArrayOf(true, false),
             ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(0, 1, 10),
+                    intArrayOf(1, 2, 1),
+                    intArrayOf(2, 3, 2),
+                    intArrayOf(3, 4, 1),
+                ),
+                arrayOf(
+                    intArrayOf(0, 4, 14),
+                    intArrayOf(1, 4, 13),
+                ),
+                booleanArrayOf(true, true),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `distance limited paths exist test`(
-        n: Int,
+        num: Int,
         edgeList: Array<IntArray>,
         queries: Array<IntArray>,
         expected: BooleanArray,
     ) {
-        val actual = strategy.perform(n, edgeList, queries)
+        val actual = strategy.invoke(num, edgeList, queries)
         assertThat(actual).isEqualTo(expected)
     }
 }

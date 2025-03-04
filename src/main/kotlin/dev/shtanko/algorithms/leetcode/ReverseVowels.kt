@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ package dev.shtanko.algorithms.leetcode
  * https://leetcode.com/problems/reverse-vowels-of-a-string/
  */
 fun interface ReverseVowels {
-    fun invoke(s: String): String
+    operator fun invoke(s: String): String
 }
 
 class ReverseVowelsTwoPointers : ReverseVowels {
@@ -30,7 +30,7 @@ class ReverseVowelsTwoPointers : ReverseVowels {
         private const val VOWELS = "aeiouAEIOU"
     }
 
-    override fun invoke(s: String): String {
+    override operator fun invoke(s: String): String {
         if (s.isEmpty()) return s
         val chars: CharArray = s.toCharArray()
         var start = 0
@@ -53,7 +53,7 @@ class ReverseVowelsTwoPointers : ReverseVowels {
 }
 
 class ReverseVowelsSet : ReverseVowels {
-    override fun invoke(s: String): String {
+    override operator fun invoke(s: String): String {
         val set: Set<Char> = HashSet(listOf('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'))
         val arr: CharArray = s.toCharArray()
         var left = 0

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -60,8 +60,8 @@ class FibonacciTest {
     @ExperimentalCoroutinesApi
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `simple test`(n: Int, expected: String) = runTest {
-        val actual = fibonacci.take(n).joinToString()
+    fun `simple test`(num: Int, expected: String) = runTest {
+        val actual = fibonacci.take(num).joinToString()
         assertThat(actual).isEqualTo(expected)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2193. Minimum Number of Moves to Make Palindrome
- * @link https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/
+ * @see <a href="https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/">Source</a>
  */
-interface MinMovesToMakePalindrome {
-    fun perform(s: String): Int
+fun interface MinMovesToMakePalindrome {
+    operator fun invoke(s: String): Int
 }
 
 class MinMovesToMakePalindromeGreedy : MinMovesToMakePalindrome {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var res = 0
         var s0 = s
         while (s0.isNotEmpty()) {

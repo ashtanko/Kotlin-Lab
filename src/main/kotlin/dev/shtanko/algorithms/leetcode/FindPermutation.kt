@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,10 +19,10 @@ package dev.shtanko.algorithms.leetcode
 import java.util.Stack
 
 /**
- * @link https://leetcode.com/problems/find-permutation/
+ * @see <a href="https://leetcode.com/problems/find-permutation/">Source</a>
  */
-interface FindPermutation {
-    fun perform(s: String): IntArray
+fun interface FindPermutation {
+    operator fun invoke(s: String): IntArray
 }
 
 /**
@@ -31,14 +31,14 @@ interface FindPermutation {
  * Space complexity : O(n).
  */
 class FindPermutationStack : FindPermutation {
-    override fun perform(s: String): IntArray {
+    override operator fun invoke(s: String): IntArray {
         val res = IntArray(s.length + 1)
         val stack: Stack<Int> = Stack()
         var j = 0
         for (i in 1..s.length) {
             if (s[i - 1] == 'I') {
                 stack.push(i)
-                while (!stack.isEmpty()) {
+                while (stack.isNotEmpty()) {
                     res[j++] = stack.pop()
                 }
             } else {
@@ -46,7 +46,7 @@ class FindPermutationStack : FindPermutation {
             }
         }
         stack.push(s.length + 1)
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             res[j++] = stack.pop()
         }
         return res
@@ -59,7 +59,7 @@ class FindPermutationStack : FindPermutation {
  * Space complexity : O(1).
  */
 class FindPermutationReversing : FindPermutation {
-    override fun perform(s: String): IntArray {
+    override operator fun invoke(s: String): IntArray {
         val res = IntArray(s.length + 1)
         for (i in res.indices) res[i] = i + 1
         var i = 1
@@ -79,7 +79,7 @@ class FindPermutationReversing : FindPermutation {
  * Space complexity : O(1).
  */
 class FindPermutationTwoPointers : FindPermutation {
-    override fun perform(s: String): IntArray {
+    override operator fun invoke(s: String): IntArray {
         val res = IntArray(s.length + 1)
         res[0] = 1
         var i = 1

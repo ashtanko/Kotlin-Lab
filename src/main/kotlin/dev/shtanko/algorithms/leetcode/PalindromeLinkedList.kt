@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface PalindromeLinkedList {
-    fun perform(head: ListNode): Boolean
+fun interface PalindromeLinkedList {
+    operator fun invoke(head: ListNode): Boolean
 }
 
 /**
@@ -26,7 +26,7 @@ interface PalindromeLinkedList {
  * Space complexity : O(n)
  */
 class PalindromeLinkedListCopy : PalindromeLinkedList {
-    override fun perform(head: ListNode): Boolean {
+    override operator fun invoke(head: ListNode): Boolean {
         val vals: MutableList<Int> = ArrayList()
         var currentNode: ListNode? = head
         while (currentNode != null) {
@@ -55,7 +55,7 @@ class PalindromeLinkedListRecursive : PalindromeLinkedList {
 
     private var frontPointer: ListNode? = null
 
-    override fun perform(head: ListNode): Boolean {
+    override operator fun invoke(head: ListNode): Boolean {
         frontPointer = head
         return recursivelyCheck(head)
     }
@@ -76,21 +76,21 @@ class PalindromeLinkedListRecursive : PalindromeLinkedList {
  * Space complexity : O(n)
  */
 class PalindromeLinkedListReverse : PalindromeLinkedList {
-    override fun perform(head: ListNode): Boolean {
-        val firstHalfEnd = endOfFirstHalf(head)
-        val secondHalfStart = firstHalfEnd?.next?.let { reverseList(it) }
+    override operator fun invoke(head: ListNode): Boolean {
+        val endOfFirstHalf = endOfFirstHalf(head)
+        val startOfSecondHalfReversed = endOfFirstHalf?.next?.let { reverseList(it) }
 
-        var p1: ListNode? = head
-        var p2 = secondHalfStart
-        var result = true
-        while (result && p2 != null) {
-            if (p1?.value != p2.value) result = false
-            p1 = p1!!.next
-            p2 = p2.next
+        var firstHalfNode: ListNode? = head
+        var secondHalfNode = startOfSecondHalfReversed
+        var isPalindrome = true
+        while (isPalindrome && secondHalfNode != null) {
+            if (firstHalfNode?.value != secondHalfNode.value) isPalindrome = false
+            firstHalfNode = firstHalfNode?.next
+            secondHalfNode = secondHalfNode.next
         }
 
-        firstHalfEnd?.next = secondHalfStart?.let { reverseList(it) }
-        return result
+        endOfFirstHalf?.next = startOfSecondHalfReversed?.let { reverseList(it) }
+        return isPalindrome
     }
 
     private fun reverseList(head: ListNode): ListNode? {

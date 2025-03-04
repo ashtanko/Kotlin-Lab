@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.E_9
+import dev.shtanko.algorithms.MOD
 import java.util.Arrays
 
 /**
  * 935. Knight Dialer
- * @link https://leetcode.com/problems/knight-dialer/
+ * @see <a href="https://leetcode.com/problems/knight-dialer/">Source</a>
  */
 fun interface KnightDialer {
-    fun perform(n: Int): Int
+    operator fun invoke(n: Int): Int
 }
 
 /**
@@ -31,7 +33,7 @@ fun interface KnightDialer {
  */
 class KnightDialerBottomUp : KnightDialer {
 
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val dirs = arrayOf(
             intArrayOf(4, 6),
             intArrayOf(6, 8),
@@ -69,7 +71,7 @@ class KnightDialerBottomUp : KnightDialer {
  * Top down Dynamic programming solution
  */
 class KnightDialerDP : KnightDialer {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         if (n == 1) return 10
         val jumpMap = arrayOf(
             intArrayOf(4, 6),

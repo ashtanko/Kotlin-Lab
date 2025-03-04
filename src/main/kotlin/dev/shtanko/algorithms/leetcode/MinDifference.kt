@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.min
 
 /**
  * 1906. Minimum Absolute Difference Queries
- * @link https://leetcode.com/problems/minimum-absolute-difference-queries/
+ * @see <a href="https://leetcode.com/problems/minimum-absolute-difference-queries/">Source</a>
  */
-interface MinDifference {
-    fun perform(nums: IntArray, queries: Array<IntArray>): IntArray
+fun interface MinDifference {
+    operator fun invoke(nums: IntArray, queries: Array<IntArray>): IntArray
 }
 
 class MinDifferencePrefixSum : MinDifference {
-    override fun perform(nums: IntArray, queries: Array<IntArray>): IntArray {
+    override operator fun invoke(nums: IntArray, queries: Array<IntArray>): IntArray {
         val n: Int = nums.size
         val count = Array(n + 1) { IntArray(LIMIT) }
         val q: Int = queries.size

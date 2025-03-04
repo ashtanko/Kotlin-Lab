@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.min
 
 /**
  * 2218. Maximum Value of K Coins From Piles
- * @link https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/
+ * @see <a href="https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/">Source</a>
  */
-interface MaxValueOfCoins {
-    fun perform(piles: List<List<Int>>, k: Int): Int
+fun interface MaxValueOfCoins {
+    operator fun invoke(piles: List<List<Int>>, k: Int): Int
 }
 
 class MaxValueOfCoinsTopDown : MaxValueOfCoins {
-    override fun perform(piles: List<List<Int>>, k: Int): Int {
+    override operator fun invoke(piles: List<List<Int>>, k: Int): Int {
         val memo = Array(piles.size + 1) {
             arrayOfNulls<Int>(k + 1)
         }

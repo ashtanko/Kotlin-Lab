@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import java.util.LinkedList
 /**
  * Given a sorted integer array without duplicates, return the summary of its ranges.
  */
-fun IntArray.summaryRanges(): List<String> {
-    val range: MutableList<String> = LinkedList()
-    var i = 0
-    while (i < size) {
-        val a = this[i]
-        while (i + 1 < size && this[i + 1] - this[i] == 1) i++
-        range.add(a.toString() + if (a == this[i]) "" else "->" + this[i])
-        i++
+fun IntArray.getSummaryRanges(): List<String> {
+    val summaryRanges: MutableList<String> = LinkedList()
+    var index = 0
+    while (index < size) {
+        val start = this[index]
+        while (index + 1 < size && this[index + 1] - this[index] == 1) index++
+        summaryRanges.add(start.toString() + if (start == this[index]) "" else "->" + this[index])
+        index++
     }
-    return range
+    return summaryRanges
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class PalindromicSubstringsTest<out T : PalindromicSubstrings>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class PalindromicSubstringsTest<out T : PalindromicSubstrings>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "abc",
@@ -35,22 +35,30 @@ internal abstract class PalindromicSubstringsTest<out T : PalindromicSubstrings>
                 "aaa",
                 6,
             ),
+            Arguments.of(
+                "a",
+                1,
+            ),
+            Arguments.of(
+                "",
+                0,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `count substrings test`(s: String, expected: Int) {
-        val actual = strategy.perform(s)
+    fun `count substrings test`(s: String, expected: Int) {
+        val actual = strategy.invoke(s)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class PalindromicSubstringsCheckAllSubstringsTest :
+class PalindromicSubstringsCheckAllSubstringsTest :
     PalindromicSubstringsTest<PalindromicSubstringsCheckAllSubstrings>(PalindromicSubstringsCheckAllSubstrings())
 
-internal class PalindromicSubstringsDPTest :
+class PalindromicSubstringsDPTest :
     PalindromicSubstringsTest<PalindromicSubstringsDP>(PalindromicSubstringsDP())
 
-internal class PalindromicSubstringsPossibleCentersTest :
+class PalindromicSubstringsPossibleCentersTest :
     PalindromicSubstringsTest<PalindromicSubstringsPossibleCenters>(PalindromicSubstringsPossibleCenters())

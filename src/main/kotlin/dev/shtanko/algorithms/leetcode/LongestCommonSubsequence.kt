@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,37 +20,37 @@ import kotlin.math.max
 
 /**
  * 1143. Longest Common Subsequence
- * @link https://leetcode.com/problems/longest-common-subsequence/description/
+ * @see <a href="https://leetcode.com/problems/longest-common-subsequence">Source</a>
  */
-interface LongestCommonSubsequence {
-    fun perform(text1: String, text2: String): Int
+fun interface LongestCommonSubsequence {
+    operator fun invoke(text1: String, text2: String): Int
 }
 
 class LongestCommonSubsequenceDP : LongestCommonSubsequence {
-    override fun perform(text1: String, text2: String): Int {
+    override operator fun invoke(text1: String, text2: String): Int {
         if (text1.length < text2.length) {
-            return lcp(text1, text2)
+            return calculateLCS(text1, text2)
         }
-        return lcp(text2, text1)
+        return calculateLCS(text2, text1)
     }
 
-    private fun lcp(s1: String, s2: String): Int {
-        val m = Array(2) { IntArray(s1.length + 1) }
-        // row represents the length of s2, col represents the length of s1
-        for (i in 1..s2.length) {
+    private fun calculateLCS(firstString: String, secondString: String): Int {
+        val dpTable = Array(2) { IntArray(firstString.length + 1) }
+        // row represents the length of secondString, col represents the length of firstString
+        for (i in 1..secondString.length) {
             // base case
-            m[i % 2][0] = 0
-            for (j in 1..s1.length) {
-                if (s1[j - 1] == s2[i - 1]) {
-                    m[i % 2][j] = m[(i - 1) % 2][j - 1] + 1
+            dpTable[i % 2][0] = 0
+            for (j in 1..firstString.length) {
+                if (firstString[j - 1] == secondString[i - 1]) {
+                    dpTable[i % 2][j] = dpTable[(i - 1) % 2][j - 1] + 1
                 } else {
-                    m[i % 2][j] = max(
-                        m[(i - 1) % 2][j - 1],
-                        max(m[(i - 1) % 2][j], m[i % 2][j - 1]),
+                    dpTable[i % 2][j] = max(
+                        dpTable[(i - 1) % 2][j - 1],
+                        max(dpTable[(i - 1) % 2][j], dpTable[i % 2][j - 1]),
                     )
                 }
             }
         }
-        return m[s2.length % 2][s1.length]
+        return dpTable[secondString.length % 2][firstString.length]
     }
 }

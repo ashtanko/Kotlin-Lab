@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Remove Nth Node From End of List
- * @link https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+ * @see <a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/">Source</a>
  */
-interface RemoveNthFromEnd {
-    fun perform(head: ListNode?, n: Int): ListNode?
+fun interface RemoveNthFromEnd {
+    operator fun invoke(head: ListNode?, n: Int): ListNode?
 }
 
 /**
@@ -30,7 +30,7 @@ interface RemoveNthFromEnd {
  * Space complexity : O(1)
  */
 class RemoveNthFromEndTwoPass : RemoveNthFromEnd {
-    override fun perform(head: ListNode?, n: Int): ListNode? {
+    override operator fun invoke(head: ListNode?, n: Int): ListNode? {
         val dummy = ListNode(0)
         dummy.next = head
         var length = 0
@@ -56,7 +56,7 @@ class RemoveNthFromEndTwoPass : RemoveNthFromEnd {
  * Space complexity : O(1)
  */
 class RemoveNthFromEndOnePass : RemoveNthFromEnd {
-    override fun perform(head: ListNode?, n: Int): ListNode? {
+    override operator fun invoke(head: ListNode?, n: Int): ListNode? {
         val dummy = ListNode(0)
         dummy.next = head
         var first: ListNode? = dummy

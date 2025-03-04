@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,25 +25,70 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class FindPermutationTest<out T : FindPermutation>(private val strategy: T) {
+abstract class FindPermutationTest<out T : FindPermutation>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of("I", intArrayOf(1, 2)),
-            Arguments.of("DI", intArrayOf(2, 1, 3)),
-            Arguments.of("DDIIDI", intArrayOf(3, 2, 1, 4, 6, 5, 7)),
+            Arguments.of(
+                "I",
+                intArrayOf(1, 2),
+            ),
+            Arguments.of(
+                "DI",
+                intArrayOf(2, 1, 3),
+            ),
+            Arguments.of(
+                "DDIIDI",
+                intArrayOf(3, 2, 1, 4, 6, 5, 7),
+            ),
+            Arguments.of(
+                "DDI",
+                intArrayOf(3, 2, 1, 4),
+            ),
+            Arguments.of(
+                "IDID",
+                intArrayOf(1, 3, 2, 5, 4),
+            ),
+            Arguments.of(
+                "IDIDD",
+                intArrayOf(1, 3, 2, 6, 5, 4),
+            ),
+            Arguments.of(
+                "IDIDDD",
+                intArrayOf(1, 3, 2, 7, 6, 5, 4),
+            ),
+            Arguments.of(
+                "IDIDID",
+                intArrayOf(1, 3, 2, 5, 4, 7, 6),
+            ),
+            Arguments.of(
+                "IDIDIDID",
+                intArrayOf(1, 3, 2, 5, 4, 7, 6, 9, 8),
+            ),
+            Arguments.of(
+                "IDIDIDIDID",
+                intArrayOf(1, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10),
+            ),
+            Arguments.of(
+                "IDIDIDIDIDID",
+                intArrayOf(1, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12),
+            ),
+            Arguments.of(
+                "IDIDIDIDIDIDID",
+                intArrayOf(1, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `find permutation test`(s: String, expected: IntArray) {
-        val actual = strategy.perform(s)
+    fun `find permutation test`(str: String, expected: IntArray) {
+        val actual = strategy.invoke(str)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class FindPermutationStackTest : FindPermutationTest<FindPermutationStack>(FindPermutationStack())
-internal class FindPermutationReversingTest : FindPermutationTest<FindPermutationReversing>(FindPermutationReversing())
-internal class FindPermutationTwoPointersTest :
+class FindPermutationStackTest : FindPermutationTest<FindPermutationStack>(FindPermutationStack())
+class FindPermutationReversingTest : FindPermutationTest<FindPermutationReversing>(FindPermutationReversing())
+class FindPermutationTwoPointersTest :
     FindPermutationTest<FindPermutationTwoPointers>(FindPermutationTwoPointers())

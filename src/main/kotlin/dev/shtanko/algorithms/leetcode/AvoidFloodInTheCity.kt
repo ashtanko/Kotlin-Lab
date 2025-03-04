@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.StraightForward
+import dev.shtanko.algorithms.annotations.level.Medium
 import java.util.TreeSet
 
-interface AvoidFloodStrategy {
-    fun perform(rains: IntArray): IntArray
+/**
+ * 1488. Avoid Flood in The City
+ * @see <a href="https://leetcode.com/problems/avoid-flood-in-the-city/">Source</a>
+ */
+@Medium("https://leetcode.com/problems/avoid-flood-in-the-city")
+fun interface AvoidFlood {
+    operator fun invoke(rains: IntArray): IntArray
 }
 
-class AvoidFloodTree : AvoidFloodStrategy {
-    override fun perform(rains: IntArray): IntArray {
+class AvoidFloodTree : AvoidFlood {
+    override operator fun invoke(rains: IntArray): IntArray {
         val full: MutableMap<Int, Int> = HashMap() // last days that is full
 
         val drain: TreeSet<Int> = TreeSet() // storage days to be used for drain
@@ -51,11 +58,11 @@ class AvoidFloodTree : AvoidFloodStrategy {
     }
 }
 
-class AvoidFloodSimple : AvoidFloodStrategy {
-
+@StraightForward
+class AvoidFloodSimple : AvoidFlood {
     private val empty = IntArray(0)
 
-    override fun perform(rains: IntArray): IntArray {
+    override operator fun invoke(rains: IntArray): IntArray {
         val ans = IntArray(rains.size)
         val n: Int = rains.size
         val fullLakes: MutableMap<Int, Int> = HashMap()

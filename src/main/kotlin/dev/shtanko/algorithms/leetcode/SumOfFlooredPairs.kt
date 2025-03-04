@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,27 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import kotlin.math.min
 
 /**
  * 1862. Sum of Floored Pairs
- * @link https://leetcode.com/problems/sum-of-floored-pairs/
+ * @see <a href="https://leetcode.com/problems/sum-of-floored-pairs/">Source</a>
  */
-interface SumOfFlooredPairs {
-    fun perform(nums: IntArray): Int
+fun interface SumOfFlooredPairs {
+    operator fun invoke(nums: IntArray): Int
 }
 
+/**
+ * Implementation of SumOfFlooredPairs using a brute force approach.
+ */
 class SumOfFlooredPairsBF : SumOfFlooredPairs {
-    override fun perform(nums: IntArray): Int {
+    /**
+     * Calculates the sum of floored pairs using a brute force approach.
+     * @param nums The array of integers.
+     * @return The sum of floored pairs.
+     */
+    override operator fun invoke(nums: IntArray): Int {
         val counts = IntArray(MAX + 1)
         for (num in nums) {
             ++counts[num]
@@ -58,8 +67,17 @@ class SumOfFlooredPairsBF : SumOfFlooredPairs {
     }
 }
 
+/**
+ * Another implementation of SumOfFlooredPairs using a different brute force approach.
+ */
 class SumOfFlooredPairsBF2 : SumOfFlooredPairs {
-    override fun perform(nums: IntArray): Int {
+    /**
+     * Calculates the sum of floored pairs using a different brute force approach.
+     * @param nums The array of integers.
+     * @return The sum of floored pairs.
+     */
+    override operator fun invoke(nums: IntArray): Int {
+        if (nums.isEmpty()) return 0
         val max: Int = nums.max()
         val preSum = IntArray(max + 1)
         for (num in nums) preSum[num]++

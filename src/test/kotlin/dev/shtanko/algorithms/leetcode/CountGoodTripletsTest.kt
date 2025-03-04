@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class CountGoodTripletsTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class CountGoodTripletsTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -48,12 +48,26 @@ internal class CountGoodTripletsTest {
                 1,
                 0,
             ),
+            Arguments.of(
+                intArrayOf(7, 3, 7, 3, 12, 1, 12, 2, 3),
+                5,
+                8,
+                1,
+                12,
+            ),
+            Arguments.of(
+                intArrayOf(3, 3, 2, 2, 3, 2, 2, 1),
+                6,
+                5,
+                15,
+                56,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `count good triplets test`(arr: IntArray, a: Int, b: Int, c: Int, expected: Int) {
+    fun `count good triplets test`(arr: IntArray, a: Int, b: Int, c: Int, expected: Int) {
         val actual = countGoodTriplets(arr, a, b, c)
         assertEquals(expected, actual)
     }

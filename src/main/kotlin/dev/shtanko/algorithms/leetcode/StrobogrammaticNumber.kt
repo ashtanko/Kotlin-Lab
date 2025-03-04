@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@ package dev.shtanko.algorithms.leetcode
 /**
  * 246. Strobogrammatic Number
  */
-interface StrobogrammaticNumber {
-    fun perform(num: String): Boolean
+fun interface StrobogrammaticNumber {
+    operator fun invoke(num: String): Boolean
 }
 
 /**
@@ -29,7 +29,7 @@ interface StrobogrammaticNumber {
  * Space complexity : O(N).
  */
 class StrobogrammaticRotated : StrobogrammaticNumber {
-    override fun perform(num: String): Boolean {
+    override operator fun invoke(num: String): Boolean {
         val rotatedDigits = charArrayOf('0', '1', '\u0000', '\u0000', '\u0000', '\u0000', '9', '\u0000', '8', '6')
         val rotatedStringBuilder = StringBuilder()
         for (i in num.length - 1 downTo 0) {
@@ -49,7 +49,7 @@ class StrobogrammaticRotated : StrobogrammaticNumber {
  * Space complexity : O(1).
  */
 class StrobogrammaticTwoPointers : StrobogrammaticNumber {
-    override fun perform(num: String): Boolean {
+    override operator fun invoke(num: String): Boolean {
         val rotatedDigits: Map<Char, Char> = hashMapOf('0' to '0', '1' to '1', '6' to '9', '8' to '8', '9' to '6')
 
         var left = 0

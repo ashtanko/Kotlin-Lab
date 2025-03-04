@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 557. Reverse Words in a String III
- * link https://leetcode.com/problems/reverse-words-in-a-string-iii/
+ * @see <a href="https://leetcode.com/problems/reverse-words-in-a-string-iii">Source</a>
  */
-interface ReverseWords3 {
-    fun perform(s: String): String
+fun interface ReverseWords3 {
+    operator fun invoke(s: String): String
 }
 
 class ReverseWords3BruteForce : ReverseWords3 {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val sb = StringBuilder()
         val sp = s.split(" ")
 
@@ -38,7 +38,7 @@ class ReverseWords3BruteForce : ReverseWords3 {
 }
 
 class ReverseWords3BruteForce2 : ReverseWords3 {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val words = split(s)
         val res = StringBuilder()
         for (word in words) res.append(reverse(word) + " ")
@@ -68,7 +68,7 @@ class ReverseWords3BruteForce2 : ReverseWords3 {
 }
 
 class ReverseWords3SB : ReverseWords3 {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val result = StringBuilder()
         val word = StringBuilder()
         for (i in s.indices) {
@@ -86,7 +86,7 @@ class ReverseWords3SB : ReverseWords3 {
 }
 
 class ReverseWords3TwoPointers : ReverseWords3 {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         var i = 0
         var j: Int
         val n: Int = s.length

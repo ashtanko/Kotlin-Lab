@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,17 +19,17 @@ package dev.shtanko.algorithms.leetcode
 import java.util.LinkedList
 import java.util.Stack
 
-interface MergeIntervalsStrategy {
-    fun perform(intervals: Array<IntArray>): Array<IntArray>
+fun interface MergeIntervals {
+    operator fun invoke(intervals: Array<IntArray>): Array<IntArray>
 }
 
-class MergeIntervalsConnectedComponents : MergeIntervalsStrategy {
+class MergeIntervalsConnectedComponents : MergeIntervals {
 
     private var graph: MutableMap<IntArray, MutableList<IntArray>> = HashMap()
     private var nodesInComp: MutableMap<Int, MutableList<IntArray>> = HashMap()
     private var visited: MutableSet<IntArray> = HashSet()
 
-    override fun perform(intervals: Array<IntArray>): Array<IntArray> {
+    override operator fun invoke(intervals: Array<IntArray>): Array<IntArray> {
         return merge(intervals)
     }
 
@@ -72,7 +72,7 @@ class MergeIntervalsConnectedComponents : MergeIntervalsStrategy {
     private fun markComponentDFS(start: IntArray, compNumber: Int) {
         val stack: Stack<IntArray> = Stack()
         stack.add(start)
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val node: IntArray = stack.pop()
             if (!visited.contains(node)) {
                 visited.add(node)
@@ -113,9 +113,9 @@ class MergeIntervalsConnectedComponents : MergeIntervalsStrategy {
     }
 }
 
-class MergeIntervalsSorting : MergeIntervalsStrategy {
+class MergeIntervalsSorting : MergeIntervals {
 
-    override fun perform(intervals: Array<IntArray>): Array<IntArray> {
+    override operator fun invoke(intervals: Array<IntArray>): Array<IntArray> {
         val i = intervals.toList().sortedWith(IntervalComparator())
         val merged = LinkedList<IntArray>()
         for (interval in i) {

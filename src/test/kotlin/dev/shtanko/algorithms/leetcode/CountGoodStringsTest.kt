@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,13 +29,14 @@ abstract class CountGoodStringsTest<out T : CountGoodStrings>(private val strate
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(3, 3, 1, 1, 8),
             Arguments.of(2, 3, 1, 2, 5),
+            Arguments.of(50, 100, 25, 25, 28),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `count good strings test`(low: Int, high: Int, zero: Int, one: Int, expected: Int) {
-        val actual = strategy.perform(low, high, zero, one)
+        val actual = strategy.invoke(low, high, zero, one)
         assertThat(actual).isEqualTo(expected)
     }
 }

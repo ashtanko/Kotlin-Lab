@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface LargestUniqueNumber {
-    fun perform(arr: IntArray): Int
+fun interface LargestUniqueNumber {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
@@ -26,7 +26,7 @@ interface LargestUniqueNumber {
  */
 class LargestUniqueNumberBruteForce : LargestUniqueNumber {
 
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         var res = -1
         val temp = IntArray(ARR_SIZE)
         for (i in arr.indices) {
@@ -51,7 +51,7 @@ class LargestUniqueNumberBruteForce : LargestUniqueNumber {
  * Space complexity: O(n).
  */
 class LargestUniqueNumberHashMap : LargestUniqueNumber {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val seen: MutableMap<Int, Int> = HashMap()
         for (i in arr.indices) {
             seen[arr[i]] = seen.getOrDefault(arr[i], 0) + 1

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,10 +21,10 @@ import kotlin.math.max
 
 /**
  * 740. Delete and Earn
- * @link https://leetcode.com/problems/delete-and-earn/
+ * @see <a href="https://leetcode.com/problems/delete-and-earn/">Source</a>
  */
-interface DeleteAndEarn {
-    fun perform(nums: IntArray): Int
+fun interface DeleteAndEarn {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
@@ -35,7 +35,7 @@ class DeleteAndEarnTopDown : DeleteAndEarn {
     private val points = HashMap<Int, Int>()
     private val cache = HashMap<Int, Int>()
 
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var maxNumber = 0
 
         // Precompute how many points we gain from taking an element
@@ -70,7 +70,7 @@ class DeleteAndEarnTopDown : DeleteAndEarn {
  * Approach 2: Bottom-Up Dynamic Programming
  */
 class DeleteAndEarnBottomUp : DeleteAndEarn {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         if (nums.isEmpty()) return 0
         val points = HashMap<Int, Int>()
         var maxNumber = 0
@@ -99,7 +99,7 @@ class DeleteAndEarnBottomUp : DeleteAndEarn {
  * Approach 3: Space Optimized Bottom-Up Dynamic Programming
  */
 class DeleteAndEarnBottomUpOpt : DeleteAndEarn {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var maxNumber = 0
         val points = HashMap<Int, Int>()
 
@@ -127,7 +127,7 @@ class DeleteAndEarnBottomUpOpt : DeleteAndEarn {
  * Approach 4: Iterate Over Elements
  */
 class DeleteAndEarnIterative : DeleteAndEarn {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val points = HashMap<Int, Int>()
 
         // Precompute how many points we gain from taking an element
@@ -146,7 +146,7 @@ class DeleteAndEarnIterative : DeleteAndEarn {
             val temp = oneBack
             if (currentElement == elements[i - 1] + 1) {
                 // The 2 elements are adjacent, cannot take both - apply normal recurrence
-                oneBack = max(oneBack, twoBack + points[currentElement]!!)
+                oneBack = max(oneBack, twoBack + points.getOrDefault(currentElement, 0))
             } else {
                 // Otherwise, we don't need to worry about adjacent deletions
                 oneBack += points[currentElement] ?: 0
@@ -159,7 +159,7 @@ class DeleteAndEarnIterative : DeleteAndEarn {
 }
 
 class DeleteAndEarnBest : DeleteAndEarn {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var maxNumber = 0
         val points = HashMap<Int, Int>()
 
@@ -186,9 +186,9 @@ class DeleteAndEarnBest : DeleteAndEarn {
                 val currentElement = elements[i]
                 val temp = oneBack
                 if (currentElement == elements[i - 1] + 1) {
-                    oneBack = max(oneBack, twoBack + points[currentElement]!!)
+                    oneBack = max(oneBack, twoBack + points.getOrDefault(currentElement, 0))
                 } else {
-                    oneBack += points[currentElement]!!
+                    oneBack += points.getOrDefault(currentElement, 0)
                 }
                 twoBack = temp
             }

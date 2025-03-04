@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,14 @@ import kotlin.math.min
 
 /**
  * 1129. Shortest Path with Alternating Colors
- * @link https://leetcode.com/problems/shortest-path-with-alternating-colors/
+ * @see <a href="https://leetcode.com/problems/shortest-path-with-alternating-colors/">Source</a>
  */
-interface ShortestAlternatingPaths {
-    fun perform(n: Int, redEdges: Array<IntArray>, blueEdges: Array<IntArray>): IntArray
+fun interface ShortestAlternatingPaths {
+    operator fun invoke(n: Int, redEdges: Array<IntArray>, blueEdges: Array<IntArray>): IntArray
 }
 
 class ShortestAlternatingPathsBFS : ShortestAlternatingPaths {
-    override fun perform(n: Int, redEdges: Array<IntArray>, blueEdges: Array<IntArray>): IntArray {
+    override operator fun invoke(n: Int, redEdges: Array<IntArray>, blueEdges: Array<IntArray>): IntArray {
         val graph: Array<Array<MutableSet<Int>>> = Array<Array<MutableSet<Int>>>(n) {
             Array(2) { HashSet() }
         }
@@ -57,7 +57,7 @@ class ShortestAlternatingPathsBFS : ShortestAlternatingPaths {
         q.offer(intArrayOf(0, 0))
         q.offer(intArrayOf(0, 1))
 
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val cur: IntArray = q.poll()
             val ind = cur[0]
             val col = cur[1]

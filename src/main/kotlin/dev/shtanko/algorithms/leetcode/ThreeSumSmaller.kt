@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,12 +17,12 @@
 package dev.shtanko.algorithms.leetcode
 
 // 3Sum Smaller
-interface ThreeSumSmallerStrategy {
-    fun perform(nums: IntArray, target: Int): Int
+fun interface ThreeSumSmallerStrategy {
+    operator fun invoke(nums: IntArray, target: Int): Int
 }
 
 class ThreeSumSmallerBinarySearch : ThreeSumSmallerStrategy {
-    override fun perform(nums: IntArray, target: Int): Int {
+    override operator fun invoke(nums: IntArray, target: Int): Int {
         nums.sort()
         var sum = 0
         for (i in 0 until nums.size - 2) {
@@ -56,7 +56,7 @@ class ThreeSumSmallerBinarySearch : ThreeSumSmallerStrategy {
 }
 
 class ThreeSumSmallerTwoPointers : ThreeSumSmallerStrategy {
-    override fun perform(nums: IntArray, target: Int): Int {
+    override operator fun invoke(nums: IntArray, target: Int): Int {
         nums.sort()
         var sum = 0
         for (i in 0 until nums.size - 2) {

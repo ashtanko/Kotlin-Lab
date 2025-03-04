@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class BinaryWatchTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class BinaryWatchTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 2,
@@ -85,14 +85,26 @@ internal class BinaryWatchTest {
                 1,
                 listOf("1:00", "2:00", "4:00", "8:00", "0:01", "0:02", "0:04", "0:08", "0:16", "0:32"),
             ),
+            Arguments.of(
+                8,
+                listOf(
+                    "7:31",
+                    "7:47",
+                    "7:55",
+                    "7:59",
+                    "11:31",
+                    "11:47",
+                    "11:55",
+                    "11:59",
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `binary watch test`(n: Int, expected: List<String>) {
-        val actual = BinaryWatch.perform(n)
-        println(actual)
+    fun `binary watch test`(num: Int, expected: List<String>) {
+        val actual = BinaryWatch.invoke(num)
         assertThat(actual, containsInAnyOrder(*expected.toTypedArray()))
     }
 }

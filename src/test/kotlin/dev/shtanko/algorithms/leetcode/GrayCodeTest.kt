@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,24 +34,24 @@ class GrayCodeTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `gray code backtracking test`(n: Int, expected: List<Int>) {
-        assertGrayCode(GrayCode::backtracking, n, expected)
+    fun `gray code backtracking test`(num: Int, expected: List<Int>) {
+        assertGrayCode(GrayCode::backtracking, num, expected)
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `gray code recursion test`(n: Int, expected: List<Int>) {
-        assertGrayCode(GrayCode::recursion, n, expected)
+    fun `gray code recursion test`(num: Int, expected: List<Int>) {
+        assertGrayCode(GrayCode::recursion, num, expected)
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `gray code iteration test`(n: Int, expected: List<Int>) {
-        assertGrayCode(GrayCode::iteration, n, expected)
+    fun `gray code iteration test`(num: Int, expected: List<Int>) {
+        assertGrayCode(GrayCode::iteration, num, expected)
     }
 
-    private fun assertGrayCode(f: (Int) -> List<Int>, n: Int, expected: List<Int>) {
-        val actual = f.invoke(n)
+    private fun assertGrayCode(f: (Int) -> List<Int>, num: Int, expected: List<Int>) {
+        val actual = f.invoke(num)
         assertThat(actual).containsAll(expected)
     }
 }

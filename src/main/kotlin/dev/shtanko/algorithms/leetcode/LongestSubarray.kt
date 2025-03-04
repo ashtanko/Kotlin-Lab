@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,35 +20,35 @@ import kotlin.math.max
 
 /**
  * 1493. Longest Subarray of 1's After Deleting One Element
- * @link https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
+ * @see <a href="https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/">Source</a>
  */
-interface LongestSubarray {
-    fun perform(nums: IntArray): Int
+fun interface LongestSubarray {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
  * Sliding window with at most one 0 inside.
  */
 class LongestSubarraySlidingWindow : LongestSubarray {
-    override fun perform(nums: IntArray): Int {
-        var i = 0
-        var k = 1
-        var res = 0
-        var j = 0
-        while (j < nums.size) {
-            if (nums[j] == 0) {
-                k--
+    override operator fun invoke(nums: IntArray): Int {
+        var startIndex = 0
+        var remainingZeros = 1
+        var result = 0
+        var endIndex = 0
+        while (endIndex < nums.size) {
+            if (nums[endIndex] == 0) {
+                remainingZeros--
             }
-            while (k < 0) {
-                if (nums[i] == 0) {
-                    k++
+            while (remainingZeros < 0) {
+                if (nums[startIndex] == 0) {
+                    remainingZeros++
                 }
-                i++
+                startIndex++
             }
-            res = max(res, j - i)
-            ++j
+            result = max(result, endIndex - startIndex)
+            ++endIndex
         }
-        return res
+        return result
     }
 }
 
@@ -56,15 +56,18 @@ class LongestSubarraySlidingWindow : LongestSubarray {
  * Sliding window that size doesn't shrink.
  */
 class LongestSubarraySlidingWindow2 : LongestSubarray {
-    override fun perform(nums: IntArray): Int {
-        var i = 0
-        var k = 1
-        var j = 0
-        while (j < nums.size) {
-            if (nums[j] == 0) k--
-            if (k < 0 && nums[i++] == 0) k++
-            ++j
+    override operator fun invoke(nums: IntArray): Int {
+        if (nums.isEmpty()) {
+            return 0
         }
-        return j - i - 1
+        var startIndex = 0
+        var remainingZeros = 1
+        var endIndex = 0
+        while (endIndex < nums.size) {
+            if (nums[endIndex] == 0) remainingZeros--
+            if (remainingZeros < 0 && nums[startIndex++] == 0) remainingZeros++
+            ++endIndex
+        }
+        return endIndex - startIndex - 1
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,20 +20,20 @@ import java.util.PriorityQueue
 
 /**
  * 451. Sort Characters By Frequency
- * @link https://leetcode.com/problems/sort-characters-by-frequency/
+ * @see <a href="https://leetcode.com/problems/sort-characters-by-frequency/">Source</a>
  */
-interface FrequencySort {
-    fun perform(s: String): String
+fun interface FrequencySort {
+    operator fun invoke(str: String): String
 }
 
 class FrequencyBucketSort : FrequencySort {
-    override fun perform(s: String): String {
+    override operator fun invoke(str: String): String {
         val map: MutableMap<Char, Int> = HashMap()
-        for (c in s.toCharArray()) {
-            map[c] = map.getOrDefault(c, 0) + 1
+        for (character in str.toCharArray()) {
+            map[character] = map.getOrDefault(character, 0) + 1
         }
 
-        val bucket: Array<MutableList<Char>> = Array(s.length + 1) {
+        val bucket: Array<MutableList<Char>> = Array(str.length + 1) {
             mutableListOf()
         }
         for (key in map.keys) {
@@ -43,9 +43,9 @@ class FrequencyBucketSort : FrequencySort {
 
         val sb = StringBuilder()
         for (pos in bucket.indices.reversed()) {
-            for (c in bucket[pos]) {
+            for (character in bucket[pos]) {
                 for (i in 0 until pos) {
-                    sb.append(c)
+                    sb.append(character)
                 }
             }
         }
@@ -54,17 +54,17 @@ class FrequencyBucketSort : FrequencySort {
 }
 
 class FrequencySortPQ : FrequencySort {
-    override fun perform(s: String): String {
+    override operator fun invoke(str: String): String {
         val map: MutableMap<Char, Int> = HashMap()
-        for (c in s.toCharArray()) {
-            map[c] = map.getOrDefault(c, 0) + 1
+        for (character in str.toCharArray()) {
+            map[character] = map.getOrDefault(character, 0) + 1
         }
 
         val pq: PriorityQueue<Map.Entry<Char, Int>> = PriorityQueue { a, b -> b.value - a.value }
         pq.addAll(map.entries)
 
         val sb = StringBuilder()
-        while (!pq.isEmpty()) {
+        while (pq.isNotEmpty()) {
             val (key, value) = pq.poll()
             for (i in 0 until value) sb.append(key)
         }

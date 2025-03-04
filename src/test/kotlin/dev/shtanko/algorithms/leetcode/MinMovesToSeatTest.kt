@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,28 @@ abstract class MinMovesToSeatTest<out T : MinMovesToSeat>(private val strategy: 
                 intArrayOf(1, 3, 2, 6),
                 4,
             ),
+            Arguments.of(
+                intArrayOf(1, 100000),
+                intArrayOf(1, 100000),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(),
+                intArrayOf(),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                intArrayOf(1),
+                0,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `min moves to seat test`(seats: IntArray, students: IntArray, expected: Int) {
-        val actual = strategy.perform(seats, students)
+        val actual = strategy.invoke(seats, students)
         assertThat(actual).isEqualTo(expected)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface SubarraySumStrategy {
-    fun perform(nums: IntArray, k: Int): Int
+fun interface SubarraySumStrategy {
+    operator fun invoke(nums: IntArray, k: Int): Int
 }
 
 class SubarraySumBruteForce : SubarraySumStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var count = 0
         for (start in nums.indices) {
             for (end in start + 1..nums.size) {
@@ -35,7 +35,7 @@ class SubarraySumBruteForce : SubarraySumStrategy {
 }
 
 class SubarraySumUsingCumulativeSum : SubarraySumStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var count = 0
         val sum = IntArray(nums.size + 1)
         sum[0] = 0
@@ -50,7 +50,7 @@ class SubarraySumUsingCumulativeSum : SubarraySumStrategy {
 }
 
 class SubarraySumWithoutSpace : SubarraySumStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var count = 0
         for (start in nums.indices) {
             var sum = 0
@@ -64,14 +64,14 @@ class SubarraySumWithoutSpace : SubarraySumStrategy {
 }
 
 class SubarraySumUsingHashmap : SubarraySumStrategy {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var count = 0
         var sum = 0
         val map: HashMap<Int, Int> = HashMap()
         map[0] = 1
         for (element in nums) {
             sum += element
-            if (map.containsKey(sum - k)) count += map[sum - k]!!
+            if (map.containsKey(sum - k)) count += map.getOrDefault(sum - k, 0)
             map[sum] = map.getOrDefault(sum, 0) + 1
         }
         return count

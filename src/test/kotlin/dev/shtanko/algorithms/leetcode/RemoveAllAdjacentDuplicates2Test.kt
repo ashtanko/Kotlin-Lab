@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class RemoveAllAdjacentDuplicates2Test<out T : RemoveAllAdjacentDuplicatesStrategy2>(private val strategy: T) {
+abstract class RemoveAllAdjacentDuplicates2Test<out T : RemoveAllAdjacentDuplicatesStrategy2>(private val strategy: T) {
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
@@ -36,23 +36,23 @@ internal abstract class RemoveAllAdjacentDuplicates2Test<out T : RemoveAllAdjace
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `remove all adjacent duplicates in string test`(s: String, k: Int, expected: String) {
-        val actual = strategy.perform(s, k)
+    fun `remove all adjacent duplicates in string test`(s: String, k: Int, expected: String) {
+        val actual = strategy.invoke(s, k)
         assertEquals(expected, actual)
     }
 }
 
-internal class RemoveDuplicates2BruteForceTest :
+class RemoveDuplicates2BruteForceTest :
     RemoveAllAdjacentDuplicates2Test<RemoveDuplicates2BruteForce>(RemoveDuplicates2BruteForce())
 
-internal class RemoveDuplicates2MemoiseTest :
+class RemoveDuplicates2MemoiseTest :
     RemoveAllAdjacentDuplicates2Test<RemoveDuplicates2Memoise>(RemoveDuplicates2Memoise())
 
-internal class RemoveDuplicates2StackTest :
+class RemoveDuplicates2StackTest :
     RemoveAllAdjacentDuplicates2Test<RemoveDuplicates2Stack>(RemoveDuplicates2Stack())
 
-internal class RemoveDuplicates2StackReconstructionTest :
+class RemoveDuplicates2StackReconstructionTest :
     RemoveAllAdjacentDuplicates2Test<RemoveDuplicates2StackReconstruction>(RemoveDuplicates2StackReconstruction())
 
-internal class RemoveDuplicates2TwoPointersTest :
+class RemoveDuplicates2TwoPointersTest :
     RemoveAllAdjacentDuplicates2Test<RemoveDuplicates2TwoPointers>(RemoveDuplicates2TwoPointers())

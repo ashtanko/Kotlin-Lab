@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,29 +22,29 @@ import kotlin.math.max
 
 /**
  * 1425. Constrained Subsequence Sum
- * @link https://leetcode.com/problems/constrained-subsequence-sum/
+ * @see <a href="https://leetcode.com/problems/constrained-subsequence-sum/">Source</a>
  */
-interface ConstrainedSubsequenceSum {
-    fun perform(nums: IntArray, k: Int): Int
+fun interface ConstrainedSubsequenceSum {
+    operator fun invoke(nums: IntArray, k: Int): Int
 }
 
 class ConstrainedSubsequenceSumDeque : ConstrainedSubsequenceSum {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         var res = nums.firstOrNull() ?: Int.MIN_VALUE
         val q: Deque<Int> = LinkedList()
         for (i in nums.indices) {
-            nums[i] += if (!q.isEmpty()) q.peek() else 0
+            nums[i] += if (q.isNotEmpty()) q.peek() else 0
             res = res.coerceAtLeast(nums[i])
-            while (!q.isEmpty() && nums[i] > q.peekLast()) q.pollLast()
+            while (q.isNotEmpty() && nums[i] > q.peekLast()) q.pollLast()
             if (nums[i] > 0) q.offer(nums[i])
-            if (i >= k && !q.isEmpty() && q.peek() == nums[i - k]) q.poll()
+            if (i >= k && q.isNotEmpty() && q.peek() == nums[i - k]) q.poll()
         }
         return res
     }
 }
 
 class ConstrainedSubsequenceSumDP : ConstrainedSubsequenceSum {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         val n: Int = nums.size
         val dp = IntArray(n)
         var ans = Int.MIN_VALUE
@@ -61,7 +61,7 @@ class ConstrainedSubsequenceSumDP : ConstrainedSubsequenceSum {
 }
 
 class ConstrainedSubsequenceSumQueue : ConstrainedSubsequenceSum {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         val n: Int = nums.size
         val dp = IntArray(n)
         val deque: Deque<Int> = LinkedList()
@@ -70,7 +70,7 @@ class ConstrainedSubsequenceSumQueue : ConstrainedSubsequenceSum {
             val max = max(0, if (deque.isEmpty()) 0 else dp[deque.peekFirst()])
             dp[i] = nums[i] + max
             ans = max(ans, dp[i])
-            while (!deque.isEmpty() && dp[i] >= dp[deque.peekLast()]) {
+            while (deque.isNotEmpty() && dp[i] >= dp[deque.peekLast()]) {
                 deque.pollLast()
             }
             deque.addLast(i)
@@ -86,7 +86,7 @@ class ConstrainedSubsequenceSumQueue : ConstrainedSubsequenceSum {
  * Solution 3: DP + Decreasing Monotonic Queue + Optimized Space
  */
 class ConstrainedSubsequenceSumQueueOpt : ConstrainedSubsequenceSum {
-    override fun perform(nums: IntArray, k: Int): Int {
+    override operator fun invoke(nums: IntArray, k: Int): Int {
         val n: Int = nums.size
         val deque: Deque<Int> = LinkedList()
         var ans = Int.MIN_VALUE
@@ -94,7 +94,7 @@ class ConstrainedSubsequenceSumQueueOpt : ConstrainedSubsequenceSum {
             val max: Int = max(0, if (deque.isEmpty()) 0 else nums[deque.peekFirst()])
             nums[i] += max
             ans = max(ans, nums[i])
-            while (!deque.isEmpty() && nums[i] >= nums[deque.peekLast()]) {
+            while (deque.isNotEmpty() && nums[i] >= nums[deque.peekLast()]) {
                 deque.pollLast()
             }
             deque.addLast(i)

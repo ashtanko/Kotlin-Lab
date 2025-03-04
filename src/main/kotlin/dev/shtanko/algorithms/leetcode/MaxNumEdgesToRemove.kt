@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.UnionFind
+
 /**
  * 1579. Remove Max Number of Edges to Keep Graph Fully Traversable
- * @link https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/
+ * @see <a href="https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable">Source</a>
  */
-interface MaxNumEdgesToRemove {
-    fun perform(n: Int, edges: Array<IntArray>): Int
+fun interface MaxNumEdgesToRemove {
+    operator fun invoke(n: Int, edges: Array<IntArray>): Int
 }
 
+@UnionFind
 class MaxNumEdgesToRemoveDSU : MaxNumEdgesToRemove {
-    override fun perform(n: Int, edges: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, edges: Array<IntArray>): Int {
         // Different objects for Alice and Bob.
         val alice = UnionFind(n)
         val bob = UnionFind(n)

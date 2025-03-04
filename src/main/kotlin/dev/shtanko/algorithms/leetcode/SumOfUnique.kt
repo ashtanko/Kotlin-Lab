@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Sum of Unique Elements
- * @link https://leetcode.com/problems/sum-of-unique-elements
+ * @see <a href="https://leetcode.com/problems/sum-of-unique-elements">Source</a>
  */
-interface SumOfUnique {
-    fun perform(nums: IntArray): Int
+fun interface SumOfUnique {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
  * Brute Force
  */
 class SumOfUniqueBruteForce : SumOfUnique {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val unique = IntArray(LIMIT) { 0 }
         var ans = 0
         for (num in nums) {
@@ -52,7 +52,7 @@ class SumOfUniqueBruteForce : SumOfUnique {
  * Hashmap, single loop
  */
 class SumOfUniqueHashMap : SumOfUnique {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var sum = 0
         val map: MutableMap<Int, Int> = HashMap()
         for (num in nums) {
@@ -75,5 +75,5 @@ class SumOfUniqueHashMap : SumOfUnique {
  * Filter
  */
 class SumOfUniqueFilter : SumOfUnique {
-    override fun perform(nums: IntArray): Int = nums.filter { n -> nums.count { it == n } < 2 }.sum()
+    override operator fun invoke(nums: IntArray): Int = nums.filter { n -> nums.count { it == n } < 2 }.sum()
 }

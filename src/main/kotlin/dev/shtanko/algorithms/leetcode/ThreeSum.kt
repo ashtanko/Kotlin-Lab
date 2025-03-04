@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 3 Sum.
- * @link https://leetcode.com/problems/3sum/
+ * @see <a href="https://leetcode.com/problems/3sum/">Source</a>
  */
-interface ThreeSum {
-    fun perform(nums: IntArray): List<List<Int>>
+fun interface ThreeSum {
+    operator fun invoke(nums: IntArray): List<List<Int>>
 }
 
 /**
@@ -30,7 +30,7 @@ interface ThreeSum {
  * Space Complexity: O(n^2).
  */
 class ThreeSumTwoPointers : ThreeSum {
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         nums.sort()
         val res: MutableList<List<Int>> = ArrayList<List<Int>>()
         var i = 0
@@ -72,7 +72,7 @@ class ThreeSumTwoPointers : ThreeSum {
  * Space Complexity: O(n^2).
  */
 class ThreeSumHashset : ThreeSum {
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         nums.sort()
         val res: MutableList<List<Int>> = ArrayList<List<Int>>()
         var i = 0
@@ -106,7 +106,7 @@ class ThreeSumHashset : ThreeSum {
  * Space Complexity: O(n).
  */
 class ThreeSumNoSort : ThreeSum {
-    override fun perform(nums: IntArray): List<List<Int>> {
+    override operator fun invoke(nums: IntArray): List<List<Int>> {
         val res: MutableSet<List<Int>> = HashSet()
         val dups: MutableSet<Int> = HashSet()
         val seen: MutableMap<Int, Int> = HashMap()

@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,10 +21,10 @@ import java.util.Queue
 
 /**
  * 1319. Number of Operations to Make Network Connected
- * @link https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+ * @see <a href="https://leetcode.com/problems/number-of-operations-to-make-network-connected/">Source</a>
  */
-interface MakeConnected {
-    fun perform(n: Int, connections: Array<IntArray>): Int
+fun interface MakeConnected {
+    operator fun invoke(n: Int, connections: Array<IntArray>): Int
 
     fun findParent(parent: IntArray, i: Int): Int {
         var i0 = i
@@ -37,7 +37,7 @@ interface MakeConnected {
  * ✔️ Solution 1a: Naive Union-Find ~ 23ms
  */
 class MakeConnectedNaiveUnionFind : MakeConnected {
-    override fun perform(n: Int, connections: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, connections: Array<IntArray>): Int {
         if (connections.size < n - 1) return -1 // To connect all nodes need at least n-1 edges
         val parent = IntArray(n)
         for (i in 0 until n) parent[i] = i
@@ -58,7 +58,7 @@ class MakeConnectedNaiveUnionFind : MakeConnected {
  * ✔️ Solution 1c: Union-Find with Path Compression and Union by Size ~ 3ms
  */
 class UnionBySizeMakeConnected : MakeConnected {
-    override fun perform(n: Int, connections: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, connections: Array<IntArray>): Int {
         if (connections.size < n - 1) return -1 // to connect all nodes need at least n-1 edges
 
         val parent = IntArray(n)
@@ -90,7 +90,7 @@ class UnionBySizeMakeConnected : MakeConnected {
  * ✔️ Solution 2: DFS ~ 11ms
  */
 class MakeConnectedDFS : MakeConnected {
-    override fun perform(n: Int, connections: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, connections: Array<IntArray>): Int {
         if (connections.size < n - 1) return -1 // To connect all nodes need at least n-1 edges
 
         val graph: Array<MutableList<Int>> = Array(n) { mutableListOf() }
@@ -119,7 +119,7 @@ class MakeConnectedDFS : MakeConnected {
  * ✔️ Solution 3: BFS ~ 12ms
  */
 class MakeConnectedBFS : MakeConnected {
-    override fun perform(n: Int, connections: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, connections: Array<IntArray>): Int {
         if (connections.size < n - 1) {
             return -1 // To connect all nodes need at least n-1 edges
         }
@@ -139,7 +139,7 @@ class MakeConnectedBFS : MakeConnected {
         visited[src] = true
         val q: Queue<Int> = LinkedList()
         q.offer(src)
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val u: Int = q.poll()
             for (v in graph[u]) {
                 if (!visited[v]) {

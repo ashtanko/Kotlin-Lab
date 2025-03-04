@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * 2452. Words Within Two Edits of Dictionary
- * @link https://leetcode.com/problems/words-within-two-edits-of-dictionary/
+ * @see <a href="https://leetcode.com/problems/words-within-two-edits-of-dictionary/">Source</a>
  */
-interface TwoEditWords {
-    fun perform(queries: Array<String>, dictionary: Array<String>): List<String>
+fun interface TwoEditWords {
+    operator fun invoke(queries: Array<String>, dictionary: Array<String>): List<String>
 }
 
 class TwoEditWordsBF : TwoEditWords {
-    override fun perform(queries: Array<String>, dictionary: Array<String>): List<String> {
+    override operator fun invoke(queries: Array<String>, dictionary: Array<String>): List<String> {
         val ans: MutableList<String> = ArrayList()
         for (query in queries) {
             for (word in dictionary) {
@@ -52,7 +54,7 @@ class TwoEditWordsBF : TwoEditWords {
 }
 
 class TwoEditWordsTrie : TwoEditWords {
-    override fun perform(queries: Array<String>, dictionary: Array<String>): List<String> {
+    override operator fun invoke(queries: Array<String>, dictionary: Array<String>): List<String> {
         val ans: MutableList<String> = ArrayList()
         for (word in dictionary) {
             insertWord(word)
@@ -97,7 +99,19 @@ class TwoEditWordsTrie : TwoEditWords {
     }
 
     private data class TNode(private var data: Char, var isEnd: Boolean = false) {
-        val children: Array<TNode?> = arrayOfNulls(26)
+        val children: Array<TNode?> = arrayOfNulls(ALPHABET_LETTERS_COUNT)
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as TNode
+
+            return children.contentEquals(other.children)
+        }
+
+        override fun hashCode(): Int {
+            return children.contentHashCode()
+        }
     }
 
     private val root = TNode('/')

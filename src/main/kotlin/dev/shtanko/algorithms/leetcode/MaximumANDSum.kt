@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.pow
 
 /**
  * 2172. Maximum AND Sum of Array
- * @link https://leetcode.com/problems/maximum-and-sum-of-array/
+ * @see <a href="https://leetcode.com/problems/maximum-and-sum-of-array/">Source</a>
  */
-interface MaximumANDSum {
-    fun perform(nums: IntArray, numSlots: Int): Int
+fun interface MaximumANDSum {
+    operator fun invoke(nums: IntArray, numSlots: Int): Int
 }
 
 class MaximumANDSumDP : MaximumANDSum {
-    override fun perform(nums: IntArray, numSlots: Int): Int {
+    override operator fun invoke(nums: IntArray, numSlots: Int): Int {
         val mask = 3.0.pow(numSlots.toDouble()).toInt() - 1
         val memo = IntArray(mask + 1)
         return dp(nums.size - 1, mask, numSlots, memo, nums)

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Counting Elements
- * @link https://leetcode.com/problems/counting-elements/
+ * @see <a href="https://leetcode.com/problems/counting-elements/">Source</a>
  */
-interface CountingElements {
-    fun perform(arr: IntArray): Int
+fun interface CountingElements {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
@@ -30,7 +30,7 @@ interface CountingElements {
  * Space complexity : O(1)
  */
 class CESearchWithArray : CountingElements {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         var count = 0
         for (x in arr) {
             if (x.plus(1).isInArray(arr)) {
@@ -60,7 +60,7 @@ class CESearchWithArray : CountingElements {
  * Space complexity : O(N).
  */
 class CESearchingWithHashSet : CountingElements {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val set = arr.toHashSet()
         var count = 0
         for (x in arr) {
@@ -79,7 +79,7 @@ class CESearchingWithHashSet : CountingElements {
  * Space complexity : varies from O(N) to O(1).
  */
 class CESearchingWithSortedArray : CountingElements {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         var count = 0
         var runLength = 1

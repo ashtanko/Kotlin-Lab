@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,11 +25,11 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class AverageOfLevelsInBinaryTreeStrategyTest<out T : AverageOfLevelsInBinaryTreeStrategy>(
+abstract class AverageOfLevelsInBinaryTreeStrategyTest<out T : AverageOfLevelsInBinaryTreeStrategy>(
     private val strategy: T,
 ) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(3).apply {
@@ -56,23 +56,83 @@ internal abstract class AverageOfLevelsInBinaryTreeStrategyTest<out T : AverageO
                 },
                 doubleArrayOf(2.0, 1.0),
             ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(4)
+                    }
+                    right = TreeNode(3).apply {
+                        right = TreeNode(5)
+                    }
+                },
+                doubleArrayOf(1.0, 2.5, 4.5),
+            ),
+            Arguments.of(
+                TreeNode(2147483647).apply {
+                    left = TreeNode(2147483647)
+                    right = TreeNode(2147483647)
+                },
+                doubleArrayOf(2147483647.0, 2147483647.0),
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(3).apply {
+                            left = TreeNode(4).apply {
+                                left = TreeNode(5)
+                            }
+                        }
+                    }
+                },
+                doubleArrayOf(1.0, 2.0, 3.0, 4.0, 5.0),
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        right = TreeNode(3)
+                    }
+                    right = TreeNode(2).apply {
+                        right = TreeNode(3)
+                    }
+                },
+                doubleArrayOf(1.0, 2.0, 3.0),
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(2).apply {
+                        left = TreeNode(3).apply {
+                            left = TreeNode(4).apply {
+                                left = TreeNode(5)
+                            }
+                        }
+                    }
+                    right = TreeNode(2).apply {
+                        right = TreeNode(3).apply {
+                            right = TreeNode(4).apply {
+                                right = TreeNode(5)
+                            }
+                        }
+                    }
+                },
+                doubleArrayOf(1.0, 2.0, 3.0, 4.0, 5.0),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `average of levels in binary tree test`(tree: TreeNode, expected: DoubleArray) {
-        val actual = strategy.perform(tree)
+    fun `average of levels in binary tree test`(tree: TreeNode, expected: DoubleArray) {
+        val actual = strategy.invoke(tree)
         assertThat(actual, equalTo(expected))
     }
 }
 
-internal class AverageOfLevelsInBinaryTreeDFSTest :
+class AverageOfLevelsInBinaryTreeDFSTest :
     AverageOfLevelsInBinaryTreeStrategyTest<AverageOfLevelsInBinaryTreeDFS>(
         AverageOfLevelsInBinaryTreeDFS(),
     )
 
-internal class AverageOfLevelsInBinaryTreeBFSTest :
+class AverageOfLevelsInBinaryTreeBFSTest :
     AverageOfLevelsInBinaryTreeStrategyTest<AverageOfLevelsInBinaryTreeBFS>(
         AverageOfLevelsInBinaryTreeBFS(),
     )

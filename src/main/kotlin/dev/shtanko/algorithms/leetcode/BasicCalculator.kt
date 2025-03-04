@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,11 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.level.Hard
 import java.util.Stack
 import kotlin.math.pow
 
-interface CalculationStrategy {
-    fun calculate(s: String): Int
+/**
+ * 224. Basic Calculator
+ * @see <a href="https://leetcode.com/problems/basic-calculator">Source</a>
+ */
+@Hard("https://leetcode.com/problems/basic-calculator")
+fun interface CalculationStrategy {
+    operator fun invoke(str: String): Int
 }
 
 class StackAndStringReversal : CalculationStrategy {
@@ -43,13 +50,13 @@ class StackAndStringReversal : CalculationStrategy {
         return res
     }
 
-    override fun calculate(s: String): Int {
+    override fun invoke(str: String): Int {
         var operand = 0
         var n = 0
         val stack = Stack<Any?>()
 
-        for (i in s.length - 1 downTo 0) {
-            val ch: Char = s[i]
+        for (i in str.length - 1 downTo 0) {
+            val ch: Char = str[i]
             if (Character.isDigit(ch)) {
                 // Forming the operand - in reverse order.
                 operand += DECIMAL.toDouble().pow(n.toDouble()).toInt() * (ch - '0')
@@ -87,15 +94,15 @@ class StackAndStringReversal : CalculationStrategy {
 }
 
 class StackAndNoStringReversal : CalculationStrategy {
-    override fun calculate(s: String): Int {
+    override fun invoke(str: String): Int {
         val stack = Stack<Int>()
         var operand = 0
         var result = 0 // For the on-going result
 
         var sign = 1 // 1 means positive, -1 means negative
 
-        for (i in s.indices) {
-            val ch: Char = s[i]
+        for (i in str.indices) {
+            val ch: Char = str[i]
             when {
                 Character.isDigit(ch) -> {
                     // Forming operand, since it could be more than one digit

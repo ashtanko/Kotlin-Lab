@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.min
 
 /**
  * 1986. Minimum Number of Work Sessions to Finish the Tasks
- * @link https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/
+ * @see <a href="https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/">Source</a>
  */
 fun interface MinSessions {
-    fun invoke(tasks: IntArray, sessionTime: Int): Int
+    operator fun invoke(tasks: IntArray, sessionTime: Int): Int
 }
 
 /**
@@ -39,7 +39,7 @@ class MinSessionsSfBitmaskDP : MinSessions {
         )
     }
 
-    override fun invoke(tasks: IntArray, sessionTime: Int): Int {
+    override operator fun invoke(tasks: IntArray, sessionTime: Int): Int {
         n = tasks.size
         this.sessionTime = sessionTime
         return dp(tasks, (1 shl n) - 1, 0)
@@ -74,7 +74,7 @@ class MinSessionsBitmask : MinSessions {
     var sessionTime: Int = 0
     var memo: Array<Pair<Int, Int>?> = arrayOfNulls(1 shl 14)
 
-    override fun invoke(tasks: IntArray, sessionTime: Int): Int {
+    override operator fun invoke(tasks: IntArray, sessionTime: Int): Int {
         n = tasks.size
         this.sessionTime = sessionTime
         return dp(tasks, (1 shl n) - 1).first

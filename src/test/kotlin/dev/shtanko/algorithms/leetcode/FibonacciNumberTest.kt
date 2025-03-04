@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,8 +28,8 @@ abstract class FibonacciNumberTest<out T : FibonacciStrategy>(private val strate
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> =
-            numberProvider().stream().map { (n: Int, expected: Long) ->
-                Arguments.of(n, expected)
+            numberProvider().stream().map { (num: Int, expected: Long) ->
+                Arguments.of(num, expected)
             }
 
         private fun numberProvider(): List<Pair<Int, Long>> = listOf(
@@ -83,8 +83,8 @@ abstract class FibonacciNumberTest<out T : FibonacciStrategy>(private val strate
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `fibonacci test`(n: Int, expected: Long) {
-        val actual = strategy.perform(n)
+    fun `fibonacci test`(num: Int, expected: Long) {
+        val actual = strategy.invoke(num)
         assertEquals(expected, actual)
     }
 }

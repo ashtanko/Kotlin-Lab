@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,17 +22,17 @@ import kotlin.math.min
 
 /**
  * Meeting Scheduler
- * @link https://leetcode.com/problems/meeting-scheduler/
+ * @see <a href="https://leetcode.com/problems/meeting-scheduler/">Source</a>
  */
-interface MeetingScheduler {
-    fun perform(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int>
+fun interface MeetingScheduler {
+    operator fun invoke(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int>
 }
 
 /**
  * Approach 1: Two pointers
  */
 class MSTwoPointers : MeetingScheduler {
-    override fun perform(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int> {
+    override operator fun invoke(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int> {
         slots1.sortWith { a, b -> a[0] - b[0] }
         slots2.sortWith { a, b -> a[0] - b[0] }
 
@@ -61,7 +61,7 @@ class MSTwoPointers : MeetingScheduler {
  * Approach 2: Heap
  */
 class MSHeap : MeetingScheduler {
-    override fun perform(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int> {
+    override operator fun invoke(slots1: Array<IntArray>, slots2: Array<IntArray>, duration: Int): List<Int> {
         val timeslots: PriorityQueue<IntArray> = PriorityQueue { slot1, slot2 -> slot1[0] - slot2[0] }
 
         for (slot in slots1) {

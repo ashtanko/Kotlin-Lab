@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,13 +43,23 @@ abstract class WordBreak2Test<out T : WordBreak2>(private val strategy: T) {
                 listOf("cats", "dog", "sand", "and", "cat"),
                 listOf<String>(),
             ),
+            Arguments.of(
+                "a",
+                listOf("a"),
+                listOf("a"),
+            ),
+            Arguments.of(
+                "cars",
+                listOf("car", "ca", "rs"),
+                listOf("ca rs"),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `word break test`(s: String, wordDict: List<String>, expected: List<String>) {
-        val actual = strategy.perform(s, wordDict)
+        val actual = strategy.invoke(s, wordDict)
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected)
     }
 }

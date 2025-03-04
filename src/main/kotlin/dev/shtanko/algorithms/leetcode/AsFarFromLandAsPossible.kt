@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,21 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.max
 import kotlin.math.min
 
 /**
  * 1162. As Far from Land as Possible
- * @link https://leetcode.com/problems/as-far-from-land-as-possible/
+ * @see <a href="https://leetcode.com/problems/as-far-from-land-as-possible/">Source</a>
  */
-interface AsFarFromLandAsPossible {
+@Medium(link = "https://leetcode.com/problems/as-far-from-land-as-possible")
+fun interface AsFarFromLandAsPossible {
     fun maxDistance(grid: Array<IntArray>): Int
 }
 
+@DP
 class AsFarFromLandAsPossibleDP : AsFarFromLandAsPossible {
     override fun maxDistance(grid: Array<IntArray>): Int {
         val n: Int = grid.size

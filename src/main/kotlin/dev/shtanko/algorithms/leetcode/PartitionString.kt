@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2405. Optimal Partition of String
- * @link https://leetcode.com/problems/optimal-partition-of-string/
+ * @see <a href="https://leetcode.com/problems/optimal-partition-of-string/">Source</a>
  */
-interface PartitionString {
-    fun perform(s: String): Int
+fun interface PartitionString {
+    operator fun invoke(s: String): Int
 }
 
 class PartitionStringBit : PartitionString {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var vis = 0
         var res = 1
 
@@ -42,7 +42,7 @@ class PartitionStringBit : PartitionString {
 }
 
 class PartitionStringSet : PartitionString {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         var ans = 1
         val st = HashSet<Char>()
         for (i in s.indices) {

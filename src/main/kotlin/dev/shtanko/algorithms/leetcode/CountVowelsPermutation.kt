@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,25 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.annotations.level.Hard
+
 /**
  * 1220. Count Vowels Permutation
- * @link https://leetcode.com/problems/count-vowels-permutation/
+ * @see <a href="https://leetcode.com/problems/count-vowels-permutation/">Source</a>
  */
-internal interface CountVowelsPermutationStrategy {
-    fun perform(n: Int): Int
+@Hard("https://leetcode.com/problems/count-vowels-permutation")
+fun interface CountVowelsPermutationStrategy {
+    operator fun invoke(n: Int): Int
 }
 
-internal sealed class CountVowelsPermutation {
+sealed interface CountVowelsPermutation {
 
     /**
      * Approach 1: Dynamic Programming (Bottom-up)
      */
     class BottomUp : CountVowelsPermutationStrategy {
-        override fun perform(n: Int): Int {
+        override operator fun invoke(n: Int): Int {
             val aVowelPermutationCount = LongArray(n)
             val eVowelPermutationCount = LongArray(n)
             val iVowelPermutationCount = LongArray(n)
@@ -63,7 +67,7 @@ internal sealed class CountVowelsPermutation {
     }
 
     class OptimizedSpace : CountVowelsPermutationStrategy {
-        override fun perform(n: Int): Int {
+        override operator fun invoke(n: Int): Int {
             var aCount: Long = 1
             var eCount: Long = 1
             var iCount: Long = 1
@@ -99,7 +103,7 @@ internal sealed class CountVowelsPermutation {
 
         private lateinit var memo: Array<LongArray>
 
-        override fun perform(n: Int): Int {
+        override operator fun invoke(n: Int): Int {
             // each row stands for the length of string
             // each column indicates the vowels
             // specifically, a: 0, e: 1, i: 2, o: 3, u: 4
@@ -146,5 +150,38 @@ internal sealed class CountVowelsPermutation {
         }
 
         override fun toString(): String = "top down"
+    }
+
+    class Matrix : CountVowelsPermutationStrategy {
+        override fun invoke(n: Int): Int {
+            var countA: Long = 1
+            var countE: Long = 1
+            var countI: Long = 1
+            var countO: Long = 1
+            var countU: Long = 1
+
+            for (length in 1 until n) {
+                // Calculate the next counts for each vowel based on the previous counts
+                val nextCountA = countE
+                val nextCountE = (countA + countI) % MOD
+                val nextCountI = (countA + countE + countO + countU) % MOD
+                val nextCountO = (countI + countU) % MOD
+                val nextCountU = countA
+
+                // Update the counts with the newly calculated values for the next length
+                countA = nextCountA
+                countE = nextCountE
+                countI = nextCountI
+                countO = nextCountO
+                countU = nextCountU
+            }
+
+            // Calculate the total count of valid strings for length n
+            val totalCount = (countA + countE + countI + countO + countU) % MOD
+
+            return totalCount.toInt()
+        }
+
+        override fun toString(): String = "matrix"
     }
 }

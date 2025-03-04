@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,15 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 
+/**
+ * Base class for tests that require deterministic execution order.
+ * This class ensures that each action is executed in the expected order and that each action is only
+ * executed once. It also provides utilities for testing exceptions.
+ *
+ * @see runTest
+ * @see expect
+ * @see finish
+ */
 open class TestBase {
     private var actionIndex = AtomicInteger()
     private var finished = AtomicBoolean()
@@ -41,6 +50,20 @@ open class TestBase {
         }
     }
 
+    /**
+     * Run a test with the given block and check that it produces the expected exceptions.
+     * The test is considered successful if the block throws an exception that matches the expected
+     * exception. If the block throws an exception that does not match the expected exception, the
+     * test fails. If the block does not throw an exception, the test fails.
+     *
+     * @param expected The expected exception. If null, the test is expected to throw an exception.
+     * @param unhandled A list of predicates that are used to check if an unhandled exception is
+     * expected. The predicates are checked in order, and the test fails if the block throws more
+     * exceptions than there are predicates in the list. If the block throws an exception that does
+     * not match the predicate at the corresponding index, the test fails.
+     * @param block The block to run.
+     * @throws Throwable If the block throws an exception that does not match the expected exception.
+     */
     fun runTest(
         expected: ((Throwable) -> Boolean)? = null,
         unhandled: List<(Throwable) -> Boolean> = emptyList(),

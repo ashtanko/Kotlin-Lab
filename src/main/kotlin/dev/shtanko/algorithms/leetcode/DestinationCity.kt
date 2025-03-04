@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,38 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface DestinationCityStrategy {
-    fun perform(paths: List<List<String>>): String
+/**
+ * 1436. Destination City
+ * @see <a href="https://leetcode.com/problems/destination-city">Source</a>
+ */
+fun interface DestinationCityStrategy {
+    operator fun invoke(paths: List<List<String>>): String
+}
+
+class DestinationCityStrategyBF : DestinationCityStrategy {
+    override fun invoke(paths: List<List<String>>): String {
+        for (element in paths) {
+            val candidate = element[1]
+            var good = true
+
+            for (path in paths) {
+                if (path[0] == candidate) {
+                    good = false
+                    break
+                }
+            }
+
+            if (good) {
+                return candidate
+            }
+        }
+
+        return ""
+    }
 }
 
 class DestinationCitySet : DestinationCityStrategy {
-    override fun perform(paths: List<List<String>>): String {
+    override operator fun invoke(paths: List<List<String>>): String {
         val set: MutableSet<String?> = HashSet()
         for (l in paths) set.add(l[1])
         for (l in paths) set.remove(l[0])
@@ -30,7 +56,7 @@ class DestinationCitySet : DestinationCityStrategy {
 }
 
 class DestinationCityHashMap : DestinationCityStrategy {
-    override fun perform(paths: List<List<String>>): String {
+    override operator fun invoke(paths: List<List<String>>): String {
         val map: MutableMap<String?, String?> = HashMap()
         for (path in paths) {
             map[path[0]] = path[1]

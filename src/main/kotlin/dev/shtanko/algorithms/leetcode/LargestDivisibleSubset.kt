@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 368. Largest Divisible Subset
- * @link https://leetcode.com/problems/largest-divisible-subset/
+ * @see <a href="https://leetcode.com/problems/largest-divisible-subset/">Source</a>
  */
-interface LargestDivisibleSubset {
-    fun perform(nums: IntArray): List<Int>
+fun interface LargestDivisibleSubset {
+    operator fun invoke(nums: IntArray): List<Int>
 }
 
 class LargestDivisibleSubsetDFS : LargestDivisibleSubset {
 
     private val mem: MutableMap<Int, List<Int>> = HashMap()
 
-    override fun perform(nums: IntArray): List<Int> {
+    override operator fun invoke(nums: IntArray): List<Int> {
         nums.sort()
         return helper(nums, 0)
     }

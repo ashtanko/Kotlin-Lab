@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,10 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BFS
+import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.Recursive
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.LinkedList
 import java.util.Queue
 import java.util.Stack
@@ -23,38 +27,46 @@ import java.util.Stack
 private const val FORMAT = "%s%s%s"
 private const val ARROW = "->"
 
-internal interface BinaryTreePathsStrategy {
-    fun binaryTreePaths(root: TreeNode?): List<String>
+/**
+ * 257. Binary Tree Paths
+ * @see <a href="https://leetcode.com/problems/binary-tree-paths/">Source</a>
+ */
+@Easy("https://leetcode.com/problems/binary-tree-paths")
+fun interface BinaryTreePaths {
+    operator fun invoke(root: TreeNode?): List<String>
 }
 
-internal class BinaryTreePathsRecursion : BinaryTreePathsStrategy {
-    override fun binaryTreePaths(root: TreeNode?): List<String> {
+@Recursive
+class BinaryTreePathsRecursion : BinaryTreePaths {
+    override fun invoke(root: TreeNode?): List<String> {
         val sList: MutableList<String> = LinkedList()
         if (root == null) return sList
         if (root.left == null && root.right == null) {
             sList.add(root.value.toString())
             return sList
         }
-        for (s in binaryTreePaths(root.left)) {
+        for (s in invoke(root.left)) {
             sList.add(String.format(FORMAT, root.value.toString(), ARROW, s))
         }
-        for (s in binaryTreePaths(root.right)) {
+        for (s in invoke(root.right)) {
             sList.add(String.format(FORMAT, root.value.toString(), ARROW, s))
         }
         return sList
     }
 }
 
-internal class BinaryTreePathsBFSQueue : BinaryTreePathsStrategy {
+@Iterative
+@BFS
+class BinaryTreePathsBFSQueue : BinaryTreePaths {
 
-    override fun binaryTreePaths(root: TreeNode?): List<String> {
+    override fun invoke(root: TreeNode?): List<String> {
         val list: MutableList<String> = ArrayList()
         val qNode: Queue<TreeNode> = LinkedList()
         val qStr: Queue<String> = LinkedList()
         if (root == null) return list
         qNode.add(root)
         qStr.add("")
-        while (!qNode.isEmpty()) {
+        while (qNode.isNotEmpty()) {
             val curNode: TreeNode = qNode.remove()
             val curStr: String = qStr.remove()
             if (curNode.left == null && curNode.right == null) list.add(curStr + curNode.value)
@@ -71,8 +83,9 @@ internal class BinaryTreePathsBFSQueue : BinaryTreePathsStrategy {
     }
 }
 
-internal class BinaryTreePathsBFSStack : BinaryTreePathsStrategy {
-    override fun binaryTreePaths(root: TreeNode?): List<String> {
+@BFS
+class BinaryTreePathsBFSStack : BinaryTreePaths {
+    override fun invoke(root: TreeNode?): List<String> {
         val list: MutableList<String> = ArrayList()
         val sNode: Stack<TreeNode> = Stack<TreeNode>()
         val sStr: Stack<String> = Stack<String>()
@@ -80,7 +93,7 @@ internal class BinaryTreePathsBFSStack : BinaryTreePathsStrategy {
         if (root == null) return list
         sNode.push(root)
         sStr.push("")
-        while (!sNode.isEmpty()) {
+        while (sNode.isNotEmpty()) {
             val curNode: TreeNode = sNode.pop()
             val curStr: String = sStr.pop()
             if (curNode.left == null && curNode.right == null) list.add(curStr + curNode.value)

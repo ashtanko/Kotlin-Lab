@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 50. Pow(x, n)
- * @link https://leetcode.com/problems/powx-n/
+ * @see <a href="https://leetcode.com/problems/powx-n/">Source</a>
  */
-interface Pow {
-    fun perform(x: Double, n: Int): Double
+fun interface Pow {
+    operator fun invoke(x: Double, n: Int): Double
 }
 
 /**
@@ -30,7 +30,7 @@ interface Pow {
  * Space complexity : O(1).
  */
 class PowBruteForce : Pow {
-    override fun perform(x: Double, n: Int): Double {
+    override operator fun invoke(x: Double, n: Int): Double {
         var a = n.toLong()
         var b = x
         if (a < 0) {
@@ -51,7 +51,7 @@ class PowBruteForce : Pow {
  * Space complexity : O(log n).
  */
 class PowFastRecursive : Pow {
-    override fun perform(x: Double, n: Int): Double {
+    override operator fun invoke(x: Double, n: Int): Double {
         var a = n.toLong()
         var b = x
         if (a < 0) {
@@ -81,7 +81,7 @@ class PowFastRecursive : Pow {
  * Space complexity : O(1).
  */
 class PowFastIterative : Pow {
-    override fun perform(x: Double, n: Int): Double {
+    override operator fun invoke(x: Double, n: Int): Double {
         var a = n.toLong()
         var b = x
         if (a < 0) {

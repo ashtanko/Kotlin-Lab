@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.TwoPointers
 import kotlin.math.max
 
 /**
  * Minimum Swaps to Group All 1's Together
- * @link https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together/
+ * @see <a href="https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together/">Source</a>
  */
-interface MinSwaps {
-    fun perform(data: IntArray): Int
+fun interface MinSwaps {
+    operator fun invoke(data: IntArray): Int
 }
 
 /**
@@ -31,8 +32,9 @@ interface MinSwaps {
  * Time complexity: O(n)
  * Space complexity: O(1)
  */
+@TwoPointers
 class MinSwapsTwoPointers : MinSwaps {
-    override fun perform(data: IntArray): Int {
+    override operator fun invoke(data: IntArray): Int {
         val ones: Int = data.sum()
         var cntOne = 0
         var maxOne = 0
@@ -60,7 +62,7 @@ class MinSwapsTwoPointers : MinSwaps {
  * Space complexity: O(n)
  */
 class MinSwapsDeque : MinSwaps {
-    override fun perform(data: IntArray): Int {
+    override operator fun invoke(data: IntArray): Int {
         val ones: Int = data.sum()
         var cntOne = 0
         var maxOne = 0

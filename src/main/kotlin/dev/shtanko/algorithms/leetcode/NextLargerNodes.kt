@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import java.util.Stack
 
 /**
  * 1019. Next Greater Node In Linked List
- * @link https://leetcode.com/problems/next-greater-node-in-linked-list/
+ * @see <a href="https://leetcode.com/problems/next-greater-node-in-linked-list/">Source</a>
  */
-interface NextLargerNodes {
-    fun perform(head: ListNode?): IntArray
+fun interface NextLargerNodes {
+    operator fun invoke(head: ListNode?): IntArray
 }
 
 class NextLargerNodesStack : NextLargerNodes {
-    override fun perform(head: ListNode?): IntArray {
+    override operator fun invoke(head: ListNode?): IntArray {
         val arr: ArrayList<Int> = ArrayList()
         var node = head
         while (node != null) {
@@ -37,7 +37,7 @@ class NextLargerNodesStack : NextLargerNodes {
         val res = IntArray(arr.size)
         val stack: Stack<Int> = Stack()
         for (i in 0 until arr.size) {
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) res[stack.pop()] = arr[i]
+            while (stack.isNotEmpty() && arr[stack.peek()] < arr[i]) res[stack.pop()] = arr[i]
             stack.push(i)
         }
         return res
@@ -45,7 +45,7 @@ class NextLargerNodesStack : NextLargerNodes {
 }
 
 class NextLargerNodesOnePass : NextLargerNodes {
-    override fun perform(head: ListNode?): IntArray {
+    override operator fun invoke(head: ListNode?): IntArray {
         // Keeps track of indices of values in nums
         val stack = Stack<Int>()
 
@@ -63,7 +63,7 @@ class NextLargerNodesOnePass : NextLargerNodes {
 
             // Process anything that is less than current node value
             // i.e. current node value is the "next"greatest for elements (index-referenced) in the stack
-            while (!stack.isEmpty() && nums[stack.peek()] < n.value) {
+            while (stack.isNotEmpty() && nums[stack.peek()] < n.value) {
                 nums[stack.pop()] = n.value
             }
 
@@ -74,7 +74,7 @@ class NextLargerNodesOnePass : NextLargerNodes {
             index++
         }
         // Handle remaining items in stack / write in 0 (no "next greatest" found for these)
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             nums[stack.pop()] = 0
         }
 

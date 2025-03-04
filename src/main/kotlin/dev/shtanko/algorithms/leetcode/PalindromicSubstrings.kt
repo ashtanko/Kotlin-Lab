@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,8 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface PalindromicSubstrings {
-    fun perform(s: String): Int
+fun interface PalindromicSubstrings {
+    operator fun invoke(str: String): Int
 }
 
 /**
@@ -26,32 +26,31 @@ interface PalindromicSubstrings {
  * Space Complexity: O(1)
  */
 class PalindromicSubstringsCheckAllSubstrings : PalindromicSubstrings {
-    override fun perform(s: String): Int {
-        var ans = 0
+    override operator fun invoke(str: String): Int {
+        var count = 0
 
-        for (start in s.indices) for (end in start until s.length) ans += if (isPalindrome(
-                s,
-                start,
-                end,
-            )
-        ) {
-            1
-        } else {
-            0
+        for (startIndex in str.indices) {
+            for (endIndex in startIndex until str.length) {
+                count += if (isPalindrome(str, startIndex, endIndex)) {
+                    1
+                } else {
+                    0
+                }
+            }
         }
 
-        return ans
+        return count
     }
 
     private fun isPalindrome(str: String, start: Int, end: Int): Boolean {
-        var s = start
-        var e = end
-        while (start < e) {
-            if (str[start] != str[e]) {
+        var left = start
+        var right = end
+        while (left < right) {
+            if (str[left] != str[right]) {
                 return false
             }
-            ++s
-            --e
+            left++
+            right--
         }
         return true
     }
@@ -63,28 +62,28 @@ class PalindromicSubstringsCheckAllSubstrings : PalindromicSubstrings {
  * Space Complexity: O(N^2)
  */
 class PalindromicSubstringsDP : PalindromicSubstrings {
-    override fun perform(s: String): Int {
-        val n: Int = s.length
-        var ans = 0
+    override operator fun invoke(str: String): Int {
+        val length: Int = str.length
+        var count = 0
 
-        if (n <= 0) {
+        if (length <= 0) {
             return 0
         }
 
-        val dp = Array(n) { BooleanArray(n) }
+        val dp = Array(length) { BooleanArray(length) }
 
         // Base case: single letter substrings
-        var k = 0
-        while (k < n) {
-            dp[k][k] = true
-            ++k
-            ++ans
+        var index = 0
+        while (index < length) {
+            dp[index][index] = true
+            count++
+            index++
         }
 
         // Base case: double letter substrings
-        for (i in 0 until n - 1) {
-            dp[i][i + 1] = s[i] == s[i + 1]
-            ans += if (dp[i][i + 1]) {
+        for (i in 0 until length - 1) {
+            dp[i][i + 1] = str[i] == str[i + 1]
+            count += if (dp[i][i + 1]) {
                 1
             } else {
                 0
@@ -92,22 +91,22 @@ class PalindromicSubstringsDP : PalindromicSubstrings {
         }
 
         // All other cases: substrings of length 3 to n
-        for (len in 3..n) {
-            var i = 0
-            var j = i + len - 1
-            while (j < n) {
-                dp[i][j] = dp[i + 1][j - 1] && s[i] == s[j]
-                ans += if (dp[i][j]) {
+        for (len in 3..length) {
+            var start = 0
+            var end = start + len - 1
+            while (end < length) {
+                dp[start][end] = dp[start + 1][end - 1] && str[start] == str[end]
+                count += if (dp[start][end]) {
                     1
                 } else {
                     0
                 }
-                ++i
-                ++j
+                start++
+                end++
             }
         }
 
-        return ans
+        return count
     }
 }
 
@@ -117,34 +116,34 @@ class PalindromicSubstringsDP : PalindromicSubstrings {
  * Space Complexity: O(1)
  */
 class PalindromicSubstringsPossibleCenters : PalindromicSubstrings {
-    override fun perform(s: String): Int {
-        var ans = 0
+    override operator fun invoke(str: String): Int {
+        var count = 0
 
-        for (i in s.indices) {
-            // odd-length palindromes, single character center
-            ans += countPalindromesAroundCenter(s, i, i)
+        for (i in str.indices) {
+            // Odd-length palindromes, single character center
+            count += countPalindromesAroundCenter(str, i, i)
 
-            // even-length palindromes, consecutive characters center
-            ans += countPalindromesAroundCenter(s, i, i + 1)
+            // Even-length palindromes, consecutive characters center
+            count += countPalindromesAroundCenter(str, i, i + 1)
         }
 
-        return ans
+        return count
     }
 
-    private fun countPalindromesAroundCenter(ss: String, lo: Int, hi: Int): Int {
-        var l = lo
-        var h = hi
-        var ans = 0
-        while (l >= 0 && h < ss.length) {
-            if (ss[l] != ss[h]) {
-                break // the first and last characters don't match!
+    private fun countPalindromesAroundCenter(string: String, lo: Int, hi: Int): Int {
+        var low = lo
+        var high = hi
+        var count = 0
+        while (low >= 0 && high < string.length) {
+            if (string[low] != string[high]) {
+                break // The first and last characters don't match!
             }
 
-            // expand around the center
-            l--
-            h++
-            ans++
+            // Expand around the center
+            low--
+            high++
+            count++
         }
-        return ans
+        return count
     }
 }

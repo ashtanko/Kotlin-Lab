@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,9 +16,11 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+
 /**
  * 211. Design Add and Search Words Data Structure
- * @link https://leetcode.com/problems/design-add-and-search-words-data-structure/
+ * @see <a href="https://leetcode.com/problems/design-add-and-search-words-data-structure/">Source</a>
  */
 interface WordDictionary {
     fun addWord(word: String)
@@ -27,7 +29,7 @@ interface WordDictionary {
 }
 
 class WordDictionaryImpl : WordDictionary {
-    private val children: Array<WordDictionaryImpl?> = Array(SIZE) { null }
+    private val children: Array<WordDictionaryImpl?> = Array(ALPHABET_LETTERS_COUNT) { null }
     private var isEndOfWord = false
 
     // Adds a word into the data structure.
@@ -62,9 +64,5 @@ class WordDictionaryImpl : WordDictionary {
             curr = curr.children[c.code - 'a'.code] ?: return false
         }
         return curr.isEndOfWord
-    }
-
-    companion object {
-        private const val SIZE = 26
     }
 }

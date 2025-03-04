@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,21 +21,21 @@ import java.util.LinkedList
 
 /**
  * 1022. Sum of Root To Leaf Binary Numbers
- * @link https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
+ * @see <a href="https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/">Source</a>
  */
-internal interface SumOfRootToLeafBinaryNumbers {
-    fun sumRootToLeaf(root: TreeNode?): Int
+fun interface SumOfRootToLeafBinaryNumbers {
+    operator fun invoke(root: TreeNode?): Int
 }
 
-internal class SumOfRootToLeafBinaryNumbersBitwise : SumOfRootToLeafBinaryNumbers {
-    override fun sumRootToLeaf(root: TreeNode?): Int {
+class SumOfRootToLeafBinaryNumbersBitwise : SumOfRootToLeafBinaryNumbers {
+    override fun invoke(root: TreeNode?): Int {
         var rootNode = root
         var rootToLeaf = 0
         var currNumber: Int
         val stack: Deque<Pair<TreeNode?, Int>> = LinkedList()
         stack.push(rootNode to 0)
 
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val treeNodeIntPair = stack.pop()
             rootNode = treeNodeIntPair.first
             currNumber = treeNodeIntPair.second
@@ -55,15 +55,15 @@ internal class SumOfRootToLeafBinaryNumbersBitwise : SumOfRootToLeafBinaryNumber
 }
 
 // Iterative Preorder Traversal
-internal class SumOfRootToLeafBinaryNumbersIPT : SumOfRootToLeafBinaryNumbers {
-    override fun sumRootToLeaf(root: TreeNode?): Int {
+class SumOfRootToLeafBinaryNumbersIPT : SumOfRootToLeafBinaryNumbers {
+    override fun invoke(root: TreeNode?): Int {
         var rootToLeaf = 0
         var currNumber: Int
         var treeNode = root
         val stack: Deque<Pair<TreeNode?, Int>> = LinkedList()
         stack.push(treeNode to 0)
 
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             val p = stack.pop()
             treeNode = p.first
             currNumber = p.second
@@ -83,10 +83,10 @@ internal class SumOfRootToLeafBinaryNumbersIPT : SumOfRootToLeafBinaryNumbers {
 }
 
 // Recursive Preorder Traversal
-internal class SumOfRootToLeafBinaryNumbersRPT : SumOfRootToLeafBinaryNumbers {
+class SumOfRootToLeafBinaryNumbersRPT : SumOfRootToLeafBinaryNumbers {
     private var rootToLeaf = 0
 
-    override fun sumRootToLeaf(root: TreeNode?): Int {
+    override fun invoke(root: TreeNode?): Int {
         preorder(root, 0)
         return rootToLeaf
     }
@@ -106,8 +106,8 @@ internal class SumOfRootToLeafBinaryNumbersRPT : SumOfRootToLeafBinaryNumbers {
 }
 
 // Morris Preorder Traversal
-internal class SumOfRootToLeafBinaryNumbersMPT : SumOfRootToLeafBinaryNumbers {
-    override fun sumRootToLeaf(root: TreeNode?): Int {
+class SumOfRootToLeafBinaryNumbersMPT : SumOfRootToLeafBinaryNumbers {
+    override fun invoke(root: TreeNode?): Int {
         var rootToLeaf = 0
         var currNumber = 0
         var steps: Int

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SumOfUniqueTest<out T : SumOfUnique>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class SumOfUniqueTest<out T : SumOfUnique>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 3, 2),
@@ -47,17 +47,61 @@ internal abstract class SumOfUniqueTest<out T : SumOfUnique>(private val strateg
                 intArrayOf(10, 6, 9, 6, 9, 6, 8, 7),
                 25,
             ),
+            Arguments.of(
+                intArrayOf(),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+                55,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
+                120,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+                136,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                153,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18),
+                171,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19),
+                190,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+                210,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21),
+                231,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22),
+                253,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23),
+                276,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `unique elements test`(elems: IntArray, expected: Int) {
-        val actual = strategy.perform(elems)
+    fun `unique elements test`(elems: IntArray, expected: Int) {
+        val actual = strategy.invoke(elems)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class SumOfUniqueBruteForceTest : SumOfUniqueTest<SumOfUniqueBruteForce>(SumOfUniqueBruteForce())
-internal class SumOfUniqueHashMapTest : SumOfUniqueTest<SumOfUniqueHashMap>(SumOfUniqueHashMap())
-internal class SumOfUniqueFilterTest : SumOfUniqueTest<SumOfUniqueFilter>(SumOfUniqueFilter())
+class SumOfUniqueBruteForceTest : SumOfUniqueTest<SumOfUniqueBruteForce>(SumOfUniqueBruteForce())
+class SumOfUniqueHashMapTest : SumOfUniqueTest<SumOfUniqueHashMap>(SumOfUniqueHashMap())
+class SumOfUniqueFilterTest : SumOfUniqueTest<SumOfUniqueFilter>(SumOfUniqueFilter())

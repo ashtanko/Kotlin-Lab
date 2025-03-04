@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@ package dev.shtanko.algorithms.leetcode
 
 import kotlin.math.min
 
-interface EditDistance {
-    fun perform(word1: String, word2: String): Int
+fun interface EditDistance {
+    operator fun invoke(word1: String, word2: String): Int
 }
 
 class EditDistanceDP : EditDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         val n: Int = word1.length
         val m: Int = word2.length
 

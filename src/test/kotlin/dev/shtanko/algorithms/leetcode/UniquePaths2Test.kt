@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class UniquePaths2Test<out T : UniquePaths2>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class UniquePaths2Test<out T : UniquePaths2>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -108,15 +108,23 @@ internal abstract class UniquePaths2Test<out T : UniquePaths2>(private val strat
                 ),
                 1,
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(0, 0),
+                    intArrayOf(1, 0),
+                ),
+                1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `unique paths with obstacles test`(obstacleGrid: Array<IntArray>, expected: Int) {
-        val actual = strategy.perform(obstacleGrid)
+    fun `unique paths with obstacles test`(obstacleGrid: Array<IntArray>, expected: Int) {
+        val actual = strategy.invoke(obstacleGrid)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class UniquePaths2DPTest : UniquePaths2Test<UniquePaths2DP>(UniquePaths2DP())
+class UniquePaths2DPTest : UniquePaths2Test<UniquePaths2>(UniquePaths2DP())
+class UniquePaths2ShortTest : UniquePaths2Test<UniquePaths2>(UniquePaths2Short())

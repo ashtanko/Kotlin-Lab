@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -66,13 +66,39 @@ abstract class CollectApplesTest<out T : CollectApples>(private val strategy: T)
                 listOf(false, false, false, false, false, false, false),
                 0,
             ),
+            Arguments.of(
+                7,
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(0, 2),
+                    intArrayOf(1, 4),
+                    intArrayOf(1, 5),
+                    intArrayOf(2, 3),
+                    intArrayOf(2, 6),
+                ),
+                listOf(true, true, true, true, true, true, true),
+                12,
+            ),
+            Arguments.of(
+                7,
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(0, 2),
+                    intArrayOf(1, 4),
+                    intArrayOf(1, 5),
+                    intArrayOf(2, 3),
+                    intArrayOf(2, 6),
+                ),
+                listOf(true, true, true, true, true, true, false),
+                10,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `min time test`(n: Int, edges: Array<IntArray>, hasApple: List<Boolean>, expected: Int) {
-        assertThat(strategy.minTime(n, edges, hasApple)).isEqualTo(expected)
+    fun `min time test`(num: Int, edges: Array<IntArray>, hasApple: List<Boolean>, expected: Int) {
+        assertThat(strategy.minTime(num, edges, hasApple)).isEqualTo(expected)
     }
 }
 

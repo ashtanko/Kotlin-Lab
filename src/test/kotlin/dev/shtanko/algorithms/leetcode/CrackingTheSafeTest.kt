@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,18 +17,16 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class CrackingSafeHierholzersAlgorithmTest {
+abstract class CrackingSafeStrategyTest<out T : CrackingSafe>(private val strategy: T) {
 
-    private val strategy = CrackingSafeHierholzersAlgorithm()
-
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(1, 1, "0"),
             Arguments.of(1, 2, "10"),
@@ -38,27 +36,16 @@ internal class CrackingSafeHierholzersAlgorithmTest {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `cracking the safe test`(n: Int, k: Int, expected: String) {
-        val actual = strategy.perform(n, k)
-        assertEquals(expected, actual)
+    fun `cracking the safe test`(num: Int, k: Int, expected: String) {
+        val actual = strategy.invoke(num, k)
+        val resultList = expected.toList().map { it.toString() }
+        val actualList = actual.toList().map { it.toString() }
+        assertThat(actualList).containsExactlyInAnyOrder(*resultList.toTypedArray())
     }
 }
 
-internal class CrackingSafeInverseBurrowsWheelerTransformTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
-            Arguments.of(1, 1, "0"),
-            Arguments.of(1, 2, "01"),
-            Arguments.of(2, 2, "00110"),
-        )
-    }
+class CrackingSafeHierholzersAlgorithmTest :
+    CrackingSafeStrategyTest<CrackingSafe>(CrackingSafeHierholzersAlgorithm())
 
-    private val strategy = CrackingSafeInverseBurrowsWheelerTransform()
-
-    @ParameterizedTest
-    @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `cracking the safe test`(n: Int, k: Int, expected: String) {
-        val actual = strategy.perform(n, k)
-        assertEquals(expected, actual)
-    }
-}
+class CrackingSafeInverseBurrowsWheelerTransformTest :
+    CrackingSafeStrategyTest<CrackingSafe>(CrackingSafeInverseBurrowsWheelerTransform())

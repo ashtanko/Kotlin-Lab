@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +23,10 @@ private const val BOARD_MAX_SIZE = 8
 
 /**
  * 999. Available Captures for Rook
- * @link https://leetcode.com/problems/available-captures-for-rook/
+ * @see <a href="https://leetcode.com/problems/available-captures-for-rook/">Source</a>
  */
-interface NumRookCaptures {
-    fun perform(board: Array<CharArray>): Int
+fun interface NumRookCaptures {
+    operator fun invoke(board: Array<CharArray>): Int
 }
 
 /**
@@ -35,7 +35,7 @@ interface NumRookCaptures {
  * Space O(1)
  */
 class NumRookCapturesSF : NumRookCaptures {
-    override fun perform(board: Array<CharArray>): Int {
+    override operator fun invoke(board: Array<CharArray>): Int {
         var x0 = 0
         var y0 = 0
         var res = 0
@@ -67,7 +67,7 @@ class NumRookCapturesSF : NumRookCaptures {
  * Memory: O(1)
  */
 class NumRookCapturesSearch : NumRookCaptures {
-    override fun perform(board: Array<CharArray>): Int {
+    override operator fun invoke(board: Array<CharArray>): Int {
         for (i in board.indices) {
             for (j in board[i].indices) {
                 if (board[i][j] == ROOK) {

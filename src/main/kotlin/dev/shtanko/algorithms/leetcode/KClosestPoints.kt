@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.PriorityQueue
 
-interface KClosestPointsStrategy {
-    fun perform(points: Array<IntArray>, k: Int): Array<IntArray>
+fun interface KClosestPointsStrategy {
+    operator fun invoke(points: Array<IntArray>, k: Int): Array<IntArray>
 
     fun IntArray.getDistance(): Int {
         return this[0] * this[0] + this[1] * this[1]
@@ -27,7 +27,7 @@ interface KClosestPointsStrategy {
 }
 
 class KClosestPointsQueue : KClosestPointsStrategy {
-    override fun perform(points: Array<IntArray>, k: Int): Array<IntArray> {
+    override operator fun invoke(points: Array<IntArray>, k: Int): Array<IntArray> {
         var n = k
         val heap = PriorityQueue(Comparator<IntArray> { left, right -> right.getDistance() - left.getDistance() })
         for (point in points) {
@@ -41,7 +41,7 @@ class KClosestPointsQueue : KClosestPointsStrategy {
 }
 
 class KClosestPointsSort : KClosestPointsStrategy {
-    override fun perform(points: Array<IntArray>, k: Int): Array<IntArray> {
+    override operator fun invoke(points: Array<IntArray>, k: Int): Array<IntArray> {
         val n = points.size
         val dists = IntArray(n)
         for (i in 0 until n) dists[i] = points[i].getDistance()

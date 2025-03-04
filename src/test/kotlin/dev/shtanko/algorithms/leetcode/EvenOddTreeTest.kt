@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,16 +18,16 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class EvenOddTreeTest<out T : EvenOddTreeStrategy>(private val strategy: T) {
+abstract class EvenOddTreeTest<out T : EvenOddTree>(private val strategy: T) {
 
-    companion object {
-
-        @JvmStatic
-        fun dataProvider(): Stream<Arguments?> = Stream.of(
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(1),
                 true,
@@ -67,15 +67,24 @@ internal abstract class EvenOddTreeTest<out T : EvenOddTreeStrategy>(private val
                 intArrayOf(11, 8, 6, 1, 3, 9, 11, 30, 20, 18, 16, 12, 10, 4, 2, 17).toTree(),
                 true,
             ),
+            Arguments.of(
+                intArrayOf(1, 10, 4, 3, 8, 7, 9, 2, 6, 12).toTree(),
+                false,
+            ),
+            Arguments.of(
+                intArrayOf(5, 4, 2, 3, 3, 7).toTree(),
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `even odd tree test`(root: TreeNode, expected: Boolean) {
-        val actual = strategy.perform(root)
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `even odd tree test`(root: TreeNode, expected: Boolean) {
+        val actual = strategy.invoke(root)
         assertEquals(expected, actual)
     }
 }
 
-internal class EvenOddTreeBSFTest : EvenOddTreeTest<EvenOddTreeBSF>(EvenOddTreeBSF())
+class EvenOddTreeBSFTest : EvenOddTreeTest<EvenOddTree>(EvenOddTreeBSF())
+class EvenOddTreeBFSTest : EvenOddTreeTest<EvenOddTree>(EvenOddTreeBFS())

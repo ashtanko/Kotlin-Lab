@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,15 +20,23 @@ import java.util.Stack
 
 fun String.isValidParentheses(): Boolean {
     val stack = Stack<Char>()
-    for (c in this.toCharArray()) {
-        if (c == '(') {
-            stack.push(')')
-        } else if (c == '{') {
-            stack.push('}')
-        } else if (c == '[') {
-            stack.push(']')
-        } else if (stack.isEmpty() || stack.pop() != c) {
-            return false
+    for (character in this.toCharArray()) {
+        when {
+            character == '(' -> {
+                stack.push(')')
+            }
+
+            character == '{' -> {
+                stack.push('}')
+            }
+
+            character == '[' -> {
+                stack.push(']')
+            }
+
+            stack.isEmpty() || stack.pop() != character -> {
+                return false
+            }
         }
     }
     return stack.isEmpty()
@@ -42,7 +50,7 @@ class ValidParentheses(private val mappings: MutableMap<Char, Char> = HashMap())
         mappings[']'] = '['
     }
 
-    fun perform(s: String): Boolean {
+    operator fun invoke(s: String): Boolean {
         // Initialize a stack to be used in the algorithm.
         val stack = Stack<Char>()
 

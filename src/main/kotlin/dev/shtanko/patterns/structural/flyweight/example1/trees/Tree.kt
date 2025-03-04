@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,9 @@ package dev.shtanko.patterns.structural.flyweight.example1.trees
 
 import java.awt.Graphics
 
-class Tree(private val x: Int, private val y: Int, type: TreeType) {
-    private val type: TreeType
+class Tree(val x: Int, val y: Int, val type: TreeType) : DrawableTree {
 
-    init {
-        this.type = type
-    }
-
-    fun draw(g: Graphics) {
-        type.draw(g, x, y)
+    override fun draw(graphics: Graphics) {
+        type.draw(graphics, x, y)
     }
 }

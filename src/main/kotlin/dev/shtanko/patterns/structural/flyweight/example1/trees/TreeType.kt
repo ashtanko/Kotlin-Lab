@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,15 +19,7 @@ package dev.shtanko.patterns.structural.flyweight.example1.trees
 import java.awt.Color
 import java.awt.Graphics
 
-class TreeType(private val name: String, color: Color, otherTreeData: String) {
-    private val color: Color
-    private val otherTreeData: String
-
-    init {
-        this.color = color
-        this.otherTreeData = otherTreeData
-    }
-
+class TreeType(val name: String, val color: Color, val otherTreeData: String) {
     fun draw(g: Graphics, x: Int, y: Int) {
         g.color = Color.BLACK
         g.fillRect(x - 1, y, 3, 5)

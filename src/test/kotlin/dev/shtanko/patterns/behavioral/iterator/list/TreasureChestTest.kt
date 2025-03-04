@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,33 +24,12 @@ import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ArgumentsSource
 
 class TreasureChestTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of()
-    }
-
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Any> {
-            return listOf(
-                Arguments.of(Item(ItemType.POTION, "Potion of courage")),
-                Arguments.of(Item(ItemType.RING, "Ring of shadows")),
-                Arguments.of(Item(ItemType.POTION, "Potion of wisdom")),
-                Arguments.of(Item(ItemType.POTION, "Potion of blood")),
-                Arguments.of(Item(ItemType.WEAPON, "Sword of silver +1")),
-                Arguments.of(Item(ItemType.POTION, "Potion of rust")),
-                Arguments.of(Item(ItemType.POTION, "Potion of healing")),
-                Arguments.of(Item(ItemType.RING, "Ring of armor")),
-                Arguments.of(Item(ItemType.WEAPON, "Steel halberd")),
-                Arguments.of(Item(ItemType.WEAPON, "Dagger of poison")),
-            )
-        }
-    }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
+    @ArgumentsSource(InputArgumentsProvider::class)
     fun `iterator test`(expectedItem: Item) {
         val chest = TreasureChest()
         val iterator = chest.iterator(expectedItem.type)
@@ -70,7 +49,7 @@ class TreasureChestTest {
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
+    @ArgumentsSource(InputArgumentsProvider::class)
     fun `get items test`(expectedItem: Item) {
         val chest = TreasureChest()
         val items = chest.items
@@ -87,5 +66,20 @@ class TreasureChestTest {
             }
         }
         fail<Any>("Expected to find item [$expectedItem] in the item list, but we didn't.")
+    }
+
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = listOf(
+            Arguments.of(Item(ItemType.POTION, "Potion of courage")),
+            Arguments.of(Item(ItemType.RING, "Ring of shadows")),
+            Arguments.of(Item(ItemType.POTION, "Potion of wisdom")),
+            Arguments.of(Item(ItemType.POTION, "Potion of blood")),
+            Arguments.of(Item(ItemType.WEAPON, "Sword of silver +1")),
+            Arguments.of(Item(ItemType.POTION, "Potion of rust")),
+            Arguments.of(Item(ItemType.POTION, "Potion of healing")),
+            Arguments.of(Item(ItemType.RING, "Ring of armor")),
+            Arguments.of(Item(ItemType.WEAPON, "Steel halberd")),
+            Arguments.of(Item(ItemType.WEAPON, "Dagger of poison")),
+        ).stream()
     }
 }

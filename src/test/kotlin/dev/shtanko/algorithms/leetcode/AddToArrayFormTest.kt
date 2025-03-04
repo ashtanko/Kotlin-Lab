@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,13 +42,33 @@ abstract class AddToArrayFormTest<out T : AddToArrayForm>(private val strategy: 
                 806,
                 listOf(1, 0, 2, 1),
             ),
+            Arguments.of(
+                intArrayOf(9, 9, 9, 9, 9, 9, 9, 9, 9, 9),
+                1,
+                listOf(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            ),
+            Arguments.of(
+                intArrayOf(0),
+                23,
+                listOf(2, 3),
+            ),
+            Arguments.of(
+                intArrayOf(0),
+                10000,
+                listOf(1, 0, 0, 0, 0),
+            ),
+            Arguments.of(
+                intArrayOf(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+                1,
+                listOf(1, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `add to array form test`(num: IntArray, k: Int, expected: List<Int>) {
-        val actual = strategy.perform(num, k)
+        val actual = strategy.invoke(num, k)
         assertThat(actual).isEqualTo(expected)
     }
 }

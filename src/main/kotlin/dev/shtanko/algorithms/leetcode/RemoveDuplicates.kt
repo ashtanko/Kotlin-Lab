@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,22 +18,29 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 26. Remove Duplicates from Sorted Array
- * @link https://leetcode.com/problems/remove-duplicates-from-sorted-array/
- * Given a sorted array nums, remove the duplicates in-place such that each element appear only once
- * and return the new length.
- * Do not allocate extra space for another array, you must do this by modifying the input array in-place
- * with O(1) extra memory.
+ * @see <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array">Source</a>
  */
-fun IntArray.removeDuplicates(): Int {
-    val n = this.size
-    if (n < 2) return n
-    var count = 0
-    for (i in 1 until n) {
-        if (this[i] == this[i - 1]) {
-            count++
-        } else {
-            this[i - count] = this[i]
+fun interface RemoveDuplicates {
+    operator fun invoke(nums: IntArray): Int
+}
+
+class RemoveDuplicatesSolution : RemoveDuplicates {
+    override fun invoke(nums: IntArray): Int {
+        val n = nums.size
+        // If the array has less than 2 elements, return its length
+        if (n < 2) return n
+        var count = 0
+        // Iterate through the array starting from the second element
+        for (i in 1 until n) {
+            // If the current element is the same as the previous one, increment the count
+            if (nums[i] == nums[i - 1]) {
+                count++
+            } else {
+                // Move the current element to the correct position
+                nums[i - count] = nums[i]
+            }
         }
+        // Return the length of the array without duplicates
+        return n - count
     }
-    return n - count
 }

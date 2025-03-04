@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -89,13 +89,37 @@ abstract class TwoSum4Test<out T : TwoSum4>(private val strategy: T) {
                 15,
                 true,
             ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        left = TreeNode(3)
+                    }
+                    right = TreeNode(9).apply {
+                        right = TreeNode(12)
+                    }
+                },
+                16,
+                true,
+            ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        left = TreeNode(3)
+                    }
+                    right = TreeNode(9).apply {
+                        right = TreeNode(12)
+                    }
+                },
+                10,
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `find target test`(root: TreeNode, target: Int, expected: Boolean) {
-        val actual = strategy.findTarget(root, target)
+        val actual = strategy.invoke(root, target)
         assertThat(actual).isEqualTo(expected)
     }
 }

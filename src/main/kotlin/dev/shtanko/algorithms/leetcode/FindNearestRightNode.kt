@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,14 +22,14 @@ import java.util.LinkedList
 import java.util.Queue
 
 // Find Nearest Right Node in Binary Tree
-interface FindNearestRightNodeStrategy {
-    fun perform(root: TreeNode?, u: TreeNode?): TreeNode?
+fun interface FindNearestRightNodeStrategy {
+    operator fun invoke(root: TreeNode?, u: TreeNode?): TreeNode?
 }
 
 // Approach 1: BFS: Two Queues
 class FindNearestRightNodeTwoQueues : FindNearestRightNodeStrategy {
 
-    override fun perform(root: TreeNode?, u: TreeNode?): TreeNode? {
+    override operator fun invoke(root: TreeNode?, u: TreeNode?): TreeNode? {
         val nextLevel: ArrayDeque<TreeNode?> = ArrayDeque()
         root?.let {
             nextLevel.offer(it)
@@ -37,11 +37,11 @@ class FindNearestRightNodeTwoQueues : FindNearestRightNodeStrategy {
 
         var currLevel: ArrayDeque<TreeNode?>
         var node: TreeNode?
-        while (!nextLevel.isEmpty()) {
+        while (nextLevel.isNotEmpty()) {
             // prepare for the next level
             currLevel = nextLevel.clone()
             nextLevel.clear()
-            while (!currLevel.isEmpty()) {
+            while (currLevel.isNotEmpty()) {
                 node = currLevel.poll()
                 if (node.levelOrder().flatten() == u.levelOrder().flatten()) {
                     return currLevel.poll()
@@ -59,7 +59,7 @@ class FindNearestRightNodeTwoQueues : FindNearestRightNodeStrategy {
 
 // Approach 2: BFS: One Queue + Sentinel
 class FindNearestRightNodeSentinel : FindNearestRightNodeStrategy {
-    override fun perform(root: TreeNode?, u: TreeNode?): TreeNode? {
+    override operator fun invoke(root: TreeNode?, u: TreeNode?): TreeNode? {
         val queue: Queue<TreeNode?> = LinkedList()
         root?.let {
             queue.offer(it)
@@ -68,7 +68,7 @@ class FindNearestRightNodeSentinel : FindNearestRightNodeStrategy {
 
         var curr: TreeNode? = null
 
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             curr = queue.poll()
             if (curr != null) {
                 // if it's the given node
@@ -83,7 +83,7 @@ class FindNearestRightNodeSentinel : FindNearestRightNodeStrategy {
                 }
             } else {
                 // add a sentinel to mark end of level
-                if (!queue.isEmpty()) queue.offer(null)
+                if (queue.isNotEmpty()) queue.offer(null)
             }
         }
         return curr
@@ -92,12 +92,12 @@ class FindNearestRightNodeSentinel : FindNearestRightNodeStrategy {
 
 // Approach 3: BFS: One Queue + Level Size Measurements
 class FindNearestRightNodeSizeMeasurements : FindNearestRightNodeStrategy {
-    override fun perform(root: TreeNode?, u: TreeNode?): TreeNode? {
+    override operator fun invoke(root: TreeNode?, u: TreeNode?): TreeNode? {
         val queue: Deque<TreeNode> = ArrayDeque()
         root?.let {
             queue.offer(it)
         }
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val levelLength: Int = queue.size
             for (i in 0 until levelLength) {
                 val node: TreeNode = queue.poll()
@@ -126,7 +126,7 @@ class FindNearestRightNodeSizePreorderTraversal : FindNearestRightNodeStrategy {
     private var nextNode: TreeNode? = null
     private var u: TreeNode? = null
 
-    override fun perform(root: TreeNode?, u: TreeNode?): TreeNode? {
+    override operator fun invoke(root: TreeNode?, u: TreeNode?): TreeNode? {
         this.u = u
         preorder(root, 0)
         return nextNode

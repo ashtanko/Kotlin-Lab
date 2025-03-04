@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,27 +18,27 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 222. Count Complete Tree Nodes
- * @link https://leetcode.com/problems/count-complete-tree-nodes/
+ * @see <a href="https://leetcode.com/problems/count-complete-tree-nodes/">Source</a>
  */
 fun interface CountNodes {
-    fun perform(root: TreeNode?): Int
+    operator fun invoke(root: TreeNode?): Int
 }
 
 class CountNodesBitrise : CountNodes {
-    override fun perform(root: TreeNode?): Int {
+    override operator fun invoke(root: TreeNode?): Int {
         val h = root.height()
         return if (h < 0) {
             0
         } else if (root?.right.height() == h - 1) {
-            (1 shl h) + perform(root?.right)
+            (1 shl h) + invoke(root?.right)
         } else {
-            1 shl h - 1 + perform(root?.left)
+            1 shl h - 1 + invoke(root?.left)
         }
     }
 }
 
 class CountNodesIterative : CountNodes {
-    override fun perform(root: TreeNode?): Int {
+    override operator fun invoke(root: TreeNode?): Int {
         var nodes = 0
         var tree = root
         var h: Int = root.height()

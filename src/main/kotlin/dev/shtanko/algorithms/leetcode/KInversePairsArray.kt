@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,19 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import dev.shtanko.algorithms.leetcode.KInversePairsArray.Companion.ARR_SIZE
+import dev.shtanko.algorithms.MOD
+import dev.shtanko.algorithms.leetcode.KInversePairsArray.Companion.DEFAULT_ARRAY_SIZE
 import kotlin.math.min
 
 /**
  * 629. K Inverse Pairs Array
- * link https://leetcode.com/problems/k-inverse-pairs-array/
+ * @see <a href="https://leetcode.com/problems/k-inverse-pairs-array">Source</a>
  */
 fun interface KInversePairsArray {
-    fun perform(n: Int, k: Int): Int
+    operator fun invoke(length: Int, numberOfPairs: Int): Int
 
     companion object {
-        const val ARR_SIZE = 1001
+        const val DEFAULT_ARRAY_SIZE = 1001
     }
 }
 
@@ -35,18 +36,18 @@ fun interface KInversePairsArray {
  * Approach 2: Using Recursion with Memoization
  */
 class KInversePairsArrayRecursion : KInversePairsArray {
-    var memo = Array(ARR_SIZE) { arrayOfNulls<Int>(ARR_SIZE) }
+    private var memo = Array(DEFAULT_ARRAY_SIZE) { arrayOfNulls<Int>(DEFAULT_ARRAY_SIZE) }
 
-    override fun perform(n: Int, k: Int): Int {
-        if (n == 0) return 0
-        if (k == 0) return 1
-        if (memo[n][k] != null) return memo[n][k] ?: -1
-        var inv = 0
-        for (i in 0..min(k, n - 1)) {
-            inv = (inv + perform(n - 1, k - i)) % MOD
+    override fun invoke(length: Int, numberOfPairs: Int): Int {
+        if (length == 0) return 0
+        if (numberOfPairs == 0) return 1
+        if (memo[length][numberOfPairs] != null) return memo[length][numberOfPairs] ?: -1
+        var inversePairsCount = 0
+        for (i in 0..min(numberOfPairs, length - 1)) {
+            inversePairsCount = (inversePairsCount + invoke(length - 1, numberOfPairs - i)) % MOD
         }
-        memo[n][k] = inv
-        return inv
+        memo[length][numberOfPairs] = inversePairsCount
+        return inversePairsCount
     }
 }
 
@@ -54,20 +55,20 @@ class KInversePairsArrayRecursion : KInversePairsArray {
  * Approach 3: Dynamic Programming
  */
 class KInversePairsArrayDP : KInversePairsArray {
-    override fun perform(n: Int, k: Int): Int {
-        val dp = Array(n + 1) { IntArray(k + 1) }
-        for (i in 1..n) {
-            for (j in 0..k) {
+    override fun invoke(length: Int, numberOfPairs: Int): Int {
+        val dpTable = Array(length + 1) { IntArray(numberOfPairs + 1) }
+        for (i in 1..length) {
+            for (j in 0..numberOfPairs) {
                 if (j == 0) {
-                    dp[i][j] = 1
+                    dpTable[i][j] = 1
                 } else {
                     for (p in 0..min(j, i - 1)) {
-                        dp[i][j] = (dp[i][j] + dp[i - 1][j - p]) % MOD
+                        dpTable[i][j] = (dpTable[i][j] + dpTable[i - 1][j - p]) % MOD
                     }
                 }
             }
         }
-        return dp[n][k]
+        return dpTable[length][numberOfPairs]
     }
 }
 
@@ -75,10 +76,10 @@ class KInversePairsArrayDP : KInversePairsArray {
  * Approach 4: Dynamic Programming with Cumulative Sum
  */
 class CumulativeSum : KInversePairsArray {
-    override fun perform(n: Int, k: Int): Int {
-        val dp = Array(n + 1) { IntArray(k + 1) }
-        for (i in 1..n) {
-            for (j in 0..k) {
+    override fun invoke(length: Int, numberOfPairs: Int): Int {
+        val dp = Array(length + 1) { IntArray(numberOfPairs + 1) }
+        for (i in 1..length) {
+            for (j in 0..numberOfPairs) {
                 if (j == 0) {
                     dp[i][j] = 1
                 } else {
@@ -93,7 +94,7 @@ class CumulativeSum : KInversePairsArray {
                 }
             }
         }
-        return (dp[n][k] + MOD - if (k > 0) dp[n][k - 1] else 0) % MOD
+        return (dp[length][numberOfPairs] + MOD - if (numberOfPairs > 0) dp[length][numberOfPairs - 1] else 0) % MOD
     }
 }
 
@@ -101,24 +102,27 @@ class CumulativeSum : KInversePairsArray {
  * Approach 5: Another Optimized Dynamic Programming Approach
  */
 class KInversePairsArrayOptimizedDP : KInversePairsArray {
-    override fun perform(n: Int, k: Int): Int {
-        val dp = Array(n + 1) { IntArray(k + 1) }
-        for (i in 1..n) {
-            var j = 0
-            while (j <= k && j <= i * (i - 1) / 2) {
-                if (i == 1 && j == 0) {
-                    dp[i][j] = 1
+    override operator fun invoke(length: Int, numberOfPairs: Int): Int {
+        val dp = Array(length + 1) { IntArray(numberOfPairs + 1) }
+
+        for (i in 1..length) {
+            var counter = 0
+            while (counter <= numberOfPairs && counter <= i * (i - 1) / 2) {
+                if (i == 1 && counter == 0) {
+                    dp[i][counter] = 1
                     break
-                } else if (j == 0) {
-                    dp[i][j] = 1
+                } else if (counter == 0) {
+                    dp[i][counter] = 1
                 } else {
-                    val value = (dp[i - 1][j] + MOD - if (j - i >= 0) dp[i - 1][j - i] else 0) % MOD
-                    dp[i][j] = (dp[i][j - 1] + value) % MOD
+                    val value =
+                        (dp[i - 1][counter] + MOD - if (counter - i >= 0) dp[i - 1][counter - i] else 0) % MOD
+                    dp[i][counter] = (dp[i][counter - 1] + value) % MOD
                 }
-                j++
+                counter++
             }
         }
-        return dp[n][k]
+
+        return dp[length][numberOfPairs]
     }
 }
 
@@ -126,19 +130,25 @@ class KInversePairsArrayOptimizedDP : KInversePairsArray {
  * Approach 6: Once Again Memoization
  */
 class KInversePairsArrayMemoization : KInversePairsArray {
-    var memo = Array(ARR_SIZE) { arrayOfNulls<Int>(ARR_SIZE) }
+    private var memoizationTable = Array(DEFAULT_ARRAY_SIZE) { arrayOfNulls<Int>(DEFAULT_ARRAY_SIZE) }
 
-    override fun perform(n: Int, k: Int): Int {
-        return (inv(n, k) + MOD - if (k > 0) inv(n, k - 1) else 0) % MOD
+    override fun invoke(length: Int, numberOfPairs: Int): Int {
+        val res = computeInversePairs(length, numberOfPairs) + MOD - if (numberOfPairs > 0) {
+            computeInversePairs(length, numberOfPairs - 1)
+        } else {
+            0
+        }
+        return res % MOD
     }
 
-    private fun inv(n: Int, k: Int): Int {
+    private fun computeInversePairs(n: Int, k: Int): Int {
         if (n == 0) return 0
         if (k == 0) return 1
-        if (memo[n][k] != null) return memo[n][k] ?: -1
-        val value: Int = (inv(n - 1, k) + MOD - if (k - n >= 0) inv(n - 1, k - n) else 0) % MOD
-        memo[n][k] = (inv(n, k - 1) + value) % MOD
-        return memo[n][k] ?: -1
+        if (memoizationTable[n][k] != null) return memoizationTable[n][k] ?: -1
+        val value: Int =
+            (computeInversePairs(n - 1, k) + MOD - if (k - n >= 0) computeInversePairs(n - 1, k - n) else 0) % MOD
+        memoizationTable[n][k] = (computeInversePairs(n, k - 1) + value) % MOD
+        return memoizationTable[n][k] ?: -1
     }
 }
 
@@ -146,17 +156,17 @@ class KInversePairsArrayMemoization : KInversePairsArray {
  * Approach 7: 1-D Dynamic Programming
  */
 class KInversePairsArrayDP1D : KInversePairsArray {
-    override fun perform(n: Int, k: Int): Int {
-        var dp = IntArray(k + 1)
-        for (i in 1..n) {
-            val temp = IntArray(k + 1)
-            temp[0] = 1
-            for (j in 1..k) {
+    override fun invoke(length: Int, numberOfPairs: Int): Int {
+        var dp = IntArray(numberOfPairs + 1)
+        for (i in 1..length) {
+            val tempDp = IntArray(numberOfPairs + 1)
+            tempDp[0] = 1
+            for (j in 1..numberOfPairs) {
                 val value = (dp[j] + MOD - if (j - i >= 0) dp[j - i] else 0) % MOD
-                temp[j] = (temp[j - 1] + value) % MOD
+                tempDp[j] = (tempDp[j - 1] + value) % MOD
             }
-            dp = temp
+            dp = tempDp
         }
-        return (dp[k] + MOD - if (k > 0) dp[k - 1] else 0) % MOD
+        return (dp[numberOfPairs] + MOD - if (numberOfPairs > 0) dp[numberOfPairs - 1] else 0) % MOD
     }
 }

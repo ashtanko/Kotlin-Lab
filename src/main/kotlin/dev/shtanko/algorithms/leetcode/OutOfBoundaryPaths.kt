@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,34 +16,27 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+
 /**
  * 576. Out of Boundary Paths
- * @link https://leetcode.com/problems/out-of-boundary-paths/
+ * @see <a href="https://leetcode.com/problems/out-of-boundary-paths/">Source</a>
  */
-interface OutOfBoundaryPaths {
-    fun findPaths(m: Int, n: Int, maxMove: Int, startRow: Int, startColumn: Int): Int
+fun interface OutOfBoundaryPaths {
+    operator fun invoke(rowCount: Int, columnCount: Int, maxMove: Int, startRow: Int, startColumn: Int): Int
 }
 
 /**
  * Approach 1: Brute Force
  */
 class OutOfBoundaryPathsBruteForce : OutOfBoundaryPaths {
-    override fun findPaths(m: Int, n: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
-        if (startRow == m || startColumn == n || startRow < 0 || startColumn < 0) return 1
+    override fun invoke(rowCount: Int, columnCount: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
+        if (startRow == rowCount || startColumn == columnCount || startRow < 0 || startColumn < 0) return 1
         if (maxMove == 0) return 0
-        return findPaths(m, n, maxMove - 1, startRow - 1, startColumn) + findPaths(
-            m,
-            n,
-            maxMove - 1,
-            startRow + 1,
-            startColumn,
-        ) + findPaths(m, n, maxMove - 1, startRow, startColumn - 1) + findPaths(
-            m,
-            n,
-            maxMove - 1,
-            startRow,
-            startColumn + 1,
-        )
+        return invoke(rowCount, columnCount, maxMove - 1, startRow - 1, startColumn) +
+            invoke(rowCount, columnCount, maxMove - 1, startRow + 1, startColumn) +
+            invoke(rowCount, columnCount, maxMove - 1, startRow, startColumn - 1) +
+            invoke(rowCount, columnCount, maxMove - 1, startRow, startColumn + 1)
     }
 }
 
@@ -51,63 +44,71 @@ class OutOfBoundaryPathsBruteForce : OutOfBoundaryPaths {
  * Approach 2: Recursion with Memoization
  */
 class OutOfBoundaryPathsMemo : OutOfBoundaryPaths {
-    override fun findPaths(m: Int, n: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
-        val memo = Array(m) {
-            Array(n) {
+    override fun invoke(rowCount: Int, columnCount: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
+        val memo = Array(rowCount) {
+            Array(columnCount) {
                 IntArray(maxMove + 1) { -1 }
             }
         }
-        return findPaths(m, n, maxMove, startRow, startColumn, memo)
+        return findPaths(rowCount, columnCount, maxMove, startRow, startColumn, memo)
     }
 
     private fun findPaths(
-        m: Int,
-        n: Int,
+        rowCount: Int,
+        columnCount: Int,
         maxMove: Int,
-        startRow: Int,
-        startColumn: Int,
+        currentRow: Int,
+        currentColumn: Int,
         memo: Array<Array<IntArray>>,
     ): Int {
-        if (startRow == m || startColumn == n || startRow < 0 || startColumn < 0) return 1
+        if (currentRow == rowCount || currentColumn == columnCount || currentRow < 0 || currentColumn < 0) return 1
         if (maxMove == 0) return 0
-        if (memo[startRow][startColumn][maxMove] >= 0) {
-            return memo[startRow][startColumn][maxMove]
+        if (memo[currentRow][currentColumn][maxMove] >= 0) {
+            return memo[currentRow][currentColumn][maxMove]
         }
 
-        val l0 = findPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo)
-        val l1 = findPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo)
-        val l2 = findPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo)
-        val l3 = findPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo)
+        val moveRight = findPaths(rowCount, columnCount, maxMove - 1, currentRow, currentColumn + 1, memo)
+        val moveLeft = findPaths(rowCount, columnCount, maxMove - 1, currentRow, currentColumn - 1, memo)
+        val moveDown = findPaths(rowCount, columnCount, maxMove - 1, currentRow + 1, currentColumn, memo)
+        val moveUp = findPaths(rowCount, columnCount, maxMove - 1, currentRow - 1, currentColumn, memo)
 
-        memo[startRow][startColumn][maxMove] = (l0 + l1 % MOD + l2 + l3 % MOD) % MOD
-        return memo[startRow][startColumn][maxMove]
+        memo[currentRow][currentColumn][maxMove] = (moveRight + moveLeft + moveDown + moveUp) % MOD
+        return memo[currentRow][currentColumn][maxMove]
     }
 }
 
 class OutOfBoundaryPathsDP : OutOfBoundaryPaths {
-    override fun findPaths(m: Int, n: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
-        var dp = Array(m) { IntArray(n) }
-        dp[startRow][startColumn] = 1
-        var count = 0
+    override fun invoke(rowCount: Int, columnCount: Int, maxMove: Int, startRow: Int, startColumn: Int): Int {
+        var currentDp = Array(rowCount) { IntArray(columnCount) }
+        currentDp[startRow][startColumn] = 1
+        var totalCount = 0
+
         for (moves in 1..maxMove) {
-            val temp = Array(m) { IntArray(n) }
-            for (i in 0 until m) {
-                for (j in 0 until n) {
-                    if (i == m - 1) count = (count + dp[i][j]) % MOD
-                    if (j == n - 1) count = (count + dp[i][j]) % MOD
-                    if (i == 0) count = (count + dp[i][j]) % MOD
-                    if (j == 0) count = (count + dp[i][j]) % MOD
+            val nextDp = Array(rowCount) { IntArray(columnCount) }
 
-                    val l = if (i > 0) dp[i - 1][j] else 0
-                    val l1 = if (i < m - 1) dp[i + 1][j] else 0
-                    val l2 = if (j > 0) dp[i][j - 1] else 0
-                    val l3 = if (j < n - 1) dp[i][j + 1] else 0
-
-                    temp[i][j] = ((l + l1) % MOD + (l2 + l3) % MOD) % MOD
+            for (rowIndex in 0 until rowCount) {
+                for (columnIndex in 0 until columnCount) {
+                    if (rowIndex == rowCount - 1) {
+                        totalCount = (totalCount + currentDp[rowIndex][columnIndex]) % MOD
+                    }
+                    if (columnIndex == columnCount - 1) {
+                        totalCount = (totalCount + currentDp[rowIndex][columnIndex]) % MOD
+                    }
+                    if (rowIndex == 0) {
+                        totalCount = (totalCount + currentDp[rowIndex][columnIndex]) % MOD
+                    }
+                    if (columnIndex == 0) {
+                        totalCount = (totalCount + currentDp[rowIndex][columnIndex]) % MOD
+                    }
+                    val left = if (rowIndex > 0) currentDp[rowIndex - 1][columnIndex] else 0
+                    val right = if (rowIndex < rowCount - 1) currentDp[rowIndex + 1][columnIndex] else 0
+                    val up = if (columnIndex > 0) currentDp[rowIndex][columnIndex - 1] else 0
+                    val down = if (columnIndex < columnCount - 1) currentDp[rowIndex][columnIndex + 1] else 0
+                    nextDp[rowIndex][columnIndex] = ((left + right) % MOD + (up + down) % MOD) % MOD
                 }
             }
-            dp = temp
+            currentDp = nextDp
         }
-        return count
+        return totalCount
     }
 }

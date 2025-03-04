@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,29 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 540. Single Element in a Sorted Array
- * @link https://leetcode.com/problems/single-element-in-a-sorted-array/
+ * @see <a href="https://leetcode.com/problems/single-element-in-a-sorted-array/">Source</a>
  */
-interface SingleElementInSortedArray {
-    fun singleNonDuplicate(nums: IntArray): Int
+fun interface SingleElementInSortedArray {
+    /**
+     * Finds the single element in a sorted array.
+     * @param nums The sorted array of integers.
+     * @return The single element in the array.
+     */
+    operator fun invoke(nums: IntArray): Int
 }
 
+/**
+ * Implementation of SingleElementInSortedArray using binary search.
+ * This implementation assumes that the input array is sorted in non-decreasing order.
+ */
 class SingleElementInSortedArrayBS : SingleElementInSortedArray {
-    override fun singleNonDuplicate(nums: IntArray): Int {
+    /**
+     * Finds the single element in a sorted array using binary search.
+     * @param nums The sorted array of integers.
+     * @return The single element in the array.
+     */
+    override fun invoke(nums: IntArray): Int {
+        if (nums.isEmpty()) return 0
         var left = 0
         var right = nums.size - 1
         while (left < right) {

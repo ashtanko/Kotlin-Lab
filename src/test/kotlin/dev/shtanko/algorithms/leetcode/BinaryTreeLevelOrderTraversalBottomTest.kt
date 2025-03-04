@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class BinaryTreeLevelOrderTraversalBottomTest {
+class BinaryTreeLevelOrderTraversalBottomTest {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(3).apply {
@@ -49,12 +49,31 @@ internal class BinaryTreeLevelOrderTraversalBottomTest {
                     listOf(3),
                 ),
             ),
+            Arguments.of(
+                TreeNode(3).apply {
+                    left = TreeNode(9)
+                    right = TreeNode(20)
+                    right?.apply {
+                        left = TreeNode(15)
+                        right = TreeNode(7)
+                    }
+                    left?.apply {
+                        left = TreeNode(1)
+                        right = TreeNode(2)
+                    }
+                },
+                listOf(
+                    listOf(1, 2, 15, 7),
+                    listOf(9, 20),
+                    listOf(3),
+                ),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `level order traversal bottom test`(root: TreeNode, expected: List<List<Int>>) {
+    fun `level order traversal bottom test`(root: TreeNode, expected: List<List<Int>>) {
         val actual = root.levelOrderBottom()
         assertEquals(expected, actual)
     }

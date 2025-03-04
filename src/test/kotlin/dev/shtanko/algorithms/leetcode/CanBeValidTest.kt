@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -82,13 +82,93 @@ abstract class CanBeValidTest<out T : CanBeValid>(private val strategy: T) {
                 "",
                 false,
             ),
+            Arguments.of(
+                "(()",
+                "0",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "01",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "010",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "011",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "10",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "11",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "100",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "101",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "110",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "111",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "1110",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "1111",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "11110",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "11111",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "111110",
+                false,
+            ),
+            Arguments.of(
+                "(()",
+                "111111",
+                false,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `can be valid test`(s: String, locked: String, expected: Boolean) {
-        val actual = strategy.perform(s, locked)
+    fun `can be valid test`(str: String, locked: String, expected: Boolean) {
+        val actual = strategy.invoke(str, locked)
         assertThat(actual).isEqualTo(expected)
     }
 }

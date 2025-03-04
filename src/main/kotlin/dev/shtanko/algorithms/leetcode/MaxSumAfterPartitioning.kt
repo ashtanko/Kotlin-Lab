@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.max
 
 /**
  * 1043. Partition Array for Maximum Sum
- * @link https://leetcode.com/problems/partition-array-for-maximum-sum/
+ * @see <a href="https://leetcode.com/problems/partition-array-for-maximum-sum/">Source</a>
  */
-interface MaxSumAfterPartitioning {
-    fun perform(arr: IntArray, k: Int): Int
+fun interface MaxSumAfterPartitioning {
+    operator fun invoke(arr: IntArray, k: Int): Int
 }
 
 class MaxSumAfterPartitioningDP : MaxSumAfterPartitioning {
-    override fun perform(arr: IntArray, k: Int): Int {
+    override operator fun invoke(arr: IntArray, k: Int): Int {
         val dp = IntArray(arr.size)
         for (to in arr.indices) {
             var currMax = 0
@@ -54,7 +54,7 @@ class MaxSumAfterPartitioningDP : MaxSumAfterPartitioning {
 }
 
 class MaxSumAfterPartitioningMemo : MaxSumAfterPartitioning {
-    override fun perform(arr: IntArray, k: Int): Int {
+    override operator fun invoke(arr: IntArray, k: Int): Int {
         val memo = arrayOfNulls<Int>(arr.size)
         return maxSumAfterPartitioning(arr, k, 0, memo)
     }

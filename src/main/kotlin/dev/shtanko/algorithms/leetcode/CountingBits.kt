@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,10 +18,10 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 338. Counting Bits
- * https://leetcode.com/problems/counting-bits/
+ * @see <a href="https://leetcode.com/problems/counting-bits">Source</a>
  */
-interface CountingBits {
-    fun perform(n: Int): IntArray
+fun interface CountingBits {
+    operator fun invoke(num: Int): IntArray
 }
 
 /**
@@ -30,9 +30,9 @@ interface CountingBits {
  * Space complexity: O(1)
  */
 class CountingBitsPopCount : CountingBits {
-    override fun perform(n: Int): IntArray {
-        val ans = IntArray(n + 1)
-        for (x in 0..n) {
+    override operator fun invoke(num: Int): IntArray {
+        val ans = IntArray(num + 1)
+        for (x in 0..num) {
             ans[x] = popCount(x)
         }
         return ans
@@ -55,13 +55,13 @@ class CountingBitsPopCount : CountingBits {
  * Space complexity: O(1)
  */
 class MostSignificantBit : CountingBits {
-    override fun perform(n: Int): IntArray {
-        val ans = IntArray(n + 1)
+    override operator fun invoke(num: Int): IntArray {
+        val ans = IntArray(num + 1)
         var x = 0
         var b = 1
 
-        while (b <= n) {
-            while (x < b && x + b <= n) {
+        while (b <= num) {
+            while (x < b && x + b <= num) {
                 ans[x + b] = ans[x] + 1
                 ++x
             }
@@ -79,9 +79,9 @@ class MostSignificantBit : CountingBits {
  * Space complexity: O(1)
  */
 class LeastSignificantBit : CountingBits {
-    override fun perform(n: Int): IntArray {
-        val ans = IntArray(n + 1)
-        for (x in 1..n) {
+    override operator fun invoke(num: Int): IntArray {
+        val ans = IntArray(num + 1)
+        for (x in 1..num) {
             ans[x] = ans[x shr 1] + (x and 1)
         }
         return ans
@@ -94,9 +94,9 @@ class LeastSignificantBit : CountingBits {
  * Space complexity: O(1)
  */
 class LastSetBit : CountingBits {
-    override fun perform(n: Int): IntArray {
-        val ans = IntArray(n + 1)
-        for (x in 1..n) {
+    override operator fun invoke(num: Int): IntArray {
+        val ans = IntArray(num + 1)
+        for (x in 1..num) {
             ans[x] = ans[x and x - 1] + 1
         }
         return ans

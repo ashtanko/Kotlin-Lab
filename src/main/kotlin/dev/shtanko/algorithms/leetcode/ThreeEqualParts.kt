@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import kotlin.math.min
 
 /**
  * 927. Three Equal Parts
- * @link https://leetcode.com/problems/three-equal-parts/
+ * @see <a href="https://leetcode.com/problems/three-equal-parts/">Source</a>
  */
 fun interface ThreeEqualParts {
-    fun invoke(arr: IntArray): IntArray
+    operator fun invoke(arr: IntArray): IntArray
 }
 
 class EqualOnes : ThreeEqualParts {
 
     private val impossible = intArrayOf(-1, -1)
 
-    override fun invoke(arr: IntArray): IntArray {
+    override operator fun invoke(arr: IntArray): IntArray {
         val n = arr.size
 
         // Count how many 1s are in arr.
@@ -94,7 +94,7 @@ class EqualOnes : ThreeEqualParts {
 }
 
 class ThreeEqualPartsSimple : ThreeEqualParts {
-    override fun invoke(arr: IntArray): IntArray {
+    override operator fun invoke(arr: IntArray): IntArray {
         var numOne = 0
         for (i in arr) {
             if (i == 1) numOne++
@@ -105,11 +105,9 @@ class ThreeEqualPartsSimple : ThreeEqualParts {
         var thirdPartStartingIndex = 0
         var count = 0
         for (i in arr.indices.reversed()) {
-            if (arr[i] == 1) {
-                if (++count == numOne / 3) {
-                    thirdPartStartingIndex = i
-                    break
-                }
+            if (arr[i] == 1 && ++count == numOne / 3) {
+                thirdPartStartingIndex = i
+                break
             }
         }
         val firstPartEndIndex = findNextEndIndexAndCompare(arr, 0, thirdPartStartingIndex)

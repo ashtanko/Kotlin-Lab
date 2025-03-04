@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,37 +17,51 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class ClosestDivisorsTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of()
-    }
-
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Int, IntArray>> {
-            return listOf(
-                -2 to intArrayOf(),
-                -1 to intArrayOf(1, 0),
-                0 to intArrayOf(1, 1),
-                8 to intArrayOf(3, 3),
-                123 to intArrayOf(5, 25),
-                999 to intArrayOf(25, 40),
-            )
-        }
+class ClosestDivisorsTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
+                -2,
+                intArrayOf(),
+            ),
+            Arguments.of(
+                -1,
+                intArrayOf(1, 0),
+            ),
+            Arguments.of(
+                0,
+                intArrayOf(1, 1),
+            ),
+            Arguments.of(
+                8,
+                intArrayOf(3, 3),
+            ),
+            Arguments.of(
+                123,
+                intArrayOf(5, 25),
+            ),
+            Arguments.of(
+                999,
+                intArrayOf(25, 40),
+            ),
+            Arguments.of(
+                1000000000,
+                intArrayOf(23658, 42269),
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `closest divisor test`(testCase: Pair<Int, IntArray>) {
-        val (num, expected) = testCase
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `closest divisor test`(num: Int, expected: IntArray) {
         val actual = closestDivisors(num)
-        assertArrayEquals(expected, actual)
+        assertThat(actual).containsExactlyInAnyOrder(*expected)
     }
 }

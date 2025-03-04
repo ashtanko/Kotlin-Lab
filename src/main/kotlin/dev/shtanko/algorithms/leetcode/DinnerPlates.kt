@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -83,7 +83,7 @@ class DinnerPlatesTree(val capacity: Int) : DinnerPlatesDS {
     private val set = TreeSet<Int>()
 
     override fun push(value: Int) {
-        if (set.size != 0) {
+        if (set.isNotEmpty()) {
             val idx = set.iterator().next()
             stacks[idx].push(value)
             if (stacks[idx].size == capacity) {
@@ -100,9 +100,9 @@ class DinnerPlatesTree(val capacity: Int) : DinnerPlatesDS {
     }
 
     override fun pop(): Int {
-        if (!stacks.isEmpty()) {
+        if (stacks.isNotEmpty()) {
             val k = stacks.peek().pop()
-            while (!stacks.isEmpty() && stacks.peek().isEmpty()) {
+            while (stacks.isNotEmpty() && stacks.peek().isEmpty()) {
                 set.remove(stacks.size - 1)
                 stacks.pop()
             }
@@ -112,7 +112,7 @@ class DinnerPlatesTree(val capacity: Int) : DinnerPlatesDS {
     }
 
     override fun popAtStack(index: Int): Int {
-        if (index >= stacks.size || stacks[index].size == 0) {
+        if (index >= stacks.size || stacks[index].isEmpty()) {
             return -1
         }
         if (index == stacks.size - 1) {

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,28 @@ package dev.shtanko.algorithms.leetcode
 import kotlin.math.ceil
 import kotlin.math.floor
 
-data class TreeNode(var value: Int) {
+/**
+ * Represents a node in a binary tree.
+ *
+ * @property value The value stored in the node.
+ * @property left The left child of the node.
+ * @property right The right child of the node.
+ */
+data class TreeNode(var value: Int) : Comparable<TreeNode> {
     var left: TreeNode? = null
     var right: TreeNode? = null
+
+    override fun compareTo(other: TreeNode): Int {
+        return value.compareTo(other.value)
+    }
 }
 
-internal fun TreeNode?.clone(): TreeNode? {
+/**
+ * Creates a deep copy of the current binary tree.
+ *
+ * @return The cloned binary tree.
+ */
+fun TreeNode?.clone(): TreeNode? {
     if (this == null) return null
     val node = TreeNode(value)
     node.left = left.clone()
@@ -33,102 +49,156 @@ internal fun TreeNode?.clone(): TreeNode? {
 }
 
 /**
- * Print a tree
+ * Creates a deep copy of the current binary tree with each node's value increased by a specified offset.
+ *
+ * @param offset The value to add to each node's value.
+ * @return The cloned binary tree with adjusted values.
  */
-fun TreeNode.prettyPrinted(): String {
-    val lines: MutableList<List<String?>> = ArrayList()
-    var level: MutableList<TreeNode?> = ArrayList()
-    var next: MutableList<TreeNode?> = ArrayList()
-    val sb = StringBuffer()
+fun TreeNode?.clone(offset: Int): TreeNode? {
+    if (this == null) {
+        return null
+    }
+    val clonedNode = TreeNode(this.value + offset)
+    clonedNode.left = this.left.clone(offset)
+    clonedNode.right = this.right.clone(offset)
+    return clonedNode
+}
 
-    level.add(this)
-    var nn = 1
-    var widest = 0
-    while (nn != 0) {
+/**
+ * Extension function to generate a pretty-printed representation of the binary tree.
+ *
+ * @return A string containing the pretty-printed binary tree.
+ */
+fun TreeNode.prettyPrint(): String {
+    val treeLines: MutableList<List<String?>> = ArrayList()
+    var currentLevel: MutableList<TreeNode?> = ArrayList()
+    var nextLevel: MutableList<TreeNode?> = ArrayList()
+    val output = StringBuffer()
+
+    currentLevel.add(this)
+    var nodeCount = 1
+    var widestValue = 0
+    while (nodeCount != 0) {
         val line: MutableList<String?> = ArrayList()
-        nn = 0
-        for (n in level) {
-            if (n == null) {
+        nodeCount = 0
+        for (node in currentLevel) {
+            if (node == null) {
                 line.add(null)
-                next.add(null)
-                next.add(null)
+                nextLevel.add(null)
+                nextLevel.add(null)
             } else {
-                val aa = "${n.value}"
-                line.add(aa)
-                if (aa.length > widest) widest = aa.length
-                next.add(n.left)
-                next.add(n.right)
-                if (n.left != null) nn++
-                if (n.right != null) nn++
+                val nodeValue = "${node.value}"
+                line.add(nodeValue)
+                if (nodeValue.length > widestValue) widestValue = nodeValue.length
+                nextLevel.add(node.left)
+                nextLevel.add(node.right)
+                if (node.left != null) nodeCount++
+                if (node.right != null) nodeCount++
             }
         }
-        if (widest % 2 == 1) widest++
-        lines.add(line)
-        val tmp: MutableList<TreeNode?> = level
-        level = next
-        next = tmp
-        next.clear()
+        if (widestValue % 2 == 1) widestValue++
+        treeLines.add(line)
+        val temp: MutableList<TreeNode?> = currentLevel
+        currentLevel = nextLevel
+        nextLevel = temp
+        nextLevel.clear()
     }
-    var perpiece = lines[lines.size - 1].size * (widest + 4)
-    for (i in lines.indices) {
-        val line = lines[i]
-        val hpw = floor((perpiece / 2f).toDouble()).toInt() - 1
+    var charactersPerPiece = treeLines[treeLines.size - 1].size * (widestValue + 4)
+    for (i in treeLines.indices) {
+        val line = treeLines[i]
+        val halfPieceWidth = floor((charactersPerPiece / 2f).toDouble()).toInt() - 1
         if (i > 0) {
             for (j in line.indices) {
                 // split node
-                var c = ' '
+                var cornerChar = ' '
                 if (j % 2 == 1) {
                     if (line[j - 1] != null) {
-                        c = if (line[j] != null) '┴' else '┘'
+                        cornerChar = if (line[j] != null) '┴' else '┘'
                     } else {
-                        if (line[j] != null) c = '└'
+                        if (line[j] != null) cornerChar = '└'
                     }
                 }
-                sb.append(c)
+                output.append(cornerChar)
 
                 // lines and spaces
                 if (line[j] == null) {
-                    for (k in 0 until perpiece - 1) {
-                        sb.append(" ")
+                    for (k in 0 until charactersPerPiece - 1) {
+                        output.append(" ")
                     }
                 } else {
-                    for (k in 0 until hpw) {
-                        sb.append(if (j % 2 == 0) " " else "─")
+                    for (k in 0 until halfPieceWidth) {
+                        output.append(if (j % 2 == 0) " " else "─")
                     }
-                    sb.append(if (j % 2 == 0) "┌" else "┐")
-                    for (k in 0 until hpw) {
-                        sb.append(if (j % 2 == 0) "─" else " ")
+                    output.append(if (j % 2 == 0) "┌" else "┐")
+                    for (k in 0 until halfPieceWidth) {
+                        output.append(if (j % 2 == 0) "─" else " ")
                     }
                 }
             }
-            sb.append("\n")
+            output.append("\n")
         }
 
         // print line of numbers
         for (j in line.indices) {
-            var f = line[j]
-            if (f == null) f = ""
-            val gap1 = ceil((perpiece / 2f - f.length / 2f).toDouble()).toInt()
-            val gap2 = floor((perpiece / 2f - f.length / 2f).toDouble()).toInt()
+            var nodeValue = line[j]
+            if (nodeValue == null) nodeValue = ""
+            val gap1 = ceil((charactersPerPiece / 2f - nodeValue.length / 2f).toDouble()).toInt()
+            val gap2 = floor((charactersPerPiece / 2f - nodeValue.length / 2f).toDouble()).toInt()
 
             // a number
             for (k in 0 until gap1) {
-                sb.append(" ")
+                output.append(" ")
             }
-            sb.append(f)
+            output.append(nodeValue)
             for (k in 0 until gap2) {
-                sb.append(" ")
+                output.append(" ")
             }
         }
-        sb.append("\n")
-        perpiece /= 2
+        output.append("\n")
+        charactersPerPiece /= 2
     }
-    return sb.toString()
+    return output.toString()
 }
 
 /**
- * @return left height of the tree
+ * Extension function to calculate the height of the binary tree.
+ *
+ * @return The height of the binary tree. Returns -1 if the tree is empty.
  */
 fun TreeNode?.height(): Int {
     return if (this == null) -1 else 1 + this.left.height()
+}
+
+/**
+ * Builds a binary tree from an array of integer values.
+ *
+ * @return The root node of the binary tree.
+ */
+fun Array<Int?>.buildTree(): TreeNode? {
+    if (isEmpty()) return null
+
+    val root = TreeNode(this.first()!!)
+    val queue = ArrayDeque<TreeNode>()
+    queue.add(root)
+
+    var index = 1
+    while (queue.isNotEmpty() && index < size) {
+        val current = queue.removeFirst()
+
+        // Process left child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.left = TreeNode(this[index]!!)
+            queue.add(current.left!!)
+        }
+        index++
+
+        // Process right child if index is within bounds
+        if (index < size && this[index] != null) {
+            current.right = TreeNode(this[index]!!)
+            queue.add(current.right!!)
+        }
+        index++
+    }
+
+    return root
 }

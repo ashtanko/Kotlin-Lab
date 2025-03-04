@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,11 +24,11 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class SumOfRootToLeafBinaryNumbersTest<out T : SumOfRootToLeafBinaryNumbers>(
+abstract class SumOfRootToLeafBinaryNumbersTest<out T : SumOfRootToLeafBinaryNumbers>(
     private val strategy: T,
 ) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(1).apply {
@@ -43,25 +43,132 @@ internal abstract class SumOfRootToLeafBinaryNumbersTest<out T : SumOfRootToLeaf
                 },
                 22,
             ),
+            Arguments.of(
+                TreeNode(1),
+                1,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0)
+                },
+                2,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    right = TreeNode(1)
+                },
+                3,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0)
+                    right = TreeNode(1)
+                },
+                5,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                    }
+                    right = TreeNode(1).apply {
+                        right = TreeNode(1)
+                    }
+                },
+                11,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                    right = TreeNode(1).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                },
+                22,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                    right = TreeNode(1).apply {
+                        left = TreeNode(0)
+                    }
+                },
+                15,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                    right = TreeNode(1).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                },
+                22,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                    right = TreeNode(1).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1).apply {
+                            left = TreeNode(0)
+                            right = TreeNode(1)
+                        }
+                    }
+                },
+                44,
+            ),
+            Arguments.of(
+                TreeNode(1).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1)
+                    }
+                    right = TreeNode(1).apply {
+                        left = TreeNode(0)
+                        right = TreeNode(1).apply {
+                            left = TreeNode(0)
+                            right = TreeNode(1).apply {
+                                left = TreeNode(0)
+                                right = TreeNode(1)
+                            }
+                        }
+                    }
+                },
+                90,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `sum of root to leaf binary numbers test`(root: TreeNode, expected: Int) {
-        val actual = strategy.sumRootToLeaf(root)
+    fun `sum of root to leaf binary numbers test`(root: TreeNode, expected: Int) {
+        val actual = strategy.invoke(root)
         assertEquals(expected, actual)
     }
 }
 
-internal class SumOfRootToLeafBinaryNumbersIPTTest :
+class SumOfRootToLeafBinaryNumbersIPTTest :
     SumOfRootToLeafBinaryNumbersTest<SumOfRootToLeafBinaryNumbers>(SumOfRootToLeafBinaryNumbersIPT())
 
-internal class SumOfRootToLeafBinaryNumbersRPTTest :
+class SumOfRootToLeafBinaryNumbersRPTTest :
     SumOfRootToLeafBinaryNumbersTest<SumOfRootToLeafBinaryNumbers>(SumOfRootToLeafBinaryNumbersRPT())
 
-internal class SumOfRootToLeafBinaryNumbersMPTTest :
+class SumOfRootToLeafBinaryNumbersMPTTest :
     SumOfRootToLeafBinaryNumbersTest<SumOfRootToLeafBinaryNumbers>(SumOfRootToLeafBinaryNumbersMPT())
 
-internal class SumOfRootToLeafBinaryNumbersBitwiseTest :
+class SumOfRootToLeafBinaryNumbersBitwiseTest :
     SumOfRootToLeafBinaryNumbersTest<SumOfRootToLeafBinaryNumbers>(SumOfRootToLeafBinaryNumbersBitwise())

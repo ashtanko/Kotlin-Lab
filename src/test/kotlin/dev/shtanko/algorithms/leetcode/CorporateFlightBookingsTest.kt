@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,15 +17,15 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class CorporateFlightBookingsTest {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+class CorporateFlightBookingsTest {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -36,13 +36,43 @@ internal class CorporateFlightBookingsTest {
                 5,
                 intArrayOf(10, 55, 45, 25, 25),
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2, 10),
+                    intArrayOf(2, 2, 15),
+                ),
+                2,
+                intArrayOf(10, 25),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2, 10),
+                    intArrayOf(2, 2, 15),
+                    intArrayOf(2, 3, 20),
+                    intArrayOf(3, 3, 25),
+                ),
+                3,
+                intArrayOf(10, 45, 45),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 2, 10),
+                    intArrayOf(2, 2, 15),
+                    intArrayOf(2, 3, 20),
+                    intArrayOf(3, 3, 25),
+                    intArrayOf(3, 4, 30),
+                    intArrayOf(4, 4, 35),
+                ),
+                4,
+                intArrayOf(10, 45, 75, 65),
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `corporate flight bookings test`(bookings: Array<IntArray>, n: Int, expected: IntArray) {
-        val actual = corpFlightBookings(bookings, n)
-        assertArrayEquals(expected, actual)
+    fun `corporate flight bookings test`(bookings: Array<IntArray>, num: Int, expected: IntArray) {
+        val actual = corpFlightBookings(bookings, num)
+        assertThat(actual).containsExactlyInAnyOrder(*expected)
     }
 }

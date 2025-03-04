@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * Number of Connected Components in an Undirected Graph
- * @link https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/solution/
+ * @see <a href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph">Source</a>
  */
-interface CountComponents {
-    fun perform(n: Int, edges: Array<IntArray>): Int
+fun interface CountComponents {
+    operator fun invoke(n: Int, edges: Array<IntArray>): Int
 }
 
 class CountComponentsDFS : CountComponents {
-    override fun perform(n: Int, edges: Array<IntArray>): Int {
+    override operator fun invoke(n: Int, edges: Array<IntArray>): Int {
         val representative = IntArray(n)
         val size = IntArray(n)
 

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,7 +21,7 @@ import java.util.LinkedList
 
 // Number of Valid Subarrays
 class ValidSubArrays {
-    fun perform(nums: IntArray): Int {
+    operator fun invoke(nums: IntArray): Int {
         var res: Int = nums.size
         if (nums.size <= 1) {
             return res
@@ -30,7 +30,7 @@ class ValidSubArrays {
         stack.push(nums[0])
         for (i in 1 until nums.size) {
             val num = nums[i]
-            while (!stack.isEmpty() && num < stack.peek()) {
+            while (stack.isNotEmpty() && num < stack.peek()) {
                 stack.pop()
             }
             res += stack.size

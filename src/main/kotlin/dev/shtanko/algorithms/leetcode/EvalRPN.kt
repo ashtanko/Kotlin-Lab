@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,17 @@ import java.util.function.BiFunction
 
 /**
  * Evaluate Reverse Polish Notation
- * @link https://leetcode.com/problems/evaluate-reverse-polish-notation/solution/
+ * @see <a href="https://leetcode.com/problems/evaluate-reverse-polish-notation">Source</a>
  */
-interface EvalRPN {
-    fun perform(tokens: Array<String>): Int
+fun interface EvalRPN {
+    operator fun invoke(tokens: Array<String>): Int
 }
 
 /**
  * Approach 1: Reducing the List In-place
  */
 class RPNInPlace : EvalRPN {
-    override fun perform(tokens: Array<String>): Int {
+    override operator fun invoke(tokens: Array<String>): Int {
         var currentPosition = 0
         var length: Int = tokens.size // We need to keep track of this ourselves.
 
@@ -83,7 +83,7 @@ class RPNInPlace : EvalRPN {
  * Approach 2: Evaluate with Stack
  */
 class RPNStack : EvalRPN {
-    override fun perform(tokens: Array<String>): Int {
+    override operator fun invoke(tokens: Array<String>): Int {
         val stack: Stack<Int> = Stack()
         for (token in tokens) {
             if (!"+-*/".contains(token)) {

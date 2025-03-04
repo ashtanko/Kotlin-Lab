@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class BinaryTreeCamerasTest<out T : BinaryTreeCamerasStrategy>(private val strategy: T) {
+abstract class BinaryTreeCamerasTest<out T : BinaryTreeCameras>(private val strategy: T) {
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
@@ -57,17 +57,41 @@ internal abstract class BinaryTreeCamerasTest<out T : BinaryTreeCamerasStrategy>
                 TreeNode(0),
                 1,
             ),
+            Arguments.of(
+                TreeNode(0).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0).apply {
+                            left = TreeNode(0).apply {
+                                right = TreeNode(0)
+                            }
+                        }
+                    }
+                },
+                2,
+            ),
+            Arguments.of(
+                TreeNode(0).apply {
+                    left = TreeNode(0).apply {
+                        left = TreeNode(0).apply {
+                            left = TreeNode(0).apply {
+                                right = TreeNode(0)
+                            }
+                        }
+                    }
+                },
+                2,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `binary tree cameras test`(root: TreeNode, expected: Int) {
-        val actual = strategy.perform(root)
+    fun `binary tree cameras test`(root: TreeNode, expected: Int) {
+        val actual = strategy.invoke(root)
         assertEquals(expected, actual)
     }
 }
 
-internal class BinaryTreeCamerasDFSTest : BinaryTreeCamerasTest<BinaryTreeCamerasDFS>(BinaryTreeCamerasDFS())
-internal class BinaryTreeCamerasDPTest : BinaryTreeCamerasTest<BinaryTreeCamerasDP>(BinaryTreeCamerasDP())
-internal class BinaryTreeCamerasGreedyTest : BinaryTreeCamerasTest<BinaryTreeCamerasGreedy>(BinaryTreeCamerasGreedy())
+class BinaryTreeCamerasDFSTest : BinaryTreeCamerasTest<BinaryTreeCamerasDFS>(BinaryTreeCamerasDFS())
+class BinaryTreeCamerasDPTest : BinaryTreeCamerasTest<BinaryTreeCamerasDP>(BinaryTreeCamerasDP())
+class BinaryTreeCamerasGreedyTest : BinaryTreeCamerasTest<BinaryTreeCamerasGreedy>(BinaryTreeCamerasGreedy())

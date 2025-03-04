@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,8 +53,8 @@ abstract class RangeSumTest<out T : RangeSum>(private val strategy: T) {
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `range sum test`(nums: IntArray, n: Int, left: Int, right: Int, expected: Int) {
-        val actual = strategy.perform(nums, n, left, right)
+    fun `range sum test`(nums: IntArray, num: Int, left: Int, right: Int, expected: Int) {
+        val actual = strategy.invoke(nums, num, left, right)
         assertThat(actual).isEqualTo(expected)
     }
 }

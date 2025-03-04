@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,27 +16,36 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Medium
+
 /**
  * 6. Zigzag Conversion
- * @link https://leetcode.com/problems/zigzag-conversion/
+ * @see <a href="https://leetcode.com/problems/zigzag-conversion/">Source</a>
  */
-interface ZigzagConversion {
-    fun convert(s: String, numRows: Int): String
+@Medium("https://leetcode.com/problems/zigzag-conversion")
+fun interface ZigzagConversion {
+    operator fun invoke(input: String, numRows: Int): String
 }
 
 class ZigzagConversionSB : ZigzagConversion {
-    override fun convert(s: String, numRows: Int): String {
-        if (numRows <= 1) return s
-        val sb = arrayOfNulls<StringBuilder>(numRows)
-        for (i in 0 until numRows) sb[i] = StringBuilder()
-        var idx = 0
-        var k = 1
-        for (c in s.toCharArray()) {
-            sb[idx]?.append(c)
-            if (idx == 0) k = 1
-            if (idx == numRows - 1) k = -1
-            idx += k
+    override fun invoke(input: String, numberOfRows: Int): String {
+        if (numberOfRows <= 1) return input
+
+        val rowBuilders = Array(numberOfRows) { StringBuilder() }
+        var currentRow = 0
+        var direction = 1
+
+        for (char in input) {
+            rowBuilders[currentRow].append(char)
+            if (currentRow == 0) {
+                direction = 1
+            }
+            if (currentRow == numberOfRows - 1) {
+                direction = -1
+            }
+            currentRow += direction
         }
-        return sb.joinToString("")
+
+        return rowBuilders.joinToString("") { it.toString() }
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,12 +19,12 @@ package dev.shtanko.algorithms.leetcode
 import java.util.PriorityQueue
 import kotlin.math.min
 
-interface SuperUglyNumberStrategy {
-    fun perform(n: Int, primes: IntArray): Int
+fun interface SuperUglyNumber {
+    operator fun invoke(n: Int, primes: IntArray): Int
 }
 
-class SuperUglyNumberCommon : SuperUglyNumberStrategy {
-    override fun perform(n: Int, primes: IntArray): Int {
+class SuperUglyNumberCommon : SuperUglyNumber {
+    override operator fun invoke(n: Int, primes: IntArray): Int {
         val ugly = IntArray(n)
         val idx = IntArray(primes.size)
 
@@ -44,8 +44,8 @@ class SuperUglyNumberCommon : SuperUglyNumberStrategy {
     }
 }
 
-class SuperUglyNumberRedundantMultiplication : SuperUglyNumberStrategy {
-    override fun perform(n: Int, primes: IntArray): Int {
+class SuperUglyNumberRedundantMultiplication : SuperUglyNumber {
+    override operator fun invoke(n: Int, primes: IntArray): Int {
         val ugly = IntArray(n)
         val idx = IntArray(primes.size)
         val values = IntArray(primes.size) { 1 }
@@ -66,8 +66,8 @@ class SuperUglyNumberRedundantMultiplication : SuperUglyNumberStrategy {
     }
 }
 
-class SuperUglyNumberHeap : SuperUglyNumberStrategy {
-    override fun perform(n: Int, primes: IntArray): Int {
+class SuperUglyNumberHeap : SuperUglyNumber {
+    override operator fun invoke(n: Int, primes: IntArray): Int {
         val ugly = IntArray(n)
 
         val pq: PriorityQueue<Num> = PriorityQueue()

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,42 +16,42 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface NumberOfStepsStrategy {
-    fun perform(n: Int): Int
+fun interface NumberOfSteps {
+    operator fun invoke(inputNumber: Int): Int
 }
 
-class NumberOfStepsStraightForward : NumberOfStepsStrategy {
-    override fun perform(n: Int): Int {
-        return n.numberOfSteps()
+class NumberOfStepsStraightForward : NumberOfSteps {
+    override operator fun invoke(inputNumber: Int): Int {
+        return inputNumber.calculateNumberOfSteps()
     }
 
-    private fun Int.numberOfSteps(): Int {
+    private fun Int.calculateNumberOfSteps(): Int {
         if (this == 0) return 0
-        var result = 0
-        var a = this
-        var mod: Int
-        while (a != 0) {
-            mod = a % 2
-            if (mod == 0) {
-                a /= 2
+        var steps = 0
+        var currentNumber = this
+        var remainder: Int
+        while (currentNumber != 0) {
+            remainder = currentNumber % 2
+            if (remainder == 0) {
+                currentNumber /= 2
             } else {
-                a -= 1
+                currentNumber -= 1
             }
-            result++
+            steps++
         }
-        return result
+        return steps
     }
 }
 
-class NumberOfStepsBinary : NumberOfStepsStrategy {
-    override fun perform(n: Int): Int {
-        if (n == 0) return 0
-        var result = 0
-        var a = n
-        while (a != 0) {
-            result += if (a and 1 == 0) 1 else 2
-            a = a shr 1
+class NumberOfStepsBinary : NumberOfSteps {
+    override operator fun invoke(inputNumber: Int): Int {
+        if (inputNumber == 0) return 0
+        var steps = 0
+        var currentNumber = inputNumber
+        while (currentNumber != 0) {
+            steps += if (currentNumber and 1 == 0) 1 else 2
+            currentNumber = currentNumber shr 1
         }
-        return result - 1
+        return steps - 1
     }
 }

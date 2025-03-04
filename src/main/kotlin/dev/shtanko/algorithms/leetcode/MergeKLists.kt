@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,22 +20,22 @@ import java.util.PriorityQueue
 
 /**
  * 23. Merge k Sorted Lists
- * @link https://leetcode.com/problems/merge-k-sorted-lists/
+ * @see <a href="https://leetcode.com/problems/merge-k-sorted-lists/">Source</a>
  */
-interface MergeKLists {
-    fun perform(lists: Array<ListNode?>): ListNode?
+fun interface MergeKLists {
+    operator fun invoke(lists: Array<ListNode?>): ListNode?
 }
 
 class MergeKListsPQ : MergeKLists {
-    override fun perform(lists: Array<ListNode?>): ListNode? {
+    override operator fun invoke(lists: Array<ListNode?>): ListNode? {
         if (lists.isEmpty()) return null
         val queue = PriorityQueue<ListNode>(
             lists.size,
             Comparator { o1, o2 ->
-                when {
-                    o1.value < o2.value -> return@Comparator -1
-                    o1.value == o2.value -> return@Comparator 0
-                    else -> return@Comparator 1
+                return@Comparator when {
+                    o1.value < o2.value -> -1
+                    o1.value == o2.value -> 0
+                    else -> 1
                 }
             },
         )

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -104,9 +104,9 @@ class SortTest {
 
     @ParameterizedTest
     @ValueSource(ints = [10, 100, 1000, 10_000, 100_000])
-    fun `new random array test`(n: Int) {
-        val array = n.toRandomArray()
-        assertThat(array.size).isEqualTo(n)
+    fun `new random array test`(num: Int) {
+        val array = num.toRandomArray()
+        assertThat(array.size).isEqualTo(num)
     }
 
     @ParameterizedTest

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class CountComponentsTest<out T : CountComponents>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class CountComponentsTest<out T : CountComponents>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 5,
@@ -46,15 +46,51 @@ internal abstract class CountComponentsTest<out T : CountComponents>(private val
                 ),
                 1,
             ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 0),
+                ),
+                1,
+            ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 0),
+                    intArrayOf(0, 2),
+                ),
+                1,
+            ),
+            Arguments.of(
+                5,
+                arrayOf(
+                    intArrayOf(0, 1),
+                    intArrayOf(1, 2),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4),
+                    intArrayOf(4, 0),
+                    intArrayOf(0, 2),
+                    intArrayOf(2, 4),
+                ),
+                1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `count components test`(n: Int, edges: Array<IntArray>, expected: Int) {
-        val actual = strategy.perform(n, edges)
+    fun `count components test`(num: Int, edges: Array<IntArray>, expected: Int) {
+        val actual = strategy.invoke(num, edges)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class CountComponentsDFSTest : CountComponentsTest<CountComponentsDFS>(CountComponentsDFS())
+class CountComponentsDFSTest : CountComponentsTest<CountComponentsDFS>(CountComponentsDFS())

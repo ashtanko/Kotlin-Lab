@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,22 +18,22 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 241. Different Ways to Add Parentheses
- * @link https://leetcode.com/problems/different-ways-to-add-parentheses/
+ * @see <a href="https://leetcode.com/problems/different-ways-to-add-parentheses/">Source</a>
  */
-interface DiffWaysToCompute {
-    fun compute(expression: String): List<Int>
+fun interface DiffWaysToCompute {
+    operator fun invoke(expression: String): List<Int>
 }
 
 class DiffWaysToComputeRecursive : DiffWaysToCompute {
 
     // function to get the result of the operation
-    fun perform(x: Int, y: Int, op: Char): Int {
+    operator fun invoke(x: Int, y: Int, op: Char): Int {
         if (op == '+') return x + y
         if (op == '-') return x - y
         return if (op == '*') x * y else 0
     }
 
-    override fun compute(expression: String): List<Int> {
+    override fun invoke(expression: String): List<Int> {
         val results: MutableList<Int> = ArrayList()
         if (expression.isBlank()) return results
         var isNumber = true
@@ -45,15 +45,15 @@ class DiffWaysToComputeRecursive : DiffWaysToCompute {
                 isNumber = false
 
                 // list of first operands
-                val left = compute(expression.substring(0, i))
+                val left = invoke(expression.substring(0, i))
 
                 // list of second operands
-                val right = compute(expression.substring(i + 1))
+                val right = invoke(expression.substring(i + 1))
 
                 // performing operations
                 for (x in left) {
                     for (y in right) {
-                        val value = perform(x, y, expression[i])
+                        val value = invoke(x, y, expression[i])
                         results.add(value)
                     }
                 }
@@ -65,7 +65,7 @@ class DiffWaysToComputeRecursive : DiffWaysToCompute {
 }
 
 class DiffWaysToComputeDivideAndConquer : DiffWaysToCompute {
-    override fun compute(expression: String): List<Int> {
+    override fun invoke(expression: String): List<Int> {
         if (expression.isEmpty()) return emptyList()
         return mutableListOf<Int>().apply {
             expression.toCharArray().forEachIndexed { index, char ->
@@ -73,8 +73,8 @@ class DiffWaysToComputeDivideAndConquer : DiffWaysToCompute {
                     val left = expression.substring(0, index)
                     val right = expression.substring(index + 1)
 
-                    val leftNums = compute(left)
-                    val rightNums = compute(right)
+                    val leftNums = invoke(left)
+                    val rightNums = invoke(right)
 
                     leftNums.forEach { num1 ->
                         rightNums.forEach { num2 ->

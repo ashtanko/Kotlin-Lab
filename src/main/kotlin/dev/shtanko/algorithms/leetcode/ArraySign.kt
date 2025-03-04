@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,24 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.level.Easy
+
 /**
  * 1822. Sign of the Product of an Array
- * @link https://leetcode.com/problems/sign-of-the-product-of-an-array/
+ * @see <a href="https://leetcode.com/problems/sign-of-the-product-of-an-array/">Source</a>
  */
-interface ArraySign {
-    fun perform(nums: IntArray): Int
+@Easy("https://leetcode.com/problems/sign-of-the-product-of-an-array")
+fun interface ArraySign {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
  * Approach 1: Counting Negative Numbers
  */
+@Iterative
 class ArraySignCountingNegativeNumbers : ArraySign {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var countNegativeNumbers = 0
         for (num in nums) {
             if (num == 0) {
@@ -46,8 +51,9 @@ class ArraySignCountingNegativeNumbers : ArraySign {
 /**
  * Approach 2: Tracking the Sign of the Product
  */
+@Iterative
 class ArraySignTracking : ArraySign {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var sign = 1
         for (num in nums) {
             if (num == 0) {
@@ -64,8 +70,9 @@ class ArraySignTracking : ArraySign {
 /**
  * Approach 3: Tracking the Sign of the Product
  */
+@Iterative
 class ArraySignSimple : ArraySign {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var sign = 1
         for (n in nums) {
             if (n == 0) {

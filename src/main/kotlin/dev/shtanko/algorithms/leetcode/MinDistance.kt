@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,10 +21,10 @@ import kotlin.math.min
 
 /**
  * 583. Delete Operation for Two Strings
- * @link https://leetcode.com/problems/delete-operation-for-two-strings/
+ * @see <a href="https://leetcode.com/problems/delete-operation-for-two-strings/">Source</a>
  */
-interface MinDistance {
-    fun perform(word1: String, word2: String): Int
+fun interface MinDistance {
+    operator fun invoke(word1: String, word2: String): Int
 }
 
 /**
@@ -33,7 +33,7 @@ interface MinDistance {
  * Space complexity : O(max (m,n))).
  */
 class MinDistanceLCS : MinDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         return word1.length + word2.length - 2 * lcs(word1, word2, word1.length, word2.length)
     }
 
@@ -53,7 +53,7 @@ class MinDistanceLCS : MinDistance {
  * Space complexity : O(m*n).
  */
 class MinDistanceLCSMemo : MinDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         val memo = Array(word1.length + 1) {
             IntArray(word2.length + 1)
         }
@@ -82,7 +82,7 @@ class MinDistanceLCSMemo : MinDistance {
  * Space complexity : O(m*n).
  */
 class MinDistanceLCSDP : MinDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         val dp = Array(word1.length + 1) { IntArray(word2.length + 1) }
         for (i in 0..word1.length) {
             for (j in 0..word2.length) {
@@ -106,7 +106,7 @@ class MinDistanceLCSDP : MinDistance {
  * Space complexity : O(m*n).
  */
 class MinDistanceDP : MinDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         val dp = Array(word1.length + 1) {
             IntArray(
                 word2.length + 1,
@@ -134,7 +134,7 @@ class MinDistanceDP : MinDistance {
  * Space complexity : O(n).
  */
 class MinDistance1DDP : MinDistance {
-    override fun perform(word1: String, word2: String): Int {
+    override operator fun invoke(word1: String, word2: String): Int {
         var dp = IntArray(word2.length + 1)
         for (i in 0..word1.length) {
             val temp = IntArray(word2.length + 1)

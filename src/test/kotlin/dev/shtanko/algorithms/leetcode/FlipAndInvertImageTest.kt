@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,45 +16,103 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import org.junit.jupiter.api.Assertions.assertArrayEquals
+import java.util.stream.Stream
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class FlipAndInvertImageTest {
+class FlipAndInvertImageTest {
 
-    companion object {
-        @JvmStatic
-        fun dataProvider(): List<Pair<Array<IntArray>, Array<IntArray>>> {
-            return listOf(
+    private class InputArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+            Arguments.of(
                 arrayOf(
                     intArrayOf(1, 1, 0),
                     intArrayOf(1, 0, 1),
                     intArrayOf(0, 0, 0),
-                ) to arrayOf(
+                ),
+                arrayOf(
                     intArrayOf(1, 0, 0),
                     intArrayOf(0, 1, 0),
                     intArrayOf(1, 1, 1),
                 ),
+            ),
+            Arguments.of(
                 arrayOf(
                     intArrayOf(1, 1, 0, 0),
                     intArrayOf(1, 0, 0, 1),
                     intArrayOf(0, 1, 1, 1),
                     intArrayOf(1, 0, 1, 0),
-                ) to arrayOf(
+                ),
+                arrayOf(
                     intArrayOf(1, 1, 0, 0),
                     intArrayOf(0, 1, 1, 0),
                     intArrayOf(0, 0, 0, 1),
                     intArrayOf(1, 0, 1, 0),
                 ),
-            )
-        }
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1),
+                ),
+                arrayOf(
+                    intArrayOf(0),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(0),
+                ),
+                arrayOf(
+                    intArrayOf(1),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 0),
+                    intArrayOf(0, 1),
+                ),
+                arrayOf(
+                    intArrayOf(1, 0),
+                    intArrayOf(0, 1),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 1, 0),
+                    intArrayOf(1, 0, 1),
+                    intArrayOf(0, 0, 0),
+                ),
+                arrayOf(
+                    intArrayOf(1, 0, 0),
+                    intArrayOf(0, 1, 0),
+                    intArrayOf(1, 1, 1),
+                ),
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(1, 1, 0, 0),
+                    intArrayOf(1, 0, 0, 1),
+                    intArrayOf(0, 1, 1, 1),
+                    intArrayOf(1, 0, 1, 0),
+                ),
+                arrayOf(
+                    intArrayOf(1, 1, 0, 0),
+                    intArrayOf(0, 1, 1, 0),
+                    intArrayOf(0, 0, 0, 1),
+                    intArrayOf(1, 0, 1, 0),
+                ),
+            ),
+        )
     }
 
     @ParameterizedTest
-    @MethodSource("dataProvider")
-    internal fun `flip and invert image test`(testCase: Pair<Array<IntArray>, Array<IntArray>>) {
-        val (arr, expected) = testCase
+    @ArgumentsSource(InputArgumentsProvider::class)
+    fun `flip and invert image test`(arr: Array<IntArray>, expected: Array<IntArray>) {
         val actual = flipAndInvertImage(arr)
-        assertArrayEquals(expected, actual)
+        assertThat(actual).isEqualTo(expected)
     }
 }

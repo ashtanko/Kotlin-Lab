@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,17 @@ import java.util.Stack
 
 /**
  * 917. Reverse Only Letters
- * @link https://leetcode.com/problems/reverse-only-letters/
+ * @see <a href="https://leetcode.com/problems/reverse-only-letters/">Source</a>
  */
-interface ReverseOnlyLetters {
-    fun perform(s: String): String
+fun interface ReverseOnlyLetters {
+    operator fun invoke(s: String): String
 }
 
 /**
  * Approach 1: Stack of Letters
  */
 class ReverseOnlyLettersStack : ReverseOnlyLetters {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val letters: Stack<Char> = Stack()
         for (c in s.toCharArray()) if (Character.isLetter(c)) letters.push(c)
 
@@ -47,7 +47,7 @@ class ReverseOnlyLettersStack : ReverseOnlyLetters {
  * Approach 2: Reverse Pointer
  */
 class ReversePointer : ReverseOnlyLetters {
-    override fun perform(s: String): String {
+    override operator fun invoke(s: String): String {
         val ans = StringBuilder()
         var j: Int = s.length - 1
         for (i in s.indices) {

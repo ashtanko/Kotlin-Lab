@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,20 +26,104 @@ import org.junit.jupiter.params.provider.ArgumentsSource
 
 abstract class SimilarStringGroupsTest<out T : SimilarStringGroups>(private val strategy: T) {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf(""), 1),
+            Arguments.of(arrayOf<String>(), 0),
             Arguments.of(arrayOf("a"), 1),
             Arguments.of(arrayOf("one"), 1),
             Arguments.of(arrayOf("tars", "rats", "arts", "star"), 2),
             Arguments.of(arrayOf("omv", "ovm"), 1),
+            Arguments.of(arrayOf("abc", "bac", "cab", "xyz", "yzx", "zxy"), 4),
+            Arguments.of(arrayOf("abc", "bac", "cab", "xyz", "yzx", "zxy", "def", "edf", "fde"), 5),
+            Arguments.of(
+                arrayOf("abc", "bad", "cda", "xyz", "yzx", "zxy"),
+                6,
+            ),
+            Arguments.of(
+                arrayOf("abc", "abc", "abc", "xyz", "xyz", "xyz"),
+                2,
+            ),
+            Arguments.of(
+                arrayOf("abcdefghijklmnopqrstuvwxyza", "bcdefghijklmnopqrstuvwxyzab", "cdefghijklmnopqrstuvwxyzabc"),
+                3,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                ),
+                4,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                    "efghijklmnopqrstuvwxyzabcde",
+                ),
+                5,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                    "efghijklmnopqrstuvwxyzabcde",
+                    "fghijklmnopqrstuvwxyzabcdef",
+                ),
+                6,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                    "efghijklmnopqrstuvwxyzabcde",
+                    "fghijklmnopqrstuvwxyzabcdef",
+                    "ghijklmnopqrstuvwxyzabcdefg",
+                ),
+                7,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                    "efghijklmnopqrstuvwxyzabcde",
+                    "fghijklmnopqrstuvwxyzabcdef",
+                    "ghijklmnopqrstuvwxyzabcdefg",
+                    "hijklmnopqrstuvwxyzabcdefgh",
+                ),
+                8,
+            ),
+            Arguments.of(
+                arrayOf(
+                    "abc",
+                    "bcdefghijklmnopqrstuvwxyzab",
+                    "cdefghijklmnopqrstuvwxyzabc",
+                    "defghijklmnopqrstuvwxyzabcd",
+                    "efghijklmnopqrstuvwxyzabcde",
+                    "fghijklmnopqrstuvwxyzabcdef",
+                    "ghijklmnopqrstuvwxyzabcdefg",
+                    "hijklmnopqrstuvwxyzabcdefgh",
+                    "ijklmnopqrstuvwxyzabcdefghi",
+                ),
+                9,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `num similar groups test`(strings: Array<String>, expected: Int) {
-        val actual = strategy.numSimilarGroups(strings)
+    fun `num similar groups test`(strings: Array<String>, expected: Int) {
+        val actual = strategy.invoke(strings)
         assertEquals(expected, actual)
     }
 }

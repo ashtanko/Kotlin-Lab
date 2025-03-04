@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
 import kotlin.math.max
 
 /**
  * Word Abbreviation.
- * @link https://leetcode.com/problems/word-abbreviation/
+ * @see <a href="https://leetcode.com/problems/word-abbreviation/">Source</a>
  */
-interface WordAbbreviation {
-    fun perform(dict: List<String>): List<String>
+fun interface WordAbbreviation {
+    operator fun invoke(dict: List<String>): List<String>
 
     fun abbrev(word: String, i: Int): String {
         val n = word.length
@@ -35,12 +36,12 @@ interface WordAbbreviation {
  * Approach #1: Greedy.
  */
 class WordAbbreviationGreedy : WordAbbreviation {
-    override fun perform(dict: List<String>): List<String> {
+    override operator fun invoke(dict: List<String>): List<String> {
         val wordToAbbr: MutableMap<String?, String?> = HashMap()
         val groups: MutableMap<Int, MutableList<String>> = HashMap()
 
         // Try to group words by their length. Because no point to compare words with different length.
-        // Also no point to look at words with length < 4.
+        // Also, no point to look at words with length < 4.
         for (word in dict) {
             val len = word.length
             if (len < 4) {
@@ -54,7 +55,7 @@ class WordAbbreviationGreedy : WordAbbreviation {
 
         // For each group of words with same length, generate a result HashMap.
         for (len in groups.keys) {
-            val res = getAbbr(groups[len]!!)
+            val res = getAbbr(groups.getOrDefault(len, emptyList()))
             for (word in res.keys) {
                 wordToAbbr[word] = res[word]
             }
@@ -109,8 +110,8 @@ class WordAbbreviationGreedy : WordAbbreviation {
 
 class IndexedWord(var word: String, var index: Int)
 
-internal class WordTrieNode {
-    var children: Array<WordTrieNode?> = arrayOfNulls(26)
+class WordTrieNode {
+    var children: Array<WordTrieNode?> = arrayOfNulls(ALPHABET_LETTERS_COUNT)
     var count: Int = 0
 }
 
@@ -118,7 +119,7 @@ internal class WordTrieNode {
  * Approach #2: Group + Least Common Prefix.
  */
 class WordAbbreviationLCP : WordAbbreviation {
-    override fun perform(dict: List<String>): List<String> {
+    override operator fun invoke(dict: List<String>): List<String> {
         val groups: MutableMap<String, MutableList<IndexedWord>> = HashMap()
         val ans = Array(dict.size) { "" }
 
@@ -156,14 +157,14 @@ class WordAbbreviationLCP : WordAbbreviation {
  * Approach #3: Group + Trie.
  */
 class WordAbbreviationTrie : WordAbbreviation {
-    override fun perform(dict: List<String>): List<String> {
+    override operator fun invoke(dict: List<String>): List<String> {
         val groups: MutableMap<String, MutableList<IndexedWord?>> = HashMap()
         val ans = Array(dict.size) { "" }
 
         for ((index, word) in dict.withIndex()) {
             val ab = abbrev(word, 0)
             if (!groups.containsKey(ab)) groups[ab] = ArrayList()
-            groups[ab]!!.add(IndexedWord(word, index))
+            groups[ab]?.add(IndexedWord(word, index))
         }
 
         for (group in groups.values) {

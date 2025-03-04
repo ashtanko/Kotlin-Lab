@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -37,13 +37,53 @@ abstract class FreedomTrailTest<out T : FreedomTrail>(private val strategy: T) {
                 "godding",
                 13,
             ),
+            Arguments.of(
+                "godding",
+                "god",
+                5,
+            ),
+            Arguments.of(
+                "godding",
+                "godding",
+                13,
+            ),
+            Arguments.of(
+                "godding",
+                "god",
+                5,
+            ),
+            Arguments.of(
+                "",
+                "",
+                0,
+            ),
+            Arguments.of(
+                "",
+                "a",
+                0,
+            ),
+            Arguments.of(
+                "a",
+                "a",
+                1,
+            ),
+            Arguments.of(
+                "a",
+                "b",
+                1,
+            ),
+            Arguments.of(
+                "a",
+                "aa",
+                2,
+            ),
         )
     }
 
     @ArgumentsSource(InputArgumentsProvider::class)
     @ParameterizedTest
     fun `find rotate steps test`(ring: String, key: String, expected: Int) {
-        val actual = strategy.findRotateSteps(ring, key)
+        val actual = strategy.invoke(ring, key)
         assertThat(actual).isEqualTo(expected)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,15 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Memoization
+
 /**
  * Coin Path.
- * @link https://leetcode.com/problems/coin-path/
+ * @see <a href="https://leetcode.com/problems/coin-path/">Source</a>
  */
-interface CoinPath {
-    fun cheapestJump(a: IntArray, b: Int): List<Int>
+fun interface CoinPath {
+    operator fun invoke(a: IntArray, b: Int): List<Int>
 }
 
 /**
@@ -29,8 +32,9 @@ interface CoinPath {
  * Time complexity : O(nB).
  * Space complexity : O(n).
  */
+@Memoization
 class CoinPathMemo : CoinPath {
-    override fun cheapestJump(a: IntArray, b: Int): List<Int> {
+    override fun invoke(a: IntArray, b: Int): List<Int> {
         val next = IntArray(a.size) { -1 }
         val memo = LongArray(a.size)
         jump(a, b, 0, next, memo)
@@ -71,8 +75,9 @@ class CoinPathMemo : CoinPath {
  * Time complexity : O(nB).
  * Space complexity : O(n).
  */
+@DP
 class CoinPathDP : CoinPath {
-    override fun cheapestJump(a: IntArray, b: Int): List<Int> {
+    override fun invoke(a: IntArray, b: Int): List<Int> {
         val next = IntArray(a.size) { -1 }
         val dp = LongArray(a.size)
         val res: MutableList<Int> = ArrayList()
@@ -91,7 +96,7 @@ class CoinPathDP : CoinPath {
             }
             dp[i] = minCost
         }
-        var i: Int = 0
+        var i = 0
         while (i < a.size && next[i] > 0) {
             res.add(i + 1)
             i = next[i]

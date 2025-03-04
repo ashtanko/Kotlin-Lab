@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,9 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BinarySearch
+import dev.shtanko.algorithms.annotations.Iterative
+import dev.shtanko.algorithms.annotations.Recursive
 import java.util.LinkedList
 import kotlin.math.abs
 
@@ -23,7 +26,7 @@ import kotlin.math.abs
  * 270. Closest Binary Search Tree Value
  * https://leetcode.com/problems/closest-binary-search-tree-value/
  */
-interface ClosestBST {
+fun interface ClosestBST {
     fun closestValue(root: TreeNode?, target: Double): Int
 }
 
@@ -32,6 +35,7 @@ interface ClosestBST {
  * Time complexity : O(N)
  * Space complexity : O(N)
  */
+@Recursive
 class RecursiveInorder : ClosestBST {
     override fun closestValue(root: TreeNode?, target: Double): Int {
         val nums = inorder(root)
@@ -56,12 +60,13 @@ class RecursiveInorder : ClosestBST {
 /**
  * Approach 2: Iterative Inorder, O(k) time
  */
+@Iterative
 class IterativeInorder : ClosestBST {
     override fun closestValue(root: TreeNode?, target: Double): Int {
         val stack: LinkedList<TreeNode?> = LinkedList()
         var pred = Int.MIN_VALUE
         var node = root
-        while (!stack.isEmpty() || node != null) {
+        while (stack.isNotEmpty() || node != null) {
             while (node != null) {
                 stack.add(node)
                 node = node.left
@@ -89,6 +94,7 @@ class IterativeInorder : ClosestBST {
  * Time complexity : O(H)
  * Space complexity : O(1)
  */
+@BinarySearch
 class ClosestBSTBinarySearch : ClosestBST {
     override fun closestValue(root: TreeNode?, target: Double): Int {
         var value: Int

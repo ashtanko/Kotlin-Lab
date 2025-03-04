@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,16 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+
 /**
  * Rotated Digits
- * @link https://leetcode.com/problems/rotated-digits/
+ * @see <a href="https://leetcode.com/problems/rotated-digits/">Source</a>
  */
-interface RotatedDigits {
-    fun perform(n: Int): Int
+fun interface RotatedDigits {
+    operator fun invoke(n: Int): Int
 }
 
 class RotatedDigitsBruteForce : RotatedDigits {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         // Count how many n in [1, N] are good.
         var ans = 0
         for (i in 1..n) if (good(i, false)) ans++
@@ -48,7 +50,7 @@ class RotatedDigitsBruteForce : RotatedDigits {
 }
 
 class RotatedDigitsDP : RotatedDigits {
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val a = n.toString().toCharArray()
         val k = a.size
         val memo = Array(k + 1) { Array(2) { IntArray(2) } }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,17 +21,17 @@ import kotlin.math.min
 
 /**
  * 410. Split Array Largest Sum
- * @link https://leetcode.com/problems/split-array-largest-sum/
+ * @see <a href="https://leetcode.com/problems/split-array-largest-sum/">Source</a>
  */
-interface SplitArrayLargestSum {
-    fun splitArray(nums: IntArray, k: Int): Int
+fun interface SplitArrayLargestSum {
+    operator fun invoke(nums: IntArray, k: Int): Int
 }
 
 class SplitArrayLargestSumMaxSum : SplitArrayLargestSum {
-    override fun splitArray(nums: IntArray, k: Int): Int {
+    override fun invoke(nums: IntArray, k: Int): Int {
         // validation
         if (nums.isEmpty() || k < 1) {
-            return -1
+            return 0
         }
 
         // get [minMaxSum, maxMaxSum]
@@ -82,7 +82,7 @@ class SplitArrayLargestSumMaxSum : SplitArrayLargestSum {
 }
 
 class SplitArrayLargestSumGreedy : SplitArrayLargestSum {
-    override fun splitArray(nums: IntArray, k: Int): Int {
+    override fun invoke(nums: IntArray, k: Int): Int {
         var low = 0
         var high = 0
         var min = Int.MAX_VALUE
@@ -117,11 +117,9 @@ class SplitArrayLargestSumGreedy : SplitArrayLargestSum {
 }
 
 class SplitArrayLargestSumBinarySearch : SplitArrayLargestSum {
-    override fun splitArray(nums: IntArray, k: Int): Int {
+    override fun invoke(nums: IntArray, k: Int): Int {
         // sanity check
         if (nums.isEmpty()) return 0
-
-        val size = nums.size
 
         var lo = 0L
         var hi = 0L
@@ -160,7 +158,7 @@ class SplitArrayLargestSumBinarySearch : SplitArrayLargestSum {
 }
 
 class SplitArrayLargestSumDP : SplitArrayLargestSum {
-    override fun splitArray(nums: IntArray, k: Int): Int {
+    override fun invoke(nums: IntArray, k: Int): Int {
         // sanity check
         if (nums.isEmpty()) return 0
 

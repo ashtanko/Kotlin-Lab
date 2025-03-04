@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,9 @@
 package dev.shtanko.algorithms.leetcode
 
 /**
+ * 344. Reverse String
+ * @see <a href="https://leetcode.com/problems/reverse-string/">Source</a>
+ *
  * Reverse String
  * Write a function that reverses a string. The input string is given as an array of characters char[].
  * Do not allocate extra space for another array, you must do this by modifying the input array in-place
@@ -24,12 +27,10 @@ package dev.shtanko.algorithms.leetcode
  */
 fun CharArray.reverse() {
     var start = 0
-    var end = size - 1
+    var end = lastIndex
 
     while (start < end) {
-        val tmp = this[start]
-        this[start] = this[end]
-        this[end] = tmp
+        this[start] = this[end].also { this[end] = this[start] }
         start++
         end--
     }

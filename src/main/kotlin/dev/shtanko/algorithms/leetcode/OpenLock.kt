@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,59 +18,69 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 752. Open the Lock
- * @link https://leetcode.com/problems/open-the-lock/
+ * @see <a href="https://leetcode.com/problems/open-the-lock/">Source</a>
  */
-interface OpenLock {
-    fun openLock(deadEnds: Array<String>, target: String): Int
+fun interface OpenLock {
+    operator fun invoke(deadEnds: Array<String>, target: String): Int
 }
 
-class OpenLockBFS : OpenLock {
-    private var begin: MutableSet<String> = HashSet<String>().apply {
-        add(START_LOCK_POSITION)
-    }
-    private var end: MutableSet<String> = HashSet()
+class LockOpenerBFS : OpenLock {
+    private var targetPositions: MutableSet<String> = HashSet()
 
-    override fun openLock(deadEnds: Array<String>, target: String): Int {
-        val deads: MutableSet<String> = HashSet(deadEnds.toList())
-        end.add(target)
+    override fun invoke(deadEnds: Array<String>, target: String): Int {
+        if (deadEnds.isEmpty() || target.isEmpty()) {
+            return DEFAULT_RESULT
+        }
+        val deadEndsSet: MutableSet<String> = HashSet(deadEnds.toList())
+        targetPositions.add(target)
         var level = 0
-        var temp: MutableSet<String>
-        while (begin.isNotEmpty() && end.isNotEmpty()) {
-            if (begin.size > end.size) {
-                temp = begin
-                begin = end
-                end = temp
+        var nextPositions: MutableSet<String>
+        while (startPositions.isNotEmpty() && targetPositions.isNotEmpty()) {
+            if (startPositions.size > targetPositions.size) {
+                nextPositions = startPositions
+                startPositions = targetPositions
+                targetPositions = nextPositions
             }
-            temp = HashSet()
-            for (s in begin) {
-                if (end.contains(s)) {
+            nextPositions = HashSet()
+            for (currentPosition in startPositions) {
+                if (targetPositions.contains(currentPosition)) {
                     return level
                 }
-                if (deads.contains(s)) {
+                if (deadEndsSet.contains(currentPosition)) {
                     continue
                 }
-                deads.add(s)
-                val sb = StringBuilder(s)
+                deadEndsSet.add(currentPosition)
+                val positionBuilder = StringBuilder(currentPosition)
                 for (i in 0 until LOCK_SIZE) {
-                    val c = sb[i]
-                    val s1 = sb.substring(0, i) + (if (c == '9') 0 else c - '0' + 1) + sb.substring(
+                    val c = positionBuilder[i]
+                    val nextPosition1 = positionBuilder.substring(
+                        0,
+                        i,
+                    ) + (if (c == '9') 0 else c - '0' + 1) + positionBuilder.substring(
                         i + 1,
                     )
-                    val s2 = sb.substring(0, i) + (if (c == '0') 9 else c - '0' - 1) + sb.substring(
+                    val nextPosition2 = positionBuilder.substring(
+                        0,
+                        i,
+                    ) + (if (c == '0') 9 else c - '0' - 1) + positionBuilder.substring(
                         i + 1,
                     )
-                    if (!deads.contains(s1)) {
-                        temp.add(s1)
+                    if (!deadEndsSet.contains(nextPosition1)) {
+                        nextPositions.add(nextPosition1)
                     }
-                    if (!deads.contains(s2)) {
-                        temp.add(s2)
+                    if (!deadEndsSet.contains(nextPosition2)) {
+                        nextPositions.add(nextPosition2)
                     }
                 }
             }
             level++
-            begin = temp
+            startPositions = nextPositions
         }
         return DEFAULT_RESULT
+    }
+
+    private var startPositions: MutableSet<String> = HashSet<String>().apply {
+        add(START_LOCK_POSITION)
     }
 
     companion object {

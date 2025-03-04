@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import kotlin.math.max
 
 /**
  * 546. Remove Boxes
- * @link https://leetcode.com/problems/remove-boxes/
+ * @see <a href="https://leetcode.com/problems/remove-boxes/">Source</a>
  */
-interface RemoveBoxes {
-    fun perform(boxes: IntArray): Int
+fun interface RemoveBoxes {
+    operator fun invoke(boxes: IntArray): Int
 }
 
 class RemoveBoxesTopDown : RemoveBoxes {
-    override fun perform(boxes: IntArray): Int {
+    override operator fun invoke(boxes: IntArray): Int {
         val n: Int = boxes.size
         val dp = Array(n) {
             Array(n) { IntArray(n) }
@@ -41,7 +41,8 @@ class RemoveBoxesTopDown : RemoveBoxes {
         if (i0 > j) return 0
         if (dp[i0][j][k0] > 0) return dp[i0][j][k0]
         while (i0 + 1 <= j && boxes[i0 + 1] == boxes[i0]) {
-            // optimization: all boxes of the same color counted continuously from the first box should be grouped together
+            // optimization: all boxes of the same color counted continuously from the first box should be
+            // grouped together
             i0++
             k0++
         }
@@ -62,7 +63,7 @@ class RemoveBoxesTopDown : RemoveBoxes {
 }
 
 class RemoveBoxesBottomUp : RemoveBoxes {
-    override fun perform(boxes: IntArray): Int {
+    override operator fun invoke(boxes: IntArray): Int {
         val n: Int = boxes.size
         val dp = Array(n) {
             Array(n) { IntArray(n) }

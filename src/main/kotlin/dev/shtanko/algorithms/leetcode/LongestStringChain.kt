@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,10 +20,10 @@ import kotlin.math.max
 
 /**
  * 1048. Longest String Chain
- * @link https://leetcode.com/problems/longest-string-chain/
+ * @see <a href="https://leetcode.com/problems/longest-string-chain/">Source</a>
  */
-interface LongestStringChain {
-    fun perform(words: Array<String>): Int
+fun interface LongestStringChain {
+    operator fun invoke(words: Array<String>): Int
 }
 
 /**
@@ -32,7 +32,7 @@ interface LongestStringChain {
  * Space complexity: O(N).
  */
 class LSCTopDown : LongestStringChain {
-    override fun perform(words: Array<String>): Int {
+    override operator fun invoke(words: Array<String>): Int {
         val memo: MutableMap<String, Int> = HashMap()
         val wordsPresent: MutableSet<String> = HashSet()
         wordsPresent.addAll(words)
@@ -74,7 +74,7 @@ class LSCTopDown : LongestStringChain {
  * Space complexity: O(N).
  */
 class LSCBottomUp : LongestStringChain {
-    override fun perform(words: Array<String>): Int {
+    override operator fun invoke(words: Array<String>): Int {
         val dp: MutableMap<String, Int> = HashMap()
 
         // Sorting the list in terms of the word length.

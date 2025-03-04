@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,17 +18,17 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 2110. Number of Smooth Descent Periods of a Stock
- * @link https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/
+ * @see <a href="https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/">Source</a>
  */
-interface GetDescentPeriods {
-    fun perform(prices: IntArray): Long
+fun interface GetDescentPeriods {
+    operator fun invoke(prices: IntArray): Long
 }
 
 /**
  * O(N) Space
  */
 class GetDescentPeriodsOnePass : GetDescentPeriods {
-    override fun perform(prices: IntArray): Long {
+    override operator fun invoke(prices: IntArray): Long {
         val dp = LongArray(prices.size)
         dp[0] = 1
         var ans: Long = 1
@@ -48,7 +48,7 @@ class GetDescentPeriodsOnePass : GetDescentPeriods {
  * O(1) Space
  */
 class GetDescentPeriodsSimple : GetDescentPeriods {
-    override fun perform(prices: IntArray): Long {
+    override operator fun invoke(prices: IntArray): Long {
         var dp: Long = 1
         var ans: Long = 1
         for (i in 1 until prices.size) {

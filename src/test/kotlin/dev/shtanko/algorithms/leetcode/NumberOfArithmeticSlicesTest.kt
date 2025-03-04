@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,8 +28,28 @@ abstract class NumberOfArithmeticSlicesTest<out T : NumberOfArithmeticSlices>(pr
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
+                intArrayOf(),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2),
+                0,
+            ),
+            Arguments.of(
+                intArrayOf(0, 0, 0, 0, 0, 0),
+                42,
+            ),
+            Arguments.of(
                 intArrayOf(2, 4, 6, 8, 10),
                 7,
+            ),
+            Arguments.of(
+                intArrayOf(3, 4, 6, 8, 10),
+                3,
             ),
             Arguments.of(
                 intArrayOf(7, 7, 7, 7, 7),
@@ -41,7 +61,7 @@ abstract class NumberOfArithmeticSlicesTest<out T : NumberOfArithmeticSlices>(pr
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `number of arithmetic slices test`(nums: IntArray, expected: Int) {
-        val actual = strategy.perform(nums)
+        val actual = strategy.invoke(nums)
         assertThat(actual).isEqualTo(expected)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class MaxScoreTest<out T : MaxScore>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class MaxScoreTest<out T : MaxScore>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 3, 4, 5, 6, 1),
@@ -57,14 +57,14 @@ internal abstract class MaxScoreTest<out T : MaxScore>(private val strategy: T) 
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `max product test`(cardPoints: IntArray, k: Int, expected: Int) {
-        val actual = strategy.perform(cardPoints, k)
+    fun `max product test`(cardPoints: IntArray, k: Int, expected: Int) {
+        val actual = strategy.invoke(cardPoints, k)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class MaxScoreDPTest : MaxScoreTest<MaxScoreDP>(MaxScoreDP())
+class MaxScoreDPTest : MaxScoreTest<MaxScoreDP>(MaxScoreDP())
 
-internal class MaxScoreDPSpaceOptimizedTest : MaxScoreTest<MaxScoreDPSpaceOptimized>(MaxScoreDPSpaceOptimized())
+class MaxScoreDPSpaceOptimizedTest : MaxScoreTest<MaxScoreDPSpaceOptimized>(MaxScoreDPSpaceOptimized())
 
-internal class MaxScoreSlidingWindowTest : MaxScoreTest<MaxScoreSlidingWindow>(MaxScoreSlidingWindow())
+class MaxScoreSlidingWindowTest : MaxScoreTest<MaxScoreSlidingWindow>(MaxScoreSlidingWindow())

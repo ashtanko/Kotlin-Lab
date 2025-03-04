@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 926. Flip String to Monotone Increasing
- * @link https://leetcode.com/problems/flip-string-to-monotone-increasing/
+ * @see <a href="https://leetcode.com/problems/flip-string-to-monotone-increasing/">Source</a>
  */
-interface MinFlipsMonoIncr {
-    fun perform(s: String): Int
+fun interface MinFlipsMonoIncr {
+    operator fun invoke(s: String): Int
 }
 
 class MinFlipsMonoIncrOnePass : MinFlipsMonoIncr {
-    override fun perform(s: String): Int {
+    override operator fun invoke(s: String): Int {
         if (s.isEmpty()) return 0
 
         val sChars: CharArray = s.toCharArray()

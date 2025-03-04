@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.Iterative
 import java.util.Stack
 
 /**
  * 1944. Number of Visible People in a Queue
- * @link https://leetcode.com/problems/number-of-visible-people-in-a-queue/
+ * @see <a href="https://leetcode.com/problems/number-of-visible-people-in-a-queue/">Source</a>
  */
-interface CanSeePersonsCount {
-    fun perform(heights: IntArray): IntArray
+fun interface CanSeePersonsCount {
+    operator fun invoke(heights: IntArray): IntArray
 }
 
+@Iterative
 class CanSeePersonsCountStack : CanSeePersonsCount {
-    override fun perform(heights: IntArray): IntArray {
+    override operator fun invoke(heights: IntArray): IntArray {
         val n: Int = heights.size
         val ans = IntArray(n)
         val st: Stack<Int> = Stack()

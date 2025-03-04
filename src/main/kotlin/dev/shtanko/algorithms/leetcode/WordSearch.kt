@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,20 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.HALF_OF_BYTE
+
 /**
  * 79. Word Search
- * @link https://leetcode.com/problems/word-search/
+ * @see <a href="https://leetcode.com/problems/word-search/">Source</a>
  */
 fun interface WordSearch {
-    fun exist(board: Array<CharArray>, word: String): Boolean
+    operator fun invoke(board: Array<CharArray>, word: String): Boolean
 }
 
 class WordSearchShort : WordSearch {
-    override fun exist(board: Array<CharArray>, word: String): Boolean {
-        val w = word.toCharArray()
+    override fun invoke(board: Array<CharArray>, word: String): Boolean {
+        val chars = word.toCharArray()
         for (y in board.indices) {
             for (x in 0 until board[y].size) {
-                if (exist(board, y, x, w, 0)) {
+                if (exist(board, y, x, chars, 0)) {
                     return true
                 }
             }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -50,13 +50,13 @@ abstract class KthSmallestTest<out T : KthSmallest>(private val strategy: T) {
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `kth smallest`(matrix: Array<IntArray>, k: Int, expected: Int) {
-        val actual = strategy.perform(matrix, k)
+        val actual = strategy.invoke(matrix, k)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
 @DisplayName("kth smallest min heap strategy")
-class KthSmallestMinHeapTest : KthSmallestTest<KthSmallestStrategy.MinHeap>(KthSmallestStrategy.MinHeap)
+class KthSmallestFurthestBuildingMinHeapTest : KthSmallestTest<KthSmallestStrategy.MinHeap>(KthSmallestStrategy.MinHeap)
 
 @DisplayName("kth smallest binary search strategy")
 class KthSmallestBinarySearchTest :

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,14 +20,14 @@ import java.util.PriorityQueue
 
 /**
  * 1928. Minimum Cost to Reach Destination in Time
- * @link https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/
+ * @see <a href="https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/">Source</a>
  */
-interface MinCost {
-    fun perform(maxTime: Int, edges: Array<IntArray>, passingFees: IntArray): Int
+fun interface MinCost {
+    operator fun invoke(maxTime: Int, edges: Array<IntArray>, passingFees: IntArray): Int
 }
 
 class MinCostQueue : MinCost {
-    override fun perform(maxTime: Int, edges: Array<IntArray>, passingFees: IntArray): Int {
+    override operator fun invoke(maxTime: Int, edges: Array<IntArray>, passingFees: IntArray): Int {
         val map: MutableMap<Int, MutableList<IntArray>> = HashMap()
         for (e in edges) {
             val from = e[0]
@@ -47,7 +47,7 @@ class MinCostQueue : MinCost {
         val times = IntArray(n) { Int.MAX_VALUE }
         dist[0] = 0
         times[0] = 0
-        while (!pq.isEmpty()) {
+        while (pq.isNotEmpty()) {
             val curr: IntArray = pq.poll()
             val node = curr[0]
             val cost = curr[1]

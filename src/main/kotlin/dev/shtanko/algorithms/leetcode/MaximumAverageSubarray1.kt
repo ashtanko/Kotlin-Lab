@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@ package dev.shtanko.algorithms.leetcode
 
 import java.lang.Double.NaN
 
-interface FindMaxAverageStrategy {
-    fun perform(nums: IntArray, k: Int): Double
+fun interface FindMaxAverage {
+    operator fun invoke(nums: IntArray, k: Int): Double
 }
 
-class FindMaxAverage1 : FindMaxAverageStrategy {
-    override fun perform(nums: IntArray, k: Int): Double {
+class FindMaxAverage1 : FindMaxAverage {
+    override operator fun invoke(nums: IntArray, k: Int): Double {
         if (nums.isEmpty()) return NaN
         val sum = IntArray(nums.size)
         sum[0] = nums[0]
@@ -36,8 +36,8 @@ class FindMaxAverage1 : FindMaxAverageStrategy {
     }
 }
 
-class FindMaxAverage2 : FindMaxAverageStrategy {
-    override fun perform(nums: IntArray, k: Int): Double {
+class FindMaxAverage2 : FindMaxAverage {
+    override operator fun invoke(nums: IntArray, k: Int): Double {
         var sum = 0.0
         for (i in 0 until k) sum += nums[i]
         var res = sum

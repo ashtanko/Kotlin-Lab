@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,16 +21,16 @@ import kotlin.math.max
 
 /**
  * 2246. Longest Path With Different Adjacent Characters
- * @link https://leetcode.com/problems/longest-path-with-different-adjacent-characters/
+ * @see <a href="https://leetcode.com/problems/longest-path-with-different-adjacent-characters/">Source</a>
  */
-interface LongestPath {
-    fun perform(parent: IntArray, s: String): Int
+fun interface LongestPath {
+    operator fun invoke(parent: IntArray, s: String): Int
 }
 
 class LongestPathDFS : LongestPath {
     var res = 0
 
-    override fun perform(parent: IntArray, s: String): Int {
+    override operator fun invoke(parent: IntArray, s: String): Int {
         res = 0
         val children: Array<ArrayList<Int>> = Array(parent.size) { ArrayList() }
         for (i in 1 until parent.size) {

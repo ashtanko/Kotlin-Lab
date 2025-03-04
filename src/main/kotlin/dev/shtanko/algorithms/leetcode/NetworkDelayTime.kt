@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,14 +23,14 @@ import kotlin.math.max
 
 /**
  * 743. Network Delay Time
- * @link https://leetcode.com/problems/network-delay-time/
+ * @see <a href="https://leetcode.com/problems/network-delay-time/">Source</a>
  */
 fun interface NetworkDelayTime {
-    fun perform(times: Array<IntArray>, n: Int, k: Int): Int
+    operator fun invoke(times: Array<IntArray>, n: Int, k: Int): Int
 }
 
 class NetworkDelayTimeDFS : NetworkDelayTime {
-    override fun perform(times: Array<IntArray>, n: Int, k: Int): Int {
+    override operator fun invoke(times: Array<IntArray>, n: Int, k: Int): Int {
         // Build the adjacency list
         for (time in times) {
             val source = time[0]
@@ -82,7 +82,7 @@ class NetworkDelayTimeDFS : NetworkDelayTime {
 }
 
 class NetworkDelayTimeBFS : NetworkDelayTime {
-    override fun perform(times: Array<IntArray>, n: Int, k: Int): Int {
+    override operator fun invoke(times: Array<IntArray>, n: Int, k: Int): Int {
         // Build the adjacency list
         for (time in times) {
             val source = time[0]
@@ -111,7 +111,7 @@ class NetworkDelayTimeBFS : NetworkDelayTime {
 
         // Time for starting node is 0
         signalReceivedAt[sourceNode] = 0
-        while (!q.isEmpty()) {
+        while (q.isNotEmpty()) {
             val currNode: Int = q.remove()
             if (!adj.containsKey(currNode)) {
                 continue
@@ -138,7 +138,7 @@ class NetworkDelayTimeBFS : NetworkDelayTime {
 class NetworkDelayTimeDijkstra : NetworkDelayTime {
     data class GraphNode(val id: Int, val neighbors: MutableList<GraphNode> = mutableListOf())
 
-    override fun perform(times: Array<IntArray>, n: Int, k: Int): Int {
+    override operator fun invoke(times: Array<IntArray>, n: Int, k: Int): Int {
         val graph = (1..n).associateWith { GraphNode(it) }
         val weight = mutableMapOf<Pair<Int, Int>, Int>()
         val distance = mutableMapOf<Int, Int>()
@@ -158,7 +158,7 @@ class NetworkDelayTimeDijkstra : NetworkDelayTime {
         sourceId: Int,
     ) {
         initializeSingleSource(graph, distance, sourceId)
-        val minHeap = PriorityQueue<GraphNode>(Comparator { o1, o2 -> (distance[o1.id] ?: 0) - (distance[o2.id] ?: 0) })
+        val minHeap = PriorityQueue<GraphNode> { o1, o2 -> (distance[o1.id] ?: 0) - (distance[o2.id] ?: 0) }
         minHeap.offer(graph[sourceId]!!)
         while (minHeap.isNotEmpty()) {
             val node = minHeap.poll()

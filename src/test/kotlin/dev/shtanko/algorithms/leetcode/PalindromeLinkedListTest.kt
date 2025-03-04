@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class PalindromeLinkedListTest<T : PalindromeLinkedList>(private val solution: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class PalindromeLinkedListTest<T : PalindromeLinkedList>(private val solution: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListNode(1).apply {
@@ -48,17 +48,17 @@ internal abstract class PalindromeLinkedListTest<T : PalindromeLinkedList>(priva
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `is palindrome test`(head: ListNode, expected: Boolean) {
-        val actual = solution.perform(head)
+    fun `is palindrome test`(head: ListNode, expected: Boolean) {
+        val actual = solution.invoke(head)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class PalindromeLinkedListCopyTest :
+class PalindromeLinkedListCopyTest :
     PalindromeLinkedListTest<PalindromeLinkedListCopy>(PalindromeLinkedListCopy())
 
-internal class PalindromeLinkedListStackTest :
+class PalindromeLinkedListStackTest :
     PalindromeLinkedListTest<PalindromeLinkedListRecursive>(PalindromeLinkedListRecursive())
 
-internal class PalindromeLinkedListReverseTest :
+class PalindromeLinkedListReverseTest :
     PalindromeLinkedListTest<PalindromeLinkedListReverse>(PalindromeLinkedListReverse())

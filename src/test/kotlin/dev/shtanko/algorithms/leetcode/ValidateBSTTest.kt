@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -258,13 +258,51 @@ abstract class ValidateBSTTest<out T : ValidateBinarySearchTree>(private val str
                 },
                 true,
             ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        right = TreeNode(8)
+                    }
+                },
+                false,
+            ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        left = TreeNode(4)
+                        right = TreeNode(6)
+                    }
+                },
+                true,
+            ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        left = TreeNode(4)
+                        right = TreeNode(8)
+                    }
+                },
+                false,
+            ),
+            Arguments.of(
+                TreeNode(7).apply {
+                    left = TreeNode(5).apply {
+                        left = TreeNode(4)
+                        right = TreeNode(6)
+                    }
+                    right = TreeNode(9).apply {
+                        left = TreeNode(8)
+                    }
+                },
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `is valid BST test`(root: TreeNode, expected: Boolean) {
-        val actual = strategy.isValidBST(root)
+        val actual = strategy.invoke(root)
         assertThat(actual).isEqualTo(expected)
     }
 }

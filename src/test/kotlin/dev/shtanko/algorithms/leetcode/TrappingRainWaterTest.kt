@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class TrappingRainWaterTest<out T : RainWaterStrategy>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class TrappingRainWaterTest<out T : RainWaterStrategy>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1), 6),
             Arguments.of(intArrayOf(), 0),
@@ -37,13 +37,13 @@ internal abstract class TrappingRainWaterTest<out T : RainWaterStrategy>(private
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `trapping rain water test`(arr: IntArray, expected: Int) {
-        val actual = strategy.perform(arr)
+    fun `trapping rain water test`(arr: IntArray, expected: Int) {
+        val actual = strategy.invoke(arr)
         assertEquals(expected, actual)
     }
 }
 
-internal class RainWaterStraightForwardTest :
+class RainWaterStraightForwardTest :
     TrappingRainWaterTest<RainWaterStraightForward>(RainWaterStraightForward())
 
-internal class RainWaterStackTest : TrappingRainWaterTest<RainWaterStack>(RainWaterStack())
+class RainWaterStackTest : TrappingRainWaterTest<RainWaterStack>(RainWaterStack())

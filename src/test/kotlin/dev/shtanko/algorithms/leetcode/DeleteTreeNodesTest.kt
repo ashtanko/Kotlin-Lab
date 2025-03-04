@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class DeleteTreeNodesTest<out T : DeleteTreeNodes>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class DeleteTreeNodesTest<out T : DeleteTreeNodes>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 7,
@@ -51,18 +51,30 @@ internal abstract class DeleteTreeNodesTest<out T : DeleteTreeNodes>(private val
                 intArrayOf(-686, -842, 616, -739, -746),
                 5,
             ),
+            Arguments.of(
+                5,
+                intArrayOf(-1, 0, 1, 2, 3),
+                intArrayOf(1, -1, 0, 0, 0),
+                0,
+            ),
+            Arguments.of(
+                5,
+                intArrayOf(-1, 0, 1, 2, 3),
+                intArrayOf(1, -1, 0, 1, 0),
+                1,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `delete tree nodes test`(nodes: Int, parent: IntArray, value: IntArray, expected: Int) {
-        val actual = strategy.perform(nodes, parent, value)
+    fun `delete tree nodes test`(nodes: Int, parent: IntArray, value: IntArray, expected: Int) {
+        val actual = strategy.invoke(nodes, parent, value)
         assertThat(actual).isEqualTo(expected)
     }
 }
 
-internal class DeleteTreeNodesBruteForceTest :
+class DeleteTreeNodesBruteForceTest :
     DeleteTreeNodesTest<DeleteTreeNodesBruteForce>(DeleteTreeNodesBruteForce())
 
-internal class DeleteTreeNodesDFSTest : DeleteTreeNodesTest<DeleteTreeNodesDFS>(DeleteTreeNodesDFS())
+class DeleteTreeNodesDFSTest : DeleteTreeNodesTest<DeleteTreeNodesDFS>(DeleteTreeNodesDFS())

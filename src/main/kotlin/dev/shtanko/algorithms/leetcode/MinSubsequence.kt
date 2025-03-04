@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@ package dev.shtanko.algorithms.leetcode
 import java.util.Collections
 import java.util.PriorityQueue
 
-interface MinSubsequenceStrategy {
-    fun perform(arr: IntArray): List<Int>
+fun interface MinSubsequenceStrategy {
+    operator fun invoke(arr: IntArray): List<Int>
 }
 
 /**
@@ -30,19 +30,19 @@ interface MinSubsequenceStrategy {
  */
 class MinSubsequenceCountingSort : MinSubsequenceStrategy {
 
-    override fun perform(arr: IntArray): List<Int> {
+    override operator fun invoke(arr: IntArray): List<Int> {
         val count = IntArray(ARR_SIZE)
         var totalSum = 0
         for (current in arr) {
             totalSum += current
             count[current]++
         }
-        val currentSubseq = mutableListOf<Int>()
+        val currentSubsequence = mutableListOf<Int>()
         var currSum = 0
         var i = count.size - 1
         while (i >= 0) {
             while (count[i] > 0) {
-                currentSubseq.add(i)
+                currentSubsequence.add(i)
                 currSum += i
                 count[i]--
                 if (currSum > totalSum - currSum) {
@@ -52,7 +52,7 @@ class MinSubsequenceCountingSort : MinSubsequenceStrategy {
             }
             --i
         }
-        return currentSubseq
+        return currentSubsequence
     }
 
     companion object {
@@ -61,8 +61,8 @@ class MinSubsequenceCountingSort : MinSubsequenceStrategy {
 }
 
 class MinSubsequencePriorityQueue : MinSubsequenceStrategy {
-    override fun perform(arr: IntArray): List<Int> {
-        return arr.solve()
+    override operator fun invoke(arr: IntArray): List<Int> {
+        return if (arr.isEmpty()) return listOf() else arr.solve()
     }
 
     private fun IntArray.solve(): List<Int> {

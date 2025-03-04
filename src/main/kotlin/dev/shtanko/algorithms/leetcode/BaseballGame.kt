@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,11 +16,16 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.level.Easy
 import java.util.Stack
 
+/**
+ * 682. Baseball Game
+ * @see <a href="https://leetcode.com/problems/baseball-game">Source</a>
+ */
+@Easy("https://leetcode.com/problems/baseball-game")
 class BaseballGame {
-
-    fun perform(ops: Array<String>): Int {
+    operator fun invoke(ops: Array<String>): Int {
         val stack = Stack<Int>()
         for (op in ops) {
             when (op) {
@@ -38,7 +43,9 @@ class BaseballGame {
             }
         }
         var ans = 0
-        for (score in stack) ans += score
+        for (score in stack) {
+            ans += score
+        }
         return ans
     }
 }

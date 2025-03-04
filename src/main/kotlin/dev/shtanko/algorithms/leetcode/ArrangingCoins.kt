@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,43 +16,53 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BinarySearch
+import dev.shtanko.algorithms.annotations.Math
+import dev.shtanko.algorithms.annotations.level.Easy
 import kotlin.math.sqrt
 
-interface ArrangingCoinsStrategy {
-    fun arrangeCoins(n: Int): Int
+/**
+ * 441. Arranging Coins
+ * @see <a href="https://leetcode.com/problems/arranging-coins/">Source</a>
+ */
+@Easy("https://leetcode.com/problems/arranging-coins")
+fun interface ArrangingCoins {
+    operator fun invoke(coins: Int): Int
 }
 
-class ArrangingCoinsBS : ArrangingCoinsStrategy {
-    override fun arrangeCoins(n: Int): Int {
-        var left = 0
-        var right = n
-        var k: Int
-        var curr: Int
+@BinarySearch
+class ArrangingCoinsBS : ArrangingCoins {
+    override fun invoke(coins: Int): Int {
+        var lowerBound = 0
+        var upperBound = coins
+        var midPoint: Int
+        var current: Int
 
-        while (left <= right) {
-            k = left + right.minus(left) / 2
-            curr = k * k.plus(1) / 2
-            if (curr == n) return k
-            if (n < curr) {
-                right = k - 1
+        while (lowerBound <= upperBound) {
+            midPoint = lowerBound + (upperBound - lowerBound) / 2
+            current = midPoint * (midPoint + 1) / 2
+            if (current == coins) return midPoint
+            if (coins < current) {
+                upperBound = midPoint - 1
             } else {
-                left = k + 1
+                lowerBound = midPoint + 1
             }
         }
-        return right
+        return upperBound
     }
 }
 
-class ArrangingCoinsMath : ArrangingCoinsStrategy {
-
-    override fun arrangeCoins(n: Int): Int {
-        val local = sqrt(C1 * n + C2) - C3
-        return local.toInt()
+@Math
+class ArrangingCoinsMath : ArrangingCoins {
+    override fun invoke(coins: Int): Int {
+        val result = sqrt(COEFFICIENT1 * coins + COEFFICIENT2) - COEFFICIENT3
+        return result.toInt()
     }
 
+    // todo refactor
     companion object {
-        private const val C1 = 2
-        private const val C2 = 0.25
-        private const val C3 = 0.5
+        private const val COEFFICIENT1 = 2
+        private const val COEFFICIENT2 = 0.25
+        private const val COEFFICIENT3 = 0.5
     }
 }

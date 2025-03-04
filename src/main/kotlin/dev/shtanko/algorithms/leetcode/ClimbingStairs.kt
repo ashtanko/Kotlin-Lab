@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,19 +16,24 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.BruteForce
+import dev.shtanko.algorithms.annotations.DP
+import dev.shtanko.algorithms.annotations.Math
+import dev.shtanko.algorithms.annotations.Memoization
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 /**
  * 70. Climbing Stairs
- * @link https://leetcode.com/problems/climbing-stairs/description/
+ * @see <a href="https://leetcode.com/problems/climbing-stairs">Source</a>
  */
-fun interface ClimbingStairsStrategy {
-    fun perform(n: Int): Int
+fun interface ClimbingStairs {
+    operator fun invoke(n: Int): Int
 }
 
-class ClimbingStairsBruteForce : ClimbingStairsStrategy {
-    override fun perform(n: Int): Int {
+@BruteForce
+class ClimbingStairsBruteForce : ClimbingStairs {
+    override operator fun invoke(n: Int): Int {
         return climbStairs(0, n)
     }
 
@@ -44,8 +49,9 @@ class ClimbingStairsBruteForce : ClimbingStairsStrategy {
     }
 }
 
-class ClimbingStairsRecursionMemo : ClimbingStairsStrategy {
-    override fun perform(n: Int): Int {
+@Memoization
+class ClimbingStairsRecursionMemo : ClimbingStairs {
+    override operator fun invoke(n: Int): Int {
         val memo = IntArray(n + 1)
         return climbStairs(0, n, memo)
     }
@@ -65,8 +71,9 @@ class ClimbingStairsRecursionMemo : ClimbingStairsStrategy {
     }
 }
 
-class ClimbingStairsDP : ClimbingStairsStrategy {
-    override fun perform(n: Int): Int {
+@DP
+class ClimbingStairsDP : ClimbingStairs {
+    override operator fun invoke(n: Int): Int {
         if (n == 1) {
             return 1
         } else if (n == 0) {
@@ -82,8 +89,9 @@ class ClimbingStairsDP : ClimbingStairsStrategy {
     }
 }
 
-class ClimbingStairsFibonacci : ClimbingStairsStrategy {
-    override fun perform(n: Int): Int {
+@Math
+class ClimbingStairsFibonacci : ClimbingStairs {
+    override operator fun invoke(n: Int): Int {
         if (n == 1) {
             return 1
         }
@@ -98,8 +106,9 @@ class ClimbingStairsFibonacci : ClimbingStairsStrategy {
     }
 }
 
-class ClimbingStairsBinetsMethod : ClimbingStairsStrategy {
-    override fun perform(n: Int): Int {
+@Math
+class ClimbingStairsBinetsMethod : ClimbingStairs {
+    override operator fun invoke(n: Int): Int {
         val q = arrayOf(intArrayOf(1, 1), intArrayOf(1, 0))
         val res = pow(q, n)
         return res[0][0]
@@ -130,9 +139,10 @@ class ClimbingStairsBinetsMethod : ClimbingStairsStrategy {
     }
 }
 
-class ClimbingStairsFibonacciFormula : ClimbingStairsStrategy {
+@Math
+class ClimbingStairsFibonacciFormula : ClimbingStairs {
 
-    override fun perform(n: Int): Int {
+    override operator fun invoke(n: Int): Int {
         val sqrt5 = sqrt(FIB_FORMULA_VALUE)
         val firstPart = 1.plus(sqrt5).div(2).pow(n.plus(1).toDouble())
         val secondPart = 1.minus(sqrt5).div(2).pow((n + 1).toDouble())

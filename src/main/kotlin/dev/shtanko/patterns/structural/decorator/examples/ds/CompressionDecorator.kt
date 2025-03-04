@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@ import java.util.zip.InflaterInputStream
 class CompressionDecorator(source: DataSource) : DataSourceDecorator(source) {
 
     companion object {
-        private const val HALF_OF_KBYTE = 512 // TODO rename
+        private const val BYTES_PER_HALF_KB = 512
     }
 
     private var compressionLevel = 6
@@ -44,7 +44,7 @@ class CompressionDecorator(source: DataSource) : DataSourceDecorator(source) {
     private fun compress(stringData: String): String? {
         val data = stringData.toByteArray()
         return try {
-            val bout = ByteArrayOutputStream(HALF_OF_KBYTE)
+            val bout = ByteArrayOutputStream(BYTES_PER_HALF_KB)
             val dos = DeflaterOutputStream(bout, Deflater(compressionLevel))
             dos.write(data)
             dos.close()
@@ -61,7 +61,7 @@ class CompressionDecorator(source: DataSource) : DataSourceDecorator(source) {
         return try {
             val inputStream: InputStream = ByteArrayInputStream(data)
             val iin = InflaterInputStream(inputStream)
-            val bout = ByteArrayOutputStream(HALF_OF_KBYTE)
+            val bout = ByteArrayOutputStream(BYTES_PER_HALF_KB)
             var b: Int
             while (iin.read().also { b = it } != -1) {
                 bout.write(b)

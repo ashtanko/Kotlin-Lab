@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.annotations.DFS
+
 /**
  * 2267. Check if There Is a Valid Parentheses String Path
- * link https://leetcode.com/problems/check-if-there-is-a-valid-parentheses-string-path/
+ * @see <a href="https://leetcode.com/problems/check-if-there-is-a-valid-parentheses-string-path">Source</a>
  */
-interface ValidParenthesesStringPath {
-    fun hasValidPath(grid: Array<CharArray>): Boolean
+fun interface ValidParenthesesStringPath {
+    operator fun invoke(grid: Array<CharArray>): Boolean
 }
 
+@DFS
 class ValidParenthesesStringPathDFS : ValidParenthesesStringPath {
 
-    override fun hasValidPath(grid: Array<CharArray>): Boolean {
+    override fun invoke(grid: Array<CharArray>): Boolean {
         val m: Int = grid.size
         val n: Int = grid[0].size
         val dp = Array(m + 1) {

@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,14 +16,18 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.ALPHABET_LETTERS_COUNT
+import dev.shtanko.algorithms.annotations.level.Medium
 import kotlin.math.abs
 import kotlin.math.min
 
 /**
- * Search Suggestions System
+ * 1268. Search Suggestions System
+ * @see <a href="https://leetcode.com/problems/search-suggestions-system/">Search Suggestions System</a>
  */
-interface SearchSuggestionsSystem {
-    fun perform(products: Array<String>, searchWord: String): List<List<String>>
+@Medium("https://leetcode.com/problems/search-suggestions-system")
+fun interface SearchSuggestionsSystem {
+    operator fun invoke(products: Array<String>, searchWord: String): List<List<String>>
 }
 
 /**
@@ -31,46 +35,52 @@ interface SearchSuggestionsSystem {
  * Time complexity : O(n log(n))+O(m log(n)).
  * Space complexity : Varies between O(1)
  */
-class SSSBinarySearch : SearchSuggestionsSystem {
-    override fun perform(products: Array<String>, searchWord: String): List<List<String>> {
+class SearchSuggestionsBinarySearch : SearchSuggestionsSystem {
+    override operator fun invoke(products: Array<String>, searchWord: String): List<List<String>> {
         products.sort()
-        val result: MutableList<MutableList<String>> = ArrayList()
-        var start: Int
-        var bsStart = 0
-        val n: Int = products.size
-        var prefix = String()
-        for (c in searchWord.toCharArray()) {
-            prefix += c
+        val suggestions: MutableList<MutableList<String>> = ArrayList()
+        var startIndex: Int
+        var binarySearchStart = 0
+        val productCount: Int = products.size
+        var currentPrefix = String()
+        for (char in searchWord.toCharArray()) {
+            currentPrefix += char
 
-            // Get the starting index of word starting with `prefix`.
-            start = lowerBound(products, bsStart, prefix)
+            // Get the starting index of word starting with `currentPrefix`.
+            startIndex = lowerBound(products, binarySearchStart, currentPrefix)
 
-            // Add empty vector to result.
-            result.add(ArrayList())
+            // Add empty list to suggestions.
+            suggestions.add(ArrayList())
 
-            // Add the words with the same prefix to the result.
+            // Add the words with the same prefix to the suggestions.
             // Loop runs until `i` reaches the end of input or 3 times or till the
-            // prefix is same for `products[i]` Whichever comes first.
-            for (i in start until min(start + 3, n)) {
-                if (products[i].length < prefix.length || products[i].substring(0, prefix.length) != prefix) break
-                result[result.size - 1].add(products[i])
+            // prefix is same for `products[i]` whichever comes first.
+            for (i in startIndex until min(startIndex + 3, productCount)) {
+                if (products[i].length < currentPrefix.length || products[i].substring(
+                        0,
+                        currentPrefix.length,
+                    ) != currentPrefix
+                ) {
+                    break
+                }
+                suggestions[suggestions.size - 1].add(products[i])
             }
 
             // Reduce the size of elements to binary search on since we know
-            bsStart = abs(start)
+            binarySearchStart = abs(startIndex)
         }
-        return result
+        return suggestions
     }
 
-    private fun lowerBound(products: Array<String>, start: Int, word: String?): Int {
-        var i = start
-        var j = products.size
+    private fun lowerBound(products: Array<String>, start: Int, prefix: String?): Int {
+        var left = start
+        var right = products.size
         var mid: Int
-        while (i < j) {
-            mid = (i + j) / 2
-            if (products[mid] >= word!!) j = mid else i = mid + 1
+        while (left < right) {
+            mid = (left + right) / 2
+            if (products[mid] >= prefix!!) right = mid else left = mid + 1
         }
-        return i
+        return left
     }
 }
 
@@ -79,46 +89,37 @@ class SSSBinarySearch : SearchSuggestionsSystem {
  * Time complexity : O(M).
  * Space complexity : O(26n)=O(n).
  */
-class SSSTrie : SearchSuggestionsSystem {
-    override fun perform(products: Array<String>, searchWord: String): List<List<String>> {
-        val result: MutableList<List<String>> = ArrayList()
-        val roots: MutableList<TrieNode> = ArrayList()
-        // Time O(m * l): where m == products array length and  l == max length of products
-        // Space O(m * l)
-        var root: TrieNode? = buildTrie(products)
+class SearchSuggestionsTrie : SearchSuggestionsSystem {
+    override operator fun invoke(products: Array<String>, searchWord: String): List<List<String>> {
+        val suggestions: MutableList<List<String>> = ArrayList()
+        val trieNodes: MutableList<TrieNode> = ArrayList()
+        var rootNode: TrieNode? = buildTrie(products)
 
-        // O(L): where L == searchWord length
-        // Space O(L)
-        for (element in searchWord) {
-            root = root?.next?.get(element - 'a')
-            if (root == null) break
-            roots.add(root)
+        for (char in searchWord) {
+            rootNode = rootNode?.children?.get(char - 'a')
+            if (rootNode == null) break
+            trieNodes.add(rootNode)
         }
 
-        // O(L * m * l): where L == searchWord length
-        //             : m == products array length
-        //             : l == max length of products
-        // Space O(m * l)
-        for (child in roots) {
+        for (node in trieNodes) {
             val subList: MutableList<String> = ArrayList()
-            search(child, subList)
-            result.add(subList)
+            collectWords(node, subList)
+            suggestions.add(subList)
         }
 
-        // O(L): where L == searchWord length
-        while (result.size < searchWord.length) result.add(ArrayList())
-        return result
+        while (suggestions.size < searchWord.length) suggestions.add(ArrayList())
+        return suggestions
     }
 
-    private fun search(root: TrieNode, res: MutableList<String>) {
-        root.word?.let {
-            res.add(it)
+    private fun collectWords(node: TrieNode, result: MutableList<String>) {
+        node.word?.let {
+            result.add(it)
         }
-        if (res.size >= 3) return
-        for (child in root.next) {
+        if (result.size >= 3) return
+        for (child in node.children) {
             if (child != null) {
-                search(child, res)
-                if (res.size >= 3) return
+                collectWords(child, result)
+                if (result.size >= 3) return
             }
         }
     }
@@ -126,25 +127,19 @@ class SSSTrie : SearchSuggestionsSystem {
     private fun buildTrie(words: Array<String>): TrieNode {
         val root = TrieNode()
         for (word in words) {
-            var p: TrieNode? = root
-            for (ch in word.toCharArray()) {
-                val index = ch - 'a'
-                p?.let {
-                    if (it.next[index] == null) it.next[index] = TrieNode()
-                }
-                p = p?.next?.get(index)
+            var currentNode: TrieNode? = root
+            for (char in word.toCharArray()) {
+                val index = char - 'a'
+                if (currentNode?.children?.get(index) == null) currentNode?.children?.set(index, TrieNode())
+                currentNode = currentNode?.children?.get(index)
             }
-            p?.word = word
+            currentNode?.word = word
         }
         return root
     }
 
-    internal class TrieNode {
-        var word: String? = null
-        var next = arrayOfNulls<TrieNode>(LETTERS_COUNT)
-
-        companion object {
-            private const val LETTERS_COUNT = 26
-        }
-    }
+    private data class TrieNode(
+        var word: String? = null,
+        var children: Array<TrieNode?> = arrayOfNulls<TrieNode>(ALPHABET_LETTERS_COUNT),
+    )
 }

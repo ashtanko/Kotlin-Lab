@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,12 +16,12 @@
 
 package dev.shtanko.algorithms.leetcode
 
-interface AbstractNumIdenticalPairs {
-    fun perform(arr: IntArray): Int
+fun interface AbstractNumIdenticalPairs {
+    operator fun invoke(arr: IntArray): Int
 }
 
 class NumIdenticalPairsNaive : AbstractNumIdenticalPairs {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         var count = 0
         for (i in 0 until arr.size - 1) {
             var j = i + 1
@@ -37,7 +37,7 @@ class NumIdenticalPairsNaive : AbstractNumIdenticalPairs {
 }
 
 class NumIdenticalPairsMap : AbstractNumIdenticalPairs {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         val map: MutableMap<Int, Int> = HashMap()
         var count = 0
         for (num in arr) {
@@ -49,7 +49,7 @@ class NumIdenticalPairsMap : AbstractNumIdenticalPairs {
 }
 
 class NumIdenticalPairsSort : AbstractNumIdenticalPairs {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         arr.sort()
         var count = 0
         var i = 0

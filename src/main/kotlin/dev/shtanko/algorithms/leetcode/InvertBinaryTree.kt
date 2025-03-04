@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,16 +19,16 @@ package dev.shtanko.algorithms.leetcode
 import java.util.LinkedList
 import java.util.Queue
 
-internal interface InvertTreeStrategy {
-    fun perform(root: TreeNode?): TreeNode?
+fun interface InvertTreeStrategy {
+    operator fun invoke(root: TreeNode?): TreeNode?
 }
 
-internal class InvertTree : InvertTreeStrategy {
-    override fun perform(root: TreeNode?): TreeNode? {
+class InvertTree : InvertTreeStrategy {
+    override operator fun invoke(root: TreeNode?): TreeNode? {
         if (root == null) return null
         val queue: Queue<TreeNode> = LinkedList<TreeNode>()
         queue.add(root)
-        while (!queue.isEmpty()) {
+        while (queue.isNotEmpty()) {
             val current: TreeNode = queue.poll()
             val temp = current.left
             current.left = current.right
@@ -40,11 +40,11 @@ internal class InvertTree : InvertTreeStrategy {
     }
 }
 
-internal class InvertTreeRecursive : InvertTreeStrategy {
-    override fun perform(root: TreeNode?): TreeNode? {
+class InvertTreeRecursive : InvertTreeStrategy {
+    override operator fun invoke(root: TreeNode?): TreeNode? {
         if (root == null) return null
-        val right: TreeNode? = perform(root.right)
-        val left: TreeNode? = perform(root.left)
+        val right: TreeNode? = invoke(root.right)
+        val left: TreeNode? = invoke(root.left)
         root.left = right
         root.right = left
         return root

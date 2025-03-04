@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,8 +24,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal abstract class MaximumErasureValueTest<out T : MaximumErasureValue>(private val strategy: T) {
-    internal class InputArgumentsProvider : ArgumentsProvider {
+abstract class MaximumErasureValueTest<out T : MaximumErasureValue>(private val strategy: T) {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
@@ -50,11 +50,11 @@ internal abstract class MaximumErasureValueTest<out T : MaximumErasureValue>(pri
     }
 }
 
-internal class MEVBruteForceTest : MaximumErasureValueTest<MEVBruteForce>(MEVBruteForce())
-internal class MEVTwoPointerSetTest : MaximumErasureValueTest<MEVTwoPointerSet>(MEVTwoPointerSet())
-internal class MEVTwoPointerBooleanArrayTest :
+class MEVBruteForceTest : MaximumErasureValueTest<MEVBruteForce>(MEVBruteForce())
+class MEVTwoPointerSetTest : MaximumErasureValueTest<MEVTwoPointerSet>(MEVTwoPointerSet())
+class MEVTwoPointerBooleanArrayTest :
     MaximumErasureValueTest<MEVTwoPointerBooleanArray>(MEVTwoPointerBooleanArray())
 
-internal class MEVTwoPointerCountMapTest : MaximumErasureValueTest<MEVTwoPointerCountMap>(MEVTwoPointerCountMap())
-internal class MEVPrefixSumTest : MaximumErasureValueTest<MEVPrefixSum>(MEVPrefixSum())
-internal class MEVPrefixSumCountArrayTest : MaximumErasureValueTest<MEVPrefixSumCountArray>(MEVPrefixSumCountArray())
+class MEVTwoPointerCountMapTest : MaximumErasureValueTest<MEVTwoPointerCountMap>(MEVTwoPointerCountMap())
+class MEVPrefixSumTest : MaximumErasureValueTest<MEVPrefixSum>(MEVPrefixSum())
+class MEVPrefixSumCountArrayTest : MaximumErasureValueTest<MEVPrefixSumCountArray>(MEVPrefixSumCountArray())

@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -47,13 +47,18 @@ abstract class CountKDifferenceTest<out T : CountKDifference>(private val strate
                 5,
                 3,
             ),
+            Arguments.of(
+                intArrayOf(1, 1, 1, 1, 1),
+                1,
+                0,
+            ),
         )
     }
 
     @ArgumentsSource(InputArgumentsProvider::class)
     @ParameterizedTest
     fun `count K Difference test`(nums: IntArray, k: Int, expected: Int) {
-        val actual = strategy.perform(nums, k)
+        val actual = strategy.invoke(nums, k)
         assertThat(actual).isEqualTo(expected)
     }
 }

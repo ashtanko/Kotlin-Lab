@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,20 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
+
 /**
  * 1301. Number of Paths with Max Score
- * @link https://leetcode.com/problems/number-of-paths-with-max-score/
+ * @see <a href="https://leetcode.com/problems/number-of-paths-with-max-score/">Source</a>
  */
-interface PathsWithMaxScore {
-    fun perform(board: List<String>): IntArray
+fun interface PathsWithMaxScore {
+    operator fun invoke(board: List<String>): IntArray
 }
 
 class PathsWithMaxScoreDP : PathsWithMaxScore {
     private val dirs = arrayOf(intArrayOf(0, -1), intArrayOf(-1, 0), intArrayOf(-1, -1))
 
-    override fun perform(board: List<String>): IntArray {
+    override operator fun invoke(board: List<String>): IntArray {
         val m: Int = board.size
         val n: Int = board[0].length
         val dpSum = Array(m) { IntArray(n) }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-internal fun increasingBST(root: TreeNode?): TreeNode? {
+fun increasingBST(root: TreeNode?): TreeNode? {
     val vals: MutableList<Int?> = ArrayList()
     inorder(root, vals)
     val ans = TreeNode(0)
@@ -28,7 +28,7 @@ internal fun increasingBST(root: TreeNode?): TreeNode? {
     return ans.right
 }
 
-internal fun inorder(node: TreeNode?, vals: MutableList<Int?>) {
+fun inorder(node: TreeNode?, vals: MutableList<Int?>) {
     if (node == null) return
     inorder(node.left, vals)
     vals.add(node.value)

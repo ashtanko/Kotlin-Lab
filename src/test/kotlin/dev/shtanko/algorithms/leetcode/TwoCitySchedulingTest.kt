@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 
-internal class TwoCitySchedulingTest {
+class TwoCitySchedulingTest {
 
-    internal class InputArgumentsProvider : ArgumentsProvider {
+    private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
@@ -37,12 +37,36 @@ internal class TwoCitySchedulingTest {
                 ),
                 110,
             ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(259, 770),
+                    intArrayOf(448, 54),
+                    intArrayOf(926, 667),
+                    intArrayOf(184, 139),
+                    intArrayOf(840, 118),
+                    intArrayOf(577, 469),
+                ),
+                1859,
+            ),
+            Arguments.of(
+                arrayOf(
+                    intArrayOf(515, 563),
+                    intArrayOf(451, 713),
+                    intArrayOf(537, 709),
+                    intArrayOf(343, 819),
+                    intArrayOf(855, 779),
+                    intArrayOf(457, 60),
+                    intArrayOf(650, 359),
+                    intArrayOf(631, 42),
+                ),
+                3086,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    internal fun `two city scheduling test`(costs: Array<IntArray>, expected: Int) {
+    fun `two city scheduling test`(costs: Array<IntArray>, expected: Int) {
         assertEquals(expected, costs.twoCitySchedCost())
     }
 }

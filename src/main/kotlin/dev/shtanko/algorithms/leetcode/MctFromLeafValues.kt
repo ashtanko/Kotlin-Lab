@@ -1,11 +1,11 @@
 /*
- * Copyright 2023 Oleksii Shtanko
+ * Designed and developed by 2023 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -21,14 +21,14 @@ import kotlin.math.min
 
 /**
  * 1130. Minimum Cost Tree From Leaf Values
- * @link https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/
+ * @see <a href="https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/">Source</a>
  */
-interface MctFromLeafValues {
-    fun perform(arr: IntArray): Int
+fun interface MctFromLeafValues {
+    operator fun invoke(arr: IntArray): Int
 }
 
 class MctFromLeafValuesDP : MctFromLeafValues {
-    override fun perform(arr: IntArray): Int {
+    override operator fun invoke(arr: IntArray): Int {
         var res = 0
         val stack: Stack<Int> = Stack()
         stack.push(Int.MAX_VALUE)

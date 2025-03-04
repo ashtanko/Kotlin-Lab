@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -58,8 +58,8 @@ abstract class NetworkDelayTimeTest<out T : NetworkDelayTime>(private val strate
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
-    fun `network delay time test`(times: Array<IntArray>, n: Int, k: Int, expected: Int) {
-        val actual = strategy.perform(times, n, k)
+    fun `network delay time test`(times: Array<IntArray>, num: Int, k: Int, expected: Int) {
+        val actual = strategy.invoke(times, num, k)
         assertThat(actual).isEqualTo(expected)
     }
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,8 +19,8 @@ package dev.shtanko.algorithms.leetcode
 /**
  * Given an integer array, find three numbers whose product is maximum and output the maximum product.
  */
-interface AbstractMaximumProductStrategy {
-    fun perform(products: IntArray): Int
+fun interface AbstractMaximumProductStrategy {
+    operator fun invoke(products: IntArray): Int
 }
 
 /**
@@ -29,7 +29,7 @@ interface AbstractMaximumProductStrategy {
  * Space complexity : O(1). Constant extra space is used.
  */
 class MaximumProductBrutForce : AbstractMaximumProductStrategy {
-    override fun perform(products: IntArray): Int {
+    override operator fun invoke(products: IntArray): Int {
         val n = products.size
         var ans = Int.MIN_VALUE
         for (i in products.indices) {
@@ -48,7 +48,7 @@ class MaximumProductBrutForce : AbstractMaximumProductStrategy {
  * Space complexity : O(log n). Sorting takes O(\log n)O(log n) space.
  */
 class MaximumProductSorting : AbstractMaximumProductStrategy {
-    override fun perform(products: IntArray): Int {
+    override operator fun invoke(products: IntArray): Int {
         products.sort()
         val n = products.size
         return (products.first() * products[1] * products.last())
@@ -61,7 +61,7 @@ class MaximumProductSorting : AbstractMaximumProductStrategy {
  * Space complexity : O(1). Constant extra space is used.
  */
 class MaximumProductSingleScan : AbstractMaximumProductStrategy {
-    override fun perform(products: IntArray): Int {
+    override operator fun invoke(products: IntArray): Int {
         var max1 = Int.MIN_VALUE
         var max2 = Int.MIN_VALUE
         var max3 = Int.MIN_VALUE

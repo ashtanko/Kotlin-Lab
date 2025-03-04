@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@ package dev.shtanko.algorithms.leetcode
 
 import java.util.Stack
 
-internal interface ConstructStringFromBinaryTreeStrategy {
-    fun perform(t: TreeNode?): String
+fun interface ConstructStringFromBinaryTreeStrategy {
+    operator fun invoke(t: TreeNode?): String
 }
 
-internal class ConstructStringFromBinaryTreeRecursion : ConstructStringFromBinaryTreeStrategy {
-    override fun perform(t: TreeNode?): String {
+class ConstructStringFromBinaryTreeRecursion : ConstructStringFromBinaryTreeStrategy {
+    override operator fun invoke(t: TreeNode?): String {
         if (t == null) {
             return ""
         }
@@ -32,8 +32,8 @@ internal class ConstructStringFromBinaryTreeRecursion : ConstructStringFromBinar
         }
         val leftFormat = "%s(%s)"
         val leftToRightValueFormat = "%s(%s)(%s)"
-        val leftValue = String.format(leftFormat, "${t.value}", perform(t.left))
-        val leftToRightValue = String.format(leftToRightValueFormat, "${t.value}", perform(t.left), perform(t.right))
+        val leftValue = String.format(leftFormat, "${t.value}", invoke(t.left))
+        val leftToRightValue = String.format(leftToRightValueFormat, "${t.value}", invoke(t.left), invoke(t.right))
         return if (t.right == null) {
             leftValue
         } else {
@@ -42,14 +42,14 @@ internal class ConstructStringFromBinaryTreeRecursion : ConstructStringFromBinar
     }
 }
 
-internal class ConstructStringFromBinaryTreeStack : ConstructStringFromBinaryTreeStrategy {
-    override fun perform(t: TreeNode?): String {
+class ConstructStringFromBinaryTreeStack : ConstructStringFromBinaryTreeStrategy {
+    override operator fun invoke(t: TreeNode?): String {
         var tree: TreeNode? = t ?: return ""
         val stack: Stack<TreeNode> = Stack()
         stack.push(tree)
         val visited: MutableSet<TreeNode> = HashSet()
         val s = StringBuilder()
-        while (!stack.isEmpty()) {
+        while (stack.isNotEmpty()) {
             tree = stack.peek()
             if (visited.contains(tree)) {
                 stack.pop()

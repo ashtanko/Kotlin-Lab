@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,9 +18,9 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 89. Gray Code
- * @link https://leetcode.com/problems/gray-code/
+ * @see <a href="https://leetcode.com/problems/gray-code/">Source</a>
  */
-internal object GrayCode {
+object GrayCode {
 
     var nextNum = 0
 
@@ -29,7 +29,7 @@ internal object GrayCode {
      * Time complexity: O(n * 2 ^ n)
      * Space complexity: O(2 ^ n)
      */
-    internal fun backtracking(n: Int): List<Int> {
+    fun backtracking(n: Int): List<Int> {
         val result: MutableList<Int> = ArrayList()
         result.add(0)
         // Keeps track of the numbers present in the current sequence.
@@ -45,7 +45,7 @@ internal object GrayCode {
      * Time complexity: O(2 ^ n)
      * Space complexity: O(n)
      */
-    internal fun recursion(n: Int): List<Int> {
+    fun recursion(n: Int): List<Int> {
         val result: MutableList<Int> = ArrayList()
         grayCodeRecursionHelper(result, n)
         return result
@@ -56,7 +56,7 @@ internal object GrayCode {
      * Time complexity: O(2 ^ n).
      * Space complexity: O(1)
      */
-    internal fun iteration(n: Int): List<Int> {
+    fun iteration(n: Int): List<Int> {
         val result: MutableList<Int> = ArrayList()
         result.add(0)
 

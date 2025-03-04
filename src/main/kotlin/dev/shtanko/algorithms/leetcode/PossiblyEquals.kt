@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,18 +16,22 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.DECIMAL
+import dev.shtanko.algorithms.annotations.DFS
 import java.lang.Character.isDigit
 
 /**
  * 2060. Check if an Original String Exists Given Two Encoded Strings
- * @link https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/
+ * @see <a href="https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings">
+ *     Source</a>
  */
-interface PossiblyEquals {
-    fun perform(s1: String, s2: String): Boolean
+fun interface PossiblyEquals {
+    operator fun invoke(s1: String, s2: String): Boolean
 }
 
+@DFS
 class PossiblyEqualsDFS : PossiblyEquals {
-    override fun perform(s1: String, s2: String): Boolean {
+    override operator fun invoke(s1: String, s2: String): Boolean {
         val l1: Int = s1.length
         val l2: Int = s2.length
 
@@ -52,11 +56,9 @@ class PossiblyEqualsDFS : PossiblyEquals {
         }
         if (dp[i][j][diff + LIMIT1] != null) return dp[i][j][diff + LIMIT1]!!
 
-        if (i < s1.size && j < s2.size && diff == 0 && s1[i] == s2[j]) {
-            if (dfs(i + 1, j + 1, 0, s1, s2, dp)) {
-                dp[i][j][LIMIT1] = true
-                return true
-            }
+        if (i < s1.size && j < s2.size && diff == 0 && s1[i] == s2[j] && dfs(i + 1, j + 1, 0, s1, s2, dp)) {
+            dp[i][j][LIMIT1] = true
+            return true
         }
 
         if (i < s1.size && !isDigit(s1[i]) && diff > 0 && dfs(i + 1, j, diff - 1, s1, s2, dp)) {

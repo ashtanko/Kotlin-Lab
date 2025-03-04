@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,13 +30,20 @@ class StrStrTest {
             Arguments.of("", "", 0),
             Arguments.of("hello", "ll", 2),
             Arguments.of("aaaaa", "bba", -1),
+            Arguments.of("a", "a", 0),
+            Arguments.of("mississippi", "issip", 4),
+            Arguments.of("mississippi", "issipi", -1),
+            Arguments.of("mississippi", "pi", 9),
+            Arguments.of("mississippi", "mississippi", 0),
+            Arguments.of("mississippi", "mississippii", -1),
+            Arguments.of("mississippi", "mississippiii", -1),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `str str test`(haystack: String, needle: String, expected: Int) {
-        val actual = StrStr.perform(haystack, needle)
+        val actual = StrStr.invoke(haystack, needle)
         assertThat(actual).isEqualTo(expected)
     }
 }

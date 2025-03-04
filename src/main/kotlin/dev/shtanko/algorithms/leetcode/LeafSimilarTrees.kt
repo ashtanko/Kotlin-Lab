@@ -1,11 +1,11 @@
 /*
- * Copyright 2020 Oleksii Shtanko
+ * Designed and developed by 2020 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,14 +18,14 @@ package dev.shtanko.algorithms.leetcode
 
 /**
  * 872. Leaf-Similar Trees
- * @link https://leetcode.com/problems/leaf-similar-trees/description/
+ * @see <a href="https://leetcode.com/problems/leaf-similar-trees">Source</a>
  */
 fun interface LeafSimilarTrees {
-    fun leafSimilar(root1: TreeNode?, root2: TreeNode?): Boolean
+    operator fun invoke(root1: TreeNode?, root2: TreeNode?): Boolean
 }
 
-class LeafSimilarDFS : LeafSimilarTrees {
-    override fun leafSimilar(root1: TreeNode?, root2: TreeNode?): Boolean {
+class LeafSimilarDepthFirstSearch : LeafSimilarTrees {
+    override fun invoke(root1: TreeNode?, root2: TreeNode?): Boolean {
         val leaves1: MutableList<Int?> = ArrayList()
         val leaves2: MutableList<Int?> = ArrayList()
         dfs(root1, leaves1)

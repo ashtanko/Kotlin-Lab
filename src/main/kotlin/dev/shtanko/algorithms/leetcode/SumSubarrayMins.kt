@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,55 +16,46 @@
 
 package dev.shtanko.algorithms.leetcode
 
+import dev.shtanko.algorithms.MOD
 import java.util.Stack
 
 /**
  * 907. Sum of Subarray Minimums
- * @link https://leetcode.com/problems/sum-of-subarray-minimums/
+ * @see <a href="https://leetcode.com/problems/sum-of-subarray-minimums/">Source</a>
  */
-interface SumSubarrayMins {
-    fun perform(arr: IntArray): Int
+fun interface SumSubarrayMins {
+    operator fun invoke(arr: IntArray): Int
 }
 
 /**
- * Approach 2: Monotonic Stack + Dynamic Programming
+ * Approach: Monotonic Stack + Dynamic Programming
  */
 class SumSubarrayMinsDP : SumSubarrayMins {
-
-    override fun perform(arr: IntArray): Int {
-        val stack: Stack<Int> = Stack()
-
-        // make a dp array of the same size as the input array `arr`
+    override operator fun invoke(arr: IntArray): Int {
+        val stack = Stack<Int>()
         val dp = IntArray(arr.size)
+        var sumOfMinimums = 0L
 
-        // making a monotonic increasing stack
         for (i in arr.indices) {
-            // pop the stack until it is empty or
-            // the top of the stack is greater than or equal to
-            // the current element
-            while (!stack.empty() && arr[stack.peek()] >= arr[i]) {
+            while (stack.isNotEmpty() && arr[stack.peek()] >= arr[i]) {
                 stack.pop()
             }
 
-            // either the previousSmaller element exists
-            if (stack.size > 0) {
-                val previousSmaller: Int = stack.peek()
-                dp[i] = dp[previousSmaller] + (i - previousSmaller) * arr[i]
+            dp[i] = if (stack.isNotEmpty()) {
+                val previousSmaller = stack.peek()
+                dp[previousSmaller] + (i - previousSmaller) * arr[i]
             } else {
-                // or it doesn't exist, in this case the current element
-                // contributes with all subarrays ending at i
-                dp[i] = (i + 1) * arr[i]
+                (i + 1) * arr[i]
             }
-            // push the current index
+
             stack.push(i)
         }
 
-        // Add all elements of the dp to get the answer
-        var sumOfMinimums: Long = 0
-        for (count in dp) {
-            sumOfMinimums += count.toLong()
-            sumOfMinimums %= MOD.toLong()
+        dp.forEach { count ->
+            sumOfMinimums += count
+            sumOfMinimums %= MOD
         }
+
         return sumOfMinimums.toInt()
     }
 }

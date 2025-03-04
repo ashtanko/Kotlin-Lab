@@ -1,11 +1,11 @@
 /*
- * Copyright 2021 Oleksii Shtanko
+ * Designed and developed by 2021 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,10 +22,10 @@ import kotlin.math.min
 
 /**
  * Shortest Unsorted Continuous Subarray
- * @link https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
+ * @see <a href="https://leetcode.com/problems/shortest-unsorted-continuous-subarray/">Source</a>
  */
-interface FindUnsortedSubArray {
-    fun perform(nums: IntArray): Int
+fun interface FindUnsortedSubArray {
+    operator fun invoke(nums: IntArray): Int
 }
 
 /**
@@ -34,7 +34,7 @@ interface FindUnsortedSubArray {
  * Space complexity : O(1)
  */
 class FindUnsortedSubArrayBruteForce : FindUnsortedSubArray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var res: Int = nums.size
         for (i in nums.indices) {
             for (j in i..nums.size) {
@@ -74,7 +74,7 @@ class FindUnsortedSubArrayBruteForce : FindUnsortedSubArray {
  * Space complexity : O(1)
  */
 class FindUnsortedSubArrayBetterBruteForce : FindUnsortedSubArray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var l: Int = nums.size
         var r = 0
         for (i in 0 until nums.size - 1) {
@@ -95,7 +95,7 @@ class FindUnsortedSubArrayBetterBruteForce : FindUnsortedSubArray {
  * Space complexity : O(n)
  */
 class FindUnsortedSubArraySort : FindUnsortedSubArray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val snums = nums.clone().sorted()
         var start = snums.size
         var end = 0
@@ -115,17 +115,17 @@ class FindUnsortedSubArraySort : FindUnsortedSubArray {
  * Space complexity : O(n)
  */
 class FindUnsortedSubArrayStack : FindUnsortedSubArray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         val stack: Stack<Int> = Stack<Int>()
         var l: Int = nums.size
         var r = 0
         for (i in nums.indices) {
-            while (!stack.isEmpty() && nums[stack.peek()] > nums[i]) l = min(l, stack.pop())
+            while (stack.isNotEmpty() && nums[stack.peek()] > nums[i]) l = min(l, stack.pop())
             stack.push(i)
         }
         stack.clear()
         for (i in nums.size - 1 downTo 0) {
-            while (!stack.isEmpty() && nums[stack.peek()] < nums[i]) r = max(r, stack.pop())
+            while (stack.isNotEmpty() && nums[stack.peek()] < nums[i]) r = max(r, stack.pop())
             stack.push(i)
         }
         return if (r - l > 0) r - l + 1 else 0
@@ -138,7 +138,7 @@ class FindUnsortedSubArrayStack : FindUnsortedSubArray {
  * Space complexity : O(1)
  */
 class FindUnsortedSubArrayConstSpace : FindUnsortedSubArray {
-    override fun perform(nums: IntArray): Int {
+    override operator fun invoke(nums: IntArray): Int {
         var min = Int.MAX_VALUE
         var max = Int.MIN_VALUE
         var flag = false

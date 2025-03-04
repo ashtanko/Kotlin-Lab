@@ -1,11 +1,11 @@
 /*
- * Copyright 2022 Oleksii Shtanko
+ * Designed and developed by 2022 ashtanko (Oleksii Shtanko)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,13 +43,29 @@ abstract class ArrayOfDoubledPairsTest<out T : ArrayOfDoubledPairs>(private val 
                 intArrayOf(),
                 true,
             ),
+            Arguments.of(
+                intArrayOf(1, 2, 4, 16, 8, 4),
+                false,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 1, 2, 4, 4),
+                false,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 1, 2, 2, 1),
+                true,
+            ),
+            Arguments.of(
+                intArrayOf(1, 2, 1, 2, 2, 1, 1, 1, 2, 2),
+                true,
+            ),
         )
     }
 
     @ParameterizedTest
     @ArgumentsSource(InputArgumentsProvider::class)
     fun `can reorder doubled test`(arr: IntArray, expected: Boolean) {
-        val actual = strategy.canReorderDoubled(arr)
+        val actual = strategy.invoke(arr)
         assertThat(actual).isEqualTo(expected)
     }
 }
