@@ -331,8 +331,8 @@ dependencies {
         implementation("org.openjdk.jol:jol-core:0.17")
         implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
         implementation(jsoup)
-        implementation("com.google.protobuf:protobuf-java:3.19.1")
-        implementation("com.google.protobuf:protobuf-kotlin-lite:3.19.6")
+        implementation("com.google.protobuf:protobuf-java:4.30.0")
+        implementation("com.google.protobuf:protobuf-kotlin-lite:4.30.0")
         implementation("io.grpc:grpc-stub:1.15.1")
         implementation("io.grpc:grpc-protobuf:1.15.1")
 
