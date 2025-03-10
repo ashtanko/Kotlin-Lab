@@ -9,7 +9,7 @@ dependency = "1.33.0"       # https://github.com/autonomousapps/dependency-analy
 pitest = "1.15.0"           # https://plugins.gradle.org/plugin/info.solidsoft.pitest
 ktlint = "12.2.0"           # https://github.com/JLLeitschuh/ktlint-gradle
 kapt = "2.1.0"              # https://kotlinlang.org/docs/kapt.html
-slf4j = "1.7.36"            # https://www.slf4j.org TODO remove
+slf4j = "2.0.17"            # https://www.slf4j.org TODO remove
 rxjava = "3.1.10"            # https://github.com/ReactiveX/RxJava TODO remove
 rxkotlin = "3.0.1"          # https://github.com/ReactiveX/RxKotlin TODO remove
 lincheck = "2.36"           # https://github.com/JetBrains/lincheck
@@ -21,11 +21,11 @@ jmh = "1.37"                # https://github.com/openjdk/jmh
 kotlintest = "3.4.2"        # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 kotest = "5.9.1"            # https://kotest.io
 assertj = "3.27.3"          # https://mvnrepository.com/artifact/org.assertj/assertj-core | https://assertj.github.io/doc
-mockito = "5.15.2"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
+mockito = "5.16.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
 mockito_kotlin = "5.4.0"    # https://github.com/mockito/mockito-kotlin
 logback = "1.5.17"          # https://logback.qos.ch
 hamcrest = "3.0"            # https://hamcrest.org/JavaHamcrest/distributables
-mockk = "1.13.16"           # https://mockk.io
+mockk = "1.13.17"           # https://mockk.io
 kover = "0.9.1"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.19.1"            # https://jsoup.org/
@@ -33,7 +33,7 @@ turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 sandwich = "2.1.0"          # https://github.com/skydoves/sandwich
 protobuf = "0.9.2"
-protoc = "3.19.1"
+protoc = "4.30.0"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
