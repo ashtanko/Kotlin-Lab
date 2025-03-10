@@ -4,7 +4,6 @@
   <a href="https://github.com/ashtanko/kotlab/actions/workflows/build.yml"><img alt="Build" src="https://github.com/ashtanko/kotlab/actions/workflows/build.yml/badge.svg?branch=main"/></a>
   <a href="https://codecov.io/gh/ashtanko/kotlab"><img alt="Codecov" src="https://codecov.io/gh/ashtanko/kotlab/branch/main/graph/badge.svg?token=JEU9EIJMHA"/></a>
   <a href="https://codeclimate.com/github/ashtanko/kotlab/test_coverage"><img alt="Test Coverage" src="https://api.codeclimate.com/v1/badges/428fc33c4caf2c832402/test_coverage"/></a>
-  <a href="https://coveralls.io/github/ashtanko/kotlab?branch=main"><img alt="Coveralls" src="https://coveralls.io/repos/github/ashtanko/kotlab/badge.svg?branch=main"/></a>
   <a href="https://app.codacy.com/gh/ashtanko/kotlab/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage"><img alt="Codacy Coverage Badge" src="https://app.codacy.com/project/badge/Coverage/74cad08184b34038bb5c64c317384367"/></a>
   <a href="https://www.codefactor.io/repository/github/ashtanko/kotlin-lab"><img alt="CodeFactor" src="https://www.codefactor.io/repository/github/ashtanko/kotlin-lab/badge"/></a>
   <a href="https://codeclimate.com/github/ashtanko/kotlab/maintainability"><img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/428fc33c4caf2c832402/maintainability"/></a>
