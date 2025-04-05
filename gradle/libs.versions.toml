@@ -21,7 +21,7 @@ jmh = "1.37"                # https://github.com/openjdk/jmh
 kotlintest = "3.4.2"        # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 kotest = "5.9.1"            # https://kotest.io
 assertj = "3.27.3"          # https://mvnrepository.com/artifact/org.assertj/assertj-core | https://assertj.github.io/doc
-mockito = "5.16.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
+mockito = "5.17.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
 mockitoKotlin = "5.4.0"     # https://github.com/mockito/mockito-kotlin
 logback = "1.5.18"          # https://logback.qos.ch
 hamcrest = "3.0"            # https://hamcrest.org/JavaHamcrest/distributables
@@ -35,6 +35,7 @@ sandwich = "2.1.0"          # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.2"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.30.0"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.30.2"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
+binaryCompatibility = "0.17.0"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
@@ -97,3 +98,4 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 diktat = { id = "com.saveourtool.diktat", version.ref = "diktat" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+kotlin-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibility" }

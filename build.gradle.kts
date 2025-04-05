@@ -35,7 +35,7 @@ plugins {
     application
     jacoco
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    // id ("org.sonarqube") version "4.4.1.3373"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.17.0"
     idea
     alias(libs.plugins.kt.jvm)
     alias(libs.plugins.detekt)

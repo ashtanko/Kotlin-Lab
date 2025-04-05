@@ -8,6 +8,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.test.runTest
 import okhttp3.ExperimentalOkHttpApi
 import okhttp3.ResponseBody
@@ -16,6 +18,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import retrofit2.HttpException
@@ -76,23 +79,27 @@ class RetryTest {
         assertEquals(3, counter, "Should retry 3 times before failing")
     }
 
-    @Test
+    @RepeatedTest(10)
     fun `should handle concurrency and correctly update attempt`() = runTest {
-        // Set up a CountDownLatch to wait for all coroutines to finish
         val latch = CountDownLatch(5)
         val retryAttempts = mutableListOf<Int>()
         val expectedAttempts = 5
+        val mutex = Mutex()
 
+        // Launch multiple coroutines to simulate concurrent retries
         val job = CoroutineScope(Dispatchers.Default).launch {
             repeat(expectedAttempts) {
                 launch {
+                    var attempt = 0
                     try {
-                        retry(policy = DefaultRetryPolicy(maxAttempts = 3)) {
+                        retry(policy = DefaultRetryPolicy(maxAttempts = 3)) { currentAttempt ->
+                            attempt = currentAttempt
                             throw IOException("Simulated failure")
                         }
-                    } catch (e: IOException) {
-                        // Capture the attempt number from AtomicInteger (using attempt.get())
-                        retryAttempts.add(e.message?.let { "Failed on attempt: $it" }?.length ?: -1)
+                    } catch (_: IOException) {
+                        mutex.withLock {
+                            retryAttempts.add(attempt)
+                        }
                     } finally {
                         latch.countDown()
                     }
@@ -100,12 +107,10 @@ class RetryTest {
             }
         }
 
-        latch.await() // Wait for all coroutines to finish
-
-        // Verify that all attempts are captured correctly
-        assertTrue(retryAttempts.size == expectedAttempts)
-        retryAttempts.forEach {
-            assertTrue(it > 0) // Ensure retry attempts were recorded
+        latch.await()
+        assertEquals(expectedAttempts, retryAttempts.size)
+        retryAttempts.forEach { attempt ->
+            assertTrue(attempt in 1..3, "Retry attempt should be between 1 and 3")
         }
 
         job.cancelAndJoin()
