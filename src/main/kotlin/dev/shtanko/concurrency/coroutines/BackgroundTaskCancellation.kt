@@ -25,7 +25,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 
 private suspend fun longRunningTask(): String {
-    delay(5000)  // Simulate long running task
+    delay(5000)  // Simulate long-running task
     return "Task completed"
 }
 

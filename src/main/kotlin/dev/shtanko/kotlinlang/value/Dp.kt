@@ -16,12 +16,18 @@
 
 package dev.shtanko.kotlinlang.value
 
+import dev.shtanko.kotlinlang.value.Dp.Companion.MULTIPLY_FACTOR
+
 @JvmInline
 value class Dp(val value: Float) : Comparable<Dp> {
 
     infix operator fun plus(other: Dp) = Dp(value = this.value + other.value)
 
     override operator fun compareTo(other: Dp) = value.compareTo(other.value)
+
+    companion object {
+        const val MULTIPLY_FACTOR = 0.03f
+    }
 }
 
-inline val Int.dp: Dp get() = Dp(value = this.toFloat())
+inline val Int.dp: Dp get() = Dp(value = (this + (this * MULTIPLY_FACTOR)).toFloat())

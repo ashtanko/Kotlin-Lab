@@ -1,60 +1,92 @@
-**Key Points**
+# ✅ JUnit 5 - The Latest Java Testing Framework  
 
-* JUnit 5 is the latest version of the popular Java testing framework.
-* It provides a flexible and powerful set of features for writing and running tests.
-* Assertions are used to verify the expected behavior of code.
-* Annotations control the execution order and behavior of tests.
-* Parameterized tests allow you to easily test with different input values.
+## 🔹 Key Points  
+- **JUnit 5** is the latest version of the popular Java testing framework.  
+- Provides a **flexible and powerful** set of features for writing and running tests.  
+- **Assertions** verify expected behavior.  
+- **Annotations** control test execution order and behavior.  
+- **Parameterized tests** allow testing with different input values.  
 
-**1. Assertions**
+---
 
-* `assertEquals(expected, actual)`: Asserts that two objects are equal.
-* `assertNotEquals(unexpected, actual)`: Asserts that two objects are not equal.
-* `assertTrue(condition)`: Asserts that a condition is true.
-* `assertFalse(condition)`: Asserts that a condition is false.
-* `assertNull(object)`: Asserts that an object is null.
-* `assertNotNull(object)`: Asserts that an object is not null.
-* `assertSame(expected, actual)`: Asserts that two object references point to the same object in memory.
-* `assertNotSame(unexpected, actual)`: Asserts that two object references do not point to the same object in memory.
-* `assertArrayEquals(expected, actual)`: Asserts that two arrays are equal.
-* `assertThrows(exceptionClass, executable)`: Asserts that a specific exception is thrown when the given executable is run.
+## 🛠 1. Assertions  
 
-**2. Test Annotations**
+| Assertion | Description |
+|-----------|------------|
+| `assertEquals(expected, actual)` | Checks if two values are equal. |
+| `assertNotEquals(unexpected, actual)` | Checks if two values are not equal. |
+| `assertTrue(condition)` | Ensures a condition is `true`. |
+| `assertFalse(condition)` | Ensures a condition is `false`. |
+| `assertNull(object)` | Ensures an object is `null`. |
+| `assertNotNull(object)` | Ensures an object is not `null`. |
+| `assertSame(expected, actual)` | Checks if two references point to the same object. |
+| `assertNotSame(unexpected, actual)` | Checks if two references do not point to the same object. |
+| `assertArrayEquals(expected, actual)` | Compares two arrays for equality. |
+| `assertThrows(exceptionClass, executable)` | Ensures an exception is thrown. |
 
-* `@Test`: Marks a method as a test method.
-* `@BeforeEach`: Executes before each test method in the class.
-* `@AfterEach`: Executes after each test method in the class.
-* `@BeforeAll`: Executes once before all test methods in the class.
-* `@AfterAll`: Executes once after all test methods in the class.
-* `@Disabled`: Disables a test method or class.
+---
 
-**3. Test Suites**
+## 🏷 2. Test Annotations  
 
-* `@RunWith(JUnitPlatform.class)`: Used in JUnit 4 to run JUnit 5 tests.
-* `@SelectPackages`: Selects all tests within a given package.
-* `@SelectClasses`: Selects specific test classes.
+| Annotation | Purpose |
+|------------|---------|
+| `@Test` | Marks a method as a test. |
+| `@BeforeEach` | Runs before each test method. |
+| `@AfterEach` | Runs after each test method. |
+| `@BeforeAll` | Runs once before all test methods. |
+| `@AfterAll` | Runs once after all test methods. |
+| `@Disabled` | Skips a test method/class. |
 
-**4. Parameterized Tests**
+---
 
-* `@ParameterizedTest`: Marks a method as a parameterized test.
-* `@ValueSource`: Provides a source of values for a parameter.
-* `@MethodSource`: Provides a source of values from a method.
-* `@CsvSource`: Provides a source of values from a CSV string.
-* `@ArgumentsSource`: Provides a source of values from a custom argument provider.
+## 📌 3. Test Suites  
 
-**5. Assumptions**
+| Annotation | Purpose |
+|------------|---------|
+| `@RunWith(JUnitPlatform.class)` | Used in JUnit 4 to run JUnit 5 tests. |
+| `@SelectPackages("com.example")` | Runs all tests from a package. |
+| `@SelectClasses({TestClass1.class, TestClass2.class})` | Runs specific test classes. |
 
-* `assumeTrue(condition)`: Skips the test if the condition is false.
-* `assumeFalse(condition)`: Skips the test if the condition is true.
+---
 
-**6. Extensions**
+## 🔄 4. Parameterized Tests  
 
-* JUnit 5 supports extensions that can modify test execution behavior.
-* Examples:
-    * `@ExtendWith`: Registers extensions to be used in a test class.
-    * `@RegisterExtension`: Registers a single extension.
+| Annotation | Purpose |
+|------------|---------|
+| `@ParameterizedTest` | Marks a test as parameterized. |
+| `@ValueSource` | Supplies simple values (e.g., numbers, strings). |
+| `@MethodSource` | Supplies values from a static method. |
+| `@CsvSource` | Supplies values from a CSV-formatted string. |
+| `@ArgumentsSource` | Uses a custom argument provider. |
 
-**7. Assertions with Custom Messages**
+---
+
+## 🎭 5. Assumptions  
+
+| Method | Purpose |
+|--------|---------|
+| `assumeTrue(condition)` | Skips test if condition is `false`. |
+| `assumeFalse(condition)` | Skips test if condition is `true`. |
+
+---
+
+## 🔌 6. Extensions  
+
+JUnit 5 supports **extensions** that modify test execution behavior.  
+
+| Annotation | Purpose |
+|------------|---------|
+| `@ExtendWith(ExtensionClass.class)` | Registers extensions. |
+| `@RegisterExtension` | Registers a single extension instance. |
+
+---
+
+## ✨ 7. Custom Messages in Assertions  
+
+You can provide **custom error messages** to assertions for better debugging:  
+
+```java
+assertEquals(4, 2 + 2, "Addition should be 4");
 
 * You can provide custom error messages to assertion methods:
     * `assertEquals(expected, actual, "Custom error message")`
@@ -75,34 +107,19 @@ public class MyTest {
 }
 ```
 
-## The main modules in JUnit 5 are:
+## 🔗 JUnit 5 Modules  
 
-- **junit-jupiter-api**: This module defines the API that you need to
-write your tests.
+| Module                              | Description |
+|-------------------------------------|-------------|
+| `junit-jupiter-api`                | Defines the API for writing tests. |
+| `junit-platform-launcher`          | API for discovering, filtering, and executing tests. |
+| `junit-platform-engine`            | API for writing custom `TestEngine` implementations. |
+| `junit-jupiter-engine`             | Implementation of `junit-platform-engine` for JUnit 5. |
+| `junit-vintage-engine`             | Supports running JUnit 3 and JUnit 4 tests. |
+| `junit-platform-commons`           | Contains shared utilities across modules. |
+| `junit-platform-console`           | Provides a console-based test runner. |
+| `junit-platform-gradle-plugin`     | Gradle plugin for running JUnit 5 tests. |
+| `junit-platform-surefire-provider` | Enables **Maven integration** for JUnit 5. |
 
-- **junit-platform-launcher**: This module defines the launcher API
-that external tool use. Launchers can be used to discover, filter,
-and execute tests.
-
-- **junit-platform-engine**: This provides the API that you can use
-to write your own TestEngine. TestEngine is responsible for the
-discovery and execution of tests.
-
-- **junit-jupiter-engine**: It is the implementation of junit-platform-
-engine API for JUnit 5.
-
-- **junit-vintage-engine**: It is the implementation of junit-platform-
-engine API for JUnit 3 and JUnit 4.
-
-- **junit-platform-commons**: It contains all the utilities which are
-used across different modules.
-
-- **junit-platform-console**: This provides an implementation of a
-launcher called ConsoleLauncher. ConsoleLauncher is a stand-
-alone application used to launch JUnit platform from the console.
-
-- **junit-platform-gradle-plugin**: This is a Gradle plug-in that can
-be used to run JUnit 5 tests.
-
-- **junit-platform-surefire-provider**: This module provides Maven
-integration for JUnit 5.
+🚀 **JUnit 5 offers modern testing features with flexibility and power.**  
+Use these tools to **write better, more maintainable tests!** ✅  
