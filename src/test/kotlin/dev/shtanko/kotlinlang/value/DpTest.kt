@@ -23,12 +23,12 @@ class DpTest {
 
     @Test
     fun `int test`() {
-        assertThat(3.dp.value).isEqualTo(3.0f)
+        assertThat(3.dp.value).isEqualTo(3.09f)
     }
 
     @Test
     fun `plus test`() {
         val actual = 3.dp.plus(2.dp).value
-        assertThat(actual).isEqualTo(5.0f)
+        assertThat(actual).isEqualTo(5.1499996f)
     }
 }

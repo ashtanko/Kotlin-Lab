@@ -1,13 +1,23 @@
-# Characteristics of Good Unit Tests
+# ✅ Characteristics of Good Unit Tests  
 
-- **Readable**: Tests should clearly explain what the unit does. A meaningful test name helps understand behavior without checking the implementation.
+- **📝 Readable**  
+  A test should clearly communicate what the unit does. A well-chosen test name should make its purpose obvious, eliminating the need to inspect the implementation.  
 
-- **Fast**: Tests should run in a few seconds to provide quick feedback. Slow tests discourage developers from running them. Use mocks to simulate dependencies and keep tests fast.
+- **⚡ Fast**  
+  Tests should execute within seconds to provide rapid feedback. Slow tests discourage frequent execution. Use mocks to simulate dependencies and keep tests efficient.  
 
-- **Independent & Isolated**: Tests should not depend on each other or execution order. Each test should run in its own isolated environment.
+- **🔗 Independent & Isolated**  
+  Each test should run independently, without relying on other tests or a specific execution order. A failure in one test should not impact others.  
 
-- **Correct**: A test should do exactly what its name suggests. Misleading test names create confusion and reduce trust in test results.
+- **✔️ Correct**  
+  A test should do exactly what its name implies. Misleading test names create confusion and reduce trust in test results. Keep test logic aligned with its stated purpose.  
 
-- **Environment Agnostic**: Tests should work on any developer machine without setup issues. Avoid dependencies on external files, environment variables, or system configurations.
+- **🌍 Environment-Agnostic**  
+  Tests should run seamlessly on any developer's machine without requiring complex setup. Avoid dependencies on external files, environment variables, or system configurations.  
 
-- **Repeatable**: Running the same test multiple times should always yield the same result. Automate test execution in the build process. Fix failing tests quickly to maintain reliability.
+- **🔁 Repeatable**  
+  Running the same test multiple times should always produce the same result. Automate test execution in the build process and fix failing tests promptly to maintain reliability.  
+
+---
+
+By following these principles, you ensure that your unit tests remain clear, efficient, and dependable throughout development. 🚀  

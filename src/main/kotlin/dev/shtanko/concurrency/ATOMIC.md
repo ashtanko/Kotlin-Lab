@@ -1,40 +1,64 @@
-# Atomic
+# Atomic Operations in Java and Kotlin
+---
 
-In the Java Virtual Machine (JVM), the term "atomic" refers to operations that are performed as a single, indivisible 
-step. This means that the operation is completed without any interference or observation from other threads. 
-Atomicity is a crucial concept in concurrent programming, ensuring that certain actions happen entirely or not at all, 
-preventing race conditions and data corruption.
+<div align="center">
+  <img src="img/concurrency/atomic.svg" alt="Figure 1" width="700"/>
+  <p style="text-align:center;">Figure 2</p>
+</div>
 
-## Atomic Operations
+---
 
-1. **Primitive Types**:
-   - **Read and write operations** on primitive types like `int`, `short`, `byte`, `char`, `float`, and `boolean` are
-      atomic, except for `long` and `double` on some architectures. On 64-bit architectures, `long` and `double` are 
-      typically atomic, but on 32-bit architectures, they might not be.
+Atomic operations are fundamental building blocks in concurrent programming that ensure thread-safe updates to shared variables. Let's explore how they work and why they're essential for reliable multi-threaded applications.
 
-2. **Volatile Variables**:
-   - Declaring a variable `volatile` ensures that reads and writes to that variable are atomic. Additionally, it ensures
-      visibility, meaning changes to a volatile variable by one thread are immediately visible to other threads.
+## What Makes an Operation Atomic?
 
-3. **Atomic Classes in `java.util.concurrent.atomic`**:
-   - Java provides classes in the `java.util.concurrent.atomic` package for performing atomic operations on variables. 
-      These classes include:
-     - `AtomicInteger`
-     - `AtomicLong`
-     - `AtomicBoolean`
-     - `AtomicReference`
-   - These classes provide methods like `get()`, `set()`, `incrementAndGet()`, `compareAndSet()`, etc., which are 
-      implemented using low-level atomic instructions provided by the hardware, ensuring atomicity.
+An atomic operation is one that executes as a single, uninterruptible unit. Just like a transaction in a database, either the entire operation completes successfully, or nothing changes at all.
 
-### Why Atomicity is Important
+## Primitive Types
 
-Atomicity is essential in multi-threaded environments to ensure that operations are completed without interference.
-Without atomic operations, multiple threads could read and write shared data simultaneously, leading to inconsistent and
-unpredictable results.
+✅ Basic types (`int`, `short`, `byte`, `char`, `float`, and `boolean`) have atomic read/write operations
+❌ `long` and `double` require special handling:
+⚠️ Not atomic on 32-bit systems
+✅ Usually atomic on 64-bit systems
+💡 Use `volatile` keyword to ensure atomicity
 
-### Example: Using `AtomicInteger`
+## Volatile Variables
 
-Here's an example of using `AtomicInteger` to perform atomic operations:
+🔄 Ensures immediate visibility across threads
+📝 Guarantees atomic read/write operations
+🔄 Prevents compiler optimizations that could break thread safety
+
+## Atomic Classes
+
+```java
+AtomicInteger     // For integers
+AtomicLong       // For long values
+AtomicBoolean    // For boolean flags
+AtomicReference  // For object references
+```
+
+Common atomic methods:
+🔄 `get()` - Atomic read operation
+➕ `incrementAndGet()` - Atomically increment and retrieve
+↔️ `compareAndSet()` - Compare value and atomically set new value if match
+
+## Hardware Support
+
+Modern processors provide specialized instructions for atomic operations:
+
+### Compare-and-Swap (CAS)
+
+💪 Compares a memory location's value with expected value
+💪 Only updates if values match
+💪 Executes as a single, uninterruptible operation
+
+### Load-Link/Store-Conditional
+
+🔗 Load-link reads value and marks memory location
+🔗 Store-conditional writes only if no other thread modified the location
+🔗 Ensures atomicity through hardware-level locking
+
+## Practical Example
 
 ```kotlin
 import java.util.concurrent.atomic.AtomicInteger
@@ -44,6 +68,7 @@ object AtomicExample {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        // Create two threads performing 1000 increments each
         val task = Runnable {
             for (i in 0 until 1000) {
                 counter.incrementAndGet()
@@ -53,33 +78,32 @@ object AtomicExample {
         val t1 = Thread(task)
         val t2 = Thread(task)
 
+        // Start threads
         t1.start()
         t2.start()
 
-        try {
-            t1.join()
-            t2.join()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        // Wait for completion
+        t1.join()
+        t2.join()
 
-        println("Counter: ${counter.get()}")
+        // Should print 2000 (1000 increments × 2 threads)
+        println("Final counter value: ${counter.get()}")
     }
 }
 ```
 
-Atomic operations in the JVM are implemented using low-level mechanisms provided by the hardware and the operating 
-system. These mechanisms ensure that atomic operations are performed without interference from other threads. Here is a 
-detailed look at how atomic operations work under the hood:
+## Best Practices
 
-Hardware Support
-Modern processors provide specific instructions that ensure atomicity. These instructions are part of the CPU's 
-instruction set and are used to perform atomic read-modify-write operations. Examples of such instructions include:
+### Use atomic operations when:
 
-* Compare-and-Swap (CAS): This instruction compares the value at a memory location with an expected value and, only if 
-they match, modifies the memory location to a new value. This is done atomically, ensuring no other thread can interfere 
-during the operation.
+🔒 Updating shared variables in multi-threaded environments
+🔒 Implementing thread-safe counters or flags
+🔒 Building lock-free data structures
 
-* Load-Link/Store-Conditional (LL/SC): These instructions work together to provide atomicity. The load-link reads the
-value, and the store-conditional writes the value only if no other write has occurred to the memory location since the
-load-link.
+### Avoid atomic operations when:
+
+⚠️ Working with thread-local variables
+⚠️ Performance is critical and synchronization isn't needed
+⚠️ Using synchronized blocks would be more readable
+
+Remember that atomic operations provide a powerful tool for building thread-safe applications, but they shouldn't replace proper synchronization entirely. Choose the right concurrency primitive based on your specific requirements and performance constraints.
