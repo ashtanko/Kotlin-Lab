@@ -10,19 +10,19 @@ pitest = "1.15.0"           # https://plugins.gradle.org/plugin/info.solidsoft.p
 ktlint = "12.2.0"           # https://github.com/JLLeitschuh/ktlint-gradle
 kapt = "2.1.0"              # https://kotlinlang.org/docs/kapt.html
 slf4j = "2.0.17"            # https://www.slf4j.org TODO remove
-rxjava = "3.1.10"            # https://github.com/ReactiveX/RxJava TODO remove
-rxkotlin = "3.0.1"          # https://github.com/ReactiveX/RxKotlin TODO remove
+rxjava = "3.1.10"           # https://github.com/ReactiveX/RxJava
+rxkotlin = "3.0.1"          # https://github.com/ReactiveX/RxKotlin
 lincheck = "2.36"           # https://github.com/JetBrains/lincheck
 serialization = "1.8.1"     # https://github.com/Kotlin/kotlinx.serialization
-retrofit = "2.11.0"         # https://github.com/square/retrofit TODO remove
-okhttp = "5.0.0-alpha.14"   # https://square.github.io/okhttp/changelogs/changelog TODO remove
-dagger = "2.56.1"           # https://dagger.dev TODO remove
+retrofit = "2.11.0"         # https://github.com/square/retrofit
+okhttp = "5.0.0-alpha.14"   # https://square.github.io/okhttp/changelogs/changelog
+dagger = "2.56.1"             # https://dagger.dev
 jmh = "1.37"                # https://github.com/openjdk/jmh
 kotlintest = "3.4.2"        # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 kotest = "5.9.1"            # https://kotest.io
 assertj = "3.27.3"          # https://mvnrepository.com/artifact/org.assertj/assertj-core | https://assertj.github.io/doc
 mockito = "5.17.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
-mockito_kotlin = "5.4.0"    # https://github.com/mockito/mockito-kotlin
+mockitoKotlin = "5.4.0"     # https://github.com/mockito/mockito-kotlin
 logback = "1.5.18"          # https://logback.qos.ch
 hamcrest = "3.0"            # https://hamcrest.org/JavaHamcrest/distributables
 mockk = "1.14.0"           # https://mockk.io
@@ -32,8 +32,9 @@ jsoup = "1.19.1"            # https://jsoup.org/
 turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 sandwich = "2.1.0"          # https://github.com/skydoves/sandwich
-protobuf = "0.9.5"
-protoc = "4.30.2"
+protobufPlugin = "0.9.5"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
+protobufKotlin = "4.30.0"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
+protoc = "4.30.2"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
 binaryCompatibility = "0.17.0"
 
 [libraries]
@@ -64,7 +65,7 @@ slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 sandwich-retrofit = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protoc" }
-#detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+protobuf-kotlin = { group = "com.google.protobuf", name = "protobuf-kotlin", version.ref = "protobufKotlin" }
 
 # testing libs
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
@@ -73,7 +74,7 @@ kotlintest-core = { module = "io.kotlintest:kotlintest-core", version.ref = "kot
 kotlintest-junit5 = { module = "io.kotlintest:kotlintest-runner-junit5", version.ref = "kotlintest" }
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito_kotlin" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 logback = { module = "ch.qos.logback:logback-core", version.ref = "logback" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
@@ -96,5 +97,5 @@ pitest = { id = "info.solidsoft.pitest", version.ref = "pitest" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 diktat = { id = "com.saveourtool.diktat", version.ref = "diktat" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
-protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 kotlin-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibility" }
