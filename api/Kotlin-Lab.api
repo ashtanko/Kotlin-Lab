@@ -21732,6 +21732,13 @@ public final class dev/shtanko/kotlinlang/types/phantom/Open : dev/shtanko/kotli
 	public static final field INSTANCE Ldev/shtanko/kotlinlang/types/phantom/Open;
 }
 
+public final class dev/shtanko/kotlinlang/types/unsigned/UnsignedKt {
+	public static final field BIG_COUNTER J
+	public static final fun buffers ()V
+	public static final fun unsignedBitwiseAnd-7apg3OU (B)B
+	public static synthetic fun unsignedBitwiseAnd-7apg3OU$default (BILjava/lang/Object;)B
+}
+
 public final class dev/shtanko/kotlinlang/value/Dp : java/lang/Comparable {
 	public static final field Companion Ldev/shtanko/kotlinlang/value/Dp$Companion;
 	public static final field MULTIPLY_FACTOR F
