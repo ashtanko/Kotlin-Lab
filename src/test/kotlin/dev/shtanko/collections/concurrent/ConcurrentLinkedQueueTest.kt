@@ -21,10 +21,9 @@ import java.util.concurrent.ConcurrentLinkedQueue
 import org.jetbrains.kotlinx.lincheck.annotations.Operation
 import org.jetbrains.kotlinx.lincheck.check
 import org.jetbrains.kotlinx.lincheck.strategy.stress.StressOptions
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 
-@Disabled("Requires a lot of time to execute")
 class ConcurrentLinkedQueueTest {
     private val s = ConcurrentLinkedQueue<Int>()
 
@@ -35,9 +34,15 @@ class ConcurrentLinkedQueueTest {
     fun poll(): Int? = s.poll()
 
     @Test
-    fun stressTest() = StressOptions()
-        .sequentialSpecification(SequentialQueue::class.java)
-        .check(this::class)
+    fun stressTest() {
+        assumeTrue(System.getenv("CI") != "true") {
+            "Test skipped on CI to reduce runtime"
+        }
+
+        StressOptions()
+            .sequentialSpecification(SequentialQueue::class.java)
+            .check(this::class)
+    }
 }
 
 class SequentialQueue {

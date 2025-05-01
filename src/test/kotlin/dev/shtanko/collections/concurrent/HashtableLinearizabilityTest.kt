@@ -25,10 +25,9 @@ import org.jetbrains.kotlinx.lincheck.paramgen.IntGen
 import org.jetbrains.kotlinx.lincheck.strategy.stress.StressCTest
 import org.jetbrains.kotlinx.lincheck.strategy.stress.StressOptions
 import org.jetbrains.kotlinx.lincheck.verifier.VerifierState
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 
-@Disabled("Requires a lot of time to execute")
 @StressCTest(minimizeFailedScenario = false)
 @Param(name = "key", gen = IntGen::class, conf = "1:5")
 internal class HashtableLinearizabilityTest : VerifierState() {
@@ -47,10 +46,15 @@ internal class HashtableLinearizabilityTest : VerifierState() {
 
     @Test
     internal fun test() {
+        assumeTrue(System.getenv("CI") != "true") {
+            "Test skipped on CI to reduce runtime"
+        }
+
         val opts = StressOptions()
             .iterations(2)
             .threads(3)
             .logLevel(LoggingLevel.INFO)
+
         LinChecker.check(HashtableLinearizabilityTest::class.java, opts)
     }
 

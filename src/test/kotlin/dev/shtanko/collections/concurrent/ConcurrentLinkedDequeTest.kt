@@ -20,11 +20,10 @@ import java.util.concurrent.ConcurrentLinkedDeque
 import org.jetbrains.kotlinx.lincheck.annotations.Operation
 import org.jetbrains.kotlinx.lincheck.check
 import org.jetbrains.kotlinx.lincheck.strategy.managed.modelchecking.ModelCheckingOptions
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-@Disabled("Requires a lot of time to execute")
 class ConcurrentLinkedDequeTest {
     private val deque = ConcurrentLinkedDeque<Int>()
 
@@ -48,6 +47,11 @@ class ConcurrentLinkedDequeTest {
 
     @Test
     fun modelCheckingTest() {
+        // Skip this test if running on CI
+        assumeTrue(System.getenv("CI") != "true") {
+            "Disabled on CI due to long runtime"
+        }
+
         assertThrows<AssertionError> {
             ModelCheckingOptions().check(this::class)
         }

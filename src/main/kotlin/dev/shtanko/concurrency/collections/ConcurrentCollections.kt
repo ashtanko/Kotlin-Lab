@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.shtanko.concurrency
+package dev.shtanko.concurrency.collections
 
 import java.util.Collections
 import java.util.Hashtable
@@ -36,13 +36,9 @@ import kotlinx.coroutines.runBlocking
 object CollectionsSynchronizedList {
     @JvmStatic
     fun main(args: Array<String>) {
-        // Create a normal list
         val normalList = mutableListOf<String>()
-
-        // Create a synchronized list from the normal list
         val synchronizedList = Collections.synchronizedList(normalList)
 
-        // Use a thread pool to demonstrate concurrent access
         val threadPool = Executors.newFixedThreadPool(10)
 
         for (i in 0 until 100) {
@@ -57,7 +53,6 @@ object CollectionsSynchronizedList {
             // Wait for all threads to finish
         }
 
-        // Print the synchronized list
         synchronizedList.forEach {
             println(it)
         }
@@ -73,7 +68,6 @@ object CopyOnWriteArrayListExample {
     fun main(args: Array<String>) {
         val cowList = CopyOnWriteArrayList<String>()
 
-        // Use a thread pool to demonstrate concurrent access
         val threadPool = Executors.newFixedThreadPool(10)
 
         for (i in 0 until 100) {
@@ -82,13 +76,10 @@ object CopyOnWriteArrayListExample {
             }
         }
 
-        // Shutdown the thread pool and wait for all tasks to complete
         threadPool.shutdown()
         while (!threadPool.isTerminated) {
             // Wait for all threads to finish
         }
-
-        // Print the CopyOnWriteArrayList
         println(cowList)
     }
 }
@@ -100,10 +91,8 @@ object CopyOnWriteArrayListExample {
 object HashtableExample {
     @JvmStatic
     fun main(args: Array<String>) {
-        // Create a Hashtable
         val hashtable = Hashtable<Int, String>()
 
-        // Use a thread pool to demonstrate concurrent access
         val threadPool = Executors.newFixedThreadPool(10)
 
         for (i in 0 until 100) {
@@ -112,13 +101,11 @@ object HashtableExample {
             }
         }
 
-        // Shutdown the thread pool and wait for all tasks to complete
         threadPool.shutdown()
         while (!threadPool.isTerminated) {
             // Wait for all threads to finish
         }
 
-        // Print the Hashtable
         hashtable.forEach { (key, value) ->
             println("Key: $key, Value: $value")
         }
@@ -133,10 +120,7 @@ object HashtableExample {
 object ConcurrentHashMapExample {
     @JvmStatic
     fun main(args: Array<String>) {
-        // Create a ConcurrentHashMap
         val concurrentMap = ConcurrentHashMap<Int, String>()
-
-        // Use a thread pool to demonstrate concurrent access
         val threadPool = Executors.newFixedThreadPool(10)
 
         for (i in 0 until 100) {
@@ -151,7 +135,6 @@ object ConcurrentHashMapExample {
             // Wait for all threads to finish
         }
 
-        // Print the ConcurrentHashMap
         concurrentMap.forEach { (key, value) ->
             println("Key: $key, Value: $value")
         }
@@ -189,11 +172,9 @@ object ConcurrentLinkedDequeExample {
     fun main(args: Array<String>) {
         val deque = ConcurrentLinkedDeque<String>()
 
-        // Adding items to the deque
         deque.addFirst("Item 1")
         deque.addLast("Item 2")
 
-        // Polling items from the deque
         println(deque.pollFirst()) // Output: Item 1
         println(deque.pollLast()) // Output: Item 2
     }
@@ -214,11 +195,9 @@ object BlockingQueueExample {
     fun main(args: Array<String>) {
         val queue = ArrayBlockingQueue<String>(10)
 
-        // Adding items to the queue
         queue.put("Item 1")
         queue.put("Item 2")
 
-        // Polling items from the queue with timeout
         println(queue.poll()) // Output: Item 1
         println(queue.poll()) // Output: Item 2
     }
@@ -234,11 +213,9 @@ object ConcurrentSkipListMapExample {
     fun main(args: Array<String>) {
         val map = ConcurrentSkipListMap<Int, String>()
 
-        // Adding items to the map
         map[1] = "Value 1"
         map[2] = "Value 2"
 
-        // Iterating over the map
         map.forEach { (key, value) ->
             println("Key: $key, Value: $value")
         }
@@ -274,10 +251,8 @@ object ConcurrentSkipListSetExample {
     fun main(args: Array<String>) {
         val concurrentSkipListSet = ConcurrentSkipListSet<Int>()
 
-        // Create a thread pool
         val executor = Executors.newFixedThreadPool(4)
 
-        // Submit tasks to the executor to add elements to the set
         executor.submit {
             for (i in 1..10) {
                 concurrentSkipListSet.add(i)
@@ -294,7 +269,6 @@ object ConcurrentSkipListSetExample {
             }
         }
 
-        // Submit a task to print elements in the set
         executor.submit {
             Thread.sleep(500) // Wait for other tasks to finish adding elements
             println("Current elements in the set: ${concurrentSkipListSet.joinToString(", ")}")

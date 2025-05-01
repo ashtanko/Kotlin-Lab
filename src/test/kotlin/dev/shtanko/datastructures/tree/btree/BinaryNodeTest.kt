@@ -73,6 +73,69 @@ internal class BinaryNodeTest {
     }
 
     @Test
+    internal fun `b tree 3 massive test`() {
+        val root = BinaryNode(100).apply {
+            leftChild = BinaryNode(50).apply {
+                leftChild = BinaryNode(25).apply {
+                    leftChild = BinaryNode(12).apply {
+                        leftChild = BinaryNode(6).apply {
+                            leftChild = BinaryNode(3)
+                            rightChild = BinaryNode(9)
+                        }
+                        rightChild = BinaryNode(18).apply {
+                            leftChild = BinaryNode(15)
+                            rightChild = BinaryNode(21)
+                        }
+                    }
+                    rightChild = BinaryNode(30).apply {
+                        leftChild = BinaryNode(28)
+                        rightChild = BinaryNode(35)
+                    }
+                }
+                rightChild = BinaryNode(75).apply {
+                    leftChild = BinaryNode(60).apply {
+                        leftChild = BinaryNode(55)
+                        rightChild = BinaryNode(65)
+                    }
+                    rightChild = BinaryNode(85).apply {
+                        leftChild = BinaryNode(80)
+                        rightChild = BinaryNode(90)
+                    }
+                }
+            }
+            rightChild = BinaryNode(150).apply {
+                leftChild = BinaryNode(125).apply {
+                    leftChild = BinaryNode(110).apply {
+                        leftChild = BinaryNode(105)
+                        rightChild = BinaryNode(115)
+                    }
+                    rightChild = BinaryNode(135).apply {
+                        leftChild = BinaryNode(130)
+                        rightChild = BinaryNode(140)
+                    }
+                }
+                rightChild = BinaryNode(175).apply {
+                    leftChild = BinaryNode(160).apply {
+                        leftChild = BinaryNode(155)
+                        rightChild = BinaryNode(165)
+                    }
+                    rightChild = BinaryNode(190).apply {
+                        leftChild = BinaryNode(185)
+                        rightChild = BinaryNode(195).apply {
+                            rightChild = BinaryNode(200).apply {
+                                rightChild = BinaryNode(210)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        assertThat(root.value).isEqualTo(100)
+        println(root)
+    }
+
+    @Test
     internal fun `b tree string test`() {
         val root = BinaryNode("H").apply {
             leftChild = BinaryNode("D").apply {
@@ -96,6 +159,65 @@ internal class BinaryNodeTest {
                 }
             }
         }
+        assertThat(root.value).isEqualTo("H")
+        println(root)
+    }
+
+    @Test
+    internal fun `very big binary tree string test`() {
+        val root = BinaryNode("H").apply {
+            leftChild = BinaryNode("D").apply {
+                leftChild = BinaryNode("B").apply {
+                    leftChild = BinaryNode("A1").apply {
+                        leftChild = BinaryNode("A0")
+                        rightChild = BinaryNode("A2")
+                    }
+                    rightChild = BinaryNode("C1").apply {
+                        leftChild = BinaryNode("C0")
+                        rightChild = BinaryNode("C2")
+                    }
+                }
+                rightChild = BinaryNode("F").apply {
+                    leftChild = BinaryNode("E1").apply {
+                        leftChild = BinaryNode("E0")
+                        rightChild = BinaryNode("E2")
+                    }
+                    rightChild = BinaryNode("G1").apply {
+                        leftChild = BinaryNode("G0")
+                        rightChild = BinaryNode("G2")
+                    }
+                }
+            }
+            rightChild = BinaryNode("P").apply {
+                leftChild = BinaryNode("K").apply {
+                    leftChild = BinaryNode("I1").apply {
+                        leftChild = BinaryNode("I0")
+                        rightChild = BinaryNode("I2")
+                    }
+                    rightChild = BinaryNode("N1").apply {
+                        leftChild = BinaryNode("M0")
+                        rightChild = BinaryNode("O0")
+                    }
+                }
+                rightChild = BinaryNode("U").apply {
+                    leftChild = BinaryNode("R1").apply {
+                        leftChild = BinaryNode("Q0")
+                        rightChild = BinaryNode("S0")
+                    }
+                    rightChild = BinaryNode("Y").apply {
+                        leftChild = BinaryNode("W1").apply {
+                            leftChild = BinaryNode("V0")
+                            rightChild = BinaryNode("X0")
+                        }
+                        rightChild = BinaryNode("Z1").apply {
+                            leftChild = BinaryNode("Z0")
+                            rightChild = BinaryNode("Z2")
+                        }
+                    }
+                }
+            }
+        }
+
         assertThat(root.value).isEqualTo("H")
         println(root)
     }

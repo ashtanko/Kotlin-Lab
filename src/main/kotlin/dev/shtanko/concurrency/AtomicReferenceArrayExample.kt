@@ -24,23 +24,19 @@ import java.util.concurrent.atomic.AtomicReferenceArray
 object AtomicReferenceArrayExample {
     @JvmStatic
     fun main(args: Array<String>) {
-        // Initialize an AtomicReferenceArray with 5 elements
         val atomicArray = AtomicReferenceArray<String>(5)
 
-        // Set values in the array
         atomicArray.set(0, "A")
         atomicArray.set(1, "B")
         atomicArray.set(2, "C")
         atomicArray.set(3, "D")
         atomicArray.set(4, "E")
 
-        // Get and print values from the array
         println("Initial values:")
         for (i in 0 until atomicArray.length()) {
             println("Index $i: ${atomicArray.get(i)}")
         }
 
-        // Update a value using compareAndSet
         val indexToUpdate = 2
         val oldValue = "C"
         val newValue = "Z"
