@@ -18851,16 +18851,6 @@ public final class dev/shtanko/concurrency/AtomicReferenceArrayExample {
 	public static final fun main ([Ljava/lang/String;)V
 }
 
-public final class dev/shtanko/concurrency/BlockingQueueExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/BlockingQueueExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/CollectionsSynchronizedList {
-	public static final field INSTANCE Ldev/shtanko/concurrency/CollectionsSynchronizedList;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
 public final class dev/shtanko/concurrency/ConcurrentFileDownloads {
 	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentFileDownloads;
 	public static final fun main ([Ljava/lang/String;)V
@@ -18870,36 +18860,6 @@ public final class dev/shtanko/concurrency/ConcurrentFileDownloads$FileDownloadT
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
 	public synthetic fun call ()Ljava/lang/Object;
 	public fun call ()Ljava/lang/String;
-}
-
-public final class dev/shtanko/concurrency/ConcurrentHashMapExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentHashMapExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/ConcurrentLinkedDequeExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentLinkedDequeExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/ConcurrentLinkedQueueExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentLinkedQueueExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/ConcurrentSkipListMapExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentSkipListMapExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/ConcurrentSkipListSetExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/ConcurrentSkipListSetExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
-public final class dev/shtanko/concurrency/CopyOnWriteArrayListExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/CopyOnWriteArrayListExample;
-	public static final fun main ([Ljava/lang/String;)V
 }
 
 public final class dev/shtanko/concurrency/CountDownLatchKt {
@@ -19041,11 +19001,6 @@ public final class dev/shtanko/concurrency/GeneratingUserReportsConcurrently$Rep
 	public fun <init> (Ljava/lang/String;)V
 	public synthetic fun call ()Ljava/lang/Object;
 	public fun call ()Ljava/lang/String;
-}
-
-public final class dev/shtanko/concurrency/HashtableExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/HashtableExample;
-	public static final fun main ([Ljava/lang/String;)V
 }
 
 public final class dev/shtanko/concurrency/InheritableThreadLocalExample {
@@ -19243,11 +19198,6 @@ public final class dev/shtanko/concurrency/SharedFlagThread : java/lang/Thread {
 	public fun run ()V
 }
 
-public final class dev/shtanko/concurrency/SharedMutableStateExample {
-	public static final field INSTANCE Ldev/shtanko/concurrency/SharedMutableStateExample;
-	public static final fun main ([Ljava/lang/String;)V
-}
-
 public final class dev/shtanko/concurrency/SimpleExecutorExample {
 	public static final field INSTANCE Ldev/shtanko/concurrency/SimpleExecutorExample;
 	public static final fun main ([Ljava/lang/String;)V
@@ -19325,6 +19275,72 @@ public final class dev/shtanko/concurrency/VolatileIncrementor {
 public final class dev/shtanko/concurrency/VolatileKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/BlockingQueueExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/BlockingQueueExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/CollectionsSynchronizedList {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/CollectionsSynchronizedList;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/ConcurrentHashMapExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/ConcurrentHashMapExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/ConcurrentLinkedDequeExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/ConcurrentLinkedDequeExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/ConcurrentLinkedQueueExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/ConcurrentLinkedQueueExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/ConcurrentSkipListMapExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/ConcurrentSkipListMapExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/ConcurrentSkipListSetExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/ConcurrentSkipListSetExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/CopyOnWriteArrayListExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/CopyOnWriteArrayListExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/CopyOnWriteArrayListExampleKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/EventDispatcher {
+	public fun <init> ()V
+	public final fun addListener (Ldev/shtanko/concurrency/collections/EventListener;)V
+	public final fun dispatchEvent (Ljava/lang/String;)V
+	public final fun removeListener (Ldev/shtanko/concurrency/collections/EventListener;)V
+}
+
+public abstract interface class dev/shtanko/concurrency/collections/EventListener {
+	public abstract fun onEvent (Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/HashtableExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/HashtableExample;
+	public static final fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/concurrency/collections/SharedMutableStateExample {
+	public static final field INSTANCE Ldev/shtanko/concurrency/collections/SharedMutableStateExample;
+	public static final fun main ([Ljava/lang/String;)V
 }
 
 public final class dev/shtanko/concurrency/coroutines/BackgroundTaskCancellation {
