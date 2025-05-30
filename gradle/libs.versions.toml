@@ -33,8 +33,8 @@ turbine = "1.2.0"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 sandwich = "2.1.1"          # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.5"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
-protobufKotlin = "4.30.2"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
-protoc = "4.30.2"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
+protobufKotlin = "4.31.1"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
+protoc = "4.31.1"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
 binaryCompatibility = "0.17.0"
 
 [libraries]
