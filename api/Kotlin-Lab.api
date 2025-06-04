@@ -948,6 +948,57 @@ public final class dev/shtanko/algorithms/codingbat/recursion2/SplitOdd10Recursi
 	public fun invoke ([I)Z
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/GetSandwich {
+	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/GetSandwichTwoPointers : dev/shtanko/algorithms/codingbat/string2/GetSandwich {
+	public fun <init> ()V
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/GetSandwichTwoSlidingWindow : dev/shtanko/algorithms/codingbat/string2/GetSandwich {
+	public fun <init> ()V
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/OneTwo {
+	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/OneTwo$Chunked : dev/shtanko/algorithms/codingbat/string2/OneTwo {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/OneTwo$Chunked;
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/OneTwo$Iterative : dev/shtanko/algorithms/codingbat/string2/OneTwo {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/OneTwo$Iterative;
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/SameStarChar {
+	public abstract fun invoke (Ljava/lang/String;)Z
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/SameStarChar$SlidingWindow : dev/shtanko/algorithms/codingbat/string2/SameStarChar {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/SameStarChar$SlidingWindow;
+	public fun invoke (Ljava/lang/String;)Z
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/SameStarChar$SlidingWindowSimple : dev/shtanko/algorithms/codingbat/string2/SameStarChar {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/SameStarChar$SlidingWindowSimple;
+	public fun invoke (Ljava/lang/String;)Z
+}
+
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/ZipZap {
+	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/ZipZap$Iterative : dev/shtanko/algorithms/codingbat/string2/ZipZap {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/ZipZap$Iterative;
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
 public abstract interface class dev/shtanko/algorithms/complexity/Problem {
 	public static final field Companion Ldev/shtanko/algorithms/complexity/Problem$Companion;
 	public static final field DEFAULT_MAX_N I
