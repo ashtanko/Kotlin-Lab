@@ -24,11 +24,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class BoldWordsInStringTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf<String>(), "", ""),
             Arguments.of(arrayOf("ab", "bc"), "aabcd", "a<b>abc</b>d"),
             Arguments.of(arrayOf("ab"), "aabcd", "a<b>ab</b>cd"),

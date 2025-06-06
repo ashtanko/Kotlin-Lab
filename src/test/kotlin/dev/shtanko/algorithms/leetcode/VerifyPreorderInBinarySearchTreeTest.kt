@@ -23,6 +23,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 abstract class VerifyPreorderInBinarySearchTreeTest<out T : VerifyPreorderInBinarySearchTreeStrategy>(
     private val strategy: T,
@@ -35,7 +36,10 @@ abstract class VerifyPreorderInBinarySearchTreeTest<out T : VerifyPreorderInBina
     //  1   3
     // Preorder (Root, Left, Right)
     private class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(5, 2, 6, 1, 3), false),
             Arguments.of(intArrayOf(5, 2, 1, 3, 6), true),
             Arguments.of(intArrayOf(5, 2, 1, 3, 6, 7), true),

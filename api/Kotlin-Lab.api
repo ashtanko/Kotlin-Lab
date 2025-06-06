@@ -990,6 +990,20 @@ public final class dev/shtanko/algorithms/codingbat/string2/SameStarChar$Sliding
 	public fun invoke (Ljava/lang/String;)Z
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/StarOut {
+	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/StarOut$Iterative : dev/shtanko/algorithms/codingbat/string2/StarOut {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/StarOut$Iterative;
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/StarOut$Stack : dev/shtanko/algorithms/codingbat/string2/StarOut {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/StarOut$Stack;
+	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
+}
+
 public abstract interface class dev/shtanko/algorithms/codingbat/string2/ZipZap {
 	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
@@ -17964,6 +17978,14 @@ public final class dev/shtanko/algorithms/simulatedannealing/TravelingSalesmanPr
 	public final fun getY ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/slidingwindow/FixedSizeExampleKt {
+	public static final fun maxSumFixedSizeSlidingWindow ([II)I
+}
+
+public final class dev/shtanko/algorithms/slidingwindow/VariableSizeExampleKt {
+	public static final fun lengthOfLongestSubstring (Ljava/lang/String;)I
 }
 
 public abstract interface class dev/shtanko/algorithms/sorts/AbstractSortStrategy {

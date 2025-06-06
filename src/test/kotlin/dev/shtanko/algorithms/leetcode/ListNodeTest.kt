@@ -17,7 +17,6 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import kotlin.streams.toList
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -26,11 +25,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class ListNodeTest {
 
     private class PrettyPrintArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListNode(1),
                 "1",
@@ -61,7 +64,10 @@ class ListNodeTest {
     }
 
     private class InputToListArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListNode(
                     1,
@@ -88,8 +94,11 @@ class ListNodeTest {
     }
 
     private class InputToListNullableArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> =
-            InputToListArgumentsProvider().provideArguments(context).toList().toMutableList().apply {
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> =
+            InputToListArgumentsProvider().provideArguments(parameters, context).toList().toMutableList().apply {
                 add(
                     Arguments.of(
                         null,
@@ -100,7 +109,10 @@ class ListNodeTest {
     }
 
     private class ToListArgs : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf<Int>(),
                 ListNode(),
@@ -137,7 +149,10 @@ class ListNodeTest {
     }
 
     private class ReverseListArgs : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf(1, 2, 3, 4, 5, 6, 7).toListNode(),
                 listOf(1, 2, 3, 4, 5, 6, 7).reversed(),
@@ -162,7 +177,10 @@ class ListNodeTest {
     }
 
     private class ZipListArgs : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf(1, 3).toListNode(),
                 listOf(2, 4).toListNode(),
@@ -177,7 +195,10 @@ class ListNodeTest {
     }
 
     private class IntArrayToListNodeArgs : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),
                 ListNode(),

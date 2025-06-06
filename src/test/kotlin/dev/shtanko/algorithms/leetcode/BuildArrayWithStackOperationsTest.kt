@@ -24,11 +24,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class BuildArrayWithStackOperationsTest {
 
     class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(1, 3), 3, listOf("Push", "Push", "Pop", "Push")),
             Arguments.of(intArrayOf(1, 2, 3), 3, listOf("Push", "Push", "Push")),
             Arguments.of(intArrayOf(1, 2), 4, listOf("Push", "Push")),

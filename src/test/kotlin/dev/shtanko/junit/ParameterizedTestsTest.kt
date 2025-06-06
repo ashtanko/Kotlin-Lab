@@ -176,7 +176,6 @@ class ParameterizedTestsTest {
             )
         }
 
-
         @JvmStatic
         val namedArgumentsSupplier: Supplier<Stream<Arguments>> = Supplier {
             Stream.of(

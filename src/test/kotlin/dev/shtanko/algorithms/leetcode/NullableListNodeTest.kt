@@ -17,18 +17,21 @@
 package dev.shtanko.algorithms.leetcode
 
 import java.util.stream.Stream
-import kotlin.streams.toList
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class NullableListNodeTest {
 
     private class InputToListArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 NullableListNode(
                     1,
@@ -55,7 +58,10 @@ class NullableListNodeTest {
     }
 
     private class ToListArgs : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf<Int>(),
                 NullableListNode(),
@@ -92,8 +98,11 @@ class NullableListNodeTest {
     }
 
     private class InputToListNullableArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> =
-            InputToListArgumentsProvider().provideArguments(context).toList().toMutableList().apply {
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> =
+            InputToListArgumentsProvider().provideArguments(parameters, context).toList().toMutableList().apply {
                 add(
                     Arguments.of(
                         null,
