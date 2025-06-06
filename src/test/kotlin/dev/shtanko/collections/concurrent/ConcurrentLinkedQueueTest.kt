@@ -16,7 +16,7 @@
 
 package dev.shtanko.collections.concurrent
 
-import java.util.LinkedList
+import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 import org.jetbrains.kotlinx.lincheck.annotations.Operation
 import org.jetbrains.kotlinx.lincheck.check

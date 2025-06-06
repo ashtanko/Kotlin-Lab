@@ -24,6 +24,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 internal class ArrayTest {
 
@@ -67,7 +68,10 @@ internal class ArrayTest {
     }
 
     private class InputArgumentsUniqueProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 1, 2, 2, 2, 3, 3, 4, 5, 5),
                 intArrayOf(1, 2, 3, 4, 5),
@@ -80,7 +84,10 @@ internal class ArrayTest {
     }
 
     private class InputArgumentsMergeProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 3, 4, 5, 6),
                 intArrayOf(7, 8, 9),
@@ -95,7 +102,10 @@ internal class ArrayTest {
     }
 
     private class InputArgumentsSortsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 3, 2, 4, 5),
                 2,

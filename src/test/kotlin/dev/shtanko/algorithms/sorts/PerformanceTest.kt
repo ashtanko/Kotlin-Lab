@@ -18,7 +18,7 @@ package dev.shtanko.algorithms.sorts
 
 import dev.shtanko.algorithms.utils.measureTime
 import dev.shtanko.extensions.generateRandomArray
-import java.util.Locale
+import java.util.*
 import java.util.stream.Stream
 import kotlin.system.measureTimeMillis
 import org.assertj.core.api.Assertions.assertThat
@@ -28,11 +28,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 internal class PerformanceTest {
 
     internal class SlowSortsArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(BubbleSort(), hundred),
             Arguments.of(BubbleSort(), fiveHundred),
             Arguments.of(BubbleSort(), eightHundred),
@@ -68,7 +72,10 @@ internal class PerformanceTest {
     }
 
     internal class FastSortsArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(mergeSortStrategy, thirtyK),
             Arguments.of(mergeSortStrategy, fiftyK),
             Arguments.of(mergeSortStrategy, hundredK),
@@ -99,7 +106,10 @@ internal class PerformanceTest {
     }
 
     private class FastScopeStrategiesInputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(10_000, true),
             Arguments.of(100_000, true),
             Arguments.of(500_000, true),
@@ -108,7 +118,10 @@ internal class PerformanceTest {
     }
 
     private class SlowScopeStrategiesInputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(5000, true),
             Arguments.of(1000, true),
             Arguments.of(10_000, true),

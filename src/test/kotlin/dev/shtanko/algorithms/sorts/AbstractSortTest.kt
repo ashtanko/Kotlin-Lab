@@ -26,12 +26,16 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 @Suppress("ArrayPrimitive")
 internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private val strategy: T) {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(getRandomArray(), true),
             Arguments.of(arrayOf(1, 2, 2, 1), true),
         )
@@ -46,7 +50,10 @@ internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private v
     }
 
     internal class InputStringArrayArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf<String>(),
                 emptyArray<String>(),
@@ -71,7 +78,10 @@ internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private v
     }
 
     internal class InputObjectArrayArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf(TestObject.empty()), arrayOf(TestObject.empty())),
             Arguments.of(
                 arrayOf(

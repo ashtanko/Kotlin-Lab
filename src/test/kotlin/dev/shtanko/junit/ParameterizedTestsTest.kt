@@ -18,7 +18,7 @@ package dev.shtanko.junit
 
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalUnit
-import java.util.EnumSet
+import java.util.*
 import java.util.function.Supplier
 import java.util.stream.IntStream
 import java.util.stream.Stream

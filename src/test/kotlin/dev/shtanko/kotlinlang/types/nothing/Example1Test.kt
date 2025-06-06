@@ -16,7 +16,6 @@
 
 package dev.shtanko.kotlinlang.types.nothing
 
-import java.lang.IllegalArgumentException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test

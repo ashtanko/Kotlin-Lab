@@ -33,11 +33,15 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 internal class GameTest {
 
     internal class ShiftCellsDownInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -98,7 +102,10 @@ internal class GameTest {
     }
 
     internal class ShiftCellsUpInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -159,7 +166,10 @@ internal class GameTest {
     }
 
     internal class ShiftCellsRightInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -192,7 +202,10 @@ internal class GameTest {
     }
 
     internal class ShiftCellsLeftInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -225,7 +238,10 @@ internal class GameTest {
     }
 
     internal class ManipulateGridInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "a",
                 arrayOf(
@@ -290,7 +306,10 @@ internal class GameTest {
     }
 
     internal class UpdateGridInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -359,7 +378,10 @@ internal class GameTest {
     }
 
     internal class GridInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),
@@ -418,7 +440,10 @@ internal class GameTest {
     }
 
     internal class GridSolvedInputParams : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(
                     intArrayOf(0, 0, 0, 0),

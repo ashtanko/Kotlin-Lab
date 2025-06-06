@@ -16,7 +16,7 @@
 
 package dev.shtanko.mockito
 
-import java.util.UUID
+import java.util.*
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

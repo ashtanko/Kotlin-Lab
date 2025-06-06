@@ -23,11 +23,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class AnyExample {
 
     private class HashCodesInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of("A", "B", false),
             Arguments.of("a", "a", true),
@@ -41,7 +45,10 @@ class AnyExample {
     }
 
     private class HashCodesNullableInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of("A", "B", false),
             Arguments.of("a", "a", true),
@@ -56,7 +63,10 @@ class AnyExample {
     }
 
     private class SymmetricInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of(Any(), Any(), false),
             Arguments.of(Broken(), Broken(), true),
@@ -66,7 +76,10 @@ class AnyExample {
     }
 
     private class TransitiveInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(Triple(1, 1, 1), true),
             Arguments.of(Triple(1, 1, 2), false),
             Arguments.of(Triple(Any(), Any(), Any()), false),
@@ -77,7 +90,10 @@ class AnyExample {
     }
 
     private class ConsistentInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(Pair(1, 1), true),
             Arguments.of(Pair(Any(), Any()), false),
             Arguments.of(Pair(Broken(), Broken()), true),

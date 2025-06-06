@@ -46,7 +46,7 @@ class NetworkResponseCacheTest {
     }
 
     @Test
-    fun `GIVEN - item in cache WHEN get THEN return not null and items are queal`() = runTest {
+    fun `GIVEN - item in cache WHEN get THEN return not null and items are equal`() = runTest {
         val item = SearchResponseModel()
         networkResponseCache.put("existing_key", item)
         val actual = networkResponseCache["existing_key"]

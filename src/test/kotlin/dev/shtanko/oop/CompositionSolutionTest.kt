@@ -16,7 +16,7 @@
 
 package dev.shtanko.oop
 
-import java.util.TreeSet
+import java.util.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

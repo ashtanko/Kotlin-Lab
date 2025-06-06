@@ -24,11 +24,15 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
 import org.junit.jupiter.params.provider.ValueSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 class SortTest {
 
     private class MergeInputParamsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 getMetadata(intArrayOf(1, 3, 2)),
                 intArrayOf(1, 2, 3),
@@ -64,7 +68,10 @@ class SortTest {
     }
 
     private class ArrayMaxInputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 3, 4, 5),
                 5,

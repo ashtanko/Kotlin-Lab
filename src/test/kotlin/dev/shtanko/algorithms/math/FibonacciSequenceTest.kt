@@ -24,11 +24,15 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 internal class FibonacciSequenceTest {
 
     internal class InputSimpleArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),
             Arguments.of(2, 1),
@@ -44,7 +48,10 @@ internal class FibonacciSequenceTest {
     }
 
     internal class InputIterativeArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),
             Arguments.of(2, 1),
@@ -57,7 +64,10 @@ internal class FibonacciSequenceTest {
     }
 
     internal class InputRecursiveArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),
             Arguments.of(2, 1),

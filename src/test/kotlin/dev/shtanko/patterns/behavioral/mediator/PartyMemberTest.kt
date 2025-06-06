@@ -32,7 +32,10 @@ import org.mockito.Mockito.verify
 
 class PartyMemberTest {
     internal class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of()
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of()
     }
 
     companion object {

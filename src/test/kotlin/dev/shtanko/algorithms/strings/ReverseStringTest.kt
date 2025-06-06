@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 internal class ReverseStringTest {
     private lateinit var stdApproach: ReverseString
@@ -22,7 +23,10 @@ internal class ReverseStringTest {
     }
 
     private class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations?,
+            context: ExtensionContext?,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("", ""),
             Arguments.of("a", "a"),
             Arguments.of("ab", "ba"),
@@ -33,7 +37,7 @@ internal class ReverseStringTest {
             Arguments.of("12345", "54321"),
             Arguments.of("!@#\$%", "%\$#@!"),  // special characters
             Arguments.of("AaBbCc", "cCbBaA"),  // mixed case
-            Arguments.of("a".repeat(1_000_000), "a".repeat(1_000_000)) // large input test
+            Arguments.of("a".repeat(1_000_000), "a".repeat(1_000_000)), // large input test
         )
     }
 

@@ -1,10 +1,10 @@
-Fake objects actually have working implementations, but usually take some shortcut 
+Fake objects actually have working implementations, but usually take some shortcut
 which makes them not suitable for production.
-[]: # 
+[]: #
 []: # ## When to use it
-[]: # 
+[]: #
 []: # Use a fake when you want to:
-[]: # 
+[]: #
 []: # * replace a real component on your system
 []: # * use a simplified version of a component
 []: # * use a component that stores data in memory
@@ -46,5 +46,5 @@ which makes them not suitable for production.
 []: # * use a component that sends event messages
 []: # * use a component that sends exception messages
 []: # * use a component that sends failure messages
-[]: # 
+[]: #
 []: # ## How to use it
