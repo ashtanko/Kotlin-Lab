@@ -976,6 +976,15 @@ public final class dev/shtanko/algorithms/codingbat/string2/OneTwo$Iterative : d
 	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/PlusOut {
+	public abstract fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/PlusOut$SlidingWindow : dev/shtanko/algorithms/codingbat/string2/PlusOut {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/PlusOut$SlidingWindow;
+	public fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
 public abstract interface class dev/shtanko/algorithms/codingbat/string2/SameStarChar {
 	public abstract fun invoke (Ljava/lang/String;)Z
 }

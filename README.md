@@ -22,22 +22,22 @@
 
 ### Metrics
 ```text
-15033 number of properties
-10428 number of functions
-8887 number of classes
+15035 number of properties
+10432 number of functions
+8890 number of classes
 233 number of packages
-3503 number of kt files
+3505 number of kt files
 ```
 
 
 ### Complexity Report
 ```text
-265356 lines of code (loc)
-164697 source lines of code (sloc)
-120295 logical lines of code (lloc)
+265421 lines of code (loc)
+164754 source lines of code (sloc)
+120331 logical lines of code (lloc)
 72514 comment lines of code (cloc)
-24821 cyclomatic complexity (mcc)
-20292 cognitive complexity
+24828 cyclomatic complexity (mcc)
+20297 cognitive complexity
 0 number of total code smells
 44 comment source ratio
 206 mcc per 1,000 lloc
