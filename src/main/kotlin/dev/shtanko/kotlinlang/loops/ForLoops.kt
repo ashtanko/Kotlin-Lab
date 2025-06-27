@@ -17,49 +17,53 @@
 package dev.shtanko.kotlinlang.loops
 
 fun simpleForLoopUntil() {
-    // 0...9
+    // Iterates from 0 to 9 (excludes 10)
     for (i in 0 until 10) {
         println(i)
     }
 }
 
 fun simpleForLoopRange() {
-    // 0...10
+    // Iterates from 0 to 10 (includes both bounds)
     for (i in 0..10) {
         println(i)
     }
 }
 
 fun simpleForLoopRangeStep() {
-    // 0,2,4,6,8,10
+    // Iterates from 0 to 10, incrementing by 2
+    // Output: 0, 2, 4, 6, 8, 10
     for (i in 0..10 step 2) {
         println(i)
     }
 }
 
 fun simpleForLoopDownTo() {
-    // 10...0
+    // Iterates from 10 down to 0, decrementing by 1
     for (i in 10 downTo 0) {
         println(i)
     }
 }
 
 fun simpleForLoopDownToStep() {
-    // 10,7,4,1
+    // Iterates from 10 down to 0, decrementing by 3
+    // Output: 10, 7, 4, 1
     for (i in 10 downTo 0 step 3) {
         println(i)
     }
 }
 
 fun simpleForLoopDownToStep1() {
-    // 10,0
+    // Iterates from 10 down to 0, decrementing by 10
+    // Output: 10, 0
     for (i in 10 downTo 0 step 10) {
         println(i)
     }
 }
 
 fun simpleForLoopDownToStep2() {
-    // 10,5
+    // Iterates from 10 down to 5, decrementing by 5
+    // Output: 10, 5
     for (i in 10 downTo 5 step 5) {
         println(i)
     }
@@ -67,37 +71,45 @@ fun simpleForLoopDownToStep2() {
 
 fun simpleForLoopArray() {
     val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // Iterates over array indices (0 to 9)
     for (i in arr.indices) {
-        println(i)
+        println("Index: $i, Value: ${arr[i]}")
     }
 }
 
 fun simpleForLoopArrayWithIndex() {
     val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    // Iterates over array with both index and value
     for ((index, value) in arr.withIndex()) {
-        println("$index $value")
+        println("Index: $index, Value: $value")
     }
 }
 
 fun main() {
-    println("For loop using until keyword: ")
+    println("For loop using 'until' (0 to 9):")
     simpleForLoopUntil()
-    println("For loop using range: ")
+
+    println("\nFor loop using range (0 to 10):")
     simpleForLoopRange()
-    println("For loop using range with step: ")
+
+    println("\nFor loop using range with step 2 (0 to 10):")
     simpleForLoopRangeStep()
-    println("For loop using downTo keyword: ")
+
+    println("\nFor loop using 'downTo' (10 to 0):")
     simpleForLoopDownTo()
-    println("For loop using downTo keyword 2: ")
+
+    println("\nFor loop using 'downTo' with step 3 (10 to 0):")
     simpleForLoopDownToStep()
-    println("For loop using downTo step 1: ")
+
+    println("\nFor loop using 'downTo' with step 10 (10 to 0):")
     simpleForLoopDownToStep1()
-    println("For loop using downTo keyword 4: ")
+
+    println("\nFor loop using 'downTo' with step 5 (10 to 5):")
     simpleForLoopDownToStep2()
-    println("For loop using downTo keyword 5: ")
+
+    println("\nFor loop over array indices:")
     simpleForLoopArray()
-    println("For loop array: ")
-    simpleForLoopArray()
-    println("For loop array with index: ")
+
+    println("\nFor loop over array with index and value:")
     simpleForLoopArrayWithIndex()
 }

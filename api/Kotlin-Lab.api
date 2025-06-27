@@ -1013,6 +1013,25 @@ public final class dev/shtanko/algorithms/codingbat/string2/StarOut$Stack : dev/
 	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string2/WordEnds {
+	public abstract fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/WordEnds$SlidingWindow : dev/shtanko/algorithms/codingbat/string2/WordEnds {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/WordEnds$SlidingWindow;
+	public fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/WordEnds$SlidingWindowOptimized : dev/shtanko/algorithms/codingbat/string2/WordEnds {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/WordEnds$SlidingWindowOptimized;
+	public fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/algorithms/codingbat/string2/WordEnds$SubstringScanning : dev/shtanko/algorithms/codingbat/string2/WordEnds {
+	public static final field INSTANCE Ldev/shtanko/algorithms/codingbat/string2/WordEnds$SubstringScanning;
+	public fun invoke (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+}
+
 public abstract interface class dev/shtanko/algorithms/codingbat/string2/ZipZap {
 	public abstract fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
@@ -21720,6 +21739,10 @@ public final class dev/shtanko/kotlinlang/lambda/LambdaKt {
 	public static final fun setMul (Lkotlin/jvm/functions/Function1;)V
 }
 
+public final class dev/shtanko/kotlinlang/loops/DoWhileLoopKt {
+	public static final fun doWhileExample ()V
+}
+
 public final class dev/shtanko/kotlinlang/loops/ForLoopsKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V
@@ -21732,6 +21755,10 @@ public final class dev/shtanko/kotlinlang/loops/ForLoopsKt {
 	public static final fun simpleForLoopRange ()V
 	public static final fun simpleForLoopRangeStep ()V
 	public static final fun simpleForLoopUntil ()V
+}
+
+public final class dev/shtanko/kotlinlang/loops/WhileLoopKt {
+	public static final fun whileLoopExample ()V
 }
 
 public abstract interface class dev/shtanko/kotlinlang/sealed/Error {
