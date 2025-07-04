@@ -22000,6 +22000,19 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2/Tau$DefaultImpls {
 	public static fun tau (Ldev/shtanko/kotlinlang/whatsnew/v2/Tau;)V
 }
 
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
+	public static final fun getFirstUser (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)Ljava/lang/String;
+	public static final fun logWelcome (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)V
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun outputMessage (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;Ljava/lang/String;)V
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService {
+	public abstract fun findUserById (I)Ljava/lang/String;
+	public abstract fun log (Ljava/lang/String;)V
+}
+
 public final class dev/shtanko/oop/CompositionInstrumentedHashSet : dev/shtanko/oop/ForwardingSet {
 	public fun <init> (Ljava/util/Set;)V
 	public fun add (Ljava/lang/Object;)Z
