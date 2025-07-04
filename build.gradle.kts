@@ -30,6 +30,16 @@ fun isLinux(): Boolean {
     return listOf("linux", "mac os", "macos").contains(osName)
 }
 
+private val compilerArgs = listOf(
+    "-opt-in=kotlin.RequiresOptIn",
+    "-Xcontext-parameters",
+    "-Xcontext-sensitive-resolution",
+    "-Xannotation-target-all",
+    "-Xannotation-default-target=param-property",
+    "-Xnested-type-aliases",
+    "-Xannotations-in-metadata",
+)
+
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     application
@@ -227,7 +237,7 @@ tasks {
     withType<KotlinJvmCompile>().configureEach {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
-            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+            compilerArgs.forEach(freeCompilerArgs::add)
         }
     }
 

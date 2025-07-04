@@ -1041,6 +1041,10 @@ public final class dev/shtanko/algorithms/codingbat/string2/ZipZap$Iterative : d
 	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string3/CountYZ {
+	public abstract fun invoke (Ljava/lang/String;)I
+}
+
 public abstract interface class dev/shtanko/algorithms/complexity/Problem {
 	public static final field Companion Ldev/shtanko/algorithms/complexity/Problem$Companion;
 	public static final field DEFAULT_MAX_N I
@@ -18336,7 +18340,7 @@ public final class dev/shtanko/api/Repo {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/api/Repo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/api/Repo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/api/Repo$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/Repo;
@@ -18344,6 +18348,7 @@ public synthetic class dev/shtanko/api/Repo$$serializer : kotlinx/serialization/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/Repo;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/api/Repo$Companion {
@@ -18366,7 +18371,7 @@ public final class dev/shtanko/api/RequestData {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/api/RequestData$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/api/RequestData$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/api/RequestData$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/RequestData;
@@ -18374,6 +18379,7 @@ public synthetic class dev/shtanko/api/RequestData$$serializer : kotlinx/seriali
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/RequestData;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/api/RequestData$Companion {
@@ -18394,7 +18400,7 @@ public final class dev/shtanko/api/User {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/api/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/api/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/api/User$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/User;
@@ -18402,6 +18408,7 @@ public synthetic class dev/shtanko/api/User$$serializer : kotlinx/serialization/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/User;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/api/User$Companion {
@@ -21013,7 +21020,7 @@ public final class dev/shtanko/github/data/model/GitHubItemModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/github/data/model/GitHubItemModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/github/data/model/GitHubItemModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/github/data/model/GitHubItemModel$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/github/data/model/GitHubItemModel;
@@ -21021,6 +21028,7 @@ public synthetic class dev/shtanko/github/data/model/GitHubItemModel$$serializer
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/github/data/model/GitHubItemModel;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/github/data/model/GitHubItemModel$Companion {
@@ -21049,7 +21057,7 @@ public final class dev/shtanko/github/data/model/GitHubLicenseModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/github/data/model/GitHubLicenseModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/github/data/model/GitHubLicenseModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/github/data/model/GitHubLicenseModel$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/github/data/model/GitHubLicenseModel;
@@ -21057,6 +21065,7 @@ public synthetic class dev/shtanko/github/data/model/GitHubLicenseModel$$seriali
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/github/data/model/GitHubLicenseModel;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/github/data/model/GitHubLicenseModel$Companion {
@@ -21113,7 +21122,7 @@ public final class dev/shtanko/github/data/model/GitHubOwnerModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/github/data/model/GitHubOwnerModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/github/data/model/GitHubOwnerModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/github/data/model/GitHubOwnerModel$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/github/data/model/GitHubOwnerModel;
@@ -21121,6 +21130,7 @@ public synthetic class dev/shtanko/github/data/model/GitHubOwnerModel$$serialize
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/github/data/model/GitHubOwnerModel;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/github/data/model/GitHubOwnerModel$Companion {
@@ -21158,7 +21168,7 @@ public final class dev/shtanko/github/data/model/SearchResponseModel {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class dev/shtanko/github/data/model/SearchResponseModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class dev/shtanko/github/data/model/SearchResponseModel$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Ldev/shtanko/github/data/model/SearchResponseModel$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/github/data/model/SearchResponseModel;
@@ -21166,6 +21176,7 @@ public synthetic class dev/shtanko/github/data/model/SearchResponseModel$$serial
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/github/data/model/SearchResponseModel;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class dev/shtanko/github/data/model/SearchResponseModel$Companion {
@@ -21987,6 +21998,19 @@ public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2/Tau {
 
 public final class dev/shtanko/kotlinlang/whatsnew/v2/Tau$DefaultImpls {
 	public static fun tau (Ldev/shtanko/kotlinlang/whatsnew/v2/Tau;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
+	public static final fun getFirstUser (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)Ljava/lang/String;
+	public static final fun logWelcome (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)V
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun outputMessage (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;Ljava/lang/String;)V
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService {
+	public abstract fun findUserById (I)Ljava/lang/String;
+	public abstract fun log (Ljava/lang/String;)V
 }
 
 public final class dev/shtanko/oop/CompositionInstrumentedHashSet : dev/shtanko/oop/ForwardingSet {

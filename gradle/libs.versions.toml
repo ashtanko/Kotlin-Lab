@@ -1,7 +1,7 @@
 [versions]
 coroutines = "1.10.2"       # https://github.com/Kotlin/kotlinx.coroutines
-junit = "5.13.1"            # https://junit.org/junit5 | https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter
-kotlin = "2.1.21"           # https://github.com/JetBrains/kotlin
+junit = "5.13.3"            # https://junit.org/junit5 | https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter
+kotlin = "2.2.0"           # https://github.com/JetBrains/kotlin
 detekt = "1.23.8"           # https://github.com/detekt/detekt
 dokka = "2.0.0"             # https://github.com/Kotlin/dokka
 spotless = "7.0.4"          # https://github.com/diffplug/spotless
@@ -28,7 +28,7 @@ hamcrest = "3.0"            # https://hamcrest.org/JavaHamcrest/distributables
 mockk = "1.14.4"            # https://mockk.io
 kover = "0.9.1"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
-jsoup = "1.20.1"            # https://jsoup.org/
+jsoup = "1.21.1"            # https://jsoup.org/
 turbine = "1.2.1"           # https://github.com/cashapp/turbine/releases
 truth = "1.4.4"             # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 sandwich = "2.1.2"          # https://github.com/skydoves/sandwich
