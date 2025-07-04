@@ -44,9 +44,9 @@ class FourKeysKeyboardDP : FourKeysKeyboard {
  * Approach #3: Mathematical.
  */
 class FourKeysKeyboardMath : FourKeysKeyboard {
-    override fun invoke(inputNumber: Int): Int {
-        val quotient = if (inputNumber > MAX_VALUE) (inputNumber - MAX_N_VALUE) / MULTIPLICATION_LIMIT else 0
-        return best[inputNumber - MULTIPLICATION_LIMIT * quotient] shl 2 * quotient
+    override fun invoke(num: Int): Int {
+        val quotient = if (num > MAX_VALUE) (num - MAX_N_VALUE) / MULTIPLICATION_LIMIT else 0
+        return best[num - MULTIPLICATION_LIMIT * quotient] shl 2 * quotient
     }
 
     companion object {

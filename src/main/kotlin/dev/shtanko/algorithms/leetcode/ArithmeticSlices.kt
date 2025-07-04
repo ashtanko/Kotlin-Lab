@@ -89,8 +89,8 @@ class ArSlicesBetterBruteForce : ArithmeticSlices {
 @Recursive
 class ArSlicesRecursion : ArithmeticSlices {
     private var totalSum = 0
-    override fun invoke(array: IntArray): Int {
-        calculateSlices(array, array.size - 1)
+    override fun invoke(arr: IntArray): Int {
+        calculateSlices(arr, arr.size - 1)
         return totalSum
     }
 

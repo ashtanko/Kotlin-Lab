@@ -17,7 +17,7 @@
 package dev.shtanko.algorithms.leetcode
 
 import dev.shtanko.algorithms.annotations.level.Medium
-import java.util.Stack
+import java.util.*
 
 /**
  * 962. Maximum Width Ramp
@@ -86,7 +86,7 @@ class MaximumWidthRampMonotonicStack : MaximumWidthRamp {
 
         // Fill the stack with indices in increasing order of their values
         for (i in 0 until n) {
-            if (indicesStack.isEmpty || arr[indicesStack.peek()] > arr[i]) {
+            if (indicesStack.isEmpty() || arr[indicesStack.peek()] > arr[i]) {
                 indicesStack.push(i)
             }
         }

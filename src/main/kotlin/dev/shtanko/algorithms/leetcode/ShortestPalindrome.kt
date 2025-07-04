@@ -71,10 +71,10 @@ class ShortestPalindromeTwoPointers : ShortestPalindromeStrategy {
 }
 
 class ShortestPalindromeMP : ShortestPalindromeStrategy {
-    override operator fun invoke(input: String): String {
-        val combinedString = input + "#" + StringBuilder(input).reverse().toString()
+    override operator fun invoke(str: String): String {
+        val combinedString = str + "#" + StringBuilder(str).reverse().toString()
         val prefixTable = buildPrefixTable(combinedString)
-        return StringBuilder(input.substring(prefixTable[prefixTable.size - 1])).reverse().toString() + input
+        return StringBuilder(str.substring(prefixTable[prefixTable.size - 1])).reverse().toString() + str
     }
 
     private fun buildPrefixTable(pattern: String): IntArray {

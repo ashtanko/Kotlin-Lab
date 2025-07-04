@@ -22008,6 +22008,21 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
 	public static final fun outputMessage (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;Ljava/lang/String;)V
 }
 
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/OldWay {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/OldWay;
+	public final fun message (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem : java/lang/Enum {
+	public static final field AUTHENTICATION Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+	public static final field CONNECTION Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+	public static final field DATABASE Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+	public static final field UNKNOWN Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+	public static fun values ()[Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+}
+
 public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService {
 	public abstract fun findUserById (I)Ljava/lang/String;
 	public abstract fun log (Ljava/lang/String;)V

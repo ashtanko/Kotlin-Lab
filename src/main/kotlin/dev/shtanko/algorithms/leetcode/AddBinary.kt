@@ -26,7 +26,7 @@ import java.math.BigInteger
  */
 @Easy(link = "https://leetcode.com/problems/add-binary")
 fun interface AddBinary {
-    operator fun invoke(a: String, b: String): String
+    operator fun invoke(firstBinary: String, secondBinary: String): String
 }
 
 /**
@@ -38,19 +38,19 @@ class AddBinaryBitByBitComputation : AddBinary {
     /**
      * Adds two binary strings and returns their sum as a binary string.
      *
-     * @param a the first binary string
-     * @param b the second binary string
+     * @param firstBinary the first binary string
+     * @param secondBinary the second binary string
      * @return the sum of the binary strings as a binary string
      */
-    override operator fun invoke(a: String, b: String): String {
+    override operator fun invoke(firstBinary: String, secondBinary: String): String {
         val sb = StringBuilder()
-        var i: Int = a.length - 1
-        var j: Int = b.length - 1
+        var i: Int = firstBinary.length - 1
+        var j: Int = secondBinary.length - 1
         var carry = 0
         while (i >= 0 || j >= 0) {
             var sum = carry
-            if (j >= 0) sum += b[j--] - '0'
-            if (i >= 0) sum += a[i--] - '0'
+            if (j >= 0) sum += secondBinary[j--] - '0'
+            if (i >= 0) sum += firstBinary[i--] - '0'
             sb.append(sum % 2)
             carry = sum / 2
         }

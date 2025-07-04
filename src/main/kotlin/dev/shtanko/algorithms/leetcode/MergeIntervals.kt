@@ -121,10 +121,10 @@ class MergeIntervalsSorting : MergeIntervals {
         for (interval in i) {
             // if the list of merged intervals is empty or if the current
             // interval does not overlap with the previous, simply append it.
-            if (merged.isEmpty() || merged.last[1] < interval[0]) {
+            if (merged.isEmpty() || merged.last()[1] < interval[0]) {
                 merged.add(interval)
             } else {
-                merged.last[1] = merged.last[1].coerceAtLeast(interval[1])
+                merged.last()[1] = merged.last()[1].coerceAtLeast(interval[1])
             }
         }
 

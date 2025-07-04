@@ -121,16 +121,16 @@ class AddOneRowToTreeStack : AddOneRowToTree {
  * Approach #3 Using queue(BFS)
  */
 class AddOneRowToTreeQueue : AddOneRowToTree {
-    override operator fun invoke(root: TreeNode?, value: Int, d: Int): TreeNode? {
-        if (d == 1) {
+    override operator fun invoke(root: TreeNode?, value: Int, depth: Int): TreeNode? {
+        if (depth == 1) {
             return TreeNode(value).apply {
                 left = root
             }
         }
         var queue: Queue<TreeNode?> = LinkedList()
         queue.add(root)
-        var depth = 1
-        while (depth < d - 1) {
+        var d = 1
+        while (d < depth - 1) {
             val temp: Queue<TreeNode?> = LinkedList()
             while (queue.isNotEmpty()) {
                 val node = queue.remove()
@@ -142,7 +142,7 @@ class AddOneRowToTreeQueue : AddOneRowToTree {
                 }
             }
             queue = temp
-            depth++
+            d++
         }
 
         while (queue.isNotEmpty()) {
