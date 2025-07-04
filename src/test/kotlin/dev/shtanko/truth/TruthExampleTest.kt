@@ -25,4 +25,39 @@ class TruthExampleTest {
         val result = 2 + 2
         assertThat(result).isEqualTo(4)
     }
+
+    @Test
+    fun testStrings() {
+        val message = "Hello, Truth!"
+        assertThat(message).contains("Truth")
+    }
+}
+
+class CollectionTruthTest {
+    @Test
+    fun testListContents() {
+        val fruits = listOf("apple", "banana", "orange")
+        assertThat(fruits).containsExactly("banana", "orange", "apple")
+    }
+
+    @Test
+    fun testMapContents() {
+        val map = mapOf("kotlin" to 2.2, "java" to 21)
+        assertThat(map).containsEntry("kotlin", 2.2)
+        assertThat(map).doesNotContainKey("scala")
+    }
+}
+
+class NullableTruthTest {
+    @Test
+    fun testNullValues() {
+        val name: String? = null
+        assertThat(name).isNull()
+    }
+
+    @Test
+    fun testNonNull() {
+        val language: String? = "Kotlin"
+        assertThat(language).isNotNull()
+    }
 }
