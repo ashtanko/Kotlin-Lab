@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.test.runTest
-import okhttp3.ExperimentalOkHttpApi
 import okhttp3.ResponseBody
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -116,7 +115,6 @@ class RetryTest {
         job.cancelAndJoin()
     }
 
-    @OptIn(ExperimentalOkHttpApi::class)
     @Test
     fun `should retry on server error using MockWebServer`() = runTest {
         var counter = 0
