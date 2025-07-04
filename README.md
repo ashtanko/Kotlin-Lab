@@ -26,14 +26,14 @@
 10440 number of functions
 8895 number of classes
 233 number of packages
-3510 number of kt files
+3509 number of kt files
 ```
 
 
 ### Complexity Report
 ```text
-265569 lines of code (loc)
-164866 source lines of code (sloc)
+265566 lines of code (loc)
+164865 source lines of code (sloc)
 120404 logical lines of code (lloc)
 72520 comment lines of code (cloc)
 24856 cyclomatic complexity (mcc)
