@@ -24,7 +24,7 @@ import dev.shtanko.algorithms.annotations.level.Medium
  */
 @Medium("https://leetcode.com/problems/zigzag-conversion")
 fun interface ZigzagConversion {
-    operator fun invoke(input: String, numRows: Int): String
+    operator fun invoke(input: String, numberOfRows: Int): String
 }
 
 class ZigzagConversionSB : ZigzagConversion {

@@ -24,10 +24,10 @@ fun interface MinOperationsXor {
     /**
      * This function calculates the minimum number of operations to make the XOR of the array equal to a target value.
      * @param nums The array of integers.
-     * @param k The target XOR value.
+     * @param targetXor The target XOR value.
      * @return The minimum number of operations.
      */
-    operator fun invoke(nums: IntArray, k: Int): Int
+    operator fun invoke(nums: IntArray, targetXor: Int): Int
 }
 
 /**
@@ -87,20 +87,20 @@ class MinOperationsXorBitCount : MinOperationsXor {
     /**
      * This function calculates the minimum number of operations to make the XOR of the array equal to a target value.
      * It first calculates the XOR of all numbers in the array, then XORs this value with the target value.
-     * The minimum number of operations is the number of 1 bits in this final XOR value.
+     * The minimum number of operations is the number of 1 bit in this final XOR value.
      * @param nums The array of integers.
-     * @param k The target XOR value.
+     * @param targetXor The target XOR value.
      * @return The minimum number of operations.
      */
-    override fun invoke(nums: IntArray, k: Int): Int {
+    override fun invoke(nums: IntArray, targetXor: Int): Int {
         // Initialize the XOR of all numbers in the array to 0
         var finalXor = 0
         // Calculate the XOR of all numbers in the array
         for (n in nums) {
             finalXor = finalXor xor n
         }
-        // The minimum number of operations is the number of 1 bits in the XOR of the XOR of all numbers and the
+        // The minimum number of operations is the number of 1 bit in the XOR of the XOR of all numbers and the
         // target value
-        return Integer.bitCount(finalXor xor k)
+        return Integer.bitCount(finalXor xor targetXor)
     }
 }

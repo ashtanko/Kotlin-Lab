@@ -12,7 +12,7 @@
   <a href="https://hitsofcode.com/github/ashtanko/kotlab/view?branch=main"><img alt="Hits-of-Code" src="https://hitsofcode.com/github/ashtanko/kotlab?branch=main"/></a>
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fashtanko%2Falgorithms-in-depth?ref=badge_shield&issueType=license"><img alt="FOSSA Status" src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fashtanko%2Falgorithms-in-depth.svg?type=shield&issueType=license"/></a>
   <a href="https://ktlint.github.io/"><img alt="CodeStyle" src="https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg"/></a>
-  <a href="http://kotlinlang.org/"><img alt="Kotlin Version" src="https://img.shields.io/badge/kotlin-1.9.21-blue.svg"/></a>
+  <a href="https://kotlinlang.org/"><img alt="Kotlin Version" src="https://img.shields.io/badge/kotlin-2.2.0-blue.svg"/></a>
   <a href="https://sonarcloud.io/summary/new_code?id=ashtanko_kotlab"><img alt="Quality Gate Status" src="https://sonarcloud.io/api/project_badges/measure?project=ashtanko_kotlab&metric=alert_status"/></a>
   <a href="https://sonarcloud.io/summary/new_code?id=ashtanko_kotlab"><img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=ashtanko_kotlab&metric=bugs"/></a>
   <a href="https://sonarcloud.io/summary/new_code?id=ashtanko_kotlab"><img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=ashtanko_kotlab&metric=code_smells"/></a>
@@ -22,21 +22,21 @@
 
 ### Metrics
 ```text
-15046 number of properties
-10450 number of functions
-8903 number of classes
+15050 number of properties
+10451 number of functions
+8905 number of classes
 235 number of packages
-3513 number of kt files
+3514 number of kt files
 ```
 
 
 ### Complexity Report
 ```text
-265658 lines of code (loc)
-164932 source lines of code (sloc)
-120447 logical lines of code (lloc)
-72527 comment lines of code (cloc)
-24869 cyclomatic complexity (mcc)
+265695 lines of code (loc)
+164962 source lines of code (sloc)
+120475 logical lines of code (lloc)
+72531 comment lines of code (cloc)
+24870 cyclomatic complexity (mcc)
 20331 cognitive complexity
 0 number of total code smells
 43 comment source ratio

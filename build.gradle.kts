@@ -18,12 +18,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_2
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 val projectJvmTarget = 17
 val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
-val kotlinVersion = KOTLIN_2_0
+val kotlinVersion = KOTLIN_2_2
 
 fun isLinux(): Boolean {
     val osName = System.getProperty("os.name").lowercase()
@@ -296,8 +296,8 @@ kotlin {
                 "-Xmulti-dollar-interpolation",
             ).forEach(::add)
         }
-        apiVersion.set(KOTLIN_2_0)
-        languageVersion.set(KOTLIN_2_0)
+        apiVersion.set(KOTLIN_2_2)
+        languageVersion.set(KOTLIN_2_2)
     }
 }
 

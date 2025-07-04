@@ -13,7 +13,7 @@ spotless:
 
 # Update the README.md file in accordance with the detekt report
 md:
-	truncate -s0 README.md && cat config/main.md >> README.md && cat build/reports/detekt/metrics.md >> README.md && cat build/reports/detekt/complexity.md >> README.md
+	sh scripts/update_kotlin_badge.sh && truncate -s0 README.md && cat config/main.md >> README.md && cat build/reports/detekt/metrics.md >> README.md && cat build/reports/detekt/complexity.md >> README.md
 
 # Copy jacoco report
 jacoco:

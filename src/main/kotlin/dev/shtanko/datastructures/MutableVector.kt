@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
+@file:Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST", "LEAKED_IN_PLACE_LAMBDA")
 
 package dev.shtanko.datastructures
 

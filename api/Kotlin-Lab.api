@@ -1049,8 +1049,8 @@ public abstract interface class dev/shtanko/algorithms/complexity/Problem {
 	public static final field Companion Ldev/shtanko/algorithms/complexity/Problem$Companion;
 	public static final field DEFAULT_MAX_N I
 	public static final field DEFAULT_MIN_N I
-	public abstract fun getMaxN ()I
-	public abstract fun getMinN ()I
+	public fun getMaxN ()I
+	public fun getMinN ()I
 	public abstract fun solve (I)J
 }
 
@@ -3679,7 +3679,7 @@ public final class dev/shtanko/algorithms/leetcode/CountNegativesTwoPointers : d
 
 public abstract interface class dev/shtanko/algorithms/leetcode/CountNicePairs {
 	public abstract fun invoke ([I)I
-	public abstract fun rev (I)I
+	public fun rev (I)I
 }
 
 public final class dev/shtanko/algorithms/leetcode/CountNicePairs$DefaultImpls {
@@ -7402,7 +7402,7 @@ public final class dev/shtanko/algorithms/leetcode/JumpGame2Kt {
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/JumpGame5Strategy {
-	public abstract fun checkNeighbors (Ljava/util/Set;IILjava/util/List;)V
+	public fun checkNeighbors (Ljava/util/Set;IILjava/util/List;)V
 	public abstract fun invoke ([I)I
 }
 
@@ -7423,7 +7423,7 @@ public final class dev/shtanko/algorithms/leetcode/KClosestPointsSort : dev/shta
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/KClosestPointsStrategy {
-	public abstract fun getDistance ([I)I
+	public fun getDistance ([I)I
 	public abstract fun invoke ([[II)[[I
 }
 
@@ -8471,8 +8471,8 @@ public final class dev/shtanko/algorithms/leetcode/LongestPathDFS : dev/shtanko/
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/LongestRepeatingSubstring {
-	public abstract fun invoke (Ljava/lang/String;)I
-	public abstract fun search (IILjava/lang/String;)I
+	public fun invoke (Ljava/lang/String;)I
+	public fun search (IILjava/lang/String;)I
 }
 
 public final class dev/shtanko/algorithms/leetcode/LongestRepeatingSubstring$DefaultImpls {
@@ -8742,7 +8742,7 @@ public final class dev/shtanko/algorithms/leetcode/MakeArrayEqualMath : dev/shta
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/MakeArrayStrictlyIncreasing {
-	public abstract fun bisectRight ([II)I
+	public fun bisectRight ([II)I
 	public abstract fun invoke ([I[I)I
 }
 
@@ -8767,7 +8767,7 @@ public final class dev/shtanko/algorithms/leetcode/MakeArrayStrictlyIncreasingTo
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/MakeConnected {
-	public abstract fun findParent ([II)I
+	public fun findParent ([II)I
 	public abstract fun invoke (I[[I)I
 }
 
@@ -9082,7 +9082,7 @@ public abstract interface class dev/shtanko/algorithms/leetcode/MaxDepthStrategy
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/MaxDetonation {
-	public abstract fun getGraph ([[I)Lkotlin/Pair;
+	public fun getGraph ([[I)Lkotlin/Pair;
 	public abstract fun maximumDetonation ([[I)I
 }
 
@@ -10982,7 +10982,7 @@ public final class dev/shtanko/algorithms/leetcode/MinPartitionsKt {
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/MinPenaltyForShop {
-	public abstract fun helper (Ljava/lang/String;III)Lkotlin/Triple;
+	public fun helper (Ljava/lang/String;III)Lkotlin/Triple;
 	public abstract fun invoke (Ljava/lang/String;)I
 }
 
@@ -15262,7 +15262,7 @@ public final class dev/shtanko/algorithms/leetcode/SmallestDivisorMath : dev/sht
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/SmallestDivisorStrategy {
-	public abstract fun computeSum ([II)J
+	public fun computeSum ([II)J
 	public abstract fun invoke ([II)I
 }
 
@@ -15966,7 +15966,7 @@ public final class dev/shtanko/algorithms/leetcode/StringCompressionSimple : dev
 
 public abstract interface class dev/shtanko/algorithms/leetcode/StringPermutationStrategy {
 	public abstract fun invoke (Ljava/lang/String;Ljava/lang/String;)Z
-	public abstract fun matches ([I[I)Z
+	public fun matches ([I[I)Z
 }
 
 public final class dev/shtanko/algorithms/leetcode/StringPermutationStrategy$DefaultImpls {
@@ -17604,7 +17604,7 @@ public final class dev/shtanko/algorithms/leetcode/WonderfulSubstringsSlidingWin
 }
 
 public abstract interface class dev/shtanko/algorithms/leetcode/WordAbbreviation {
-	public abstract fun abbrev (Ljava/lang/String;I)Ljava/lang/String;
+	public fun abbrev (Ljava/lang/String;I)Ljava/lang/String;
 	public abstract fun invoke (Ljava/util/List;)Ljava/util/List;
 }
 
@@ -18419,16 +18419,17 @@ public abstract interface class dev/shtanko/api/contributors/Contributors : kotl
 	public abstract fun addCancelListener (Ljava/awt/event/ActionListener;)V
 	public abstract fun addLoadListener (Lkotlin/jvm/functions/Function0;)V
 	public abstract fun addOnWindowClosingListener (Lkotlin/jvm/functions/Function0;)V
-	public abstract fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
+	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
 	public abstract fun getJob ()Lkotlinx/coroutines/Job;
 	public abstract fun getParams ()Ldev/shtanko/api/contributors/Params;
 	public abstract fun getSelectedVariant ()Ldev/shtanko/api/contributors/Variant;
-	public abstract fun init ()V
-	public abstract fun loadContributors ()V
-	public abstract fun loadInitialParams ()V
+	public fun init ()V
+	public fun loadContributors ()V
+	public fun loadInitialParams ()V
 	public abstract fun removeCancelListener (Ljava/awt/event/ActionListener;)V
-	public abstract fun saveParams ()V
+	public fun saveParams ()V
 	public abstract fun setActionsStatus (ZZ)V
+	public static synthetic fun setActionsStatus$default (Ldev/shtanko/api/contributors/Contributors;ZZILjava/lang/Object;)V
 	public abstract fun setLoadingStatus (Ljava/lang/String;Z)V
 	public abstract fun setParams (Ldev/shtanko/api/contributors/Params;)V
 	public abstract fun updateContributors (Ljava/util/List;)V
@@ -18441,8 +18442,6 @@ public final class dev/shtanko/api/contributors/Contributors$DefaultImpls {
 	public static fun loadInitialParams (Ldev/shtanko/api/contributors/Contributors;)V
 	public static fun saveParams (Ldev/shtanko/api/contributors/Contributors;)V
 	public static synthetic fun setActionsStatus$default (Ldev/shtanko/api/contributors/Contributors;ZZILjava/lang/Object;)V
-	public static synthetic fun updateLoadingStatus$default (Ldev/shtanko/api/contributors/Contributors;Ldev/shtanko/api/contributors/Contributors$LoadingStatus;Ljava/lang/Long;ILjava/lang/Object;)V
-	public static synthetic fun updateResults$default (Ldev/shtanko/api/contributors/Contributors;Ljava/util/List;JZILjava/lang/Object;)V
 }
 
 public final class dev/shtanko/api/contributors/ContributorsImpl : dev/shtanko/api/contributors/Contributors {
@@ -21207,6 +21206,7 @@ public final class dev/shtanko/github/data/network/di/DiKt {
 
 public abstract interface class dev/shtanko/github/data/network/service/SearchService {
 	public abstract fun search (Ljava/lang/String;Ldev/shtanko/github/data/model/Order;Ljava/lang/Integer;Ldev/shtanko/github/data/model/Sort;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun search$default (Ldev/shtanko/github/data/network/service/SearchService;Ljava/lang/String;Ldev/shtanko/github/data/model/Order;Ljava/lang/Integer;Ldev/shtanko/github/data/model/Sort;Ljava/lang/Integer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/github/data/network/service/SearchService$DefaultImpls {
@@ -21955,7 +21955,7 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2/RGB : java/lang/Enum {
 }
 
 public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2/Rho {
-	public abstract fun inc ()Ldev/shtanko/kotlinlang/whatsnew/v2/Sigma;
+	public fun inc ()Ldev/shtanko/kotlinlang/whatsnew/v2/Sigma;
 }
 
 public final class dev/shtanko/kotlinlang/whatsnew/v2/Rho$DefaultImpls {
@@ -21963,7 +21963,7 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2/Rho$DefaultImpls {
 }
 
 public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2/Sigma : dev/shtanko/kotlinlang/whatsnew/v2/Rho {
-	public abstract fun sigma ()V
+	public fun sigma ()V
 }
 
 public final class dev/shtanko/kotlinlang/whatsnew/v2/Sigma$DefaultImpls {
@@ -21993,7 +21993,7 @@ public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2/Status {
 }
 
 public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2/Tau {
-	public abstract fun tau ()V
+	public fun tau ()V
 }
 
 public final class dev/shtanko/kotlinlang/whatsnew/v2/Tau$DefaultImpls {
@@ -22006,6 +22006,14 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V
 	public static final fun outputMessage (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;Ljava/lang/String;)V
+}
+
+public abstract interface annotation class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Email : java/lang/annotation/Annotation {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/MetaTargetForPropertiesKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
 }
 
 public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/OldWay {
@@ -22021,6 +22029,20 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem : java/lang/En
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
 	public static fun values ()[Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Problem;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/User {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/User;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/User;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/User;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEmail ()Ljava/lang/String;
+	public final fun getSecondaryEmail ()Ljava/lang/String;
+	public final fun getUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService {
@@ -22262,7 +22284,7 @@ public abstract interface class dev/shtanko/patterns/behavioral/command/Target {
 	public static final field Companion Ldev/shtanko/patterns/behavioral/command/Target$Companion;
 	public abstract fun getSize ()Ldev/shtanko/patterns/behavioral/command/Size;
 	public abstract fun getVisibility ()Ldev/shtanko/patterns/behavioral/command/Visibility;
-	public abstract fun printStatus ()V
+	public fun printStatus ()V
 	public abstract fun setSize (Ldev/shtanko/patterns/behavioral/command/Size;)V
 	public abstract fun setVisibility (Ldev/shtanko/patterns/behavioral/command/Visibility;)V
 }
@@ -22943,7 +22965,7 @@ public final class dev/shtanko/patterns/creational/factorymethod/examples/button
 
 public abstract interface class dev/shtanko/patterns/creational/factorymethod/examples/buttons/Dialog {
 	public abstract fun createButton ()Ldev/shtanko/patterns/creational/factorymethod/examples/buttons/Button;
-	public abstract fun renderWindow ()Ljava/lang/String;
+	public fun renderWindow ()Ljava/lang/String;
 }
 
 public final class dev/shtanko/patterns/creational/factorymethod/examples/buttons/Dialog$DefaultImpls {

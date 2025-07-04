@@ -21,6 +21,7 @@ import kotlin.collections.indices
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -60,6 +61,7 @@ class MatrixMultiplyTiles : MatrixMultiplyStrategy {
         const val TILE_SIZE = 500
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun invoke(
         a: List<List<Int>>,
         b: List<List<Int>>,

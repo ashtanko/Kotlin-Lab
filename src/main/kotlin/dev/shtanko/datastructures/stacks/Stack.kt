@@ -68,7 +68,7 @@ value class Stack<T>(private val backing: ArrayList<T> = ArrayList()) {
      *
      * @return true if the stack is empty, false otherwise
      */
-    fun isEmpty() = backing.isEmpty
+    fun isEmpty() = backing.isEmpty()
 
     /**
      * Checks if the stack is not empty.
