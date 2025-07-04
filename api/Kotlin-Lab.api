@@ -1041,6 +1041,10 @@ public final class dev/shtanko/algorithms/codingbat/string2/ZipZap$Iterative : d
 	public fun invoke (Ljava/lang/String;)Ljava/lang/String;
 }
 
+public abstract interface class dev/shtanko/algorithms/codingbat/string3/CountYZ {
+	public abstract fun invoke (Ljava/lang/String;)I
+}
+
 public abstract interface class dev/shtanko/algorithms/complexity/Problem {
 	public static final field Companion Ldev/shtanko/algorithms/complexity/Problem$Companion;
 	public static final field DEFAULT_MAX_N I
