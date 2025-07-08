@@ -22000,6 +22000,36 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2/Tau$DefaultImpls {
 	public static fun tau (Ldev/shtanko/kotlinlang/whatsnew/v2/Tau;)V
 }
 
+public abstract class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Error : dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Error;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Error;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Error;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Helper {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Helper;
+	public final fun sample ()Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Success : dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Success;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Success;Ljava/lang/Object;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult$Success;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
 	public static final fun getFirstUser (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)Ljava/lang/String;
 	public static final fun logWelcome (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;)V
@@ -22008,10 +22038,60 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ContextParametersKt {
 	public static final fun outputMessage (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/UserService;Ljava/lang/String;)V
 }
 
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Dijkstra {
+	public fun <init> ()V
+	public final fun run ()V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Dijkstra$Node {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Dijkstra$Node;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Dijkstra$Node;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/Dijkstra$Node;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface annotation class dev/shtanko/kotlinlang/whatsnew/v2_2_0/Email : java/lang/annotation/Annotation {
 }
 
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/FileProcessor {
+	public fun <init> ()V
+	public final fun processFiles (Ljava/util/Map;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/FileProcessor$FileData {
+	public fun <init> (Ljava/lang/String;I)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun copy (Ljava/lang/String;I)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/FileProcessor$FileData;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/FileProcessor$FileData;Ljava/lang/String;IILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_2_0/FileProcessor$FileData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/HtmlBuilder {
+	public fun <init> ()V
+	public final fun render ()Ljava/lang/String;
+	public final fun tag (Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/HtmlBuilder$Element {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
 public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/MetaTargetForPropertiesKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_2_0/NestedTypeAliasesKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V
 }
