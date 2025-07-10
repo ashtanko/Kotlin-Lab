@@ -45,7 +45,7 @@ plugins {
     application
     jacoco
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.0"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1"
     idea
     alias(libs.plugins.kt.jvm)
     alias(libs.plugins.detekt)
