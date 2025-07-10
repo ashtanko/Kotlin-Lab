@@ -22000,6 +22000,259 @@ public final class dev/shtanko/kotlinlang/whatsnew/v2/Tau$DefaultImpls {
 	public static fun tau (Ldev/shtanko/kotlinlang/whatsnew/v2/Tau;)V
 }
 
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Coupon : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem {
+	public fun <init> (Ljava/lang/String;I)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun copy (Ljava/lang/String;I)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Coupon;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Coupon;Ljava/lang/String;IILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Coupon;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getDiscount ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Empty : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Empty;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Product : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem {
+	public fun <init> (DZ)V
+	public final fun component1 ()D
+	public final fun component2 ()Z
+	public final fun copy (DZ)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Product;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Product;DZILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem$Product;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPrice ()D
+	public fun hashCode ()I
+	public final fun isOnSale ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Example1UserAccessControlKt {
+	public static final fun accessSystem (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Example2SmartNavigationRulesKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun navigateTo (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Example3FileProcessingMultipleConditionsKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun process (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Example4HTTPResponseHandlingKt {
+	public static final fun handleResponse (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Example5ShoppingCartPromotionsKt {
+	public static final fun applyDiscount (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/CartItem;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Image : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File {
+	public fun <init> (Ljava/lang/String;D)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()D
+	public final fun copy (Ljava/lang/String;D)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Image;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Image;Ljava/lang/String;DILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Image;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExtension ()Ljava/lang/String;
+	public final fun getSizeMB ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Unknown : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Unknown;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Video : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File {
+	public fun <init> (ILjava/lang/String;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Video;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Video;ILjava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/File$Video;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDuration ()I
+	public final fun getFormat ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Error : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse {
+	public fun <init> (ILjava/lang/String;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Error;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Error;ILjava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Error;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getStatusCode ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Success : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse {
+	public fun <init> (ILjava/lang/String;)V
+	public final fun component1 ()I
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (ILjava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Success;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Success;ILjava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Success;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getData ()Ljava/lang/String;
+	public final fun getStatusCode ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Timeout : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/HttpResponse$Timeout;
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Home : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Home;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Home;ZILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Home;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun isLoggedIn ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Profile : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Profile;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Profile;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Profile;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUserId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Settings : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen {
+	public static final field INSTANCE Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/Screen$Settings;
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User {
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Admin : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User {
+	public fun <init> (I)V
+	public final fun component1 ()I
+	public final fun copy (I)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Admin;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Admin;IILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Admin;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLevel ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Guest : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Guest;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Guest;ZILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Guest;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun isTemporary ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Member : dev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Member;
+	public static synthetic fun copy$default (Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Member;ZILjava/lang/Object;)Ldev/shtanko/kotlinlang/whatsnew/v2_1_0/guard_conditions/User$Member;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun isPremium ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/multidollar_string_interpolation/Example1JSONSchemaTemplateKt {
+	public static final fun getJsonSchema (Lkotlin/reflect/KClass;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/multidollar_string_interpolation/Example2ShellScriptTemplateKt {
+	public static final fun generateScript (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/multidollar_string_interpolation/Example3TemplatingWithMustachestylePlaceholdersKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun template (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/multidollar_string_interpolation/Example4DynamicSQLQueryWithPlaceholderKt {
+	public static final fun buildQuery (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/multidollar_string_interpolation/Example5InvoiceTemplateKt {
+	public static final fun invoiceTemplate (D)Ljava/lang/String;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/non_local_break_and_continue/Example1ContinueInsideRunKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun processList (Ljava/util/List;)Z
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/non_local_break_and_continue/Example2BreakAndContinueInWithAndAlsoKt {
+	public static final fun analyzeData (Ljava/util/List;)V
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public abstract interface class dev/shtanko/kotlinlang/whatsnew/v2_1_0/opt_in/CoreLibraryApi {
+	public abstract fun performCoreAction ()V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/opt_in/CustomFeature : dev/shtanko/kotlinlang/whatsnew/v2_1_0/opt_in/CoreLibraryApi {
+	public fun <init> ()V
+	public fun performCoreAction ()V
+}
+
+public final class dev/shtanko/kotlinlang/whatsnew/v2_1_0/opt_in/ExampleKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+}
+
+public abstract interface annotation class dev/shtanko/kotlinlang/whatsnew/v2_1_0/opt_in/UnstableApi : java/lang/annotation/Annotation {
+}
+
 public abstract class dev/shtanko/kotlinlang/whatsnew/v2_2_0/ApiResult {
 }
 

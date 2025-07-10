@@ -38,6 +38,7 @@ private val compilerArgs = listOf(
     "-Xannotation-default-target=param-property",
     "-Xnested-type-aliases",
     "-Xannotations-in-metadata",
+    "-Xnon-local-break-continue",
 )
 
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
