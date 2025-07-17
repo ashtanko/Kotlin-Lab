@@ -35,7 +35,7 @@ sandwich = "2.1.2"          # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.5"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.31.1"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.31.1"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
-binaryCompatibility = "0.18.0"
+binaryCompatibility = "0.18.1"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
