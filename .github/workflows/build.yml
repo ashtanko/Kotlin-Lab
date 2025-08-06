@@ -7,11 +7,16 @@ on:
     paths-ignore:
       - '**.md'
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
+  id-token: write
 
 jobs:
   build:
@@ -22,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for better analysis relevancy
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4.7.1
@@ -51,33 +56,21 @@ jobs:
             -${{ hashFiles('**/*.gradle*') }}
             -${{ hashFiles('**/buildSrc/**') }}
 
-      - name: Run checks and test
-        # run: ./gradlew detekt ktlintCheck --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
-        run: ./gradlew detekt --build-cache --no-daemon --stacktrace --gradle-user-home "$GRADLE_HOME"
+      - name: Run Detekt
+        run: ./gradlew detekt --build-cache --no-daemon --stacktrace
 
-      - name: Build with Gradle and test
-        run: ./gradlew build -x koverVerify -x ktlintCheck -x ktlintFormat -x runKtlintCheckOverTestSourceSet -x ktlintMainSourceSetCheck -x ktlintKotlinScriptCheck  # Skipping koverVerify to avoid failure if coverage has lowered
+      - name: Build with Gradle and run tests
+        run: ./gradlew build -x koverVerify -x ktlintCheck -x ktlintFormat -x runKtlintCheckOverTestSourceSet -x ktlintMainSourceSetCheck -x ktlintKotlinScriptCheck
 
       - name: Generate Test Coverage Xml Report
         run: ./gradlew koverXmlReport
 
-#      - name: Upload coverage to Codecov
-#        uses: codecov/codecov-action@v3.1.4
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          directory: ./build/reports/kover/
-#          files: ./build/reports/kover/report.xml
-#          verbose: true
-
-      - name: Upload test coverage to Code Climate
-        uses: paambaati/codeclimate-action@v9.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/kotlin"
+      - name: Upload test coverage to qlty
+        uses: qltysh/qlty-action/coverage@v1
         with:
-          coverageCommand: ./gradlew test jacocoTestReport
-          coverageLocations: ./build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-          debug: true
+          oidc: true
+          files: build/reports/jacoco/test/jacocoTestReport.xml
+          add-prefix: src/main/kotlin
 
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
