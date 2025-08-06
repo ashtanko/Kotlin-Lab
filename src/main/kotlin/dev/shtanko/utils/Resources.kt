@@ -19,11 +19,15 @@ package dev.shtanko.utils
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Paths
+import kotlin.jvm.Throws
 
 typealias ResourceFileName = String
+typealias ResourceFilePath = String
 
 /**
- * Reads the content of a JSON file from the resources directory.
+ * Reads the content of a JSON file from the resource directory.
  *
  * @return The content of the JSON file as a string, or null if the file is not found.
  */
@@ -36,4 +40,14 @@ fun ResourceFileName.readJsonFromResource(): String? {
     } else {
         null
     }
+}
+
+@Throws(IllegalStateException::class)
+fun ResourceFilePath.readImageBytes(): ByteArray {
+    val classLoader = Thread.currentThread().contextClassLoader
+    val resource = classLoader.getResource(this)
+        ?: error("Image not found")
+
+    val path = Paths.get(resource.toURI())
+    return Files.readAllBytes(path)
 }
