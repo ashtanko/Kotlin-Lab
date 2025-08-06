@@ -22,10 +22,10 @@ kotlintest = "3.4.2"        # https://mvnrepository.com/artifact/io.kotlintest/k
 kotest = "5.9.1"            # https://kotest.io
 assertj = "3.27.3"          # https://mvnrepository.com/artifact/org.assertj/assertj-core | https://assertj.github.io/doc
 mockito = "5.18.0"          # https://mvnrepository.com/artifact/org.mockito/mockito-core
-mockitoKotlin = "5.4.0"     # https://github.com/mockito/mockito-kotlin
+mockitoKotlin = "6.0.0"     # https://github.com/mockito/mockito-kotlin
 logback = "1.5.18"          # https://logback.qos.ch
 hamcrest = "3.0"            # https://hamcrest.org/JavaHamcrest/distributables
-mockk = "1.14.4"            # https://mockk.io
+mockk = "1.14.5"            # https://mockk.io
 kover = "0.9.1"             # https://github.com/Kotlin/kotlinx-kover
 diktat = "2.0.0"            # https://github.com/saveourtool/diktat
 jsoup = "1.21.1"            # https://jsoup.org/
@@ -35,7 +35,7 @@ sandwich = "2.1.2"          # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.5"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.31.1"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.31.1"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
-binaryCompatibility = "0.18.0"
+binaryCompatibility = "0.18.1"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
