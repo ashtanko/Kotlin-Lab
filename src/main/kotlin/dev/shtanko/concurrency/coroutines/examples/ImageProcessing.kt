@@ -27,13 +27,13 @@ private const val SEPIA_BLUE_SCALE_R = 0.272
 private const val SEPIA_BLUE_SCALE_G = 0.534
 private const val SEPIA_BLUE_SCALE_B = 0.131
 
-private const val MAX_COLOR_VALUE = 255
+const val MAX_COLOR_VALUE = 255
 private const val BRIGHTNESS_ADJUSTMENT = 40
 
 private const val DEFAULT_THRESHOLD = 128
 private const val RGB_COMPONENT_COUNT = 3
 private const val MIN_COLOR = 0
-private const val MAX_COLOR = 255
+const val MAX_COLOR = 255
 
 private const val KERNEL_SIZE = 3
 private const val KERNEL_CENTER = KERNEL_SIZE / 2
@@ -41,7 +41,7 @@ private const val KERNEL_CENTER = KERNEL_SIZE / 2
 private val GAUSSIAN_KERNEL = arrayOf(
     doubleArrayOf(1.0 / 16, 2.0 / 16, 1.0 / 16),
     doubleArrayOf(2.0 / 16, 4.0 / 16, 2.0 / 16),
-    doubleArrayOf(1.0 / 16, 2.0 / 16, 1.0 / 16)
+    doubleArrayOf(1.0 / 16, 2.0 / 16, 1.0 / 16),
 )
 
 fun toGrayscale(image: BufferedImage): BufferedImage {
