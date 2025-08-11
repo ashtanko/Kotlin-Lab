@@ -16,6 +16,9 @@
 
 package dev.shtanko.api
 
+import dev.shtanko.api.model.Repo
+import dev.shtanko.api.model.RequestData
+import dev.shtanko.api.model.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

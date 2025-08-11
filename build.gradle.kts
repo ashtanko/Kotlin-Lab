@@ -338,14 +338,25 @@ dependencies {
         implementation(okhttp)
         implementation(sandwich.retrofit)
         implementation(okhttp.logging)
-        implementation("org.openjdk.jol:jol-core:0.17")
-        implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-        implementation(jsoup)
-        implementation("com.google.protobuf:protobuf-java:4.31.1")
-        implementation("com.google.protobuf:protobuf-kotlin-lite:4.31.1")
-        implementation("io.grpc:grpc-stub:1.73.0")
-        implementation("io.grpc:grpc-protobuf:1.73.0")
 
+        ktor.apply {
+            client.apply {
+                implementation(client.core)
+                implementation(client.okhttp)
+                implementation(client.content.negotiation)
+                implementation(client.logging)
+                implementation(client.cio)
+            }
+            implementation(ktor.serialization.kotlinx.json)
+        }
+        implementation("ch.qos.logback:logback-classic:1.4.11")
+        implementation(jsoup)
+        implementation(libs.jol.core)
+        implementation(libs.retrofit2.kotlinx.serialization.converter)
+        implementation(libs.protobuf.java)
+        implementation(libs.protobuf.kotlin.lite)
+        implementation(libs.grpc.stub)
+        implementation(libs.grpc.protobuf)
 
         testImplementation(mockk)
         testImplementation(junit)
@@ -369,6 +380,7 @@ dependencies {
         testImplementation(okhttp.mockwebserver)
         testImplementation(turbine)
         testImplementation(truth)
+        testImplementation(ktor.client.mock)
     }
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }

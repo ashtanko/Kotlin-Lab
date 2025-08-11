@@ -16,8 +16,6 @@
 
 package dev.shtanko.api.contributors
 
-import dev.shtanko.api.RequestData
-import dev.shtanko.api.User
 import dev.shtanko.api.contributors.Contributors.LoadingStatus.CANCELED
 import dev.shtanko.api.contributors.Contributors.LoadingStatus.COMPLETED
 import dev.shtanko.api.contributors.Contributors.LoadingStatus.IN_PROGRESS
@@ -30,6 +28,8 @@ import dev.shtanko.api.contributors.Variant.NOT_CANCELLABLE
 import dev.shtanko.api.contributors.Variant.PROGRESS
 import dev.shtanko.api.contributors.Variant.SUSPEND
 import dev.shtanko.api.createGitHubService
+import dev.shtanko.api.model.RequestData
+import dev.shtanko.api.model.User
 import dev.shtanko.api.tasks.loadContributorsBackground
 import dev.shtanko.api.tasks.loadContributorsBlocking
 import dev.shtanko.api.tasks.loadContributorsCallbacks

@@ -17,10 +17,11 @@
 package dev.shtanko.api
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dev.shtanko.api.model.Repo
+import dev.shtanko.api.model.User
 import java.lang.String.format
 import java.util.Base64
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -55,34 +56,6 @@ interface GitHubService {
         @Path("repo") repo: String,
     ): Response<List<User>>
 }
-
-@Serializable
-data class Repo(
-    val id: Long,
-    val name: String,
-)
-
-@Serializable
-data class User(
-    val login: String,
-    val contributions: Int,
-)
-
-@Serializable
-data class RequestData(
-    val username: String,
-    val password: String,
-    val org: String,
-)
-
-private val json = Json { ignoreUnknownKeys = true }
-
-private const val BASE_URL = "https://api.github.com/"
-private const val JSON_CONTENT_TYPE = "application/json"
-private const val AUTH_HEADER = "Authorization"
-private const val ACCEPT_HEADER = "Accept"
-private const val ACCEPT_HEADER_VALUE = "application/vnd.github.v3+json"
-private const val AUTH_BASIC = "Basic %s"
 
 fun createHttpClient(authToken: String): OkHttpClient {
     return OkHttpClient.Builder()
