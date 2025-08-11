@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -45,7 +44,6 @@ private val compilerArgs = listOf(
 plugins {
     application
     jacoco
-    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1"
     idea
     alias(libs.plugins.kt.jvm)
@@ -137,22 +135,22 @@ kover {
 }
 
 tasks {
-    named("distZip") {
-        dependsOn(withType<ShadowJar>())
-    }
+//    named("distZip") {
+//        dependsOn(withType<ShadowJar>())
+//    }
 
-    withType<ShadowJar> {
-        print("Build Report Parser: $name")
-        archiveFileName.set("detekt_report_parser.jar")
-        archiveVersion.set("")
-        archiveClassifier.set("")
-        manifest {
-            attributes(
-                "Main-Class" to "dev.shtanko.report.ReportParserKt",
-                "Implementation-Version" to project.version,
-            )
-        }
-    }
+//    withType<ShadowJar> {
+//        print("Build Report Parser: $name")
+//        archiveFileName.set("detekt_report_parser.jar")
+//        archiveVersion.set("")
+//        archiveClassifier.set("")
+//        manifest {
+//            attributes(
+//                "Main-Class" to "dev.shtanko.report.ReportParserKt",
+//                "Implementation-Version" to project.version,
+//            )
+//        }
+//    }
 
     withType<Test> {
         maxParallelForks = 1
