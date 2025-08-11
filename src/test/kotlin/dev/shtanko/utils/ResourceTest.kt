@@ -18,10 +18,13 @@ package dev.shtanko.utils
 
 import java.io.File
 import java.io.FileWriter
+import java.nio.file.Files
+import kotlin.test.assertTrue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class ResourceTest {
     @Test
@@ -41,6 +44,34 @@ class ResourceTest {
         assertEquals(fileContent, result)
 
         deleteTestResourceFile(fileName)
+    }
+
+    @Test
+    fun `readImageBytes should load file correctly`() {
+        val path: ResourceFilePath = "images/bd.jpg"
+        val bytes = path.readImageBytes()
+
+        assertNotNull(bytes)
+        assertTrue(bytes.isNotEmpty(), "Image byte array should not be empty")
+
+        // Optional: write a copy to verify output manually
+        val tempFile = Files.createTempFile("copy-", ".png")
+        Files.write(tempFile, bytes)
+
+        assertTrue(Files.exists(tempFile), "Copied image file should exist")
+        assertTrue(Files.size(tempFile) > 0, "Copied image file should not be empty")
+    }
+
+
+    @Test
+    fun `readImageBytes should throw error if file does not exist`() {
+        val invalidPath: ResourceFilePath = "images/nonexistent.png"
+
+        val exception = assertThrows<IllegalStateException> {
+            invalidPath.readImageBytes()
+        }
+
+        assertEquals("Image not found", exception.message)
     }
 
     private fun createTestResourceFile(fileName: String, content: String) {

@@ -19732,6 +19732,27 @@ public abstract interface class dev/shtanko/concurrency/coroutines/examples/IAto
 	public abstract fun transferFunds (Ldev/shtanko/concurrency/coroutines/examples/AtomicBankTransfer$Account;Ldev/shtanko/concurrency/coroutines/examples/AtomicBankTransfer$Account;DLkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public final class dev/shtanko/concurrency/coroutines/examples/ImageProcessingKt {
+	public static final fun adjustBrightness (Ljava/awt/image/BufferedImage;I)Ljava/awt/image/BufferedImage;
+	public static synthetic fun adjustBrightness$default (Ljava/awt/image/BufferedImage;IILjava/lang/Object;)Ljava/awt/image/BufferedImage;
+	public static final fun applySepia (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun blur (Ljava/awt/image/BufferedImage;I)Ljava/awt/image/BufferedImage;
+	public static synthetic fun blur$default (Ljava/awt/image/BufferedImage;IILjava/lang/Object;)Ljava/awt/image/BufferedImage;
+	public static final fun decodeImage ([B)Ljava/awt/image/BufferedImage;
+	public static final fun display ([B)V
+	public static final fun flipVertical (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun invertColors (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun mirrorHorizontal (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun rotate90 (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun toBlackAndWhite (Ljava/awt/image/BufferedImage;I)Ljava/awt/image/BufferedImage;
+	public static synthetic fun toBlackAndWhite$default (Ljava/awt/image/BufferedImage;IILjava/lang/Object;)Ljava/awt/image/BufferedImage;
+	public static final fun toByteArray (Ljava/awt/image/BufferedImage;Ljava/lang/String;)[B
+	public static synthetic fun toByteArray$default (Ljava/awt/image/BufferedImage;Ljava/lang/String;ILjava/lang/Object;)[B
+	public static final fun toGrayscale (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+}
+
 public final class dev/shtanko/concurrency/coroutines/flow/EmployeeManager {
 	public static final field INSTANCE Ldev/shtanko/concurrency/coroutines/flow/EmployeeManager;
 	public final fun getEmployee (I)Lkotlinx/coroutines/flow/Flow;
@@ -24338,6 +24359,7 @@ public final class dev/shtanko/utils/Quintuple$Companion {
 }
 
 public final class dev/shtanko/utils/ResourcesKt {
+	public static final fun readImageBytes (Ljava/lang/String;)[B
 	public static final fun readJsonFromResource (Ljava/lang/String;)Ljava/lang/String;
 }
 
