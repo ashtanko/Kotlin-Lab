@@ -73,6 +73,14 @@ repositories {
 application {
     mainClass.set("link.kotlin.scripts.Application")
     mainClass.set("dev.shtanko.report.ReportParserKt")
+    mainClass.set("dev.shtanko.http.Main")
+}
+
+tasks.register<JavaExec>("dev.shtanko.http.Main.main()") {
+    mainClass.set("dev.shtanko.http.Main")
+    group = "application"
+    mainClass.set("dev.shtanko.http.Main")
+    classpath = sourceSets["main"].runtimeClasspath
 }
 
 pitest {
@@ -380,6 +388,7 @@ dependencies {
         testImplementation(truth)
         testImplementation(ktor.client.mock)
     }
+    implementation("org.xerial:sqlite-jdbc:3.45.3.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
