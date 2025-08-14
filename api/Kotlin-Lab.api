@@ -19790,6 +19790,17 @@ public final class dev/shtanko/concurrency/coroutines/actors/ExampleKt {
 	public static synthetic fun main ([Ljava/lang/String;)V
 }
 
+public final class dev/shtanko/concurrency/coroutines/examples/AdvancedImageProcessingKt {
+	public static final fun applyRegionSpecificFilter (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun blendSegment (Ljava/awt/image/BufferedImage;Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun detectEdges (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
+	public static final fun mergeSegments (Ljava/util/List;II)Ljava/awt/image/BufferedImage;
+	public static final fun processImageParallel (Ljava/awt/image/BufferedImage;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun segmentImage (Ljava/awt/image/BufferedImage;I)Ljava/util/List;
+}
+
 public final class dev/shtanko/concurrency/coroutines/examples/AtomicBankTransfer : dev/shtanko/concurrency/coroutines/examples/IAtomicBankTransfer {
 	public static final field Companion Ldev/shtanko/concurrency/coroutines/examples/AtomicBankTransfer$Companion;
 	public fun <init> ()V
@@ -19837,6 +19848,8 @@ public abstract interface class dev/shtanko/concurrency/coroutines/examples/IAto
 }
 
 public final class dev/shtanko/concurrency/coroutines/examples/ImageProcessingKt {
+	public static final field MAX_COLOR I
+	public static final field MAX_COLOR_VALUE I
 	public static final fun adjustBrightness (Ljava/awt/image/BufferedImage;I)Ljava/awt/image/BufferedImage;
 	public static synthetic fun adjustBrightness$default (Ljava/awt/image/BufferedImage;IILjava/lang/Object;)Ljava/awt/image/BufferedImage;
 	public static final fun applySepia (Ljava/awt/image/BufferedImage;)Ljava/awt/image/BufferedImage;
