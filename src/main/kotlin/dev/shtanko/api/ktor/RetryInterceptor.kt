@@ -38,26 +38,38 @@ class RetryInterceptor private constructor(
             scope.plugin(HttpSend).intercept { request ->
                 var lastResponse: HttpClientCall? = null
 
+        override fun install(plugin: RetryInterceptor, scope: HttpClient) {
+            scope.plugin(HttpSend).intercept { request ->
+                var lastResponse: HttpClientCall? = null
+
                 repeat(plugin.maxRetries + 1) { attempt ->
                     try {
-                        val response = execute(request)
+                        val call = execute(request)
+                        val status = call.response.status
 
-                        if (attempt == 0 || response.response.status !in plugin.retryOn) {
-                            return@intercept response
+                        if (status in plugin.retryOn && attempt < plugin.maxRetries) {
+                            // Free resources before retrying
+                            try { call.response.close() } catch (_: Throwable) {}
+                            val delayMs = plugin.baseDelayMs * (1L shl attempt) // Exponential backoff
+                            println("🔄 Retry attempt ${attempt + 1} after ${delayMs}ms for $status")
+                            kotlinx.coroutines.delay(delayMs)
+                            lastResponse = call
+                        } else {
+                            return@intercept call
                         }
-
-                        lastResponse = response
-                        val delay = plugin.baseDelayMs * (1 shl attempt) // Exponential backoff
-                        println("🔄 Retry attempt $attempt after ${delay}ms for ${response.response.status}")
-                        kotlinx.coroutines.delay(delay)
-
                     } catch (e: Exception) {
+                        if (e is kotlinx.coroutines.CancellationException) throw e
                         if (attempt == plugin.maxRetries) throw e
-                        val delay = plugin.baseDelayMs * (1 shl attempt)
-                        println("🔄 Retry attempt $attempt after ${delay}ms due to exception: ${e.message}")
-                        kotlinx.coroutines.delay(delay)
+                        val delayMs = plugin.baseDelayMs * (1L shl attempt)
+                        println("🔄 Retry attempt ${attempt + 1} after ${delayMs}ms due to exception: ${e.message}")
+                        kotlinx.coroutines.delay(delayMs)
                     }
                 }
+
+                // Fallback; normally we return inside the loop
+                lastResponse ?: execute(request)
+            }
+        }
 
                 lastResponse ?: execute(request)
             }
