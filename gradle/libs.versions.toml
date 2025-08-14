@@ -1,12 +1,12 @@
 [versions]
 coroutines = "1.10.2"       # https://github.com/Kotlin/kotlinx.coroutines
 junit = "5.13.4"            # https://junit.org/junit5 | https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter
-kotlin = "2.2.0"            # https://github.com/JetBrains/kotlin
+kotlin = "2.2.10"            # https://github.com/JetBrains/kotlin
 detekt = "1.23.8"           # https://github.com/detekt/detekt
 dokka = "2.0.0"             # https://github.com/Kotlin/dokka
 spotless = "7.2.1"          # https://github.com/diffplug/spotless
 dependency = "1.33.0"       # https://github.com/autonomousapps/dependency-analysis-gradle-plugin
-pitest = "1.15.0"           # https://plugins.gradle.org/plugin/info.solidsoft.pitest
+pitest = "1.19.0-rc.1"      # https://plugins.gradle.org/plugin/info.solidsoft.pitest
 ktlint = "13.0.0"           # https://github.com/JLLeitschuh/ktlint-gradle
 kapt = "2.1.0"              # https://kotlinlang.org/docs/kapt.html
 slf4j = "2.0.17"            # https://www.slf4j.org TODO remove
