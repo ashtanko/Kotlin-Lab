@@ -18337,7 +18337,7 @@ public final class dev/shtanko/api/KtorGithubServiceKt {
 	public static synthetic fun createKtorClient$default (Ljava/lang/String;Ljava/lang/String;Lio/ktor/client/engine/HttpClientEngine;ILjava/lang/Object;)Lio/ktor/client/HttpClient;
 }
 
-public final class dev/shtanko/api/KtorInterceptorKt {
+public final class dev/shtanko/api/KtorInterceptorExampleKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V
 }
@@ -18444,6 +18444,94 @@ public final class dev/shtanko/api/contributors/Variant : java/lang/Enum {
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Ldev/shtanko/api/contributors/Variant;
 	public static fun values ()[Ldev/shtanko/api/contributors/Variant;
+}
+
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/ApiKeyInterceptor$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/ApiKeyInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/ApiKeyInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor$Config {
+	public fun <init> ()V
+	public final fun getApiKey ()Ljava/lang/String;
+	public final fun getHeaderName ()Ljava/lang/String;
+	public final fun setApiKey (Ljava/lang/String;)V
+	public final fun setHeaderName (Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/HttpLogInterceptor$Companion;
+	public synthetic fun <init> (ZZZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/HttpLogInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/HttpLogInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor$Config {
+	public fun <init> ()V
+	public final fun getLogHeaders ()Z
+	public final fun getLogRequest ()Z
+	public final fun getLogResponse ()Z
+	public final fun setLogHeaders (Z)V
+	public final fun setLogRequest (Z)V
+	public final fun setLogResponse (Z)V
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Companion;
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Config {
+	public fun <init> ()V
+	public final fun getRequestProcessor ()Lkotlin/jvm/functions/Function1;
+	public final fun getResponseProcessor ()Lkotlin/jvm/functions/Function2;
+	public final fun setRequestProcessor (Lkotlin/jvm/functions/Function1;)V
+	public final fun setResponseProcessor (Lkotlin/jvm/functions/Function2;)V
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/RetryInterceptor$Companion;
+	public synthetic fun <init> (ILjava/util/Set;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/RetryInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/RetryInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor$Config {
+	public fun <init> ()V
+	public final fun getBaseDelayMs ()J
+	public final fun getMaxRetries ()I
+	public final fun getRetryOn ()Ljava/util/Set;
+	public final fun setBaseDelayMs (J)V
+	public final fun setMaxRetries (I)V
+	public final fun setRetryOn (Ljava/util/Set;)V
 }
 
 public final class dev/shtanko/api/model/Repo {
