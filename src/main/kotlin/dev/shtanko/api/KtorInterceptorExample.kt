@@ -24,6 +24,12 @@ fun main() = runBlocking {
             level = LogLevel.BODY
         }
 
+        // Prevent requests from hanging indefinitely
+        install(HttpTimeout) {
+            requestTimeoutMillis = 10_000
+            connectTimeoutMillis = 5_000
+            socketTimeoutMillis = 10_000
+        }
         // Install custom interceptors
         install(HttpLogInterceptor) {
             logRequest = true
