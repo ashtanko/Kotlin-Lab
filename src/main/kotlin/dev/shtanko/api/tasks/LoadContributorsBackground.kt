@@ -17,7 +17,7 @@
 package dev.shtanko.api.tasks
 
 import dev.shtanko.api.GitHubService
-import dev.shtanko.api.RequestData
+import dev.shtanko.api.model.RequestData
 import kotlin.concurrent.thread
 
 fun loadContributorsBackground(service: GitHubService, req: RequestData) {

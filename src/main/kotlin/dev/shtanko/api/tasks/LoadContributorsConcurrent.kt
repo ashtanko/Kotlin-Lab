@@ -17,10 +17,10 @@
 package dev.shtanko.api.tasks
 
 import dev.shtanko.api.GitHubService
-import dev.shtanko.api.RequestData
-import dev.shtanko.api.User
 import dev.shtanko.api.contributors.logRepos
 import dev.shtanko.api.contributors.logUsers
+import dev.shtanko.api.model.RequestData
+import dev.shtanko.api.model.User
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

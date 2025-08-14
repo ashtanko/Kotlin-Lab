@@ -18326,93 +18326,20 @@ public final class dev/shtanko/api/GitHubServiceKt {
 	public static synthetic fun createRetrofit$default (Lokhttp3/OkHttpClient;Lokhttp3/HttpUrl;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lretrofit2/Retrofit;
 }
 
-public final class dev/shtanko/api/Repo {
-	public static final field Companion Ldev/shtanko/api/Repo$Companion;
-	public fun <init> (JLjava/lang/String;)V
-	public final fun component1 ()J
-	public final fun component2 ()Ljava/lang/String;
-	public final fun copy (JLjava/lang/String;)Ldev/shtanko/api/Repo;
-	public static synthetic fun copy$default (Ldev/shtanko/api/Repo;JLjava/lang/String;ILjava/lang/Object;)Ldev/shtanko/api/Repo;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getId ()J
-	public final fun getName ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public final class dev/shtanko/api/KtorGitHubApi {
+	public fun <init> (Lio/ktor/client/HttpClient;)V
+	public final fun getOrgRepos (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getRepoContributors (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final synthetic class dev/shtanko/api/Repo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Ldev/shtanko/api/Repo$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/Repo;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/Repo;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+public final class dev/shtanko/api/KtorGithubServiceKt {
+	public static final fun createKtorClient (Ljava/lang/String;Ljava/lang/String;Lio/ktor/client/engine/HttpClientEngine;)Lio/ktor/client/HttpClient;
+	public static synthetic fun createKtorClient$default (Ljava/lang/String;Ljava/lang/String;Lio/ktor/client/engine/HttpClientEngine;ILjava/lang/Object;)Lio/ktor/client/HttpClient;
 }
 
-public final class dev/shtanko/api/Repo$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/shtanko/api/RequestData {
-	public static final field Companion Ldev/shtanko/api/RequestData$Companion;
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/lang/String;
-	public final fun component3 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/shtanko/api/RequestData;
-	public static synthetic fun copy$default (Ldev/shtanko/api/RequestData;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/api/RequestData;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getOrg ()Ljava/lang/String;
-	public final fun getPassword ()Ljava/lang/String;
-	public final fun getUsername ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final synthetic class dev/shtanko/api/RequestData$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Ldev/shtanko/api/RequestData$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/RequestData;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/RequestData;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/shtanko/api/RequestData$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/shtanko/api/User {
-	public static final field Companion Ldev/shtanko/api/User$Companion;
-	public fun <init> (Ljava/lang/String;I)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()I
-	public final fun copy (Ljava/lang/String;I)Ldev/shtanko/api/User;
-	public static synthetic fun copy$default (Ldev/shtanko/api/User;Ljava/lang/String;IILjava/lang/Object;)Ldev/shtanko/api/User;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getContributions ()I
-	public final fun getLogin ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final synthetic class dev/shtanko/api/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Ldev/shtanko/api/User$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/User;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/User;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/shtanko/api/User$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+public final class dev/shtanko/api/KtorInterceptorExampleKt {
+	public static final fun main ()V
+	public static synthetic fun main ([Ljava/lang/String;)V
 }
 
 public abstract interface class dev/shtanko/api/contributors/Contributors : kotlinx/coroutines/CoroutineScope {
@@ -18472,8 +18399,8 @@ public abstract interface class dev/shtanko/api/contributors/ContributorsReposit
 public final class dev/shtanko/api/contributors/LoggerKt {
 	public static final fun getLog ()Lorg/slf4j/Logger;
 	public static final fun log (Ljava/lang/String;)V
-	public static final fun logRepos (Ldev/shtanko/api/RequestData;Lretrofit2/Response;)V
-	public static final fun logUsers (Ldev/shtanko/api/Repo;Lretrofit2/Response;)V
+	public static final fun logRepos (Ldev/shtanko/api/model/RequestData;Lretrofit2/Response;)V
+	public static final fun logUsers (Ldev/shtanko/api/model/Repo;Lretrofit2/Response;)V
 }
 
 public final class dev/shtanko/api/contributors/MainKt {
@@ -18519,6 +18446,183 @@ public final class dev/shtanko/api/contributors/Variant : java/lang/Enum {
 	public static fun values ()[Ldev/shtanko/api/contributors/Variant;
 }
 
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/ApiKeyInterceptor$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/ApiKeyInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/ApiKeyInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/ApiKeyInterceptor$Config {
+	public fun <init> ()V
+	public final fun getApiKey ()Ljava/lang/String;
+	public final fun getHeaderName ()Ljava/lang/String;
+	public final fun setApiKey (Ljava/lang/String;)V
+	public final fun setHeaderName (Ljava/lang/String;)V
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/HttpLogInterceptor$Companion;
+	public synthetic fun <init> (ZZZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/HttpLogInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/HttpLogInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/HttpLogInterceptor$Config {
+	public fun <init> ()V
+	public final fun getLogHeaders ()Z
+	public final fun getLogRequest ()Z
+	public final fun getLogResponse ()Z
+	public final fun setLogHeaders (Z)V
+	public final fun setLogRequest (Z)V
+	public final fun setLogResponse (Z)V
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Companion;
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/RequestResponseProcessorInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/RequestResponseProcessorInterceptor$Config {
+	public fun <init> ()V
+	public final fun getRequestProcessor ()Lkotlin/jvm/functions/Function1;
+	public final fun getResponseProcessor ()Lkotlin/jvm/functions/Function2;
+	public final fun setRequestProcessor (Lkotlin/jvm/functions/Function1;)V
+	public final fun setResponseProcessor (Lkotlin/jvm/functions/Function2;)V
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor {
+	public static final field Companion Ldev/shtanko/api/ktor/RetryInterceptor$Companion;
+	public synthetic fun <init> (ILjava/util/Set;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor$Companion : io/ktor/client/plugins/HttpClientPlugin {
+	public fun getKey ()Lio/ktor/util/AttributeKey;
+	public fun install (Ldev/shtanko/api/ktor/RetryInterceptor;Lio/ktor/client/HttpClient;)V
+	public synthetic fun install (Ljava/lang/Object;Lio/ktor/client/HttpClient;)V
+	public fun prepare (Lkotlin/jvm/functions/Function1;)Ldev/shtanko/api/ktor/RetryInterceptor;
+	public synthetic fun prepare (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/api/ktor/RetryInterceptor$Config {
+	public fun <init> ()V
+	public final fun getBaseDelayMs ()J
+	public final fun getMaxRetries ()I
+	public final fun getRetryOn ()Ljava/util/Set;
+	public final fun setBaseDelayMs (J)V
+	public final fun setMaxRetries (I)V
+	public final fun setRetryOn (Ljava/util/Set;)V
+}
+
+public final class dev/shtanko/api/model/Repo {
+	public static final field Companion Ldev/shtanko/api/model/Repo$Companion;
+	public fun <init> (JLjava/lang/String;)V
+	public final fun component1 ()J
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (JLjava/lang/String;)Ldev/shtanko/api/model/Repo;
+	public static synthetic fun copy$default (Ldev/shtanko/api/model/Repo;JLjava/lang/String;ILjava/lang/Object;)Ldev/shtanko/api/model/Repo;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()J
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/shtanko/api/model/Repo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/shtanko/api/model/Repo$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/model/Repo;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/model/Repo;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/shtanko/api/model/Repo$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/shtanko/api/model/RequestData {
+	public static final field Companion Ldev/shtanko/api/model/RequestData$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ldev/shtanko/api/model/RequestData;
+	public static synthetic fun copy$default (Ldev/shtanko/api/model/RequestData;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ldev/shtanko/api/model/RequestData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOrg ()Ljava/lang/String;
+	public final fun getPassword ()Ljava/lang/String;
+	public final fun getUsername ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/shtanko/api/model/RequestData$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/shtanko/api/model/RequestData$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/model/RequestData;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/model/RequestData;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/shtanko/api/model/RequestData$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/shtanko/api/model/User {
+	public static final field Companion Ldev/shtanko/api/model/User$Companion;
+	public fun <init> (Ljava/lang/String;I)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun copy (Ljava/lang/String;I)Ldev/shtanko/api/model/User;
+	public static synthetic fun copy$default (Ldev/shtanko/api/model/User;Ljava/lang/String;IILjava/lang/Object;)Ldev/shtanko/api/model/User;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContributions ()I
+	public final fun getLogin ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/shtanko/api/model/User$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/shtanko/api/model/User$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/shtanko/api/model/User;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/shtanko/api/model/User;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/shtanko/api/model/User$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class dev/shtanko/api/samples/ChannelsSample {
 	public static final field INSTANCE Ldev/shtanko/api/samples/ChannelsSample;
 	public static final fun main ([Ljava/lang/String;)V
@@ -18530,36 +18634,36 @@ public final class dev/shtanko/api/tasks/AggregateKt {
 
 public final class dev/shtanko/api/tasks/BlockingRequestKt {
 	public static final fun bodyList (Lretrofit2/Response;)Ljava/util/List;
-	public static final fun loadContributorsBlocking (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;)Ljava/util/List;
+	public static final fun loadContributorsBlocking (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;)Ljava/util/List;
 }
 
 public final class dev/shtanko/api/tasks/CallbackRequestKt {
-	public static final fun loadContributorsCallbacks (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/jvm/functions/Function1;)V
+	public static final fun loadContributorsCallbacks (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/jvm/functions/Function1;)V
 	public static final fun onResponse (Lretrofit2/Call;Lkotlin/jvm/functions/Function1;)V
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsBackgroundKt {
-	public static final fun loadContributorsBackground (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;)V
+	public static final fun loadContributorsBackground (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;)V
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsChannelsKt {
-	public static final fun loadContributorsChannels (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun loadContributorsChannels (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsConcurrentKt {
-	public static final fun loadContributorsConcurrent (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun loadContributorsConcurrent (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsNotCancellableKt {
-	public static final fun loadContributorsNotCancellable (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun loadContributorsNotCancellable (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsProgressKt {
-	public static final fun loadContributorsProgress (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun loadContributorsProgress (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/jvm/functions/Function3;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/api/tasks/LoadContributorsSuspendKt {
-	public static final fun loadContributorsSuspend (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun loadContributorsSuspend (Ldev/shtanko/api/GitHubService;Ldev/shtanko/api/model/RequestData;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class dev/shtanko/benchmark/Benchmark {

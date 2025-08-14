@@ -16,9 +16,9 @@
 
 package dev.shtanko.api.contributors
 
-import dev.shtanko.api.Repo
-import dev.shtanko.api.RequestData
-import dev.shtanko.api.User
+import dev.shtanko.api.model.Repo
+import dev.shtanko.api.model.RequestData
+import dev.shtanko.api.model.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import retrofit2.Response

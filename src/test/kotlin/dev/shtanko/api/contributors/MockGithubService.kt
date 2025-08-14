@@ -17,8 +17,8 @@
 package dev.shtanko.api.contributors
 
 import dev.shtanko.api.GitHubService
-import dev.shtanko.api.Repo
-import dev.shtanko.api.User
+import dev.shtanko.api.model.Repo
+import dev.shtanko.api.model.User
 import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Response

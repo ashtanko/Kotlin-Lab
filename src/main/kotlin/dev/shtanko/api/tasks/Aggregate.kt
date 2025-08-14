@@ -16,7 +16,7 @@
 
 package dev.shtanko.api.tasks
 
-import dev.shtanko.api.User
+import dev.shtanko.api.model.User
 
 /*
 
@@ -24,7 +24,7 @@ import dev.shtanko.api.User
  repository he or she contributed to.
  Merge duplications: each user should be present only once in the resulting list
  with the total value of contributions for all the repositories.
- Users should be sorted in a descending order by their contributions.
+ Users should be sorted in descending order by their contributions.
 
  The corresponding test can be found in test/tasks/AggregationKtTest.kt.
  You can use 'Navigate | Test' menu action (note the shortcut) to navigate to the test.
