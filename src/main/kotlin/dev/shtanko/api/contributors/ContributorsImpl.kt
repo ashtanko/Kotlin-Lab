@@ -16,7 +16,7 @@
 
 package dev.shtanko.api.contributors
 
-import dev.shtanko.api.User
+import dev.shtanko.api.model.User
 import java.awt.event.ActionListener
 import kotlinx.coroutines.Job
 

@@ -36,6 +36,11 @@ protobufPlugin = "0.9.5"    # https://mvnrepository.com/artifact/com.google.prot
 protobufKotlin = "4.32.0"   # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.32.0"           # https://mvnrepository.com/artifact/com.google.protobuf/protoc
 binaryCompatibility = "0.18.1"
+ktor = "3.2.3"
+jol = "0.17"
+retrofit-kotlinx-serialization = "1.0.0"
+protobuf = "4.31.1"
+grpc = "1.74.0"
 
 [libraries]
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "coroutines" }
@@ -66,6 +71,27 @@ jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 sandwich-retrofit = { group = "com.github.skydoves", name = "sandwich-retrofit", version.ref = "sandwich" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protoc" }
 protobuf-kotlin = { group = "com.google.protobuf", name = "protobuf-kotlin", version.ref = "protobufKotlin" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+# OpenJDK JOL
+jol-core = { module = "org.openjdk.jol:jol-core", version.ref = "jol" }
+
+# Retrofit kotlinx.serialization converter
+retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization" }
+
+# Protobuf
+protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+protobuf-kotlin-lite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobuf" }
+
+# gRPC
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc" }
+grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
 
 # testing libs
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }

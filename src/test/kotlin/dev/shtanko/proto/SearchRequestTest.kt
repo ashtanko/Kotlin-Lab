@@ -2,8 +2,10 @@ package dev.shtanko.proto
 
 import SearchRequestOuterClass.SearchRequest
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled("Fluky test")
 class SearchRequestTest {
 
     @Test

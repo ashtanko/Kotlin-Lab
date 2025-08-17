@@ -16,7 +16,7 @@
 
 package dev.shtanko.api.tasks
 
-import dev.shtanko.api.User
+import dev.shtanko.api.model.User
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.extension.ExtensionContext
