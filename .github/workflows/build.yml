@@ -65,13 +65,6 @@ jobs:
       - name: Generate Test Coverage Xml Report
         run: ./gradlew koverXmlReport
 
-      - name: Upload test coverage to qlty
-        uses: qltysh/qlty-action/coverage@v2
-        with:
-          oidc: true
-          files: build/reports/jacoco/test/jacocoTestReport.xml
-          add-prefix: src/main/kotlin
-
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
