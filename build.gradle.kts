@@ -73,6 +73,14 @@ repositories {
 application {
     mainClass.set("link.kotlin.scripts.Application")
     mainClass.set("dev.shtanko.report.ReportParserKt")
+    mainClass.set("dev.shtanko.http.Main")
+}
+
+tasks.register<JavaExec>("dev.shtanko.http.Main.main()") {
+    mainClass.set("dev.shtanko.http.Main")
+    group = "application"
+    mainClass.set("dev.shtanko.http.Main")
+    classpath = sourceSets["main"].runtimeClasspath
 }
 
 pitest {
@@ -339,8 +347,8 @@ dependencies {
         implementation("org.openjdk.jol:jol-core:0.17")
         implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
         implementation(jsoup)
-        implementation("com.google.protobuf:protobuf-java:4.31.1")
-        implementation("com.google.protobuf:protobuf-kotlin-lite:4.31.1")
+        implementation("com.google.protobuf:protobuf-java:4.32.0")
+        implementation("com.google.protobuf:protobuf-kotlin-lite:4.32.0")
         implementation("io.grpc:grpc-stub:1.74.0")
         implementation("io.grpc:grpc-protobuf:1.74.0")
 
@@ -368,6 +376,7 @@ dependencies {
         testImplementation(turbine)
         testImplementation(truth)
     }
+    implementation("org.xerial:sqlite-jdbc:3.50.3.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
