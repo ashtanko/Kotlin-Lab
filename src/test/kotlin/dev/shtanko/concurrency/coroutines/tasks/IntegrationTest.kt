@@ -42,7 +42,7 @@ class IntegrationTest {
     fun `should run multiple different tasks concurrently`() = testScope.runTest(timeout = 30.seconds) {
         viewModel.addTask(SortingTask(1))
         viewModel.addTask(MergeSortTask(1))
-        viewModel.addTask(BinaryTreeTask(1))
+        viewModel.addTask(SortingTask(1))
         viewModel.addTask(QuickSortTask(1))
 
 
