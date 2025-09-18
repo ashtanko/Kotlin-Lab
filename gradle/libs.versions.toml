@@ -37,7 +37,7 @@ kover = "0.9.2"              # https://github.com/Kotlin/kotlinx-kover
 # --- Networking & Serialization ---
 retrofit = "3.0.0"           # https://github.com/square/retrofit
 okhttp = "5.1.0"             # https://square.github.io/okhttp/changelogs/changelog
-sandwich = "2.1.2"           # https://github.com/skydoves/sandwich
+sandwich = "2.1.3"           # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.5"     # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.32.0"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.32.0"            # https://mvnrepository.com/artifact/com.google.protobuf/protoc
