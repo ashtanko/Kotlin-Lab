@@ -51,7 +51,7 @@ slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
 logback = "1.5.18"           # https://logback.qos.ch
 
 # --- Concurrency ---
-rxjava = "3.1.11"            # https://github.com/ReactiveX/RxJava
+rxjava = "3.1.12"            # https://github.com/ReactiveX/RxJava
 rxkotlin = "3.0.1"           # https://github.com/ReactiveX/RxKotlin
 
 # --- Benchmarking ---
