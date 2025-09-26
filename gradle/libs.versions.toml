@@ -44,7 +44,7 @@ protoc = "4.32.0"            # https://mvnrepository.com/artifact/com.google.pro
 jsoup = "1.21.1"             # https://jsoup.org/
 
 # --- Dependency Injection ---
-dagger = "2.57.1"              # https://dagger.dev
+dagger = "2.57.2"              # https://dagger.dev
 
 # --- Logging ---
 slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
