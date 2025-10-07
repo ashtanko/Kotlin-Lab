@@ -349,8 +349,8 @@ dependencies {
         implementation(jsoup)
         implementation("com.google.protobuf:protobuf-java:4.32.0")
         implementation("com.google.protobuf:protobuf-kotlin-lite:4.32.0")
-        implementation("io.grpc:grpc-stub:1.75.0")
-        implementation("io.grpc:grpc-protobuf:1.75.0")
+        implementation("io.grpc:grpc-stub:1.76.0")
+        implementation("io.grpc:grpc-protobuf:1.76.0")
 
 
         testImplementation(mockk)
