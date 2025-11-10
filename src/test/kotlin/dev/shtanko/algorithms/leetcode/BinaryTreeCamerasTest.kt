@@ -29,8 +29,8 @@ abstract class BinaryTreeCamerasTest<out T : BinaryTreeCameras>(private val stra
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(0).apply {

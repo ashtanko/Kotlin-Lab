@@ -24,8 +24,8 @@ internal class RemoveMiddleSubstringTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("", "", ""), // empty input and remove
             Arguments.of("abc", "", "abc"), // empty remove string

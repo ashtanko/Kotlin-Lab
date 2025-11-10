@@ -31,8 +31,8 @@ internal class MaxPowerOfTwoTest {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(2, 2),
@@ -55,8 +55,8 @@ internal class MaxPowerOfTwoTest {
 
     internal class InputDecomposeArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, listOf<Int>()),
             Arguments.of(1, listOf(1)),

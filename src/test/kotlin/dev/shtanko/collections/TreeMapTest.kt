@@ -16,7 +16,7 @@
 
 package dev.shtanko.collections
 
-import java.util.*
+import java.util.TreeMap
 import java.util.stream.Stream
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -33,8 +33,8 @@ internal class TreeMapTest {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(), listOf<Int>()),
             Arguments.of(intArrayOf(1), listOf(1)),

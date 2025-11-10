@@ -29,8 +29,8 @@ class AnyExample {
 
     private class HashCodesInputParamsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of("A", "B", false),
@@ -46,8 +46,8 @@ class AnyExample {
 
     private class HashCodesNullableInputParamsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of("A", "B", false),
@@ -64,8 +64,8 @@ class AnyExample {
 
     private class SymmetricInputParamsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("A", "A", true),
             Arguments.of(Any(), Any(), false),
@@ -77,8 +77,8 @@ class AnyExample {
 
     private class TransitiveInputParamsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(Triple(1, 1, 1), true),
             Arguments.of(Triple(1, 1, 2), false),
@@ -91,8 +91,8 @@ class AnyExample {
 
     private class ConsistentInputParamsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(Pair(1, 1), true),
             Arguments.of(Pair(Any(), Any()), false),

@@ -17,7 +17,7 @@
 package dev.shtanko.antipatterns
 
 import io.mockk.mockk
-import java.util.*
+import java.util.UUID
 import kotlin.test.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull

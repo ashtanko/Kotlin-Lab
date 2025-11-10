@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class TwoSum2Test {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(2, 7, 11, 15),

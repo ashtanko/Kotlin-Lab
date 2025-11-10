@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 internal abstract class SumsToTargetTest<out T : SumsToTarget>(private val strategy: T) {
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(1, 3, 7), 8, true),
             Arguments.of(intArrayOf(1, 3, 7), 6, false),

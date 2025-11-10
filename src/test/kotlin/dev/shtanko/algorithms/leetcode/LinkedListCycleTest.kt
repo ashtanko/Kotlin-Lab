@@ -29,8 +29,8 @@ abstract class LinkedListCycleTest<out T : LinkedListCycle>(private val strategy
     private class InputArgumentsProvider : ArgumentsProvider {
         val first = ListNode(1)
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListNode(3).apply {

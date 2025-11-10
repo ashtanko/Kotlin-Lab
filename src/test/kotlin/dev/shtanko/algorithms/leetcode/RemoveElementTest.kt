@@ -29,8 +29,8 @@ abstract class RemoveElementTest<out T : RemoveElement>(private val strategy: T)
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(3, 2, 2, 3),

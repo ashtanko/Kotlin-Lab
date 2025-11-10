@@ -18,7 +18,7 @@ package dev.shtanko.algorithms.sorts
 
 import dev.shtanko.algorithms.utils.measureTime
 import dev.shtanko.extensions.generateRandomArray
-import java.util.*
+import java.util.Locale
 import java.util.stream.Stream
 import kotlin.system.measureTimeMillis
 import org.assertj.core.api.Assertions.assertThat
@@ -34,8 +34,8 @@ internal class PerformanceTest {
 
     internal class SlowSortsArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(BubbleSort(), hundred),
             Arguments.of(BubbleSort(), fiveHundred),
@@ -73,8 +73,8 @@ internal class PerformanceTest {
 
     internal class FastSortsArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(mergeSortStrategy, thirtyK),
             Arguments.of(mergeSortStrategy, fiftyK),
@@ -107,8 +107,8 @@ internal class PerformanceTest {
 
     private class FastScopeStrategiesInputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(10_000, true),
             Arguments.of(100_000, true),
@@ -119,8 +119,8 @@ internal class PerformanceTest {
 
     private class SlowScopeStrategiesInputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(5000, true),
             Arguments.of(1000, true),

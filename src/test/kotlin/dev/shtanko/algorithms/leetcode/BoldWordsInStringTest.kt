@@ -30,8 +30,8 @@ class BoldWordsInStringTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf<String>(), "", ""),
             Arguments.of(arrayOf("ab", "bc"), "aabcd", "a<b>abc</b>d"),

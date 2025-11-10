@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class ListTNodeTest {
     private class PrettyPrintIntArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListTNode(1),
@@ -63,8 +63,8 @@ class ListTNodeTest {
 
     private class PrettyPrintStringArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListTNode("A").apply {
@@ -87,8 +87,8 @@ class ListTNodeTest {
 
     private class PrettyPrintObjectArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListTNode(DummyObject(0, "John")).apply {
@@ -101,8 +101,8 @@ class ListTNodeTest {
 
     private class ListObjectArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf(DummyObject(0, "John"), DummyObject(1, "Doe")),

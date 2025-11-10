@@ -55,8 +55,8 @@ class DragonSlayingStrategyTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = listOf(
             Arguments.of(MeleeStrategy(), "With your Excalibur you sever the dragon's head!"),
             Arguments.of(

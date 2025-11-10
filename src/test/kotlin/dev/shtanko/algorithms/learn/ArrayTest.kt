@@ -69,8 +69,8 @@ internal class ArrayTest {
 
     private class InputArgumentsUniqueProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 1, 2, 2, 2, 3, 3, 4, 5, 5),
@@ -85,8 +85,8 @@ internal class ArrayTest {
 
     private class InputArgumentsMergeProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 3, 4, 5, 6),
@@ -103,8 +103,8 @@ internal class ArrayTest {
 
     private class InputArgumentsSortsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 3, 2, 4, 5),

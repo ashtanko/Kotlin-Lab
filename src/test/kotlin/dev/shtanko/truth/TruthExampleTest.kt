@@ -57,7 +57,7 @@ class NullableTruthTest {
 
     @Test
     fun testNonNull() {
-        val language: String? = "Kotlin"
+        val language: String = "Kotlin"
         assertThat(language).isNotNull()
     }
 }

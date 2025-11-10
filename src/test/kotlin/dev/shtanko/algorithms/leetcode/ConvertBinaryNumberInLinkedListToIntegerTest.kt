@@ -31,8 +31,8 @@ abstract class BinaryNumberToIntTest<out T : BinaryNumberToIntStrategy>(
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 ListNode(1).apply {

@@ -16,7 +16,7 @@
 
 package dev.shtanko.algorithms.leetcode
 
-import java.util.*
+import java.util.TreeMap
 import java.util.stream.Stream
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -44,8 +44,8 @@ class ValidParenthesesTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "()",

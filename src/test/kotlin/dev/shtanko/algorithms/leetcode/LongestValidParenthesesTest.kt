@@ -29,8 +29,8 @@ abstract class LongestValidParenthesesTest<out T : LongestValidParenthesesStrate
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "",
@@ -49,8 +49,8 @@ abstract class LongestValidParenthesesTest<out T : LongestValidParenthesesStrate
 
     private class HighLoadInputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 "",

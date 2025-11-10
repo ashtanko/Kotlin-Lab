@@ -36,8 +36,8 @@ class StrongPasswordCheckerTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = listOf(
             "" to 6,
             "1" to 5,

@@ -12,9 +12,9 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class WordEndsTest<out T : WordEnds>(private val strategy: T) {
     private object InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
-        ): Stream<out Arguments?>? = Stream.of(
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("abcXY123XYijk", "XY", "c13i"),
             Arguments.of("XY123XY", "XY", "13"),
             Arguments.of("XY1XY", "XY", "11"),

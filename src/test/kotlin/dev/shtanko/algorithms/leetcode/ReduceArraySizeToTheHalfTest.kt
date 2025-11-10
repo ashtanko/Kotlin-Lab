@@ -36,8 +36,8 @@ abstract class ReduceArraySizeToTheHalfTest<out T : MinSetSize>(private val stra
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(3, 3, 3, 3, 5, 5, 5, 2, 2, 7),

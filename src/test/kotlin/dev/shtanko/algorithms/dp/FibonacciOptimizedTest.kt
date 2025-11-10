@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 internal class FibonacciOptimizedTest {
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0L),
             Arguments.of(1, 1L),

@@ -29,8 +29,8 @@ class ValidSubArraysTest {
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(1, 4, 2, 5, 3), 11),
             Arguments.of(intArrayOf(3, 2, 1), 3),

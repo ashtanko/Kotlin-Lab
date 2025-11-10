@@ -15,7 +15,7 @@ diktat = "2.0.0"              # https://github.com/saveourtool/diktat
 binaryCompatibility = "0.18.1"
 
 # --- Testing ---
-junit = "5.14.0"             # https://junit.org/junit5
+junit = "6.0.0"             # https://junit.org/junit5
 kotest = "5.9.1"             # https://kotest.io
 kotlintest = "3.4.2"         # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 assertj = "3.27.6"           # https://assertj.github.io/doc

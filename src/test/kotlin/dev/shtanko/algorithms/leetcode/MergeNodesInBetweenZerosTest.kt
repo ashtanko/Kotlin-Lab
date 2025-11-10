@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class MergeNodesInBetweenZerosTest<out T : MergeNodesInBetweenZeros>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(0, 3, 1, 0, 4, 5, 2, 0).toListNode(),

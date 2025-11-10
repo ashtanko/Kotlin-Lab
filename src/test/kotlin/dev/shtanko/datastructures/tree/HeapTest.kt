@@ -16,7 +16,8 @@
 
 package dev.shtanko.datastructures.tree
 
-import java.util.*
+import java.util.PriorityQueue
+import java.util.Random
 import java.util.stream.IntStream
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest

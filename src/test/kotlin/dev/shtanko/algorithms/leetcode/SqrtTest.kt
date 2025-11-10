@@ -36,8 +36,8 @@ abstract class SqrtTest<out T : SqrtStrategy>(private val strategy: T) {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = listOf(
             0 to 0,
             1 to 1,
