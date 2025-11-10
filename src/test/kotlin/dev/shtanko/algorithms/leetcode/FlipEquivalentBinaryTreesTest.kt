@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class FlipEquivalentBinaryTreesTest<out T : FlipEquivalentBinaryTrees>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf<Int?>(1, 2, 3, 4, 5, 6, null, null, null, 7, 8).buildTree(),

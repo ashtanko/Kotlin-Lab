@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class MaxNumberOfApplesTest<out T : MaxNumberOfApples>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(),

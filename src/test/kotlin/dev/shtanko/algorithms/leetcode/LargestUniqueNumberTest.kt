@@ -29,8 +29,8 @@ abstract class LargestUniqueNumberTest(val strategy: LargestUniqueNumber) {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(5, 7, 3, 9, 4, 9, 8, 3, 1),

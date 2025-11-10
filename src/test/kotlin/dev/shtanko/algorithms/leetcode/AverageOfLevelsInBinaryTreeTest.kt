@@ -32,8 +32,8 @@ abstract class AverageOfLevelsInBinaryTreeStrategyTest<out T : AverageOfLevelsIn
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(3).apply {

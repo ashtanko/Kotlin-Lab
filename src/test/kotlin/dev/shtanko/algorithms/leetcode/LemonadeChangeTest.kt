@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class LemonadeChangeTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(0), false),
             Arguments.of(intArrayOf(5, 5, 5, 10, 20), true),

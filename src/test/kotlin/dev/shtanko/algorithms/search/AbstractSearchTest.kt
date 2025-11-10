@@ -30,8 +30,8 @@ internal abstract class AbstractSearchTest<out T : AbstractSearchStrategy<Int>>(
 
     private class InputIntArrayArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf<Int>(), 1, -1),
             Arguments.of(arrayOf(1), 1, 0),

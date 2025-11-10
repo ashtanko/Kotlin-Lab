@@ -33,8 +33,8 @@ internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private v
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(getRandomArray(), true),
             Arguments.of(arrayOf(1, 2, 2, 1), true),
@@ -51,8 +51,8 @@ internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private v
 
     internal class InputStringArrayArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf<String>(),
@@ -79,8 +79,8 @@ internal abstract class AbstractSortTest<out T : AbstractSortStrategy>(private v
 
     internal class InputObjectArrayArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(arrayOf(TestObject.empty()), arrayOf(TestObject.empty())),
             Arguments.of(

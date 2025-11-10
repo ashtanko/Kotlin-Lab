@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class AverageSalaryTest<out T : AverageSalary>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(4000, 3000, 1000, 2000),

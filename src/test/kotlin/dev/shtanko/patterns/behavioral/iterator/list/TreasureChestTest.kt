@@ -71,8 +71,8 @@ class TreasureChestTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = listOf(
             Arguments.of(Item(ItemType.POTION, "Potion of courage")),
             Arguments.of(Item(ItemType.RING, "Ring of shadows")),

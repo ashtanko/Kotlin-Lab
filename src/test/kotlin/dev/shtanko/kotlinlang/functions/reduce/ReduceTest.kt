@@ -29,8 +29,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class ReduceTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),

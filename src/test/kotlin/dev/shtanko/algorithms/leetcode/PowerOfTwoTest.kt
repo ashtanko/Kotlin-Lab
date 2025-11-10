@@ -41,8 +41,8 @@ abstract class PowerOfTwoTest<out T : PowerOfTwo>(private val strategy: T) {
 
     private class InputPositiveCasesProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = listOf(
             1,
             2,
@@ -80,8 +80,8 @@ abstract class PowerOfTwoTest<out T : PowerOfTwo>(private val strategy: T) {
 
     private class InputNegativeCasesProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> =
             listOf(
                 3,

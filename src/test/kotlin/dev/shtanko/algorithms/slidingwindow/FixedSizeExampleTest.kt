@@ -12,9 +12,9 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class FixedSizeExampleTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
-        ): Stream<out Arguments?>? {
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
+        ): Stream<out Arguments> {
             return Stream.of(
                 Arguments.of(intArrayOf(1, 2, 3, 4, 5), 3, 12),      // Normal case
                 Arguments.of(intArrayOf(-1, -2, -3, -4, -5), 2, -3),  // All negatives

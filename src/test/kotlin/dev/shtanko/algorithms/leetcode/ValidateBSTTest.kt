@@ -23,10 +23,14 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
 import org.junit.jupiter.params.provider.ArgumentsSource
+import org.junit.jupiter.params.support.ParameterDeclarations
 
 abstract class ValidateBSTTest<out T : ValidateBinarySearchTree>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
-        override fun provideArguments(p0: ExtensionContext?): Stream<out Arguments> = Stream.of(
+        override fun provideArguments(
+            parameters: ParameterDeclarations,
+            p0: ExtensionContext,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 TreeNode(2).apply {
                     left = TreeNode(1)

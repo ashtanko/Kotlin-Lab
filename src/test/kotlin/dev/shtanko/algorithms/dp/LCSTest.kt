@@ -32,8 +32,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class LCSTest<out T : LCS>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> =
             initialArgs.stream().map { (x: String, y: String, m: Int, num: Int, expected: Int) ->
                 Arguments.of(

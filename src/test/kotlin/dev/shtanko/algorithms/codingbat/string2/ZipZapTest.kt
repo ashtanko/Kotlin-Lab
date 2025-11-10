@@ -12,9 +12,9 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class ZipZapTest<out T : ZipZap>(private val strategy: T) {
     private object InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
-        ): Stream<out Arguments?>? = Stream.of(
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
+        ): Stream<out Arguments> = Stream.of(
             Arguments.of("", ""),
             Arguments.of("zipXzap", "zpXzp"),
             Arguments.of("zipXzap", "zpXzp"),

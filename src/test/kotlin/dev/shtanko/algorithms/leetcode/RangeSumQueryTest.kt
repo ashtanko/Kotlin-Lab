@@ -29,8 +29,8 @@ class RangeSumQueryTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         private val arr = intArrayOf(-2, 0, 3, -5, 2, -1)
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 RangeSumQueryBruteForce(arr),

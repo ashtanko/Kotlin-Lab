@@ -29,8 +29,8 @@ abstract class TwoSumLessThanKTest<out T : TwoSumLessThanKStrategy>(private val 
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(34, 23, 1, 24, 75, 33, 54, 8),

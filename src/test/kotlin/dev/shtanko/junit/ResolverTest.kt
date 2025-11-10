@@ -47,16 +47,16 @@ class ResolverTest {
 
 class IntegerResolver : ParameterResolver {
     override fun supportsParameter(
-        parameterContext: ParameterContext?,
-        extensionContext: ExtensionContext?,
+        parameterContext: ParameterContext,
+        extensionContext: ExtensionContext,
     ): Boolean {
-        return parameterContext?.parameter?.type == Int::class.java
+        return parameterContext.parameter.type == Int::class.java
     }
 
     override fun resolveParameter(
-        parameterContext: ParameterContext?,
-        extensionContext: ExtensionContext?,
-    ): Any? {
+        parameterContext: ParameterContext,
+        extensionContext: ExtensionContext,
+    ): Any {
         return 2
     }
 }
