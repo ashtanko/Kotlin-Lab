@@ -9,7 +9,7 @@ kapt = "2.1.0"               # https://kotlinlang.org/docs/kapt.html
 # --- Code Quality & Lint ---
 detekt = "1.23.8"            # https://github.com/detekt/detekt
 dokka = "2.1.0"              # https://github.com/Kotlin/dokka
-spotless = "8.0.0"           # https://github.com/diffplug/spotless
+spotless = "8.1.0"           # https://github.com/diffplug/spotless
 ktlint = "13.1.0"            # https://github.com/JLLeitschuh/ktlint-gradle
 diktat = "2.0.0"              # https://github.com/saveourtool/diktat
 binaryCompatibility = "0.18.1"
