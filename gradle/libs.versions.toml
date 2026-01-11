@@ -48,7 +48,7 @@ dagger = "2.57.2"              # https://dagger.dev
 
 # --- Logging ---
 slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
-logback = "1.5.23"           # https://logback.qos.ch
+logback = "1.5.24"           # https://logback.qos.ch
 
 # --- Concurrency ---
 rxjava = "3.1.12"            # https://github.com/ReactiveX/RxJava
