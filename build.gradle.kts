@@ -379,7 +379,7 @@ dependencies {
         testImplementation(turbine)
         testImplementation(truth)
     }
-    implementation("org.xerial:sqlite-jdbc:3.50.3.0")
+    implementation("org.xerial:sqlite-jdbc:3.51.1.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
