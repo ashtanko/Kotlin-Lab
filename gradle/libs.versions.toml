@@ -15,7 +15,7 @@ diktat = "2.0.0"              # https://github.com/saveourtool/diktat
 binaryCompatibility = "0.18.1"
 
 # --- Testing ---
-junit = "6.0.1"             # https://junit.org/junit5
+junit = "6.0.2"             # https://junit.org/junit5
 kotest = "5.9.1"             # https://kotest.io
 kotlintest = "3.4.2"         # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
 assertj = "3.27.6"           # https://assertj.github.io/doc
@@ -48,7 +48,7 @@ dagger = "2.57.2"              # https://dagger.dev
 
 # --- Logging ---
 slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
-logback = "1.5.23"           # https://logback.qos.ch
+logback = "1.5.24"           # https://logback.qos.ch
 
 # --- Concurrency ---
 rxjava = "3.1.12"            # https://github.com/ReactiveX/RxJava
