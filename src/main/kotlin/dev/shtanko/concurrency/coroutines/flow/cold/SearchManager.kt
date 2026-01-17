@@ -21,6 +21,6 @@ class SearchManager(private val api: SearchApi) {
         .distinctUntilChanged()
         .flatMapLatest { query ->
             flow { emit(api.search(query)) }
+                .catch { emit(emptyList()) }
         }
-        .catch { emit(emptyList()) }
 }
