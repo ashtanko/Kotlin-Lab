@@ -1,4 +1,4 @@
-.PHONY: check run test lines md default jacoco spotless kover diktat cloc jar repo
+.PHONY: check run test lines md default jacoco spotless kover diktat cloc jar repo api
 
 # Run detekt + ktlint
 check:
@@ -50,5 +50,7 @@ jar:
 repo:
 	./gradlew detektReportToMdTask
 
+api:
+	./gradlew apiDump
 
 .DEFAULT_GOAL := default
