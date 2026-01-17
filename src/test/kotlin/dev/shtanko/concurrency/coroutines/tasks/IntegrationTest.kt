@@ -65,11 +65,11 @@ class IntegrationTest {
 
         // Start all tasks
         viewModel.runAllTasks()
-        delay(100)
+        advanceUntilIdle()
 
         // Cancel all tasks
         viewModel.cancelAllTasks()
-        delay(100)
+        advanceUntilIdle()
 
         // Verify tasks are cancelled
         val tasks = viewModel.tasks.value
