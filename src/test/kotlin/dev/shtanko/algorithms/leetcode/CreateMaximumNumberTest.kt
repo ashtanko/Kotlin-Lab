@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class CreateMaximumNumberTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(3, 4, 6, 5),

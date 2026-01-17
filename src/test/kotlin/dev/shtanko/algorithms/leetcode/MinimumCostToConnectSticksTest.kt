@@ -30,8 +30,8 @@ class MinimumCostToConnectSticksTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(2, 4, 3), 14),
             Arguments.of(intArrayOf(1, 8, 3, 5), 30),

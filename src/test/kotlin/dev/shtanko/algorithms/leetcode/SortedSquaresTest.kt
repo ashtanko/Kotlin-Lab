@@ -29,8 +29,8 @@ abstract class SortedSquaresTest<out T : SortedSquares>(private val strategy: T)
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(-4, -1, 0, 3, 10),

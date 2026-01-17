@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class ComponentValueTest<out T : ComponentValue>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(6, 2, 2, 2, 6),

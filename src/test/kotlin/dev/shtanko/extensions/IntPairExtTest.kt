@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class IntPairExtTest {
     private class DivideInputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(2 to 3, 2),
             Arguments.of(1 to 4, 1),

@@ -30,8 +30,8 @@ internal class FibonacciSequenceTest {
 
     internal class InputSimpleArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),
@@ -49,8 +49,8 @@ internal class FibonacciSequenceTest {
 
     internal class InputIterativeArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),
@@ -65,8 +65,8 @@ internal class FibonacciSequenceTest {
 
     internal class InputRecursiveArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(0, 0),
             Arguments.of(1, 1),

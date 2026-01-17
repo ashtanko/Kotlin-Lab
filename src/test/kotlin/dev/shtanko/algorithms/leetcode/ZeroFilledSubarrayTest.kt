@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class ZeroFilledSubarrayTest<out T : ZeroFilledSubarray>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 3, 0, 0, 2, 0, 0, 4),

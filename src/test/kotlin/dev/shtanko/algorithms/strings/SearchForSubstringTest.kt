@@ -24,8 +24,8 @@ internal class SearchForSubstringTest {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("hello world", "hello", 0),
             Arguments.of("hello world", "world", 6),

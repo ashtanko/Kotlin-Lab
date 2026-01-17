@@ -36,8 +36,8 @@ abstract class UniqueOccurrencesTest<out T : UniqueOccurrences>(private val stra
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 2, 2, 1, 1, 3),

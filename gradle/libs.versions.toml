@@ -1,57 +1,57 @@
 [versions]
 
 # --- Kotlin & Core ---
-kotlin = "2.2.10"            # https://github.com/JetBrains/kotlin
+kotlin = "2.2.21"            # https://github.com/JetBrains/kotlin
 coroutines = "1.10.2"        # https://github.com/Kotlin/kotlinx.coroutines
 serialization = "1.9.0"      # https://github.com/Kotlin/kotlinx.serialization
 kapt = "2.1.0"               # https://kotlinlang.org/docs/kapt.html
 
 # --- Code Quality & Lint ---
 detekt = "1.23.8"            # https://github.com/detekt/detekt
-dokka = "2.0.0"              # https://github.com/Kotlin/dokka
-spotless = "7.2.1"           # https://github.com/diffplug/spotless
-ktlint = "13.0.0"            # https://github.com/JLLeitschuh/ktlint-gradle
+dokka = "2.1.0"              # https://github.com/Kotlin/dokka
+spotless = "8.1.0"           # https://github.com/diffplug/spotless
+ktlint = "13.1.0"            # https://github.com/JLLeitschuh/ktlint-gradle
 diktat = "2.0.0"              # https://github.com/saveourtool/diktat
 binaryCompatibility = "0.18.1"
 
 # --- Testing ---
-junit = "5.13.4"             # https://junit.org/junit5
+junit = "6.0.2"             # https://junit.org/junit5
 kotest = "5.9.1"             # https://kotest.io
 kotlintest = "3.4.2"         # https://mvnrepository.com/artifact/io.kotlintest/kotlintest-core
-assertj = "3.27.4"           # https://assertj.github.io/doc
-mockito = "5.19.0"           # https://mvnrepository.com/artifact/org.mockito/mockito-core
-mockitoKotlin = "6.0.0"      # https://github.com/mockito/mockito-kotlin
-mockk = "1.14.5"             # https://mockk.io
+assertj = "3.27.6"           # https://assertj.github.io/doc
+mockito = "5.21.0"           # https://mvnrepository.com/artifact/org.mockito/mockito-core
+mockitoKotlin = "6.1.0"      # https://github.com/mockito/mockito-kotlin
+mockk = "1.14.7"             # https://mockk.io
 hamcrest = "3.0"             # https://hamcrest.org
 turbine = "1.2.1"            # https://github.com/cashapp/turbine/releases
-truth = "1.4.4"              # https://central.sonatype.com/artifact/com.google.truth/truth/overview
+truth = "1.4.5"              # https://central.sonatype.com/artifact/com.google.truth/truth/overview
 lincheck = "2.29"            # https://github.com/JetBrains/lincheck
 
 # --- Dependency Management ---
 dependency = "1.33.0"        # https://github.com/autonomousapps/dependency-analysis-gradle-plugin
 
 # --- Build & Coverage ---
-pitest = "1.19.0-rc.1"       # https://plugins.gradle.org/plugin/info.solidsoft.pitest
-kover = "0.9.1"              # https://github.com/Kotlin/kotlinx-kover
+pitest = "1.19.0-rc.2"       # https://plugins.gradle.org/plugin/info.solidsoft.pitest
+kover = "0.9.4"              # https://github.com/Kotlin/kotlinx-kover
 
 # --- Networking & Serialization ---
 retrofit = "3.0.0"           # https://github.com/square/retrofit
-okhttp = "5.1.0"             # https://square.github.io/okhttp/changelogs/changelog
-sandwich = "2.1.2"           # https://github.com/skydoves/sandwich
-protobufPlugin = "0.9.5"     # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
+okhttp = "5.2.1"             # https://square.github.io/okhttp/changelogs/changelog
+sandwich = "2.2.0"           # https://github.com/skydoves/sandwich
+protobufPlugin = "0.9.6"     # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.32.0"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.32.0"            # https://mvnrepository.com/artifact/com.google.protobuf/protoc
-jsoup = "1.21.1"             # https://jsoup.org/
+jsoup = "1.22.1"             # https://jsoup.org/
 
 # --- Dependency Injection ---
-dagger = "2.57"              # https://dagger.dev
+dagger = "2.57.2"              # https://dagger.dev
 
 # --- Logging ---
 slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
-logback = "1.5.18"           # https://logback.qos.ch
+logback = "1.5.24"           # https://logback.qos.ch
 
 # --- Concurrency ---
-rxjava = "3.1.11"            # https://github.com/ReactiveX/RxJava
+rxjava = "3.1.12"            # https://github.com/ReactiveX/RxJava
 rxkotlin = "3.0.1"           # https://github.com/ReactiveX/RxKotlin
 
 # --- Benchmarking ---

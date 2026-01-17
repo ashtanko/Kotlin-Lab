@@ -24,8 +24,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 
 class AreaInputArgumentsProvider : ArgumentsProvider {
     override fun provideArguments(
-        parameters: ParameterDeclarations?,
-        context: ExtensionContext?,
+        parameters: ParameterDeclarations,
+        context: ExtensionContext,
     ): Stream<out Arguments> = Stream.of(
         Arguments.of(0, 0, 0),
         Arguments.of(2, 2, 4),

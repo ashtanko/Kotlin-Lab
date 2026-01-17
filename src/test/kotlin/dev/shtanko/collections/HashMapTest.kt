@@ -31,8 +31,8 @@ internal class HashMapTest {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(intArrayOf(), listOf<Int>()),
             Arguments.of(intArrayOf(4), listOf(4)),

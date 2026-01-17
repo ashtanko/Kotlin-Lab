@@ -146,8 +146,8 @@ class HttpLogRepositoryTest {
                     method = if (i % 2 == 0) "GET" else "POST",
                     url = "https://example.com/api/$i",
                     responseCode = 200 + (i % 5),
-                    timestamp = Instant.now().minusSeconds((i % 100).toLong())
-                )
+                    timestamp = Instant.now().minusSeconds((i % 100).toLong()),
+                ),
             )
         }
 

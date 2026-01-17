@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class KthLargestStreamTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(KthLargestStreamHeap(args1.first, args1.second)),
         )

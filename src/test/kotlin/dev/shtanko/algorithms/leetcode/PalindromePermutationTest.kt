@@ -29,8 +29,8 @@ abstract class PalindromePermutationTest<out T : PalindromePermutationBehavior>(
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of("", true),
             Arguments.of("a", true),

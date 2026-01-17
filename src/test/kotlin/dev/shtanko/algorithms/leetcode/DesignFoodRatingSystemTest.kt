@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class DesignFoodRatingSystemTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(FoodRatingsPriorityQueue(foods, cuisines, ratings)),
             Arguments.of(FoodRatingsSortedSet(foods, cuisines, ratings)),

@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class CenterOfStarGraphTest<out T : CenterOfStarGraph>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf(intArrayOf(1, 2), intArrayOf(2, 3), intArrayOf(4, 2)),

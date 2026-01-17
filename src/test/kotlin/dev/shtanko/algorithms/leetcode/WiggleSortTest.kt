@@ -29,8 +29,8 @@ abstract class WiggleSortTest<out T : WiggleSort>(private val strategy: T) {
 
     class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(3, 5, 2, 1, 6, 4),

@@ -39,8 +39,8 @@ internal class EncodeToStringTest {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 Data(name = "kotlinx.serialization", lang = "Kotlin"),
@@ -51,8 +51,8 @@ internal class EncodeToStringTest {
 
     internal class InputListArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 emptyList<Data>(),

@@ -60,7 +60,7 @@ plugins {
 }
 
 jacoco {
-    toolVersion = "0.8.13"
+    toolVersion = "0.8.14"
 }
 
 repositories {
@@ -161,6 +161,7 @@ tasks {
 //    }
 
     withType<Test> {
+        maxHeapSize = "4g"
         maxParallelForks = 1
         jvmArgs(
             "--add-opens",
@@ -169,6 +170,8 @@ tasks {
             "java.base/jdk.internal.util=ALL-UNNAMED",
             "--add-exports",
             "java.base/sun.security.action=ALL-UNNAMED",
+            "-XX:+HeapDumpOnOutOfMemoryError",
+            "-XX:HeapDumpPath=${project.buildDir}/heapdump.hprof"
         )
     }
 
@@ -349,8 +352,8 @@ dependencies {
         implementation(jsoup)
         implementation("com.google.protobuf:protobuf-java:4.32.0")
         implementation("com.google.protobuf:protobuf-kotlin-lite:4.32.0")
-        implementation("io.grpc:grpc-stub:1.74.0")
-        implementation("io.grpc:grpc-protobuf:1.74.0")
+        implementation("io.grpc:grpc-stub:1.76.0")
+        implementation("io.grpc:grpc-protobuf:1.76.0")
 
 
         testImplementation(mockk)
@@ -376,7 +379,7 @@ dependencies {
         testImplementation(turbine)
         testImplementation(truth)
     }
-    implementation("org.xerial:sqlite-jdbc:3.50.3.0")
+    implementation("org.xerial:sqlite-jdbc:3.51.1.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 

@@ -30,8 +30,8 @@ class BinaryGapTest {
 
     internal class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = args().stream().map {
             Arguments.of(
                 it.first,

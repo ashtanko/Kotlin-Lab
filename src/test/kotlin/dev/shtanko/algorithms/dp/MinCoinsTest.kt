@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 class MinCoinsTest {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             // 11 = 5 + 5 + 1
             Arguments.of(

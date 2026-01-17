@@ -20,7 +20,7 @@ package dev.shtanko.kotlinlang
 object OverloadedTopLevelFunctions {
     @JvmStatic
     fun main(args: Array<String>) {
-        val uByte: UByte = UByte.MIN_VALUE
+        UByte.MIN_VALUE
         // doStuff(uByte) // Overload resolution ambiguity before Kotlin 2.1.0
     }
 

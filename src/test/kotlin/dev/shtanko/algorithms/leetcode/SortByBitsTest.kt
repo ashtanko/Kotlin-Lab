@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class SortByBitsTest<out T : SortByBits>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8),

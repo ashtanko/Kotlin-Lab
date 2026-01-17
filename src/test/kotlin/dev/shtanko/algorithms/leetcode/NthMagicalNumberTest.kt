@@ -36,8 +36,8 @@ abstract class NthMagicalNumberTest<out T : NthMagicalNumber>(private val strate
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(1, 2, 3, 2),
             Arguments.of(4, 2, 3, 6),

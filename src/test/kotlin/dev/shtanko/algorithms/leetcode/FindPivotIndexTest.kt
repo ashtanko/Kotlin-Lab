@@ -28,8 +28,8 @@ import org.junit.jupiter.params.support.ParameterDeclarations
 abstract class FindPivotIndexTest<out T : FindPivotIndex>(private val strategy: T) {
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(1, 7, 3, 6, 5, 6),

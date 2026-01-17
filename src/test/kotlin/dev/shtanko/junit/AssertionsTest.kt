@@ -72,7 +72,7 @@ class AssertionsTest {
 
     @Test
     fun `example of assertNotNull(object)`() {
-        val obj: Any? = "not null"
+        val obj: Any = "not null"
         assertNotNull(obj, "object should not be null")
     }
 

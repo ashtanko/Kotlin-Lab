@@ -16,7 +16,7 @@
 
 package dev.shtanko.collections.concurrent
 
-import java.util.*
+import java.util.Hashtable
 import org.jetbrains.kotlinx.lincheck.LinChecker
 import org.jetbrains.kotlinx.lincheck.LoggingLevel
 import org.jetbrains.kotlinx.lincheck.annotations.Operation

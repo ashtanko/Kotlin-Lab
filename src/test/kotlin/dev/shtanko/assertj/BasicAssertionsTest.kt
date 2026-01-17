@@ -42,7 +42,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `isNotNull example test`() {
-        val nullableString: String? = "1"
+        val nullableString: String = "1"
         assertThat(nullableString).isNotNull()
     }
     // endregion

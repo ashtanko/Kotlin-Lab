@@ -29,8 +29,8 @@ abstract class CrackingSafeStrategyTest<out T : CrackingSafe>(private val strate
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(1, 1, "0"),
             Arguments.of(1, 2, "10"),

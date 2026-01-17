@@ -29,8 +29,8 @@ abstract class ContinuousSubarraySumTest<out T : ContinuousSubarraySum>(private 
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 intArrayOf(23, 2, 4, 6, 7),

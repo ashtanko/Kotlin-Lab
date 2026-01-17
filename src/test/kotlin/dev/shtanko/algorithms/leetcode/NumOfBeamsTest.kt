@@ -36,8 +36,8 @@ abstract class NumOfBeamsTest<out T : NumOfBeams>(private val strategy: T) {
 
     private class InputArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 arrayOf("011001", "000000", "010100", "001000"),

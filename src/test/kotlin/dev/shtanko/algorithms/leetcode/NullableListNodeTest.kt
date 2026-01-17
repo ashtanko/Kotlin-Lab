@@ -29,8 +29,8 @@ class NullableListNodeTest {
 
     private class InputToListArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 NullableListNode(
@@ -59,8 +59,8 @@ class NullableListNodeTest {
 
     private class ToListArgs : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> = Stream.of(
             Arguments.of(
                 listOf<Int>(),
@@ -99,8 +99,8 @@ class NullableListNodeTest {
 
     private class InputToListNullableArgumentsProvider : ArgumentsProvider {
         override fun provideArguments(
-            parameters: ParameterDeclarations?,
-            context: ExtensionContext?,
+            parameters: ParameterDeclarations,
+            context: ExtensionContext,
         ): Stream<out Arguments> =
             InputToListArgumentsProvider().provideArguments(parameters, context).toList().toMutableList().apply {
                 add(
