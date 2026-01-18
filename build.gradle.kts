@@ -20,25 +20,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_2
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
-val projectJvmTarget = 17
-val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
-val kotlinVersion = KOTLIN_2_2
-
-fun isLinux(): Boolean {
-    val osName = System.getProperty("os.name").lowercase()
-    return listOf("linux", "mac os", "macos").contains(osName)
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.google.guava:guava:33.1.0-jre")
+    }
 }
-
-private val compilerArgs = listOf(
-    "-opt-in=kotlin.RequiresOptIn",
-    "-Xcontext-parameters",
-    "-Xcontext-sensitive-resolution",
-    "-Xannotation-target-all",
-    "-Xannotation-default-target=param-property",
-    "-Xnested-type-aliases",
-    "-Xannotations-in-metadata",
-    "-Xnon-local-break-continue",
-)
 
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
@@ -58,6 +47,26 @@ plugins {
     alias(libs.plugins.ktlint)
     alias(libs.plugins.protobuf)
 }
+
+val projectJvmTarget = 17
+val satisfyingNumberOfCores = Runtime.getRuntime().availableProcessors().div(2).takeIf { it > 0 } ?: 1
+val kotlinVersion = KOTLIN_2_2
+
+fun isLinux(): Boolean {
+    val osName = System.getProperty("os.name").lowercase()
+    return listOf("linux", "mac os", "macos").contains(osName)
+}
+
+private val compilerArgs = listOf(
+    "-opt-in=kotlin.RequiresOptIn",
+    "-Xcontext-parameters",
+    "-Xcontext-sensitive-resolution",
+    "-Xannotation-target-all",
+    "-Xannotation-default-target=param-property",
+    "-Xnested-type-aliases",
+    "-Xannotations-in-metadata",
+    "-Xnon-local-break-continue",
+)
 
 jacoco {
     toolVersion = "0.8.14"
@@ -354,6 +363,7 @@ dependencies {
         implementation("com.google.protobuf:protobuf-kotlin-lite:4.33.3")
         implementation("io.grpc:grpc-stub:1.76.0")
         implementation("io.grpc:grpc-protobuf:1.76.0")
+        implementation("com.google.guava:guava:33.1.0-jre")
 
 
         testImplementation(mockk)
