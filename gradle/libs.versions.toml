@@ -25,7 +25,7 @@ mockk = "1.14.7"             # https://mockk.io
 hamcrest = "3.0"             # https://hamcrest.org
 turbine = "1.2.1"            # https://github.com/cashapp/turbine/releases
 truth = "1.4.5"              # https://central.sonatype.com/artifact/com.google.truth/truth/overview
-lincheck = "2.29"            # https://github.com/JetBrains/lincheck
+lincheck = "2.39"            # https://github.com/JetBrains/lincheck
 
 # --- Dependency Management ---
 dependency = "3.5.1"        # https://github.com/autonomousapps/dependency-analysis-gradle-plugin
