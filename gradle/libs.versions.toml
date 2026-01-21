@@ -31,7 +31,7 @@ lincheck = "2.29"            # https://github.com/JetBrains/lincheck
 dependency = "3.5.1"        # https://github.com/autonomousapps/dependency-analysis-gradle-plugin
 
 # --- Build & Coverage ---
-pitest = "1.19.0-rc.2"       # https://plugins.gradle.org/plugin/info.solidsoft.pitest
+pitest = "1.19.0-rc.3"       # https://plugins.gradle.org/plugin/info.solidsoft.pitest
 kover = "0.9.4"              # https://github.com/Kotlin/kotlinx-kover
 
 # --- Networking & Serialization ---
