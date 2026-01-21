@@ -39,8 +39,8 @@ retrofit = "3.0.0"           # https://github.com/square/retrofit
 okhttp = "5.2.1"             # https://square.github.io/okhttp/changelogs/changelog
 sandwich = "2.2.0"           # https://github.com/skydoves/sandwich
 protobufPlugin = "0.9.6"     # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
-protobufKotlin = "4.33.3"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
-protoc = "4.33.3"            # https://mvnrepository.com/artifact/com.google.protobuf/protoc
+protobufKotlin = "4.33.4"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
+protoc = "4.33.4"            # https://mvnrepository.com/artifact/com.google.protobuf/protoc
 jsoup = "1.22.1"             # https://jsoup.org/
 
 # --- Dependency Injection ---
