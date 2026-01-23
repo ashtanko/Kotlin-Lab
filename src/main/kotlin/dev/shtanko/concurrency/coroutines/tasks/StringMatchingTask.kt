@@ -12,6 +12,8 @@ class StringMatchingTask(
     description = "Finding patterns in $textSize characters",
 ) {
     override suspend fun execute(): Int {
+        require(textSize > 0) { "textSize must be > 0" }
+        require(patternSize > 0) { "patternSize must be > 0" }
         val text = buildString {
             repeat(textSize) {
                 append(('a'..'z').random())
