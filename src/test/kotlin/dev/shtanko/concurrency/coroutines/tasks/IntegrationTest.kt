@@ -48,11 +48,21 @@ class IntegrationTest {
 
         viewModel.runAllTasks()
 
-        viewModel.tasks.test {
-            val tasks = awaitItem()
-            assertTrue(tasks.size >= 4)
-            val idleCount = tasks.count { it.status.value == TaskStatus.IDLE }
-            assertEquals(4, idleCount)
+        viewModel.results.test {
+            // Initial empty list
+            awaitItem()
+            // Wait until we've collected 4 results
+            var final: List<TaskResult<*>> = emptyList()
+            while (true) {
+                val next = awaitItem()
+                if (next.size >= 4) {
+                    final = next
+                    break
+                }
+            }
+            assertEquals(4, final.size)
+            assertTrue(final.all { it.status == TaskStatus.COMPLETED })
+            cancelAndIgnoreRemainingEvents()
         }
     }
 
