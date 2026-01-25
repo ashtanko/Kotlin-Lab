@@ -3,7 +3,7 @@
 # --- Kotlin & Core ---
 kotlin = "2.2.21"            # https://github.com/JetBrains/kotlin
 coroutines = "1.10.2"        # https://github.com/Kotlin/kotlinx.coroutines
-serialization = "1.9.0"      # https://github.com/Kotlin/kotlinx.serialization
+serialization = "1.10.0"      # https://github.com/Kotlin/kotlinx.serialization
 kapt = "2.1.0"               # https://kotlinlang.org/docs/kapt.html
 
 # --- Code Quality & Lint ---
