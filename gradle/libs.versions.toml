@@ -32,7 +32,7 @@ dependency = "3.5.1"        # https://github.com/autonomousapps/dependency-analy
 
 # --- Build & Coverage ---
 pitest = "1.19.0-rc.3"       # https://plugins.gradle.org/plugin/info.solidsoft.pitest
-kover = "0.9.4"              # https://github.com/Kotlin/kotlinx-kover
+kover = "0.9.5"              # https://github.com/Kotlin/kotlinx-kover
 
 # --- Networking & Serialization ---
 retrofit = "3.0.0"           # https://github.com/square/retrofit
