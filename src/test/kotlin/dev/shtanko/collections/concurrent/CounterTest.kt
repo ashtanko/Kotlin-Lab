@@ -6,7 +6,6 @@ import org.jetbrains.lincheck.datastructures.StressOptions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable
 
-@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 private class Counter {
     private val value = AtomicInteger(0)
 
@@ -14,6 +13,7 @@ private class Counter {
     fun get() = value.get()
 }
 
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 class CounterTest {
     private val c = Counter()
 
