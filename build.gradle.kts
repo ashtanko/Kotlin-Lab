@@ -355,7 +355,6 @@ dependencies {
         implementation("io.grpc:grpc-stub:1.76.0")
         implementation("io.grpc:grpc-protobuf:1.76.0")
 
-
         testImplementation(mockk)
         testImplementation(junit)
         testImplementation(lincheck)
