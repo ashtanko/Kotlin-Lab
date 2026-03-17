@@ -361,8 +361,8 @@ dependencies {
         implementation(jsoup)
         implementation("com.google.protobuf:protobuf-java:4.33.4")
         implementation("com.google.protobuf:protobuf-kotlin-lite:4.33.4")
-        implementation("io.grpc:grpc-stub:1.76.0")
-        implementation("io.grpc:grpc-protobuf:1.76.0")
+        implementation("io.grpc:grpc-stub:1.80.0")
+        implementation("io.grpc:grpc-protobuf:1.80.0")
         implementation("com.google.guava:guava:33.5.0-jre")
 
 
