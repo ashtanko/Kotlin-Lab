@@ -19788,6 +19788,35 @@ public final class dev/shtanko/concurrency/coroutines/flow/StateFlowExample {
 	public final fun updateState (Ljava/lang/String;)V
 }
 
+public final class dev/shtanko/concurrency/coroutines/flow/cold/FakeSearchApi : dev/shtanko/concurrency/coroutines/flow/cold/SearchApi {
+	public fun <init> ()V
+	public fun search (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class dev/shtanko/concurrency/coroutines/flow/cold/SearchApi {
+	public abstract fun search (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/concurrency/coroutines/flow/cold/SearchManager {
+	public fun <init> (Ldev/shtanko/concurrency/coroutines/flow/cold/SearchApi;)V
+	public final fun getSuggestions (Lkotlinx/coroutines/flow/Flow;J)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun getSuggestions$default (Ldev/shtanko/concurrency/coroutines/flow/cold/SearchManager;Lkotlinx/coroutines/flow/Flow;JILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class dev/shtanko/concurrency/coroutines/flow/cold/StockApi {
+	public abstract fun fetchPrice (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class dev/shtanko/concurrency/coroutines/flow/cold/StockApiKt {
+	public static final fun tickerFlow (J)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class dev/shtanko/concurrency/coroutines/flow/cold/StockRepository {
+	public fun <init> (Ldev/shtanko/concurrency/coroutines/flow/cold/StockApi;J)V
+	public synthetic fun <init> (Ldev/shtanko/concurrency/coroutines/flow/cold/StockApi;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getStockPrice (Ljava/lang/String;)Lkotlinx/coroutines/flow/Flow;
+}
+
 public final class dev/shtanko/concurrency/coroutines/flow/operators/FlowCombiningOperators {
 	public static final field INSTANCE Ldev/shtanko/concurrency/coroutines/flow/operators/FlowCombiningOperators;
 }
