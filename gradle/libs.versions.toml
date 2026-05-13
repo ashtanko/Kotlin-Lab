@@ -47,7 +47,7 @@ jsoup = "1.22.2"             # https://jsoup.org/
 dagger = "2.59.2"              # https://dagger.dev
 
 # --- Logging ---
-slf4j = "2.0.17"              # https://www.slf4j.org TODO remove
+slf4j = "2.0.18"              # https://www.slf4j.org TODO remove
 logback = "1.5.32"           # https://logback.qos.ch
 
 # --- Concurrency ---
