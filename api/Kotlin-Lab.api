@@ -42,6 +42,7 @@ public final class SearchRequestOuterClass$SearchRequest : com/google/protobuf/G
 	public synthetic fun getDefaultInstanceForType ()Lcom/google/protobuf/Message;
 	public synthetic fun getDefaultInstanceForType ()Lcom/google/protobuf/MessageLite;
 	public static final fun getDescriptor ()Lcom/google/protobuf/Descriptors$Descriptor;
+	public fun getDescriptorForType ()Lcom/google/protobuf/Descriptors$Descriptor;
 	public fun getPageNumber ()I
 	public fun getParserForType ()Lcom/google/protobuf/Parser;
 	public fun getQuery ()Ljava/lang/String;
