@@ -27,7 +27,7 @@ class RingBuffer {
      * position of first (oldest) data byte within the ring buffer
      * Note: non synchronized
      */
-    private var bufferPosition = MIN_VALUE
+    private var bufferPosition = MIN
 
     /**
      * Just use for prevent increments [bufferPosition] in first [incrementAndGet] method call
@@ -36,13 +36,13 @@ class RingBuffer {
 
     /**
      * This function increments position of byte except for the first call
-     * and when position of byte reach [MAX_VALUE] start over
+     * and when position of byte reach [MAX] start over
      *
-     * @return position of byte in range [MIN_VALUE] until [MAX_VALUE]
+     * @return position of byte in range [MIN] until [MAX]
      */
     fun incrementAndGet(): Byte {
-        if (bufferPosition == MAX_VALUE) {
-            bufferPosition = MIN_VALUE
+        if (bufferPosition == MAX) {
+            bufferPosition = MIN
             isFirstIteration = true
         }
         if (!isFirstIteration) {
@@ -60,7 +60,7 @@ class RingBuffer {
     }
 
     companion object {
-        private const val MIN_VALUE = Byte.MIN_VALUE // -128
-        private const val MAX_VALUE = Byte.MAX_VALUE // 127
+        private const val MIN = Byte.MIN_VALUE // -128
+        private const val MAX = Byte.MAX_VALUE // 127
     }
 }
