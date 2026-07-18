@@ -110,7 +110,7 @@ class IntStack {
      * @return the index of the first occurrence of the value, or -1 if the value is not found
      */
     fun indexOf(value: Int): Int {
-        for (i in 0 until topOfStack) if (elements[i] == value) return i
+        for (i in 0..topOfStack) if (elements[i] == value) return i
         return -1
     }
 }
