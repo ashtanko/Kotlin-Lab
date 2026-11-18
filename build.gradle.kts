@@ -365,7 +365,6 @@ dependencies {
         implementation("io.grpc:grpc-protobuf:1.85.1")
         implementation("com.google.guava:guava:33.6.0-jre")
 
-
         testImplementation(mockk)
         testImplementation(junit)
         testImplementation(lincheck)
