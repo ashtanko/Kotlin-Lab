@@ -17,9 +17,9 @@
 package dev.shtanko.collections.concurrent
 
 import java.util.concurrent.ConcurrentLinkedDeque
-import org.jetbrains.kotlinx.lincheck.annotations.Operation
-import org.jetbrains.kotlinx.lincheck.check
-import org.jetbrains.kotlinx.lincheck.strategy.managed.modelchecking.ModelCheckingOptions
+import org.jetbrains.lincheck.LincheckAssertionError
+import org.jetbrains.lincheck.datastructures.ModelCheckingOptions
+import org.jetbrains.lincheck.datastructures.Operation
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -52,7 +52,8 @@ class ConcurrentLinkedDequeTest {
             "Disabled on CI due to long runtime"
         }
 
-        assertThrows<AssertionError> {
+        // ConcurrentLinkedDeque is known to be non-linearizable, so Lincheck must find a violation.
+        assertThrows<LincheckAssertionError> {
             ModelCheckingOptions().check(this::class)
         }
     }
