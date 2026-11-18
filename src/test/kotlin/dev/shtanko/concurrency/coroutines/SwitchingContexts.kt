@@ -16,8 +16,8 @@
 
 package dev.shtanko.concurrency.coroutines
 
-import io.kotest.common.runBlocking
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 object SwitchingContexts {
