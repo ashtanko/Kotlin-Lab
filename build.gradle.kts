@@ -349,7 +349,6 @@ dependencies {
         implementation(slf4j)
         implementation(rxjava)
         implementation(rxkotlin)
-        implementation(lincheck)
         implementation(kotlin.serialization.json)
         implementation(retrofit)
         implementation(retrofit.mock)

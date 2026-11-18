@@ -18,20 +18,16 @@ package dev.shtanko.collections.concurrent
 
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.BlockingQueue
-import org.jetbrains.kotlinx.lincheck.LinChecker
-import org.jetbrains.kotlinx.lincheck.LoggingLevel
-import org.jetbrains.kotlinx.lincheck.annotations.Operation
-import org.jetbrains.kotlinx.lincheck.annotations.Param
-import org.jetbrains.kotlinx.lincheck.paramgen.IntGen
-import org.jetbrains.kotlinx.lincheck.strategy.stress.StressCTest
-import org.jetbrains.kotlinx.lincheck.strategy.stress.StressOptions
-import org.jetbrains.kotlinx.lincheck.verifier.VerifierState
+import org.jetbrains.lincheck.datastructures.IntGen
+import org.jetbrains.lincheck.datastructures.Operation
+import org.jetbrains.lincheck.datastructures.Param
+import org.jetbrains.lincheck.datastructures.StressOptions
+import org.jetbrains.lincheck.util.LoggingLevel
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 
-@StressCTest(minimizeFailedScenario = false)
 @Param(name = "key", gen = IntGen::class, conf = "1:5")
-class ArrayBlockingQueueLinearizabilityTest : VerifierState() {
+class ArrayBlockingQueueLinearizabilityTest {
 
     private val queue: BlockingQueue<Int> = ArrayBlockingQueue(10)
 
@@ -45,34 +41,17 @@ class ArrayBlockingQueueLinearizabilityTest : VerifierState() {
         return queue.offer(value)
     }
 
-    override fun extractState() = queue
-
     @Test
     internal fun test() {
         assumeTrue(System.getenv("CI") != "true") {
             "Skipped on CI to reduce test time"
         }
 
-        val opts = StressOptions()
+        StressOptions()
             .iterations(2)
             .threads(3)
+            .minimizeFailedScenario(false)
             .logLevel(LoggingLevel.INFO)
-        LinChecker.check(ArrayBlockingQueueLinearizabilityTest::class.java, opts)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        if (!super.equals(other)) return false
-
-        other as ArrayBlockingQueueLinearizabilityTest
-
-        return queue == other.queue
-    }
-
-    override fun hashCode(): Int {
-        var result = super.hashCode()
-        result = 31 * result + queue.hashCode()
-        return result
+            .check(this::class)
     }
 }

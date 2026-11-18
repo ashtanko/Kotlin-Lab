@@ -16,9 +16,8 @@
 
 package dev.shtanko.concurrency
 
-import org.jetbrains.kotlinx.lincheck.annotations.Operation
-import org.jetbrains.kotlinx.lincheck.check
-import org.jetbrains.kotlinx.lincheck.strategy.managed.modelchecking.ModelCheckingOptions
+import org.jetbrains.lincheck.datastructures.ModelCheckingOptions
+import org.jetbrains.lincheck.datastructures.Operation
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 

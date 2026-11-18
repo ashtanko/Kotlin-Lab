@@ -17,20 +17,16 @@
 package dev.shtanko.collections.concurrent
 
 import java.util.concurrent.ConcurrentHashMap
-import org.jetbrains.kotlinx.lincheck.LinChecker
-import org.jetbrains.kotlinx.lincheck.LoggingLevel
-import org.jetbrains.kotlinx.lincheck.annotations.Operation
-import org.jetbrains.kotlinx.lincheck.annotations.Param
-import org.jetbrains.kotlinx.lincheck.paramgen.IntGen
-import org.jetbrains.kotlinx.lincheck.strategy.stress.StressCTest
-import org.jetbrains.kotlinx.lincheck.strategy.stress.StressOptions
-import org.jetbrains.kotlinx.lincheck.verifier.VerifierState
+import org.jetbrains.lincheck.datastructures.IntGen
+import org.jetbrains.lincheck.datastructures.Operation
+import org.jetbrains.lincheck.datastructures.Param
+import org.jetbrains.lincheck.datastructures.StressOptions
+import org.jetbrains.lincheck.util.LoggingLevel
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 
-@StressCTest(minimizeFailedScenario = false)
 @Param(name = "key", gen = IntGen::class, conf = "1:5")
-internal class HashMapLinearizabilityTest : VerifierState() {
+internal class HashMapLinearizabilityTest {
 
     private val map: MutableMap<Int, Int> = ConcurrentHashMap()
 
@@ -51,15 +47,11 @@ internal class HashMapLinearizabilityTest : VerifierState() {
             "Test skipped on CI to reduce runtime"
         }
 
-        val opts = StressOptions()
+        StressOptions()
             .iterations(5)
             .threads(3)
+            .minimizeFailedScenario(false)
             .logLevel(LoggingLevel.INFO)
-
-        LinChecker.check(HashMapLinearizabilityTest::class.java, opts)
-    }
-
-    override fun extractState(): Any {
-        return map
+            .check(this::class)
     }
 }
