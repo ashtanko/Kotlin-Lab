@@ -33,7 +33,7 @@ buildscript {
 plugins {
     application
     jacoco
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.1"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.18.2"
     idea
     alias(libs.plugins.kt.jvm)
     alias(libs.plugins.detekt)
