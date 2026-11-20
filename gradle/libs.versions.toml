@@ -41,7 +41,7 @@ sandwich = "2.4.0"           # https://github.com/skydoves/sandwich
 protobufPlugin = "0.10.1"     # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
 protobufKotlin = "4.36.2"    # https://mvnrepository.com/artifact/com.google.protobuf/protobuf-kotlin
 protoc = "4.36.2"            # https://mvnrepository.com/artifact/com.google.protobuf/protoc
-jsoup = "1.22.2"             # https://jsoup.org/
+jsoup = "1.24.1"             # https://jsoup.org/
 
 # --- Dependency Injection ---
 dagger = "2.60.1"              # https://dagger.dev
