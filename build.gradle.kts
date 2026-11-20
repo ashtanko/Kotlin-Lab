@@ -25,7 +25,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.guava:guava:33.6.0-jre")
+        classpath("com.google.guava:guava:33.7.2-jre")
     }
 }
 
@@ -363,7 +363,7 @@ dependencies {
         implementation("com.google.protobuf:protobuf-kotlin-lite:4.36.2")
         implementation("io.grpc:grpc-stub:1.85.1")
         implementation("io.grpc:grpc-protobuf:1.85.1")
-        implementation("com.google.guava:guava:33.6.0-jre")
+        implementation("com.google.guava:guava:33.7.2-jre")
 
 
         testImplementation(mockk)
